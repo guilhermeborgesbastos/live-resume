@@ -1,0 +1,27 @@
+//----------------------------------*\
+// Fonts
+//----------------------------------*/
+@import 'assets/scss/modules/_fonts.scss';
+
+// primary font
+$primary_font: 'Montserrat';
+
+// font-weight
+$thin:100;
+$light:300;
+$regular:400;
+$bold:700;
+$black:900;
+
+// Font size
+$font-xs:12px;
+$font-sm: 14px;
+$primary-fs: 16px;
+$font-md: 18px;
+$font-lg: 20px;
+
+body {
+    font-family: $primary_font;
+    font-size: $primary-fs;
+    font-weight: $regular;
+}
