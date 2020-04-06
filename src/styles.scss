@@ -3,8 +3,9 @@
 //----------------------------------*/
 @import 'assets/scss/modules/_fonts.scss';
 
-// primary font
+// primary background and font
 $primary_font: 'Montserrat';
+$primary_background: #d4e7fe;
 
 // font-weight
 $thin:100;
@@ -20,7 +21,9 @@ $primary-fs: 16px;
 $font-md: 18px;
 $font-lg: 20px;
 
-body {
+html, body {
+    height: 100%;
+    background: $primary_background;
     font-family: $primary_font;
     font-size: $primary-fs;
     font-weight: $regular;

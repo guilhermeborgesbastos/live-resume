@@ -1,0 +1,70 @@
+header {
+    display: flex;
+    background: transparent;
+    padding-top: 18px;
+    flex-flow: row wrap;
+}
+
+header ul {
+    display: flex;
+    flex-flow: row wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Logo styles */
+header .child.logo-container {
+    flex-grow: 2;
+    text-align: center;
+}
+
+header .child.logo-container a {
+    width: 125px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+/* Nav styles */
+header .child.nav-container {
+    flex-grow: 5;
+    align-self: flex-end;
+}
+
+header .child.nav-container nav {
+    align-self: flex-end;
+}
+
+header .child.nav-container nav ul li {
+    flex-grow: 1;
+    text-align: center;
+    width: 70px;
+    max-width: 125px;
+}
+
+header .child.nav-container nav ul li a {
+    color:#222f5c;
+    font-size: .9em;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+/* Language styles */
+header .child.language-container {
+    flex-grow: 1;
+}
+
+header .child.language-container ul {
+    width: 100px;
+    display: flex;
+}
+
+header .child.language-container ul li {
+    flex-grow: 1;
+}
+
+header .child.language-container ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+}
