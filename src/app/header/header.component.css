@@ -3,6 +3,7 @@ header {
     background: transparent;
     padding-top: 18px;
     flex-flow: row wrap;
+    align-items: center;
 }
 
 header ul {
@@ -24,30 +25,40 @@ header .child.logo-container a {
     text-decoration: none;
     text-transform: uppercase;
     text-decoration: none;
+    font-size: 35px;
+    font-weight: 700;
+    color: #222F5C;
 }
 
 /* Nav styles */
 header .child.nav-container {
     flex-grow: 5;
-    align-self: flex-end;
 }
 
-header .child.nav-container nav {
-    align-self: flex-end;
+header .child.nav-container ul {
+    justify-content: flex-end;
+    align-items: center;
+    height: 52px;
 }
 
-header .child.nav-container nav ul li {
-    flex-grow: 1;
+header .child.nav-container ul li {
     text-align: center;
-    width: 70px;
-    max-width: 125px;
+    margin-right: 1em;
 }
 
-header .child.nav-container nav ul li a {
-    color:#222f5c;
-    font-size: .9em;
+header .child.nav-container ul li a {
     text-transform: capitalize;
     text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: #222F5C;
+    padding: 14px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+header .child.nav-container ul li a:hover {
+    background-color: #ffffffa1;
 }
 
 /* Language styles */
@@ -55,16 +66,44 @@ header .child.language-container {
     flex-grow: 1;
 }
 
-header .child.language-container ul {
-    width: 100px;
-    display: flex;
+header .child.language-container .frame {
+    background-color: #fff;
+    display: inline-block; 
+    border-radius: 10px;
 }
 
-header .child.language-container ul li {
+header .child.language-container .frame ul {
+    height: 52px;
+	text-align:center;
+}
+
+header .child.language-container .frame ul:before{
+	content:"\202f\202d";
+}
+
+header .child.language-container .frame ul li {
     flex-grow: 1;
+    display:inline-block;
+    height: 25px;
+    margin: 14px 0 0 0;
+	border-right:1px solid #bfbfbf3b;
 }
 
-header .child.language-container ul li a {
+header .child.language-container .frame ul li:last-of-type {
+    border-right:none;
+}
+
+header .child.language-container .frame ul li a {
+    display: inline-block;
+	margin:0 15px;
     text-decoration: none;
     text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    color: #222f5c59;
+    transition: 0.3s;
+}
+
+header .child.language-container .frame ul li a:hover {
+    color: #222F5C;
 }

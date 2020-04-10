@@ -16,6 +16,15 @@
 
 @font-face {
     font-family: 'Montserrat';
+    src: url('assets/fonts/semi-bold/Montserrat-SemiBold.woff2') format('woff2'),
+        url('assets/fonts/semi-bold/Montserrat-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Montserrat';
     src: url('assets/fonts/bold/Montserrat-Bold.woff2') format('woff2'),
         url('assets/fonts/bold/Montserrat-Bold.woff') format('woff');
     font-weight: bold;
