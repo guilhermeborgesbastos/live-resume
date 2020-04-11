@@ -1,7 +1,13 @@
 <header>
+
+    <div class="child navbar-toggle">
+        <fa-icon [icon]="faBars" class="bar-icon"></fa-icon>
+    </div>
+
     <div class="child logo-container">
         <a href="#" class="logo">{{title}}</a>
     </div>
+
     <div class="child nav-container">
         <ul>
             <li><a href="#" i18n="nav@@aboutMe">About me</a></li>
@@ -15,9 +21,10 @@
     <div class="child language-container">
         <div class="frame">
             <ul>
+                <li><a href="#" class="active">EN</a></li>
                 <li><a href="#">PT</a></li>
-                <li><a href="#">EN</a></li>
             </ul>
         </div>
     </div>
+
 </header>   

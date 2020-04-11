@@ -19,4 +19,4 @@ import { PageNotFoundModule } from './404/page-not-found.module';
   bootstrap: [ AppComponent ]
 })
 
-export class AppModule { }
+export class AppModule {}

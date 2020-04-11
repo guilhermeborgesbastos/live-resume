@@ -108,6 +108,102 @@ header .child.language-container .frame ul li a {
     transition: 0.3s;
 }
 
+header .child.language-container .frame ul li a.active {
+    color: #222F5C;
+}
+
 header .child.language-container .frame ul li a:hover {
     color: #222F5C;
+}
+
+/* navbar-toggle styles */
+header .child.navbar-toggle {
+    flex-grow: 1;
+    display: none;
+    justify-content: center;
+}
+
+/* When the screen is less than 1024 pixels wide*/
+@media screen and (max-width: 1024px) {
+
+    header {
+        background: #fff;
+        border-radius: 0px 0px 15px 15px;
+        -webkit-box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16); 
+        box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16);
+        padding: 10px;
+    }
+
+    header .child.logo-container {
+        flex-grow: 4;
+    }
+
+    header .child.navbar-toggle {
+        display: flex;
+    }
+
+    header .child.nav-container {
+        display: none;
+    }
+
+    header .child.navbar-toggle .bar-icon{
+        font-size: 30px;
+    }
+
+    header .child.language-container .frame {
+        background-color: transparent;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+    
+    header .child.language-container {
+        flex-grow: initial;
+    }
+}
+
+/* When the screen is less than 500 pixels wide*/
+@media screen and (max-width: 500px) {
+
+    header .child.navbar-toggle .bar-icon{
+        font-size: 20px;
+        border: 1px solid #b3b7c61f;
+        padding: 5px 10px 5px 10px;
+    }
+
+    header .child.language-container .frame ul li a {
+        font-size: 18px;
+        margin: 0 10px;
+    }
+
+    header .child.language-container .frame ul li {
+        height: 21px;
+        margin: 15px 0 0 0;
+        border-right: 2px solid #bfbfbf3b;
+    }
+}
+
+/* When the screen is less than 384 pixels wide*/
+@media screen and (max-width: 384px) {
+
+    header .child.navbar-toggle .bar-icon{
+        font-size: 15px;
+        border: 1px solid #b3b7c61f;
+        padding: 5px 10px 5px 10px;
+    }
+
+    header .child.language-container .frame ul li a {
+        font-size: 15px;
+        margin: 0 8px;
+    }
+
+    header .child.language-container .frame ul li {
+        height: 20px;
+        margin: 15px 0 0 0;
+        border-right: 2px solid #bfbfbf3b;
+    }
+
+    header .child.logo-container a {
+        font-size: 28px;
+    }
 }
