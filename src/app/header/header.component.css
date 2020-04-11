@@ -53,12 +53,14 @@ header .child.nav-container ul li a {
     font-weight: 600;
     color: #222F5C;
     padding: 14px;
-    border-radius: 10px;
+    border-radius: 15px;
     transition: 0.3s;
 }
 
 header .child.nav-container ul li a:hover {
-    background-color: #ffffffa1;
+    background-color: #fff;
+    -webkit-box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16); 
+    box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16);
 }
 
 /* Language styles */
@@ -69,7 +71,9 @@ header .child.language-container {
 header .child.language-container .frame {
     background-color: #fff;
     display: inline-block; 
-    border-radius: 10px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16); 
+    box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16);
 }
 
 header .child.language-container .frame ul {
@@ -86,7 +90,7 @@ header .child.language-container .frame ul li {
     display:inline-block;
     height: 25px;
     margin: 14px 0 0 0;
-	border-right:1px solid #bfbfbf3b;
+	border-right: 2px solid #bfbfbf3b;
 }
 
 header .child.language-container .frame ul li:last-of-type {
