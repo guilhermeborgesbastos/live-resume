@@ -7,9 +7,13 @@ import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { PostsComponent } from '../posts/posts.component';
 import { ExperienceComponent } from '../experience/experience.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  imports: [ ResumeRoutingModule ],
+  imports: [ 
+    ResumeRoutingModule,
+    FontAwesomeModule
+  ],
   declarations: [ 
     ResumeComponent,
     HeaderComponent,

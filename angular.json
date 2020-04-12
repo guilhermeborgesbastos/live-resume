@@ -55,7 +55,23 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+            },
+            "en": {
+              "aot": true,
+              "outputPath": "dist/under-construction-en/",
+              "i18nFile": "src/locales/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr",
+              "i18nMissingTranslation": "error"
+            },
+            "pt": {
+              "aot": true,
+              "outputPath": "dist/under-construction-pt/",
+              "i18nFile": "src/locales/messages.pt.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "i18nMissingTranslation": "error"
             }
           }
         },
@@ -67,6 +83,12 @@
           "configurations": {
             "production": {
               "browserTarget": "live-resume:build:production"
+            },
+            "en": {
+              "browserTarget": "live-resume:build:en"
+            },
+            "pt": {
+              "browserTarget": "live-resume:build:pt"
             }
           }
         },

@@ -11,6 +11,7 @@ $primary_background: #d4e7fe;
 $thin:100;
 $light:300;
 $regular:400;
+$semi-bold:600;
 $bold:700;
 $black:900;
 
@@ -27,4 +28,6 @@ html, body {
     font-family: $primary_font;
     font-size: $primary-fs;
     font-weight: $regular;
+    margin: 0;
+    padding: 0;
 }
