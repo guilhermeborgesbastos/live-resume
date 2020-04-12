@@ -1,14 +1,14 @@
 <header>
 
     <div class="child navbar-toggle">
-        <fa-icon [icon]="faBars" class="bar-icon"></fa-icon>
+        <fa-icon [icon]="faBars" class="bar-icon" (click)="onToggleBar()"></fa-icon>
     </div>
 
     <div class="child logo-container">
         <a href="#" class="logo">{{title}}</a>
     </div>
 
-    <div class="child nav-container">
+    <div class="child nav-container" [hidden]="!hasMenuToggled">
         <ul>
             <li><a href="#" i18n="nav@@aboutMe">About me</a></li>
             <li><a href="#" i18n="nav@@experiences">Experiences</a></li>

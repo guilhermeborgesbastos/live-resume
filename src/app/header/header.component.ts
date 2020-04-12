@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -9,13 +9,20 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 export class HeaderComponent implements OnInit {
   
+  hasMenuToggled: boolean;
+  faBars: IconDefinition;
   title: string;
-  faBars = faBars;
 
   constructor() { }
 
   ngOnInit(): void {
     this.title = 'gbastos';
+    this.faBars = faBars;
+    this.hasMenuToggled = true;
+  }
+
+  onToggleBar() {
+    this.hasMenuToggled = !this.hasMenuToggled;
   }
 
 }

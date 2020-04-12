@@ -33,6 +33,7 @@ header .child.logo-container a {
 /* Nav styles */
 header .child.nav-container {
     flex-grow: 5;
+    transition: 0.3s;
 }
 
 header .child.nav-container ul {
@@ -121,6 +122,7 @@ header .child.navbar-toggle {
     flex-grow: 1;
     display: none;
     justify-content: center;
+    cursor: pointer;
 }
 
 /* When the screen is less than 1024 pixels wide*/
@@ -138,12 +140,20 @@ header .child.navbar-toggle {
         flex-grow: 4;
     }
 
+    header .child.nav-container ul {
+        flex-flow: column;
+        height: inherit;
+    }
+
     header .child.navbar-toggle {
         display: flex;
     }
 
     header .child.nav-container {
-        display: none;
+        order: 5;
+        border-top: 2px solid #bfbfbf1a;
+        padding-top: 1em;
+        flex-basis: 100%;
     }
 
     header .child.navbar-toggle .bar-icon{
@@ -159,6 +169,38 @@ header .child.navbar-toggle {
     
     header .child.language-container {
         flex-grow: initial;
+    }
+
+    header .child.nav-container ul {
+        align-items: flex-start;
+        line-height: 35px;
+        padding-left: 1em;
+    }
+
+    
+    header .child.nav-container ul li:before {
+        content: '\2022';
+        font-size: 50px;
+        position: absolute;
+        color: #5e81abbd;
+        margin-top: -4px;
+    }
+
+    header .child.nav-container ul li:hover::before {
+        color: #222F5C;
+    }
+
+    header .child.nav-container ul li a {
+        font-size: 20px;
+        color: #5e81abbd;
+        padding-left: 25px;
+    }
+
+    header .child.nav-container ul li a:hover {
+        color: #222F5C;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
     }
 }
 
@@ -190,6 +232,10 @@ header .child.navbar-toggle {
         font-size: 15px;
         border: 1px solid #b3b7c61f;
         padding: 5px 10px 5px 10px;
+    }
+
+    header .child.nav-container ul li a {
+        font-size: 18px;
     }
 
     header .child.language-container .frame ul li a {
