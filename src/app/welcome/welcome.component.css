@@ -32,64 +32,18 @@
     margin-bottom: 4em;
 }
 
-/* Skills container */
-.layer_one .avatar-container .skills {
-    position: absolute;
-    top: 150px;
-    left: 5px;
-    z-index: 0;
+.layer_one .dialog-container img {
+    animation: float-dialog 6s ease-in-out infinite;
 }
 
-.layer_one .avatar-container .skills img.background {
-    width: 55vh;
-}
-
-.layer_one .avatar-container .skills .skill-icon{
-    position: absolute;
-    width: 50px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.docker {
-    top: 375px;
-    left: -35px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.css {
-    top: 300px;
-    left: -65px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.git {
-    top: 205px;
-    left: -85px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.html {
-    top: 120px;
-    left: -65px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.sql {
-    top: 40px;
-    left: -20px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.php {
-    top: -20px;
-    left: 50px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.java {
-    top: -20px;
-    right: 50px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.bitbucket {
-    bottom: 90px;
-    right: -50px;
-}
-
-.layer_one .avatar-container .skills .skill-icon.android {
-    bottom: 30px;
-    right: 0;
+@keyframes float-dialog {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
 }
