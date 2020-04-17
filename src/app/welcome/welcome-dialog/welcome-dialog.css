@@ -1,0 +1,52 @@
+
+/* Dialog container */
+.dialog-container {
+    align-self: center;
+	z-index: 2;
+	animation: float-dialog 6s ease-in-out infinite;
+}
+
+.dialog-container img {
+    width: 60vh;
+    margin-left: -7.7em;
+    margin-bottom: 4em;
+}
+
+.dialog-container .console {
+	position: absolute;
+    top: 7em;
+    left: -2em;
+    width: 400px;
+}
+
+.dialog-container .console p {
+	margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.dialog-container .console .hello {
+	font-size: 50px;
+    font-weight: 600;
+    color: #222F5C;
+}
+
+.dialog-container .console .phrase {
+	font-size: 26px;
+    color: #576183;
+	font-weight: 600;
+	margin-top: 8px;
+}
+
+/* Dialog container animation */
+@keyframes float-dialog {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}

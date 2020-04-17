@@ -19,31 +19,3 @@
     z-index: 1;
     position: relative;
 }
-
-/* Dialog container */
-.layer_one .dialog-container {
-    align-self: center;
-    z-index: 2;
-}
-
-.layer_one .dialog-container img {
-    width: 60vh;
-    margin-left: -7.7em;
-    margin-bottom: 4em;
-}
-
-.layer_one .dialog-container img {
-    animation: float-dialog 6s ease-in-out infinite;
-}
-
-@keyframes float-dialog {
-	0% {
-		transform: translatey(0px);
-	}
-	50% {
-		transform: translatey(-20px);
-	}
-	100% {
-		transform: translatey(0px);
-	}
-}
