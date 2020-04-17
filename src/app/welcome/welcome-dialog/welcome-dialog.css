@@ -16,7 +16,8 @@
 	position: absolute;
     top: 7em;
     left: -2em;
-    width: 400px;
+	width: 400px;
+	text-align: center;
 }
 
 .dialog-container .console p {
@@ -31,8 +32,8 @@
     color: #222F5C;
 }
 
-.dialog-container .console .phrase {
-	font-size: 26px;
+.dialog-container .console span.txt-rotate {
+	font-size: 35px;
     color: #576183;
 	font-weight: 600;
 	margin-top: 8px;
