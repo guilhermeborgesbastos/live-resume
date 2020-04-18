@@ -1,0 +1,21 @@
+#welcome {
+    flex-direction: column;
+    height: 780px;
+}
+
+.layer_one {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.layer_one .avatar-container {
+    position: relative;
+}
+
+.layer_one .avatar-container img.illustration {
+    height: 780px;
+    z-index: 1;
+    position: relative;
+}
