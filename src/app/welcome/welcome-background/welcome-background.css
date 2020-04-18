@@ -6,7 +6,7 @@
 }
 
 .skills img.background {
-    width: 55vh;
+    width: 535px;
 }
 
 .skills .skill-icon {
@@ -16,7 +16,7 @@
 
 /* Specifications for each icon positioning */
 .skills .skill-icon.docker {
-    top: 375px;
+    top: 385px;
     left: -35px;
 }
 
@@ -51,13 +51,13 @@
 }
 
 .skills .skill-icon.bitbucket {
-    bottom: 90px;
-    right: -50px;
+    bottom: 110px;
+    right: -30px;
 }
 
 .skills .skill-icon.android {
-    bottom: 30px;
-    right: 0;
+    bottom: 40px;
+    right: 10px;
 }
 
 /* Define the animations for the icons */

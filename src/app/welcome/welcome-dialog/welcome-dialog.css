@@ -1,22 +1,21 @@
 
 /* Dialog container */
 .dialog-container {
-    align-self: center;
 	z-index: 2;
+	margin-top: 5em;
 	animation: float-dialog 6s ease-in-out infinite;
 }
 
 .dialog-container img {
-    width: 60vh;
-    margin-left: -7.7em;
-    margin-bottom: 4em;
+    width: 580px;
+    margin-left: -7em;
 }
 
 .dialog-container .console {
 	position: absolute;
     top: 7em;
-    left: -2em;
-	width: 400px;
+    left: 0;
+	width: 370px;
 	text-align: center;
 }
 
@@ -27,16 +26,16 @@
 }
 
 .dialog-container .console .hello {
-	font-size: 50px;
+	font-size: 60px;
     font-weight: 600;
     color: #222F5C;
 }
 
 .dialog-container .console span.txt-rotate {
-	font-size: 35px;
+	font-size: 40px;
     color: #576183;
 	font-weight: 600;
-	margin-top: 8px;
+	margin-top: 10px;
 }
 
 /* Dialog container animation */
