@@ -1,8 +1,8 @@
 #about {
     flex-direction: column;
-    background-color: #fff;
-    height: 510px;
     align-items: center;
+    background-image: linear-gradient(0deg, #ffffff 44.44%, #d4e7fe 44.44%, #d4e7fe 0%, #ffffff 0%, #ffffff 94.44%, #d4e7fe 94.44%, #d4e7fe 100%);
+    background-size: 10px 1220px;
 }
 
 .about-container {
@@ -15,7 +15,6 @@
     border-radius: 15px;
     box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16);
     width: 85vw;
-    top: -3em;
     z-index: 2;
     padding: 2em;
     max-width: 1400px;
@@ -60,10 +59,6 @@
     text-align: justify;
 }
 
-.first-column .hobbies {
-
-}
-
 .first-column h3 {
     font-size: 22px;
     font-weight: 600;
@@ -75,8 +70,12 @@
     font-size: 40px;
     color: #555F81;
     margin-right: 1em;
+    transition: 0.3s;
 }
 
+.first-column .bar-icon:hover {
+    color: #8087a1;
+}
 
 /* Second column */
 .second-column {
@@ -102,13 +101,13 @@
     margin-top: 1em;
 }
 
-
 .second-column .social-media .bar-icon {
     font-size: 60px;
     color: #414C73;
     margin: 0px 20px 0px 20px;
+    transition: 0.3s;
 }
 
-.second-column .social-media a {
-
+.second-column .social-media .bar-icon:hover {
+    color: #8087a1;
 }

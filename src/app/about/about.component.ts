@@ -11,7 +11,7 @@ import { faLinkedin, faGithub, faFacebook } from '@fortawesome/free-brands-svg-i
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+  styleUrls: ['./about.component.css', './about.component-responsivity.css']
 })
 export class AboutComponent implements OnInit {
   
