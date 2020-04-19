@@ -119,6 +119,9 @@
 
     .dialog-container .console span.txt-rotate {
         font-size: 11px;
+        line-height: 15px;
+        display: inline-block;
+        margin-top: 5px;
     }
 }
 

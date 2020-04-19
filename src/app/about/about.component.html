@@ -1,1 +1,37 @@
-<p>about works!</p>
+<section id="about">
+    <div class="about-container">
+        <div class="first-column">
+            <h1 i18n="nav@@aboutMe">About me</h1>
+            <h2>{{name}}</h2>
+            <p class="years-old">{{yearsOld}} years old</p>
+            <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est.
+                <br><br>
+                Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus. Etiam ut orci eros. Nunc ac interdum mauris.
+                <br><br>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est.
+            </p>
+            <div class="hobbies">
+                <h3>Hobbies</h3>
+                <fa-icon [icon]="faBiking" class="bar-icon" title="Cycling"></fa-icon>
+                <fa-icon [icon]="faDumbbell" class="bar-icon" title="Gym"></fa-icon>
+                <fa-icon [icon]="faSuitcaseRolling" class="bar-icon" title="Travel"></fa-icon>
+                <fa-icon [icon]="faBook" class="bar-icon" title="Read"></fa-icon>
+            </div>
+        </div>
+        <div class="second-column">
+            <div class="profile-picture"></div>
+            <div class="social-media">
+                <a href="{{linkedinUrl}}" target="blank">
+                    <fa-icon [icon]="faLinkedin" class="bar-icon" title="LinkedIn"></fa-icon>
+                </a>
+                <a href="{{githubUrl}}" target="blank">
+                    <fa-icon [icon]="faGithub" class="bar-icon" title="GitHub"></fa-icon>
+                </a>
+                <a href="{{facebookUrl}}" target="blank">
+                    <fa-icon [icon]="faFacebook" class="bar-icon" title="Facebook"></fa-icon>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
