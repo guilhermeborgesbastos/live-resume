@@ -1,0 +1,122 @@
+@mixin display-flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+.overlay {
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,0.6418942577030813) 0%, rgba(0,0,0,0.773546918767507) 65%, rgba(0,0,0,0.8379726890756303) 75%, rgba(0,0,0,0.9724264705882353) 100%);
+    @include display-flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.landscape {
+    background: url('../../assets/template/experience/rotterdam.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 780px;
+    top: -4em;
+    position: relative;
+}
+
+.container {
+    @include display-flex;
+    flex-direction: column;
+    max-width: 1400px;
+    align-self: center;
+    width: 85vw;
+}
+
+.top-container {
+    display: flex;
+    color: #fff;
+}
+
+.top-container .title {
+    flex-grow: 2;
+}
+
+.top-container .title h1 {
+    font-size: 42px;
+    font-weight: 600;
+}
+
+.top-container .navigation {
+    @include display-flex;
+    flex-grow: 1;
+    font-size: 32px;
+    font-weight: 500;
+    align-items: center;
+    text-align: right;
+}
+
+.top-container .navigation .previous {
+    flex-grow: 1;
+}
+
+.top-container .navigation .next {
+    flex-grow: 1;
+}
+
+
+.middle-container {
+    @include display-flex;
+    flex-direction: column;
+    text-align: right;
+    color: #fff;
+}
+
+.middle-container .company-name {
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 50px;
+}
+
+.middle-container .period {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.middle-container .location {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.middle-container .description {
+    margin-top: 1em;
+    font-size: 20px;
+    font-weight: normal;
+    text-align: justify;
+}
+
+.middle-container .social-media {
+    text-align: right;
+    margin-top: 1em;
+}
+
+.middle-container .social-media .icon {
+    font-size: 50px;
+    color: #fff;
+    margin: 0px 20px 0px 20px;
+    transition: 0.3s;
+}
+
+.middle-container .social-media .icon:last-child {
+    margin-right: 0;
+}
+
+.middle-container .social-media .icon:hover {
+    color: #8087a1;
+}
+
+
+.bottom-container {
+
+}
