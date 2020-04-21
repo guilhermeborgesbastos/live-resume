@@ -4,7 +4,7 @@
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-  }
+}
 
 .overlay {
     background: rgb(2,0,36);
@@ -40,7 +40,7 @@
 }
 
 .top-container .title {
-    flex-grow: 2;
+    flex-grow: 4;
 }
 
 .top-container .title h1 {
@@ -54,17 +54,42 @@
     font-size: 32px;
     font-weight: 500;
     align-items: center;
-    text-align: right;
+    text-align: center;
 }
 
 .top-container .navigation .previous {
+    flex-grow: 2;
+    -webkit-transition: text-shadow .3s linear;
+    -moz-transition: text-shadow .3s linear;
+    -ms-transition: text-shadow .3s linear;
+    -o-transition: text-shadow .3s linear;
+    transition: text-shadow .3s linear;
+    cursor: pointer;
+    text-align: left;
+}
+
+.top-container .navigation .devider {
     flex-grow: 1;
 }
 
 .top-container .navigation .next {
-    flex-grow: 1;
+    flex-grow: 2;
+    -webkit-transition: text-shadow .3s linear;
+    -moz-transition: text-shadow .3s linear;
+    -ms-transition: text-shadow .3s linear;
+    -o-transition: text-shadow .3s linear;
+    transition: text-shadow .3s linear;
+    cursor: pointer;
+    text-align: right;
 }
 
+.top-container .navigation .previous:hover {
+    text-shadow: 0 0 15px white;
+}
+
+.top-container .navigation .next:hover {
+    text-shadow: 0 0 15px white;
+}
 
 .middle-container {
     @include display-flex;
@@ -96,6 +121,24 @@
     text-align: justify;
 }
 
+.middle-container .technologies {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+    flex-wrap: wrap;
+}
+
+.middle-container .technologies .hashtag {
+    padding: 2px 5px 2px 5px;
+    background-color: #414c73;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.middle-container .technologies .hashtag:before {
+    content: '#';
+}
+
 .middle-container .social-media {
     text-align: right;
     margin-top: 1em;
@@ -116,7 +159,12 @@
     color: #8087a1;
 }
 
-
-.bottom-container {
-
-}
+@keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+  }
+  

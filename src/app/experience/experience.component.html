@@ -9,6 +9,7 @@
                     <div class="previous">
                         <fa-icon [icon]="faChevronLeft" class="icon" title="previous"></fa-icon>  Previous
                     </div>
+                    <div class="devider">|</div>
                     <div class="next">
                         Next <fa-icon [icon]="faChevronRight" class="icon" title="next"></fa-icon>
                     </div>
@@ -20,6 +21,16 @@
                 <div class="location">Rio de Janeiro, Brazil</div>
                 <div class="description">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus. 
+                </div>
+                <div class="technologies">
+                    <span class="hashtag">HTML</span>
+                    <span class="hashtag">CSS</span>
+                    <span class="hashtag">Javascript</span>
+                    <span class="hashtag">Java</span>
+                    <span class="hashtag">Angular</span>
+                    <span class="hashtag">Spring Boot</span>
+                    <span class="hashtag">PHP</span>
+                    <span class="hashtag">MongoDB</span>
                 </div>
                 <div class="social-media">
                     <a href="#" target="blank">
@@ -33,9 +44,7 @@
                     </a>
                 </div>
             </div>
-            <div class="bottom-container">
-                Timeline
-            </div>
+            <app-experience-timeline></app-experience-timeline>
         </div>
     </div>
 </section>
