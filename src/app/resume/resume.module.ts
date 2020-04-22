@@ -5,21 +5,21 @@ import { HeaderComponent } from '../header/header.component';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { PostsComponent } from '../posts/posts.component';
-import { ExperienceComponent } from '../experience/experience.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WelcomeModule } from '../welcome/welcome.molule';
+import { ExperienceModule } from '../experience/experience.module';
 
 @NgModule({
   imports: [ 
     ResumeRoutingModule,
     FontAwesomeModule,
-    WelcomeModule
+    WelcomeModule,
+    ExperienceModule
   ],
   declarations: [ 
     ResumeComponent,
     HeaderComponent,
     AboutComponent,
-    ExperienceComponent,
     PostsComponent,
     ContactComponent
   ],

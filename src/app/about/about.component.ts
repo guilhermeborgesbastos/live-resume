@@ -15,7 +15,6 @@ import { faLinkedin, faGithub, faFacebook } from '@fortawesome/free-brands-svg-i
 })
 export class AboutComponent implements OnInit {
   
-  title: string;
   name: string;
   yearsOld: number;
 

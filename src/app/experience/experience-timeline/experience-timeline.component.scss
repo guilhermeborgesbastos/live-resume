@@ -1,0 +1,121 @@
+.bottom-container {
+  position: relative;
+  bottom: -100px;
+}
+
+#lineCont {
+  width: 100%;
+  height: 20%;
+}
+
+#line {
+  height: 3px;
+  width: 100%;
+  background: #ffffff61;
+  border-radius: 5px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+}
+
+#span {
+  display: none;
+  width: 70%;
+  margin: auto;
+  margin-top: 25%;
+  text-align: center;
+  color: white;
+}
+
+.circle.current{
+  width: 15px;
+  height: 15px;
+  background: #414c73;
+  top: -8px;
+  font-size: 22px;
+  text-shadow: 0 0 15px white;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 15px;
+  position: absolute;
+  top: -6px;
+  border: 3px solid white;
+  cursor: pointer;
+  transition: text-shadow 0.3s linear;
+
+  .popupSpan {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    white-space: nowrap;
+    display: inline-block;
+    color: white;
+    position: absolute;
+    top: 20px;
+    left: -35px;
+    display: none;
+    transition: all 0.1s ease-out;
+  }
+  &.hover:before, &.active:before {
+    display: block;
+  }
+  &.hover .popupSpan, &.active .popupSpan {
+    display: block;
+  }
+  &.active .popupSpan {
+    top: -40px;
+  }
+  &.active.current .popupSpan {
+    left: -50px;
+    top: -50px;
+    // Not sure about the animation yet....
+    // -webkit-animation: float-dialog 6s ease-in-out infinite;
+    // animation: float-dialog 6s ease-in-out infinite;
+  }
+}
+
+#mainCont {
+  height: 80%;
+  width: 100%;
+  position: relative;
+  color: white;
+  font-size: 62px;
+  text-align: center;
+  transition: all 0.2s ease-out;
+  span {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 30%;
+    transition: all 0.2s ease-out;
+    &.right {
+      left: 200%;
+    }
+    &.center {
+      left: 0% !important;
+    }
+    &.left {
+      left: -100%;
+    }
+  }
+}
+
+@keyframes grow {
+   0% {
+    -webkit-transform: scale( 0.98 );-moz-transform: scale( 0.98 );-o-transform: scale( 0.98 );-ms-transform: scale( 0.98 );transform: scale( 0.98 );
+   }
+   
+   50% {
+   -webkit-transform: scale( 0.99 );-moz-transform: scale( 0.99 );-o-transform: scale( 0.99 );-ms-transform: scale( 0.99 );transform: scale( 0.99 );
+   }
+   
+   100% {
+     -webkit-transform: scale( 0.98 );-moz-transform: scale( 0.98 );-o-transform: scale( 0.98 );-ms-transform: scale( 0.98 );transform: scale( 0.98 );
+   }
+ }
