@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {  faChevronLeft , faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithub, faFacebook, IconDefinition} from '@fortawesome/free-brands-svg-icons';
+import { IExperience } from './experience-interfaces';
+import { DataService } from '../core/data.service';
 
 @Component({
   selector: 'app-experience',
@@ -15,7 +17,9 @@ export class ExperienceComponent implements OnInit {
   faChevronLeft: IconDefinition;
   faChevronRight: IconDefinition;
 
-  constructor() { }
+  experiences: IExperience[];
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
     this.faLinkedin = faLinkedin;
@@ -23,6 +27,10 @@ export class ExperienceComponent implements OnInit {
     this.faFacebook = faFacebook;
     this.faChevronLeft = faChevronLeft;
     this.faChevronRight = faChevronRight;
+
+    // Fetch the Experiences from the Data Service
+    this.dataService.getExperiences()
+        .subscribe((experiences: IExperience[]) => this.experiences = experiences);
   }
 
 }

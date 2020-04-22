@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "position": 1,
+        "startAt": "01-02-2011",
+        "endAt": "06-15-2013",
+        "role": "Full-stack Developer",
+        "companyName": "E-tática",
+        "location": "Rio de Janeiro, Brazil",
+        "descriptions": [
+            {
+                "language": "pt",
+                "description": "At E-tática Agency, placed in Rio de Janeiro. I had the chance to work with small and medium e-commerce with cross-technical and cross-cultural teams. Integrating it with external APIs such as Payment services and ERPs platforms."
+            },
+            {
+                "language": "en",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "linkedInUrl": "http://linkedInUrl.com",
+        "websiteUrl": "http://linkedInUrl.com",
+        "facebookUrl": "http://linkedInUrl.com"
+    },
+    {
+        "id": 2,
+        "position": 2,
+        "startAt": "07-01-2013",
+        "endAt": "12-22-2016",
+        "role": "Mobile Developer (Android - Java)",
+        "companyName": "Deevo Studio",
+        "location": "São Paulo, Brazil",
+        "descriptions": [
+            {
+                "language": "pt",
+                "description": "Uma empresa de São Paulo - Brasil, especializada em desenvolvimento web e design. Com extenso portfólio, resultado de 20 anos de experiência no mercado com Agências e o mercado corporativo. As criações vão desde o desenvolvimento da marca e identidade visual até a criação de aplicativos e sites com amplo conhecimento do Wordpress."
+            },
+            {
+                "language": "en",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "linkedInUrl": "http://linkedInUrl.com",
+        "websiteUrl": "http://linkedInUrl.com",
+        "facebookUrl": "http://linkedInUrl.com"
+    },
+    {
+        "id": 3,
+        "position": 3,
+        "startAt": "01-02-2017",
+        "endAt": "11-28-2017",
+        "role": "Full-stack Developer",
+        "companyName": "Skydreamer Start-up",
+        "location": "Utrecht, Netherlands",
+        "descriptions": [
+            {
+                "language": "pt",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            },
+            {
+                "language": "en",
+                "description": "Skydreamer is a startup that turns traveling with friends into a Swipe and Match game, offering thousands of destinations all around the world. Always with the best offers for Flights, Hotels, apartments."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "linkedInUrl": "http://linkedInUrl.com",
+        "websiteUrl": "http://linkedInUrl.com",
+        "facebookUrl": "http://linkedInUrl.com"
+    },
+    {
+        "id": 4,
+        "position": 4,
+        "startAt": "12-18-2017",
+        "endAt": "04-15-2020",
+        "role": "Software Engeneer",
+        "companyName": "Skydreamer Start-up",
+        "location": "Utrecht, Netherlands",
+        "descriptions": [
+            {
+                "language": "pt",
+                "description": "Na QAT Global, sou responsável por ser o 'Pod Leader' de back-end. Trabalhamos com Big Data Analysis para o maior fornecedor americano de tecnologia de água, permitindo que os clientes em todo o mundo transportem, tratem, testem e usem com eficiência a água em serviços públicos, residenciais, comerciais, agrícolas e industriais. A empresa faz negócios em mais de 150 países. Meu trabalho é garantir que todos os desenvolvedores estão aplicando os melhores padrões, práticas e padrões necessários para um aplicativo corporativo."
+            },
+            {
+                "language": "en",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "linkedInUrl": "http://linkedInUrl.com",
+        "websiteUrl": "http://linkedInUrl.com",
+        "facebookUrl": "http://linkedInUrl.com"
+    }
+]
