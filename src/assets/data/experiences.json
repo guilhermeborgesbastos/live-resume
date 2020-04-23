@@ -36,7 +36,8 @@
                 "title": "Facebook",
                 "httpAddress": "http://facebook.com"
             }
-        ]
+        ],
+        "backgroundUrl": "../../assets/template/experience/rio.jpg"
     },
     {
         "id": 2,
@@ -75,7 +76,8 @@
                 "title": "Facebook",
                 "httpAddress": "http://facebook.com"
             }
-        ]
+        ],
+        "backgroundUrl": "../../assets/template/experience/sao-paulo.jpg"
     },
     {
         "id": 3,
@@ -114,7 +116,8 @@
                 "title": "Facebook",
                 "httpAddress": "http://facebook.com"
             }
-        ]
+        ],
+        "backgroundUrl": "../../assets/template/experience/utrecht.jpg"
     },
     {
         "id": 4,
@@ -153,6 +156,46 @@
                 "title": "Facebook",
                 "httpAddress": "http://facebook.com"
             }
-        ]
+        ],
+        "backgroundUrl": "../../assets/template/experience/uberaba.jpg"
+    },
+    {
+        "id": 5,
+        "position": 5,
+        "startAt": "05-01-2020",
+        "role": "DevOps Engeneer",
+        "companyName": "Swisscom AG",
+        "location": "Rotterdam, Netherlands",
+        "descriptions": [
+            {
+                "language": "pt",
+                "description": "Na QAT Global, sou responsável por ser o 'Pod Leader' de back-end. Trabalhamos com Big Data Analysis para o maior fornecedor americano de tecnologia de água, permitindo que os clientes em todo o mundo transportem, tratem, testem e usem com eficiência a água em serviços públicos, residenciais, comerciais, agrícolas e industriais. A empresa faz negócios em mais de 150 países. Meu trabalho é garantir que todos os desenvolvedores estão aplicando os melhores padrões, práticas e padrões necessários para um aplicativo corporativo."
+            },
+            {
+                "language": "en",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "httpAddress": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "httpAddress": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "httpAddress": "http://facebook.com"
+            }
+        ],
+        "backgroundUrl": "../../assets/template/experience/rotterdam.jpg"
     }
 ]

@@ -9,6 +9,7 @@ export interface IExperience {
     endAt?: string;  // For the purpose of stringifying MM-DD-YYYY date format
     technologies?: string[];
     medias?: IExperienceMedia[];
+    backgroundUrl?: string
 }
 
 export interface IExperienceDescription {

@@ -14,16 +14,17 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 export class ExperienceComponent implements OnInit {
 
   experiences: IExperience[];
-  experiencesDesc: IExperience[] = [];
+  experiencesOrdered: IExperience[] = [];
   currentPosition: number;
+  backgroundUrl: string;
 
   @ViewChild('orderedList', { static: false }) orderedList: ElementRef;
 
   constructor(
     private dataService: DataService,
     private sortService: SorterService,
-    private elRef: ElementRef,
     private renderer: Renderer2,
+    private elRef: ElementRef,
     private library: FaIconLibrary
   ) {
     library.addIconPacks(fas, fab);
@@ -37,8 +38,9 @@ export class ExperienceComponent implements OnInit {
           this.currentPosition = experiences.length;
           this.experiences = experiences;
 
-          this.experiencesDesc = [...experiences];
-          this.experiencesDesc.sort(this.sortService.sort('position', 'desc'));        
+          this.experiencesOrdered = [...experiences];
+          this.experiencesOrdered.sort(this.sortService.sort('position', 'desc'));       
+          this.backgroundUrl = this.retrieveBackgroundUrl();
         });
   }
 
@@ -52,6 +54,7 @@ export class ExperienceComponent implements OnInit {
     }, 400);
     
     this.currentPosition = this.currentPosition - 1;
+    this.backgroundUrl = this.retrieveBackgroundUrl();
 
     const targetElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
     this.renderer.addClass(targetElem, 'selected');
@@ -62,7 +65,7 @@ export class ExperienceComponent implements OnInit {
     }, 400);
   }
 
-  onClickNext(): void{
+  onClickNext(): void {
     const currElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
     this.renderer.removeClass(currElem, 'selected');
     this.renderer.addClass(currElem, 'leave-left');
@@ -72,6 +75,7 @@ export class ExperienceComponent implements OnInit {
     }, 400);
     
     this.currentPosition = this.currentPosition + 1;
+    this.backgroundUrl = this.retrieveBackgroundUrl();
 
     const targetElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
     this.renderer.addClass(targetElem, 'selected');
@@ -80,6 +84,10 @@ export class ExperienceComponent implements OnInit {
     setTimeout(() => {
       this.renderer.removeClass(targetElem, 'enter-right');
     }, 400);
+  }
+
+  retrieveBackgroundUrl(): string {
+    return this.experiences[this.currentPosition - 1].backgroundUrl;
   }
 
 }

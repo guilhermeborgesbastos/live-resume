@@ -46,7 +46,7 @@ export class ExperienceTimelineComponent implements OnInit {
     let dates: string[] = this._experiences.map(experience => experience.startAt);
 
     // TO-DO: Adding the current day in order to complete the timeline...
-    dates.push('04-22-2020');
+    dates.push('02-22-2021');
 
     if(dates && dates.length < 2) {
       this.renderer.setStyle(this.elRef.nativeElement, 'visibility', 'hidden');

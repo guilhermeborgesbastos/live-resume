@@ -16,7 +16,6 @@
 }
 
 .landscape {
-    background: url('../../assets/template/experience/rotterdam.jpg') no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -24,6 +23,16 @@
     height: 780px;
     top: -4em;
     position: relative;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    -webkit-transition: background-image 0.3s ease-in-out;
+    transition: background-image 0.3s ease-in-out;
 }
 
 .container {

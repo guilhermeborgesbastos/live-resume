@@ -1,4 +1,4 @@
-<section id="experience" class="landscape">
+<section id="experience" class="landscape" [style.backgroundImage]="'url('+backgroundUrl+')'">
     <div class="overlay">
         <div class="container">
             <div class="top-container">
@@ -10,7 +10,7 @@
                         <fa-icon [icon]="['fas', 'chevron-left']" class="icon" title="previous"></fa-icon> Previous
                     </div>
                     <div class="devider">|</div>
-                    <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesDesc?.length}">
+                    <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
                        Next <fa-icon [icon]="['fas', 'chevron-right']" class="icon" title="next"></fa-icon>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
             <div class="middle-container">
                 <div class="events-content">
                     <ol #orderedList>
-                        <li *ngFor="let exp of experiencesDesc; let i = index" [ngClass]="{'selected': i == 0}" data-id="{{ exp.id }}">
+                        <li *ngFor="let exp of experiencesOrdered; let i = index" [ngClass]="{'selected': i == 0}" data-id="{{ exp.id }}">
                             <div class="company-name">{{ exp.companyName }}</div>
                             <div class="period">{{ exp.startAt }} - {{ exp.endAt }}</div>
                             <div class="location">{{ exp.location }}</div>
