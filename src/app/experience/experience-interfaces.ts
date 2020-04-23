@@ -8,12 +8,16 @@ export interface IExperience {
     startAt: string; // For the purpose of stringifying MM-DD-YYYY date format
     endAt?: string;  // For the purpose of stringifying MM-DD-YYYY date format
     technologies?: string[];
-    linkedInUrl?: string;
-    websiteUrl?: string;
-    facebookUrl?: string;
+    medias?: IExperienceMedia[];
 }
 
 export interface IExperienceDescription {
     language: string;
     description: string;
+}
+
+export interface IExperienceMedia {
+    icon: string; // Use the official names of Brand Icons (https://www.w3schools.com/icons/fontawesome_icons_brand.asp)
+    title: string;
+    httpAddress: string;
 }

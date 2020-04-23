@@ -20,9 +20,23 @@
         "technologies": [
             "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
         ],
-        "linkedInUrl": "http://linkedInUrl.com",
-        "websiteUrl": "http://linkedInUrl.com",
-        "facebookUrl": "http://linkedInUrl.com"
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "httpAddress": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "httpAddress": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "httpAddress": "http://facebook.com"
+            }
+        ]
     },
     {
         "id": 2,
@@ -45,9 +59,23 @@
         "technologies": [
             "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
         ],
-        "linkedInUrl": "http://linkedInUrl.com",
-        "websiteUrl": "http://linkedInUrl.com",
-        "facebookUrl": "http://linkedInUrl.com"
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "httpAddress": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "httpAddress": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "httpAddress": "http://facebook.com"
+            }
+        ]
     },
     {
         "id": 3,
@@ -70,9 +98,23 @@
         "technologies": [
             "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
         ],
-        "linkedInUrl": "http://linkedInUrl.com",
-        "websiteUrl": "http://linkedInUrl.com",
-        "facebookUrl": "http://linkedInUrl.com"
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "httpAddress": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "httpAddress": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "httpAddress": "http://facebook.com"
+            }
+        ]
     },
     {
         "id": 4,
@@ -80,8 +122,8 @@
         "startAt": "12-18-2017",
         "endAt": "04-15-2020",
         "role": "Software Engeneer",
-        "companyName": "Skydreamer Start-up",
-        "location": "Utrecht, Netherlands",
+        "companyName": "QAT Global",
+        "location": "Uberaba, Brazil",
         "descriptions": [
             {
                 "language": "pt",
@@ -95,8 +137,22 @@
         "technologies": [
             "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
         ],
-        "linkedInUrl": "http://linkedInUrl.com",
-        "websiteUrl": "http://linkedInUrl.com",
-        "facebookUrl": "http://linkedInUrl.com"
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "httpAddress": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "httpAddress": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "httpAddress": "http://facebook.com"
+            }
+        ]
     }
 ]

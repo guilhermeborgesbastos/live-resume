@@ -36,6 +36,7 @@ export class ExperienceTimelineComponent implements OnInit {
     this.offsetWidth = this.elRef.nativeElement.offsetWidth;
   }
 
+  // TO-DO: not working properly on Firefox
   daysBetween(startDate: string, endDate: string): number {
     return Math.round(Math.abs((+new Date(startDate)) - (+new Date(endDate)))/8.64e7);
   }
@@ -44,14 +45,15 @@ export class ExperienceTimelineComponent implements OnInit {
 
     let dates: string[] = this._experiences.map(experience => experience.startAt);
 
-    // Adding the current day in order to complete the timeline...
+    // TO-DO: Adding the current day in order to complete the timeline...
     dates.push('04-22-2020');
 
     if(dates && dates.length < 2) {
       this.renderer.setStyle(this.elRef.nativeElement, 'visibility', 'hidden');
     } 
     else if (dates.length >= 2) {
-      const oneDayInPixels: number = this.offsetWidth / this.daysBetween(dates[0], dates[dates.length - 1]);
+      const daysBetween: number = this.daysBetween(dates[0], dates[dates.length - 1]);
+      const oneDayInPixels: number = this.offsetWidth / daysBetween;
       
       // Draw first date circle      
       this.renderer.appendChild(this.line.nativeElement, this.createCircle(0, 0, dates[0]));
@@ -86,7 +88,8 @@ export class ExperienceTimelineComponent implements OnInit {
     const circleElement = this.renderer.createElement('div');
     this.renderer.addClass(circleElement, 'circle');
     this.renderer.addClass(circleElement, 'active');
-    this.renderer.setStyle(circleElement, 'left', this.calculatePosition(left, this.offsetWidth) + '%');
+    const leftPos = this.calculatePosition(left, this.offsetWidth);
+    this.renderer.setStyle(circleElement, 'left', `${leftPos}%`);
     this.renderer.setAttribute(circleElement, 'id', 'circle_' + index);
 
     const labelElement = this.renderer.createElement('div');
