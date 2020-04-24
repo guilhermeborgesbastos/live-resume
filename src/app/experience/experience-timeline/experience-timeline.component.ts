@@ -9,6 +9,7 @@ import { IExperience } from '../experience-interfaces';
 export class ExperienceTimelineComponent implements OnInit {
 
   private _experiences: IExperience[] = [];
+  private _currentPosition: number;
   private offsetWidth: number;
 
   // For the purpose of stringifying MM-DD-YYYY date format
@@ -20,6 +21,17 @@ export class ExperienceTimelineComponent implements OnInit {
     private elRef: ElementRef,
     private renderer: Renderer2
   ) {}
+
+  @Input() get currentPosition(): number {
+    return this._currentPosition;
+  }
+
+  set currentPosition(value: number) {
+    if(value) {
+      this._currentPosition = value;
+      this.updateTimelineNavigation();
+    }
+  }
 
   @Input() get experiences(): IExperience[] {
       return this._experiences;
@@ -34,6 +46,14 @@ export class ExperienceTimelineComponent implements OnInit {
 
   ngOnInit() : void {
     this.offsetWidth = this.elRef.nativeElement.offsetWidth;
+  }
+
+  updateTimelineNavigation() {
+    const activePreviousElem = this.line.nativeElement.querySelector('.circle.active.current');
+    this.renderer.removeClass(activePreviousElem, 'current');
+    
+    const targetElem = this.line.nativeElement.querySelector('div[id="circle_' + ( this.currentPosition - 1 ) + '"]');
+    this.renderer.addClass(targetElem, 'current');
   }
 
   // TO-DO: not working properly on Firefox

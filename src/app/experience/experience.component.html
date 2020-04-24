@@ -20,7 +20,8 @@
                     <ol #orderedList>
                         <li *ngFor="let exp of experiencesOrdered; let i = index" [ngClass]="{'selected': i == 0}" data-id="{{ exp.id }}">
                             <div class="company-name">{{ exp.companyName }}</div>
-                            <div class="period">{{ exp.startAt }} - {{ exp.endAt }}</div>
+                            <div class="role">{{ exp.role }}</div>
+                            <div class="period">{{ exp.startAt | date:'MMM yyyy' }} - {{ (exp.endAt | date:'MMM yyyy') || "current" }}</div>
                             <div class="location">{{ exp.location }}</div>
                             <div class="description">{{ exp.descriptions[1].description }}</div> <!-- TO-DO: Add internationalization -->
                             <div class="technologies">
@@ -37,7 +38,7 @@
             </div>
 
             <!--TODO: use *bgIf here  to not render it on the dom in case of only ONE experience -->
-            <app-experience-timeline [experiences]="experiences"></app-experience-timeline>
+            <app-experience-timeline [experiences]="experiences" [currentPosition]="currentPosition"></app-experience-timeline>
         </div>
     </div>
 </section>
