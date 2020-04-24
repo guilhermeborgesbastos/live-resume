@@ -1,4 +1,4 @@
-<section id="experience" class="landscape">
+<section id="experience" class="landscape" [style.backgroundImage]="'url('+backgroundUrl+')'">
     <div class="overlay">
         <div class="container">
             <div class="top-container">
@@ -6,45 +6,39 @@
                     <h1>Experiences</h1>
                 </div>
                 <div class="navigation">
-                    <div class="previous">
-                        <fa-icon [icon]="faChevronLeft" class="icon" title="previous"></fa-icon>  Previous
+                    <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
+                        <fa-icon [icon]="['fas', 'chevron-left']" class="icon" title="previous"></fa-icon> Previous
                     </div>
                     <div class="devider">|</div>
-                    <div class="next">
-                        Next <fa-icon [icon]="faChevronRight" class="icon" title="next"></fa-icon>
+                    <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
+                       Next <fa-icon [icon]="['fas', 'chevron-right']" class="icon" title="next"></fa-icon>
                     </div>
                 </div>
             </div>
             <div class="middle-container">
-                <div class="company-name">Company Name</div>
-                <div class="period">dec 2017 - ago 2018</div>
-                <div class="location">Rio de Janeiro, Brazil</div>
-                <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus. 
-                </div>
-                <div class="technologies">
-                    <span class="hashtag">HTML</span>
-                    <span class="hashtag">CSS</span>
-                    <span class="hashtag">Javascript</span>
-                    <span class="hashtag">Java</span>
-                    <span class="hashtag">Angular</span>
-                    <span class="hashtag">Spring Boot</span>
-                    <span class="hashtag">PHP</span>
-                    <span class="hashtag">MongoDB</span>
-                </div>
-                <div class="social-media">
-                    <a href="#" target="blank">
-                        <fa-icon [icon]="faLinkedin" class="icon" title="LinkedIn"></fa-icon>
-                    </a>
-                    <a href="#" target="blank">
-                        <fa-icon [icon]="faGithub" class="icon" title="GitHub"></fa-icon>
-                    </a>
-                    <a href="#" target="blank">
-                        <fa-icon [icon]="faFacebook" class="icon" title="Facebook"></fa-icon>
-                    </a>
+                <div class="events-content">
+                    <ol #orderedList>
+                        <li *ngFor="let exp of experiencesOrdered; let i = index" [ngClass]="{'selected': i == 0}" data-id="{{ exp.id }}">
+                            <div class="company-name">{{ exp.companyName }}</div>
+                            <div class="role">{{ exp.role }}</div>
+                            <div class="period">{{ exp.startAt | date:'MMM yyyy' }} - {{ (exp.endAt | date:'MMM yyyy') || "current" }}</div>
+                            <div class="location">{{ exp.location }}</div>
+                            <div class="description">{{ exp.descriptions[1].description }}</div> <!-- TO-DO: Add internationalization -->
+                            <div class="technologies">
+                                <span class="hashtag" *ngFor="let technology of exp.technologies">{{ technology }}</span>
+                            </div>
+                            <div class="social-media">
+                                <a *ngFor="let media of exp.medias" href="{{ media.httpAddress }}" target="blank">
+                                    <fa-icon [icon]="['fab', media.icon]" class="icon" title="{{ media.title }}"></fa-icon>
+                                </a>
+                            </div>
+                        </li>
+                    </ol>
                 </div>
             </div>
-            <app-experience-timeline [experiences]="experiences"></app-experience-timeline>
+
+            <!--TODO: use *bgIf here  to not render it on the dom in case of only ONE experience -->
+            <app-experience-timeline [experiences]="experiences" [currentPosition]="currentPosition"></app-experience-timeline>
         </div>
     </div>
 </section>
