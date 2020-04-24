@@ -11,7 +11,7 @@
 #line {
   height: 3px;
   width: 100%;
-  background: #ffffff61;
+  background:rgba(255, 255, 255, 0.25);
   border-radius: 5px;
   margin: auto;
   top: 50%;
@@ -60,6 +60,7 @@
     left: -35px;
     display: none;
     transition: all 0.1s ease-out;
+    pointer-events: none; /* Only the Circles in the timeline are listened by events. */
   }
   &.hover:before, &.active:before {
     display: block;
@@ -69,6 +70,17 @@
   }
   &.active .popupSpan {
     top: -40px;
+  }
+  &.active.future {
+    width: 0px;
+    height: 0px;
+    border-top: 7px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 13px solid white;
+    background: transparent;
+    border-radius: 0;
+    border-right: 0;
+    pointer-events: none;
   }
   &.active.current .popupSpan {
     left: -50px;

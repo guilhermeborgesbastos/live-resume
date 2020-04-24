@@ -44,7 +44,7 @@ export class ExperienceComponent implements OnInit {
         });
   }
 
-  onClickPrevious(): void {
+  onClickPrevious(targetPos?: number): void {
     const currElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
     this.renderer.removeClass(currElem, 'selected');
     this.renderer.addClass(currElem, 'leave-right');
@@ -53,9 +53,10 @@ export class ExperienceComponent implements OnInit {
       this.renderer.removeClass(currElem, 'leave-right');
     }, 400);
     
-    this.currentPosition = this.currentPosition - 1;
+    // Subtracts one to the current position in order to move backwards in the timeline.
+    this.currentPosition = (targetPos ? +targetPos : this.currentPosition - 1);
     this.backgroundUrl = this.retrieveBackgroundUrl();
-
+    
     const targetElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
     this.renderer.addClass(targetElem, 'selected');
     this.renderer.addClass(targetElem, 'enter-left');
@@ -65,7 +66,7 @@ export class ExperienceComponent implements OnInit {
     }, 400);
   }
 
-  onClickNext(): void {
+  onClickNext(targetPos?: number): void {
     const currElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
     this.renderer.removeClass(currElem, 'selected');
     this.renderer.addClass(currElem, 'leave-left');
@@ -74,16 +75,26 @@ export class ExperienceComponent implements OnInit {
       this.renderer.removeClass(currElem, 'leave-left');
     }, 400);
     
-    this.currentPosition = this.currentPosition + 1;
+    // Sums one to the current position in order to move further in the timeline.
+    this.currentPosition = (targetPos ? +targetPos : this.currentPosition + 1);
     this.backgroundUrl = this.retrieveBackgroundUrl();
 
-    const targetElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
+    const targetElem = this.orderedList.nativeElement.querySelector('li[id="' +this.currentPosition + '"]');
     this.renderer.addClass(targetElem, 'selected');
     this.renderer.addClass(targetElem, 'enter-right');
 
     setTimeout(() => {
       this.renderer.removeClass(targetElem, 'enter-right');
     }, 400);
+  }
+
+  updateNavigation(targetPos: number) {
+    // in case of == nothing to do here
+    if(targetPos > this.currentPosition) {
+      this.onClickNext(targetPos);
+    } else if (targetPos < this.currentPosition) {
+      this.onClickPrevious(targetPos);
+    }
   }
 
   retrieveBackgroundUrl(): string {

@@ -37,8 +37,10 @@
                 </div>
             </div>
 
-            <!--TODO: use *bgIf here  to not render it on the dom in case of only ONE experience -->
-            <app-experience-timeline [experiences]="experiences" [currentPosition]="currentPosition"></app-experience-timeline>
+            <app-experience-timeline 
+                [experiences]="experiences" 
+                [currentPosition]="currentPosition" 
+                (onTimelineChanged)="updateNavigation($event)"></app-experience-timeline>
         </div>
     </div>
 </section>

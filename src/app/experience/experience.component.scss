@@ -31,7 +31,14 @@
     background-origin: initial;
     background-clip: initial;
     background-color: initial;
+    
+    /*
+     * This is supported natively by Chrome, Opera and Safari. Firefox and IE hasn't implemented it yet (bugzil.la).
+    */
     -webkit-transition: background-image 0.3s ease-in-out;
+    -moz-transition: background-image 0.3s ease-in-out;
+    -ms-transition: background-image 0.3s ease-in-out;
+    -o-transition: background-image 0.3s ease-in-out;
     transition: background-image 0.3s ease-in-out;
 }
 

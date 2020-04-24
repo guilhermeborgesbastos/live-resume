@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, ViewChildren, QueryList, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, EventEmitter, Renderer2, OnDestroy, Output } from '@angular/core';
 import { IExperience } from '../experience-interfaces';
 
 @Component({
@@ -6,11 +6,15 @@ import { IExperience } from '../experience-interfaces';
   templateUrl: './experience-timeline.component.html',
   styleUrls: [ './experience-timeline.component.scss' ]
 })
-export class ExperienceTimelineComponent implements OnInit {
+export class ExperienceTimelineComponent implements OnInit, OnDestroy {
 
   private _experiences: IExperience[] = [];
   private _currentPosition: number;
   private offsetWidth: number;
+
+  @Output() onTimelineChanged = new EventEmitter<number>();
+
+  public removeEventListener: () => void;
 
   // For the purpose of stringifying MM-DD-YYYY date format
   private MONTHS_STR: string[] = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
@@ -46,13 +50,25 @@ export class ExperienceTimelineComponent implements OnInit {
 
   ngOnInit() : void {
     this.offsetWidth = this.elRef.nativeElement.offsetWidth;
+
+    this.removeEventListener = this.renderer.listen(this.elRef.nativeElement, 'click', (event) => {
+      if (event.target && event.target.getAttribute('id-position')) {
+        const targetId: number = event.target.getAttribute('id-position');
+        this.onTimelineChanged.emit(targetId);
+      }
+    });
   }
 
+  // Cleanup by removing the event listener on destroy
+  public ngOnDestroy() {
+    this.removeEventListener();
+  }
+  
   updateTimelineNavigation() {
     const activePreviousElem = this.line.nativeElement.querySelector('.circle.active.current');
     this.renderer.removeClass(activePreviousElem, 'current');
     
-    const targetElem = this.line.nativeElement.querySelector('div[id="circle_' + ( this.currentPosition - 1 ) + '"]');
+    const targetElem = this.line.nativeElement.querySelector('div[id-position="' + this.currentPosition + '"]');
     this.renderer.addClass(targetElem, 'current');
   }
 
@@ -76,7 +92,7 @@ export class ExperienceTimelineComponent implements OnInit {
       const oneDayInPixels: number = this.offsetWidth / daysBetween;
       
       // Draw first date circle      
-      this.renderer.appendChild(this.line.nativeElement, this.createCircle(0, 0, dates[0]));
+      this.renderer.appendChild(this.line.nativeElement, this.createCircle(1, 0, dates[0]));
 
       let i: number;
       const lastFrameLoop = dates.length - 1;
@@ -85,7 +101,7 @@ export class ExperienceTimelineComponent implements OnInit {
       for (i = 1; i < lastFrameLoop; i++) {
         const periodInDays: number = this.daysBetween(dates[0], dates[i]);
         const periodWidth: number = periodInDays * oneDayInPixels;
-        const circleElement = this.createCircle(i, periodWidth, dates[i]);
+        const circleElement = this.createCircle((i + 1), periodWidth, dates[i]);
 
         if(i == lastFrameLoop - 1) {
           this.renderer.addClass(circleElement, 'current');
@@ -95,7 +111,7 @@ export class ExperienceTimelineComponent implements OnInit {
       }
 
       // Draw last date circle ( the current frame )
-      const lastDataCircle = this.createCurrentCircle(i);
+      const lastDataCircle = this.createCurrentTriangle(i + 1);
       this.renderer.appendChild(this.line.nativeElement, lastDataCircle);
     }
   }
@@ -110,7 +126,7 @@ export class ExperienceTimelineComponent implements OnInit {
     this.renderer.addClass(circleElement, 'active');
     const leftPos = this.calculatePosition(left, this.offsetWidth);
     this.renderer.setStyle(circleElement, 'left', `${leftPos}%`);
-    this.renderer.setAttribute(circleElement, 'id', 'circle_' + index);
+    this.renderer.setAttribute(circleElement, 'id-position', index.toString());
 
     const labelElement = this.renderer.createElement('div');
     this.renderer.addClass(labelElement, 'popupSpan');
@@ -122,20 +138,12 @@ export class ExperienceTimelineComponent implements OnInit {
     return circleElement;
   }
 
-  createCurrentCircle(index: number): any {
+  createCurrentTriangle(index: number): any {
     const circleElement = this.renderer.createElement('div');
     this.renderer.addClass(circleElement, 'circle');
     this.renderer.addClass(circleElement, 'active');
+    this.renderer.addClass(circleElement, 'future');
     this.renderer.setStyle(circleElement, 'left', '100%');
-    this.renderer.setAttribute(circleElement, 'id', 'circle_' + index);
-
-    const labelElement = this.renderer.createElement('div');
-    this.renderer.addClass(labelElement, 'popupSpan');
-    const labelText = this.renderer.createText('currently');
-    this.renderer.appendChild(labelElement, labelText);
-
-    this.renderer.appendChild(circleElement, labelElement);
-
     return circleElement;
   }
 
