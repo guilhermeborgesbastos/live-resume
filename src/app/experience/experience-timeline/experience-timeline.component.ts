@@ -4,7 +4,7 @@ import { IExperience } from '../experience-interfaces';
 @Component({
   selector: 'app-experience-timeline',
   templateUrl: './experience-timeline.component.html',
-  styleUrls: [ './experience-timeline.component.scss' ]
+  styleUrls: [ './experience-timeline.component.scss' , 'experience-timeline.component.reponsivity.scss']
 })
 export class ExperienceTimelineComponent implements OnInit, OnDestroy {
 
@@ -120,6 +120,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
     return (leftPosition * 100) / offsetWidth;
   }
 
+  // TO-DO: Replace 'circle' for the 'milestone', for meaningful purposes...
   createCircle(index: number, left: number, date: string): any {
     const circleElement = this.renderer.createElement('div');
     this.renderer.addClass(circleElement, 'circle');
@@ -128,10 +129,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
     this.renderer.setStyle(circleElement, 'left', `${leftPos}%`);
     this.renderer.setAttribute(circleElement, 'id-position', index.toString());
 
-    const labelElement = this.renderer.createElement('div');
-    this.renderer.addClass(labelElement, 'popupSpan');
-    const labelText = this.renderer.createText(this.dateSpan(date.toString()));
-    this.renderer.appendChild(labelElement, labelText);
+    const labelElement = this.createLabelElement(date.toString());
 
     this.renderer.appendChild(circleElement, labelElement);
 
@@ -148,12 +146,26 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
   }
 
   /*
-   * Update this function based on the desired date formatting.
+   * Update this function based on the desired date label formatting.
   */
-  dateSpan(date: string): string {
+  createLabelElement(date: string): string {
     let month: any = date.split('-')[0];
     month = this.MONTHS_STR[month - 1];
+    const labelElement = this.renderer.createElement('div');
+    this.renderer.addClass(labelElement, 'popupSpan');
+
+    const monthSpan = this.renderer.createElement('span');
+    this.renderer.addClass(monthSpan, 'month');
+    this.renderer.appendChild(monthSpan, this.renderer.createText(month));
+
     const year = date.split('-')[2];
-    return `${month} ${year}`; // year, E.g: May. 2020
+    const yearSpan = this.renderer.createElement('span');
+    this.renderer.addClass(yearSpan, 'year');
+    this.renderer.appendChild(yearSpan, this.renderer.createText(year));
+
+    this.renderer.appendChild(labelElement, monthSpan);
+    this.renderer.appendChild(labelElement, yearSpan);
+
+    return labelElement; // year, E.g: May. 2020
   }
 }

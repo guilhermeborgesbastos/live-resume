@@ -9,16 +9,27 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
-  styleUrls: ['./experience.component.scss']
+  styleUrls: ['./experience.component.scss', 'experience-component.reponsivity.scss']
 })
 export class ExperienceComponent implements OnInit {
+  
+  SELECTED_CLASS: string = 'selected';
+  LEAVE_RIGHT_CLASS: string = 'leave-right';
+  ENTER_RIGHT_CLASS: string = 'enter-right';
+  LEAVE_LEFT_CLASS: string = 'leave-left';
+  ENTER_LEFT_CLASS: string = 'enter-left';
+  TRANSITION_TIME: number = 400;
 
   experiences: IExperience[];
   experiencesOrdered: IExperience[] = [];
   currentPosition: number;
   backgroundUrl: string;
 
-  @ViewChild('orderedList', { static: false }) orderedList: ElementRef;
+  previousYear: string;
+  currentYear: string;
+  nextYear: string;
+
+  @ViewChild('orderedList') orderedList: ElementRef;
 
   constructor(
     private dataService: DataService,
@@ -41,51 +52,60 @@ export class ExperienceComponent implements OnInit {
           this.experiencesOrdered = [...experiences];
           this.experiencesOrdered.sort(this.sortService.sort('position', 'desc'));       
           this.backgroundUrl = this.retrieveBackgroundUrl();
+          this.updateMobileNavigationView();
         });
   }
 
+  createListSelector(position: number): string {
+    return `li[id="${position}"]`;
+  } 
+
   onClickPrevious(targetPos?: number): void {
-    const currElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
-    this.renderer.removeClass(currElem, 'selected');
-    this.renderer.addClass(currElem, 'leave-right');
+    const currElem = this.orderedList.nativeElement.querySelector(this.createListSelector(this.currentPosition));
+    this.renderer.removeClass(currElem, this.SELECTED_CLASS);
+    this.renderer.addClass(currElem, this.LEAVE_RIGHT_CLASS);
 
     setTimeout(() => {
-      this.renderer.removeClass(currElem, 'leave-right');
-    }, 400);
+      this.renderer.removeClass(currElem, this.LEAVE_RIGHT_CLASS);
+    }, this.TRANSITION_TIME);
     
     // Subtracts one to the current position in order to move backwards in the timeline.
     this.currentPosition = (targetPos ? +targetPos : this.currentPosition - 1);
     this.backgroundUrl = this.retrieveBackgroundUrl();
     
-    const targetElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
-    this.renderer.addClass(targetElem, 'selected');
-    this.renderer.addClass(targetElem, 'enter-left');
+    const targetElem = this.orderedList.nativeElement.querySelector(this.createListSelector(this.currentPosition));
+    this.renderer.addClass(targetElem, this.SELECTED_CLASS);
+    this.renderer.addClass(targetElem, this.ENTER_LEFT_CLASS);
 
     setTimeout(() => {
-      this.renderer.removeClass(targetElem, 'enter-left');
-    }, 400);
+      this.renderer.removeClass(targetElem, this.ENTER_LEFT_CLASS);
+    }, this.TRANSITION_TIME);
+
+    this.updateMobileNavigationView();
   }
 
   onClickNext(targetPos?: number): void {
-    const currElem = this.orderedList.nativeElement.querySelector('li[id="' + this.currentPosition + '"]');
-    this.renderer.removeClass(currElem, 'selected');
-    this.renderer.addClass(currElem, 'leave-left');
+    const currElem = this.orderedList.nativeElement.querySelector(this.createListSelector(this.currentPosition));
+    this.renderer.removeClass(currElem, this.SELECTED_CLASS);
+    this.renderer.addClass(currElem, this.LEAVE_LEFT_CLASS);
 
     setTimeout(() => {
-      this.renderer.removeClass(currElem, 'leave-left');
-    }, 400);
+      this.renderer.removeClass(currElem, this.LEAVE_LEFT_CLASS);
+    }, this.TRANSITION_TIME);
     
     // Sums one to the current position in order to move further in the timeline.
     this.currentPosition = (targetPos ? +targetPos : this.currentPosition + 1);
     this.backgroundUrl = this.retrieveBackgroundUrl();
 
-    const targetElem = this.orderedList.nativeElement.querySelector('li[id="' +this.currentPosition + '"]');
-    this.renderer.addClass(targetElem, 'selected');
-    this.renderer.addClass(targetElem, 'enter-right');
+    const targetElem = this.orderedList.nativeElement.querySelector(this.createListSelector(this.currentPosition));
+    this.renderer.addClass(targetElem, this.SELECTED_CLASS);
+    this.renderer.addClass(targetElem, this.ENTER_RIGHT_CLASS);
 
     setTimeout(() => {
-      this.renderer.removeClass(targetElem, 'enter-right');
-    }, 400);
+      this.renderer.removeClass(targetElem, this.ENTER_RIGHT_CLASS);
+    }, this.TRANSITION_TIME);
+    
+    this.updateMobileNavigationView();
   }
 
   updateNavigation(targetPos: number) {
@@ -101,4 +121,12 @@ export class ExperienceComponent implements OnInit {
     return this.experiences[this.currentPosition - 1].backgroundUrl;
   }
 
+  updateMobileNavigationView() {
+    this.previousYear = 
+      this.experiences[this.currentPosition - 2]?.startAt || this.experiences[this.currentPosition - 1].startAt;
+    this.currentYear = 
+      this.experiences[this.currentPosition - 1].startAt;
+    this.nextYear = 
+      this.experiences[this.currentPosition]?.startAt || this.experiences[this.currentPosition - 1].startAt;
+  }
 }
