@@ -20,5 +20,5 @@ export interface IExperienceDescription {
 export interface IExperienceMedia {
     icon: string; // Use the official names of Brand Icons (https://www.w3schools.com/icons/fontawesome_icons_brand.asp)
     title: string;
-    httpAddress: string;
+    http: string;
 }

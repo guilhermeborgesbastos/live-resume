@@ -24,17 +24,17 @@
             {
                 "icon": "linkedin",
                 "title": "LinkedIn",
-                "httpAddress": "http://linkedin.com"
+                "http": "http://linkedin.com"
             },
             {
                 "icon": "github",
                 "title": "GitHub",
-                "httpAddress": "http://github.com"
+                "http": "http://github.com"
             },
             {
                 "icon": "facebook",
                 "title": "Facebook",
-                "httpAddress": "http://facebook.com"
+                "http": "http://facebook.com"
             }
         ],
         "backgroundUrl": "../../assets/template/experience/rio.jpg"
@@ -64,17 +64,17 @@
             {
                 "icon": "linkedin",
                 "title": "LinkedIn",
-                "httpAddress": "http://linkedin.com"
+                "http": "http://linkedin.com"
             },
             {
                 "icon": "github",
                 "title": "GitHub",
-                "httpAddress": "http://github.com"
+                "http": "http://github.com"
             },
             {
                 "icon": "facebook",
                 "title": "Facebook",
-                "httpAddress": "http://facebook.com"
+                "http": "http://facebook.com"
             }
         ],
         "backgroundUrl": "../../assets/template/experience/sao-paulo.jpg"
@@ -104,17 +104,17 @@
             {
                 "icon": "linkedin",
                 "title": "LinkedIn",
-                "httpAddress": "http://linkedin.com"
+                "http": "http://linkedin.com"
             },
             {
                 "icon": "github",
                 "title": "GitHub",
-                "httpAddress": "http://github.com"
+                "http": "http://github.com"
             },
             {
                 "icon": "facebook",
                 "title": "Facebook",
-                "httpAddress": "http://facebook.com"
+                "http": "http://facebook.com"
             }
         ],
         "backgroundUrl": "../../assets/template/experience/utrecht.jpg"
@@ -144,17 +144,17 @@
             {
                 "icon": "linkedin",
                 "title": "LinkedIn",
-                "httpAddress": "http://linkedin.com"
+                "http": "http://linkedin.com"
             },
             {
                 "icon": "github",
                 "title": "GitHub",
-                "httpAddress": "http://github.com"
+                "http": "http://github.com"
             },
             {
                 "icon": "facebook",
                 "title": "Facebook",
-                "httpAddress": "http://facebook.com"
+                "http": "http://facebook.com"
             }
         ],
         "backgroundUrl": "../../assets/template/experience/uberaba.jpg"
@@ -183,17 +183,17 @@
             {
                 "icon": "linkedin",
                 "title": "LinkedIn",
-                "httpAddress": "http://linkedin.com"
+                "http": "http://linkedin.com"
             },
             {
-                "icon": "github",
-                "title": "GitHub",
-                "httpAddress": "http://github.com"
+                "icon": "instagram",
+                "title": "Instagram",
+                "http": "http://instagram.com"
             },
             {
                 "icon": "facebook",
                 "title": "Facebook",
-                "httpAddress": "http://facebook.com"
+                "http": "http://facebook.com"
             }
         ],
         "backgroundUrl": "../../assets/template/experience/rotterdam.jpg"
