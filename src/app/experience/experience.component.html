@@ -14,21 +14,43 @@
                        Next <fa-icon [icon]="['fas', 'chevron-right']" class="icon" title="next"></fa-icon>
                     </div>
                 </div>
+
+                <!-- Custom mobile menu active under 600px wide resolution -->
+                <div class="navigation-mobile">
+                    <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
+                       <div class="molding">
+                           <span [innerHtml]="previousYear | safariDateFormatter | date:'yyyy'"></span>
+                           <fa-icon [icon]="['fas', 'chevron-left']" class="icon" title="previous"></fa-icon>
+                        </div>
+                    </div>
+                    <div class="current"><span [innerHtml]="currentYear | safariDateFormatter | date:'yyyy'"></span></div>
+                    <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
+                        <div class="molding">
+                            <fa-icon [icon]="['fas', 'chevron-right']" class="icon" title="next"></fa-icon>
+                            <span [innerHtml]="nextYear | safariDateFormatter | date:'yyyy'"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="middle-container">
                 <div class="events-content">
                     <ol #orderedList>
                         <li *ngFor="let exp of experiencesOrdered; let i = index" [ngClass]="{'selected': i == 0}" data-id="{{ exp.id }}">
                             <div class="company-name">{{ exp.companyName }}</div>
                             <div class="role">{{ exp.role }}</div>
-                            <div class="period">{{ exp.startAt | date:'MMM yyyy' }} - {{ (exp.endAt | date:'MMM yyyy') || "current" }}</div>
+                            <div class="period">
+                                <span>{{ exp.startAt | safariDateFormatter | date:'MMM yyyy' }}</span>
+                                <span>-</span>
+                                <span>{{ (exp.endAt | safariDateFormatter | date:'MMM yyyy') || "current" }}</span>
+                            </div>
                             <div class="location">{{ exp.location }}</div>
                             <div class="description">{{ exp.descriptions[1].description }}</div> <!-- TO-DO: Add internationalization -->
                             <div class="technologies">
                                 <span class="hashtag" *ngFor="let technology of exp.technologies">{{ technology }}</span>
                             </div>
                             <div class="social-media">
-                                <a *ngFor="let media of exp.medias" href="{{ media.httpAddress }}" target="blank">
+                                <a *ngFor="let media of exp.medias" href="{{ media.http }}" target="blank">
                                     <fa-icon [icon]="['fab', media.icon]" class="icon" title="{{ media.title }}"></fa-icon>
                                 </a>
                             </div>
@@ -37,8 +59,10 @@
                 </div>
             </div>
 
-            <!--TODO: use *bgIf here  to not render it on the dom in case of only ONE experience -->
-            <app-experience-timeline [experiences]="experiences" [currentPosition]="currentPosition"></app-experience-timeline>
+            <app-experience-timeline 
+                [experiences]="experiences" 
+                [currentPosition]="currentPosition" 
+                (onTimelineChanged)="updateNavigation($event)"></app-experience-timeline>
         </div>
     </div>
 </section>

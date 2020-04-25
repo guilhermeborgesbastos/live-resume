@@ -12,7 +12,9 @@
     @include display-flex;
     width: 100%;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 4em;
+    padding-bottom: 8em;
 }
 
 .landscape {
@@ -20,7 +22,6 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 780px;
     top: -4em;
     position: relative;
     background-position-x: center;
@@ -31,7 +32,12 @@
     background-origin: initial;
     background-clip: initial;
     background-color: initial;
+    
+    // This is supported natively by Chrome, Opera and Safari. Firefox and IE hasn't implemented it yet (bugzil.la).
     -webkit-transition: background-image 0.3s ease-in-out;
+    -moz-transition: background-image 0.3s ease-in-out;
+    -ms-transition: background-image 0.3s ease-in-out;
+    -o-transition: background-image 0.3s ease-in-out;
     transition: background-image 0.3s ease-in-out;
 }
 
@@ -46,70 +52,74 @@
 .top-container {
     display: flex;
     color: #fff;
-}
+    flex-wrap: wrap;
 
-.top-container .title {
-    flex-grow: 4;
-}
+    .title {
+        flex-grow: 4;
 
-.top-container .title h1 {
-    font-size: 42px;
-    font-weight: 600;
-}
+        & h1 {
+            font-size: 42px;
+            font-weight: 600;
+        }
+    }
 
-.top-container .navigation {
-    @include display-flex;
-    flex-grow: 1;
-    font-size: 32px;
-    font-weight: 500;
-    align-items: center;
-    text-align: center;
-}
+    // Disabled for desktop resolutions or higher.
+    .navigation-mobile {
+        display: none;
+    }
 
-.top-container .navigation .previous {
-    flex-grow: 2;
-    -webkit-transition: text-shadow .3s linear;
-    -moz-transition: text-shadow .3s linear;
-    -ms-transition: text-shadow .3s linear;
-    -o-transition: text-shadow .3s linear;
-    transition: text-shadow .3s linear;
-    cursor: pointer;
-    text-align: left;
-}
-
-.top-container .navigation .devider {
-    flex-grow: 1;
-}
-
-.top-container .navigation .next {
-    flex-grow: 2;
-    -webkit-transition: text-shadow .3s linear;
-    -moz-transition: text-shadow .3s linear;
-    -ms-transition: text-shadow .3s linear;
-    -o-transition: text-shadow .3s linear;
-    transition: text-shadow .3s linear;
-    cursor: pointer;
-    text-align: right;
-}
-
-.top-container .navigation .previous:hover {
-    text-shadow: 0 0 15px white;
-}
-
-.top-container .navigation .next:hover {
-    text-shadow: 0 0 15px white;
-}
-
-.top-container .navigation .next.disabled {
-    cursor: no-drop;
-    opacity: .6;
-    pointer-events: none;
-}
-
-.top-container .navigation .previous.disabled {
-    cursor: no-drop;
-    opacity: .6;
-    pointer-events: none;
+    .navigation {
+        @include display-flex;
+        flex-grow: 1;
+        font-size: 32px;
+        font-weight: 500;
+        align-items: center;
+        text-align: center;
+    
+        .previous {
+            flex-grow: 2;
+            cursor: pointer;
+            text-align: left;
+            -webkit-transition: text-shadow .3s linear;
+            -moz-transition: text-shadow .3s linear;
+            -ms-transition: text-shadow .3s linear;
+            -o-transition: text-shadow .3s linear;
+            transition: text-shadow .3s linear;
+    
+            &.disabled {
+                cursor: no-drop;
+                opacity: .6;
+                pointer-events: none;
+            }        
+            &:hover {
+                text-shadow: 0 0 15px white;
+            }
+        }
+    
+        .devider {
+            flex-grow: 1;
+        }
+    
+        .next {
+            flex-grow: 2;
+            cursor: pointer;
+            text-align: right;
+            -webkit-transition: text-shadow .3s linear;
+            -moz-transition: text-shadow .3s linear;
+            -ms-transition: text-shadow .3s linear;
+            -o-transition: text-shadow .3s linear;
+            transition: text-shadow .3s linear;
+            
+            &.disabled {
+                cursor: no-drop;
+                opacity: .6;
+                pointer-events: none;
+            }
+            &:hover {
+                text-shadow: 0 0 15px white;
+            }
+        }
+    }
 }
 
 .middle-container {
@@ -117,152 +127,144 @@
     flex-direction: column;
     text-align: right;
     color: #fff;
-    min-height: 360px;
-}
 
-.middle-container .events-content {
-    position: relative;
-    width: 100%;
-    /* margin: 2em 0; */
-    overflow: hidden;
-    -webkit-transition: height 0.4s;
-    -moz-transition: height 0.4s;
-    transition: height 0.4s;
-}
+    .events-content {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        -webkit-transition: height 0.4s;
+        -moz-transition: height 0.4s;
+        transition: height 0.4s;
 
-.middle-container .events-content ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+        .company-name {
+            font-size: 35px;
+            font-weight: 600;
+            line-height: 50px;
+        }
 
-.middle-container .events-content ol li {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    left: 0;
-    top: 0;
-    -webkit-transform: translateX(-100%);
-    -moz-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
-    -o-transform: translateX(-100%);
-    transform: translateX(-100%);
-    padding: 0 5%;
-    opacity: 0;
-    -webkit-animation-duration: 0.4s;
-    -moz-animation-duration: 0.4s;
-    animation-duration: 0.4s;
-    -webkit-animation-timing-function: ease-in-out;
-    -moz-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-    margin: 0;
-    padding: 0;
-}
+        .role {
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 20px;
+            margin-bottom: 1em;
+            font-style: italic;
+        }
 
-.middle-container .events-content ol li.enter-right, .middle-container .events-content ol li.leave-right {
-    -webkit-animation-name: cd-enter-right;
-    -moz-animation-name: cd-enter-right;
-    animation-name: cd-enter-right;
-}
+        .period {
+            font-size: 22px;
+            font-weight: 400;
 
-.middle-container .events-content ol li.enter-left, .middle-container .events-content ol li.leave-left {
-    -webkit-animation-name: cd-enter-left;
-    -moz-animation-name: cd-enter-left;
-    animation-name: cd-enter-left;
-}
+            span {
+                margin: 5px;
+            }
+        }
 
-.middle-container .events-content ol li.leave-right, .middle-container .events-content ol li.leave-left {
-    -webkit-animation-direction: reverse;
-    -moz-animation-direction: reverse;
-    animation-direction: reverse;
-}
+        .location {
+            font-size: 22px;
+            font-weight: 400;
+        }
 
-.middle-container .events-content ol li.selected {
-    position: relative;
-    z-index: 2;
-    opacity: 1;
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
-    transform: translateX(0);
-}
+        .description {
+            margin-top: 1em;
+            font-size: 20px;
+            font-weight: normal;
+            text-align: justify;
+        }
 
-.middle-container .company-name {
-    font-size: 35px;
-    font-weight: 600;
-    line-height: 50px;
-}
+        ol {
+            margin: 0;
+            padding: 0;
+            list-style: none;
 
-.middle-container .role {
-    font-size: 22px;
-    font-weight: 300;
-    line-height: 20px;
-    margin-bottom: 1em;
-    font-style: italic;
-}
+            li {
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                left: 0;
+                top: 0;
+                opacity: 0;
+                -webkit-transform: translateX(-100%);
+                -moz-transform: translateX(-100%);
+                -ms-transform: translateX(-100%);
+                -o-transform: translateX(-100%);
+                transform: translateX(-100%);
+                -webkit-animation-duration: 0.4s;
+                -moz-animation-duration: 0.4s;
+                animation-duration: 0.4s;
+                -webkit-animation-timing-function: ease-in-out;
+                -moz-animation-timing-function: ease-in-out;
+                animation-timing-function: ease-in-out;
+            }
+            
+            .selected {
+                position: relative;
+                z-index: 2;
+                opacity: 1;
+                -webkit-transform: translateX(0);
+                -moz-transform: translateX(0);
+                -ms-transform: translateX(0);
+                -o-transform: translateX(0);
+                transform: translateX(0);
+            }
+            
+            // Defines the animations of the navigation ordered list.
+            li.enter-right, li.leave-right {
+                -webkit-animation-name: cd-enter-right;
+                -moz-animation-name: cd-enter-right;
+                animation-name: cd-enter-right;
+            }
 
-.middle-container .period {
-    font-size: 22px;
-    font-weight: 400;
-}
+            li.enter-left, li.leave-left {
+                -webkit-animation-name: cd-enter-left;
+                -moz-animation-name: cd-enter-left;
+                animation-name: cd-enter-left;
+            }
 
-.middle-container .location {
-    font-size: 22px;
-    font-weight: 400;
-}
+            li.leave-right, li.leave-left {
+                -webkit-animation-direction: reverse;
+                -moz-animation-direction: reverse;
+                animation-direction: reverse;
+            }
+        }
 
-.middle-container .description {
-    margin-top: 1em;
-    font-size: 20px;
-    font-weight: normal;
-    text-align: justify;
-}
+        .technologies {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
 
-.middle-container .technologies {
-    display: flex;
-    flex-direction: row;
-    margin-top: 1em;
-    flex-wrap: wrap;
-}
+            span.hashtag {
+                padding: 2px 5px 2px 5px;
+                background-color: #414c73;
+                border-radius: 5px;
+                margin-right: 10px;
+                margin-top: 10px;
 
-.middle-container .technologies .hashtag {
-    padding: 2px 5px 2px 5px;
-    background-color: #414c73;
-    border-radius: 5px;
-    margin-right: 10px;
-}
+                &:before {
+                    content: '#';
+                }
+            }
+        }
+        
+        .social-media {
+            text-align: right;
+            margin-top: 1em;
 
-.middle-container .technologies .hashtag:before {
-    content: '#';
-}
+            .icon {
+                font-size: 50px;
+                color: #fff;
+                margin: 0px 20px 0px 20px;
+                transition: 0.3s;
 
-.middle-container .social-media {
-    text-align: right;
-    margin-top: 1em;
-}
-
-.middle-container .social-media .icon {
-    font-size: 50px;
-    color: #fff;
-    margin: 0px 20px 0px 20px;
-    transition: 0.3s;
-}
-
-.middle-container .social-media .icon:last-child {
-    margin-right: 0;
-}
-
-.middle-container .social-media .icon:hover {
-    color: #8087a1;
-}
-
-@keyframes glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-    }
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+                &:last-child {
+                    margin-right: 0;
+                }
+                &:hover {
+                    color: #8087a1;
+                }
+            }
+        }
     }
 }
 
@@ -347,4 +349,3 @@
         transform: translateX(0%);
     }
 }
-  
