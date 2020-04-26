@@ -3,8 +3,8 @@ export interface IExperience {
     position: number;
     role: string;
     companyName: string;
-    location: string;
-    descriptions: IExperienceDescription[];
+    city: string;
+    internationalizations: IExperienceInternationalization[];
     startAt: string; // For the purpose of stringifying MM-DD-YYYY date format
     endAt?: string;  // For the purpose of stringifying MM-DD-YYYY date format
     technologies?: string[];
@@ -12,8 +12,9 @@ export interface IExperience {
     backgroundUrl?: string
 }
 
-export interface IExperienceDescription {
+export interface IExperienceInternationalization {
     language: string;
+    country: string;
     description: string;
 }
 
