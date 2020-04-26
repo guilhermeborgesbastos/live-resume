@@ -6,14 +6,16 @@
         "endAt": "06-15-2013",
         "role": "Full-stack Developer",
         "companyName": "E-tática",
-        "location": "Rio de Janeiro, Brazil",
-        "descriptions": [
+        "city": "Rio de Janeiro",
+        "internationalizations": [
             {
                 "language": "pt",
+                "country": "Brasil",
                 "description": "At E-tática Agency, placed in Rio de Janeiro. I had the chance to work with small and medium e-commerce with cross-technical and cross-cultural teams. Integrating it with external APIs such as Payment services and ERPs platforms."
             },
             {
                 "language": "en",
+                "country": "Brazil",
                 "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
             }
         ],
@@ -46,14 +48,16 @@
         "endAt": "12-22-2016",
         "role": "Mobile Developer",
         "companyName": "Deevo Studio",
-        "location": "São Paulo, Brazil",
-        "descriptions": [
+        "city": "São Paulo",
+        "internationalizations": [
             {
                 "language": "pt",
+                "country": "Brasil",
                 "description": "Uma empresa de São Paulo - Brasil, especializada em desenvolvimento web e design. Com extenso portfólio, resultado de 20 anos de experiência no mercado com Agências e o mercado corporativo. As criações vão desde o desenvolvimento da marca e identidade visual até a criação de aplicativos e sites com amplo conhecimento do Wordpress."
             },
             {
                 "language": "en",
+                "country": "Brazil",
                 "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
             }
         ],
@@ -86,14 +90,16 @@
         "endAt": "11-28-2017",
         "role": "Full-stack Developer",
         "companyName": "Skydreamer Startup",
-        "location": "Utrecht, Netherlands",
-        "descriptions": [
+        "city": "Utrecht",
+        "internationalizations": [
             {
                 "language": "pt",
+                "country": "Holanda",
                 "description": "Lorem (PT) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
             },
             {
                 "language": "en",
+                "country": "Netherlands",
                 "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
             }
         ],
@@ -126,14 +132,16 @@
         "endAt": "04-15-2020",
         "role": "Software Engeneer",
         "companyName": "QAT Global",
-        "location": "Uberaba, Brazil",
-        "descriptions": [
+        "city": "Uberaba",
+        "internationalizations": [
             {
                 "language": "pt",
+                "country": "Brasil",
                 "description": "Na QAT Global, sou responsável por ser o 'Pod Leader' de back-end. Trabalhamos com Big Data Analysis para o maior fornecedor americano de tecnologia de água, permitindo que os clientes em todo o mundo transportem, tratem, testem e usem com eficiência a água em serviços públicos, residenciais, comerciais, agrícolas e industriais. A empresa faz negócios em mais de 150 países. Meu trabalho é garantir que todos os desenvolvedores estão aplicando os melhores padrões, práticas e padrões necessários para um aplicativo corporativo."
             },
             {
                 "language": "en",
+                "country": "Brazil",
                 "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
             }
         ],
@@ -165,14 +173,16 @@
         "startAt": "05-01-2020",
         "role": "DevOps Engeneer",
         "companyName": "Swisscom AG",
-        "location": "Rotterdam, Netherlands",
-        "descriptions": [
+        "city": "Rotterdam",
+        "internationalizations": [
             {
                 "language": "pt",
-                "description": "Na QAT Global, sou responsável por ser o 'Pod Leader' de back-end. Trabalhamos com Big Data Analysis para o maior fornecedor americano de tecnologia de água, permitindo que os clientes em todo o mundo transportem, tratem, testem e usem com eficiência a água em serviços públicos, residenciais, comerciais, agrícolas e industriais. A empresa faz negócios em mais de 150 países. Meu trabalho é garantir que todos os desenvolvedores estão aplicando os melhores padrões, práticas e padrões necessários para um aplicativo corporativo."
+                "country": "Holanda",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
             },
             {
                 "language": "en",
+                "country": "Netherlands",
                 "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
             }
         ],

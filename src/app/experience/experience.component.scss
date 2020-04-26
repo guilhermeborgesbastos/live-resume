@@ -95,7 +95,11 @@
                 text-shadow: 0 0 15px white;
             }
         }
-    
+        
+        span {
+            margin: 10px;
+        }
+
         .devider {
             flex-grow: 1;
         }
@@ -135,6 +139,7 @@
         -webkit-transition: height 0.4s;
         -moz-transition: height 0.4s;
         transition: height 0.4s;
+        min-height: 390px;
 
         .company-name {
             font-size: 35px;

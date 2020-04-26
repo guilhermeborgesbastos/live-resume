@@ -62,7 +62,7 @@
               "outputPath": "dist/under-construction-en/",
               "i18nFile": "src/locales/messages.en.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "fr",
+              "i18nLocale": "en",
               "i18nMissingTranslation": "error"
             },
             "pt": {
@@ -70,7 +70,7 @@
               "outputPath": "dist/under-construction-pt/",
               "i18nFile": "src/locales/messages.pt.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "de",
+              "i18nLocale": "pt",
               "i18nMissingTranslation": "error"
             }
           }
