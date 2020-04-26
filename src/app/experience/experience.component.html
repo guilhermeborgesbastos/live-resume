@@ -3,15 +3,17 @@
         <div class="container">
             <div class="top-container">
                 <div class="title">
-                    <h1>Experiences</h1>
+                    <h1 i18n="nav@@experiences">Experiences</h1>
                 </div>
                 <div class="navigation">
                     <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
-                        <fa-icon [icon]="['fas', 'chevron-left']" class="icon" title="previous"></fa-icon> Previous
+                        <fa-icon [icon]="['fas', 'chevron-left']" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
+                        <span i18n="exp.nav@@previous">Previous</span>
                     </div>
                     <div class="devider">|</div>
                     <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
-                       Next <fa-icon [icon]="['fas', 'chevron-right']" class="icon" title="next"></fa-icon>
+                        <span i18n="exp.nav@@next">Next</span>
+                        <fa-icon [icon]="['fas', 'chevron-right']" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
                     </div>
                 </div>
 
@@ -19,15 +21,15 @@
                 <div class="navigation-mobile">
                     <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
                        <div class="molding">
-                           <span [innerHtml]="previousYear | safariDateFormatter | date:'yyyy'"></span>
-                           <fa-icon [icon]="['fas', 'chevron-left']" class="icon" title="previous"></fa-icon>
+                           <span [innerHtml]="previousYear | safariDateFormatter | localizedDate:'yyyy'"></span>
+                           <fa-icon [icon]="['fas', 'chevron-left']" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
                         </div>
                     </div>
-                    <div class="current"><span [innerHtml]="currentYear | safariDateFormatter | date:'yyyy'"></span></div>
+                    <div class="current"><span [innerHtml]="currentYear | safariDateFormatter | localizedDate:'yyyy'"></span></div>
                     <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
                         <div class="molding">
-                            <fa-icon [icon]="['fas', 'chevron-right']" class="icon" title="next"></fa-icon>
-                            <span [innerHtml]="nextYear | safariDateFormatter | date:'yyyy'"></span>
+                            <fa-icon [icon]="['fas', 'chevron-right']" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
+                            <span [innerHtml]="nextYear | safariDateFormatter | localizedDate:'yyyy'"></span>
                         </div>
                     </div>
                 </div>
@@ -40,9 +42,9 @@
                             <div class="company-name">{{ exp.companyName }}</div>
                             <div class="role">{{ exp.role }}</div>
                             <div class="period">
-                                <span>{{ exp.startAt | safariDateFormatter | date:'MMM yyyy' }}</span>
+                                <span>{{ exp.startAt | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
                                 <span>-</span>
-                                <span>{{ (exp.endAt | safariDateFormatter | date:'MMM yyyy') || "current" }}</span>
+                                <span>{{ (exp.endAt | safariDateFormatter | localizedDate:'MMM yyyy') || "current" }}</span>
                             </div>
                             <div class="location">{{ exp.location }}</div>
                             <div class="description">{{ exp.descriptions[1].description }}</div> <!-- TO-DO: Add internationalization -->
