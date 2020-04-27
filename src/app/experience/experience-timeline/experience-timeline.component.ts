@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, EventEmitter, Renderer2, OnDestroy, Output } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, EventEmitter, Renderer2, OnDestroy, Output, LOCALE_ID, Inject } from '@angular/core';
 import { IExperience } from '../experience-interfaces';
+import { SafariDateFormatterPipe } from '../../core/pipe/safari-date-formatter.pipe';
+import { LocalizedDatePipe } from '../../core/pipe/localized-date.pipe';
 
 @Component({
   selector: 'app-experience-timeline',
@@ -23,7 +25,8 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
 
   constructor(
     private elRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    @Inject(LOCALE_ID) public locale: string
   ) {}
 
   @Input() get currentPosition(): number {
@@ -149,8 +152,13 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
    * Update this function based on the desired date label formatting.
   */
   createLabelElement(date: string): string {
-    let month: any = date.split('-')[0];
-    month = this.MONTHS_STR[month - 1];
+
+    const safariDateFormatterPipe = new SafariDateFormatterPipe();
+    const safariDateFormatterPipeValue = safariDateFormatterPipe.transform(date);
+    
+    const localizedDatePipe = new LocalizedDatePipe(this.locale);
+
+    let month: any = localizedDatePipe.transform(safariDateFormatterPipeValue, 'MMM');
     const labelElement = this.renderer.createElement('div');
     this.renderer.addClass(labelElement, 'popupSpan');
 
@@ -158,7 +166,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
     this.renderer.addClass(monthSpan, 'month');
     this.renderer.appendChild(monthSpan, this.renderer.createText(month));
 
-    const year = date.split('-')[2];
+    const year = localizedDatePipe.transform(safariDateFormatterPipeValue, 'yyyy');
     const yearSpan = this.renderer.createElement('span');
     this.renderer.addClass(yearSpan, 'year');
     this.renderer.appendChild(yearSpan, this.renderer.createText(year));

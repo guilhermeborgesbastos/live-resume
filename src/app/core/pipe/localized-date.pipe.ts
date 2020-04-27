@@ -12,6 +12,7 @@ export class LocalizedDatePipe implements PipeTransform {
 
   transform(value: any, pattern: string = 'mediumDate'): any {
     const datePipe: DatePipe = new DatePipe(this.locale);
-    return datePipe.transform(value, pattern);
+    // For now, the translation will be manual, further on, the i18n service will be injected to provide such capability...
+    return datePipe.transform(value, pattern) || (this.locale === 'en' ? "Currently" : "Atualmente");
   }
 }
