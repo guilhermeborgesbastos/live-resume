@@ -57,6 +57,7 @@
     color: #5E6788;
     margin-right: 2em;
     text-align: justify;
+    min-height: 220px;
 }
 
 .first-column h3 {
@@ -66,14 +67,14 @@
     margin-bottom: 10px;
 }
 
-.first-column .bar-icon {
+.first-column .icon {
     font-size: 40px;
     color: #555F81;
     margin-right: 1em;
     transition: 0.3s;
 }
 
-.first-column .bar-icon:hover {
+.first-column .icon:hover {
     color: #8087a1;
 }
 
@@ -101,13 +102,13 @@
     margin-top: 1em;
 }
 
-.second-column .social-media .bar-icon {
+.second-column .social-media .icon {
     font-size: 60px;
     color: #414C73;
     margin: 0px 20px 0px 20px;
     transition: 0.3s;
 }
 
-.second-column .social-media .bar-icon:hover {
+.second-column .social-media .icon:hover {
     color: #8087a1;
 }
