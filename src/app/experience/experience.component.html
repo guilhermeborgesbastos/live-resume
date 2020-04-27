@@ -44,7 +44,7 @@
                             <div class="period">
                                 <span>{{ exp.startAt | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
                                 <span class="devider">-</span>
-                                <span>{{ (exp.endAt | safariDateFormatter | localizedDate:'MMM yyyy') || "current" }}</span>
+                                <span>{{ (exp.endAt | safariDateFormatter | localizedDate:'MMM yyyy') }}</span>
                             </div>
                             <div class="location">
                                 <span class="city">{{ exp.city }}</span>
