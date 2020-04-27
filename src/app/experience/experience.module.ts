@@ -4,11 +4,10 @@ import { ExperienceTimelineComponent } from './experience-timeline/experience-ti
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from '../core/core.module';
-import { InternationalizationDirective } from './internationalization.directive';
 
 @NgModule({
     imports: [ CommonModule, FontAwesomeModule, CoreModule],
-    declarations: [ ExperienceComponent, ExperienceTimelineComponent, InternationalizationDirective ],
+    declarations: [ ExperienceComponent, ExperienceTimelineComponent ],
     exports: [ ExperienceComponent ]
 })
 

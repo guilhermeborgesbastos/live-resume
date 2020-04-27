@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, EventEmitter, Renderer2, OnDestroy, Output, LOCALE_ID, Inject } from '@angular/core';
+import { 
+  Component, OnInit,
+  Input, ElementRef,
+  ViewChild, EventEmitter,
+  Renderer2, OnDestroy,
+  Output, LOCALE_ID,
+  Inject
+} from '@angular/core';
 import { IExperience } from '../experience-interfaces';
 import { SafariDateFormatterPipe } from '../../core/pipe/safari-date-formatter.pipe';
 import { LocalizedDatePipe } from '../../core/pipe/localized-date.pipe';
@@ -17,9 +24,6 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
   @Output() onTimelineChanged = new EventEmitter<number>();
 
   public removeEventListener: () => void;
-
-  // For the purpose of stringifying MM-DD-YYYY date format
-  private MONTHS_STR: string[] = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
 
   @ViewChild('line', { static: false }) line: ElementRef;
 

@@ -81,6 +81,15 @@
         </context-group>
         <note priority="1" from="description">exp.nav</note>
       </trans-unit>
+      <trans-unit id="yearsOld" datatype="html">
+        <source>years old</source>
+        <target>anos de idade</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/about/about.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">about</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

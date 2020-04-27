@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { IExperience } from '../experience/experience-interfaces';
+import { IAbout } from '../about/about-interfaces';
 
 @Injectable()
 export class DataService {
@@ -20,15 +21,11 @@ export class DataService {
             );
     }
     
-    getExperience(id: number) : Observable<IExperience> {
-      return this.http.get<IExperience[]>(this.baseUrl + 'experiences.json')
-        .pipe(
-          map(experiences => {
-            let experience = experiences.filter((exp: IExperience) => exp.id === id);
-            return (experience && experience.length) ? experience[0] : null;
-          }),
-          catchError(this.handleError)
-        )
+    getAbout() : Observable<IAbout> {
+      return this.http.get<IAbout>(this.baseUrl + 'about.json')
+          .pipe(
+              catchError(this.handleError)
+          );
     }
 
     private handleError(error: any) {
@@ -41,5 +38,4 @@ export class DataService {
       }
       return Observable.throw(error || 'Node.js server error');
     }
-
 }
