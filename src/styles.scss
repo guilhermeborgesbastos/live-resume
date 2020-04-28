@@ -30,4 +30,9 @@ html, body {
     font-weight: $regular;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+}
+
+section {
+    display: flex;
 }

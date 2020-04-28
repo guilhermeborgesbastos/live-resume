@@ -1,0 +1,148 @@
+
+@media screen and (max-width: 1280px) {
+
+    .first-column p.text {
+        font-size: 16px;
+    }
+
+    .second-column .profile-picture {
+        width: 380px;
+        height: 380px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    
+    .second-column .profile-picture {
+        width: 370px;
+        height: 370px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    
+    .about-container {
+        width: 80vw;
+    }
+
+    .second-column .profile-picture {
+        width: 360px;
+        height: 360px;
+    }
+
+    .first-column p.years-old {    
+        font-size: 16px;
+    }
+    
+    .first-column h1 {
+        font-size: 20px;
+    }
+
+    .first-column h2 {
+        font-size: 32px;
+    }
+}
+
+@media screen and (max-width: 880px) {
+
+    .about-container {
+        flex-wrap: wrap;
+    } 
+
+    .first-column p.text {
+        font-size: 14px;
+        margin-right: 0;
+    }
+ 
+    .second-column .profile-picture {
+        width: 340px;
+        height: 340px;
+        align-self: center;
+    }
+
+    .first-column .bar-icon { 
+        margin: 20px;
+    }
+
+    .first-column h2 {
+        font-size: 30px;
+    }
+    
+    .first-column .hobbies {
+        text-align: center;
+    }
+
+    .second-column {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2em;
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+
+    .about-container {
+        width: 75vw;
+    }
+
+    .first-column h2 {
+        font-size: 26px;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    
+    .first-column h2 {
+        font-size: 20px;
+    }
+
+    .first-column p.years-old {    
+        font-size: 14px;
+    }
+        
+    .first-column h1 {
+        font-size: 18px;
+    }
+
+    .first-column p.text {
+        font-size: 12px;
+    }
+
+    .first-column .bar-icon {
+        font-size: 30px;
+        margin: 10px;
+    }
+     
+    .second-column .profile-picture {
+        width: 280px;
+        height: 280px;
+    }
+
+    .second-column .social-media .bar-icon {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+   
+    .about-container {
+        width: 80vw;
+        padding: 1em;
+    }
+
+    .first-column h2 {
+        font-size: 18px;
+    }
+
+    .second-column .profile-picture {
+        width: 240px;
+        height: 240px;
+    }
+
+    .second-column .social-media .bar-icon {
+        font-size: 40px;
+    }
+
+}

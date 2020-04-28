@@ -1,1 +1,25 @@
-<p>about works!</p>
+<section id="about">
+    <div class="about-container">
+        <div class="first-column">
+            <h1 i18n="nav@@aboutMe">About me</h1>
+            <h2>{{ name }}</h2>
+            <p class="years-old">
+                <span>{{ yearsOld }}</span>
+                &nbsp;<span i18n="about@@yearsOld">years old</span>
+            </p>
+            <p class="text" internationalization [data]="aboutData?.internationalizations" property='description'>Loading...</p>
+            <div class="hobbies">
+                <h3>Hobbies</h3>
+                <fa-icon *ngFor="let hobby of aboutData?.hobbies" [icon]="['fas', hobby.icon]" class="icon" title="{{ hobby.title }}"></fa-icon>
+            </div>
+        </div>
+        <div class="second-column">
+            <div class="profile-picture"></div>
+            <div class="social-media">
+                <a *ngFor="let media of aboutData?.medias" href="{{ media.http }}" target="blank">
+                    <fa-icon [icon]="['fab', media.icon]" class="icon" title="{{ media.title }}"></fa-icon>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

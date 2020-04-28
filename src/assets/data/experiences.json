@@ -1,0 +1,221 @@
+[
+    {
+        "id": 1,
+        "position": 1,
+        "startAt": "01-02-2011",
+        "endAt": "06-15-2013",
+        "companyName": "E-tática",
+        "internationalizations": [
+            {
+                "language": "pt",
+                "city": "Rio de Janeiro",
+                "country": "Brasil",
+                "role": "Desenvolvedor Full-stack",
+                "description": "At E-tática Agency, placed in Rio de Janeiro. I had the chance to work with small and medium e-commerce with cross-technical and cross-cultural teams. Integrating it with external APIs such as Payment services and ERPs platforms."
+            },
+            {
+                "language": "en",
+                "city": "Rio de Janeiro",
+                "country": "Brazil",
+                "role": "Full-stack Developer",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "http": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "http": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "http": "http://facebook.com"
+            }
+        ],
+        "backgroundUrl": "../../assets/template/experience/rio.jpg"
+    },
+    {
+        "id": 2,
+        "position": 2,
+        "startAt": "07-01-2013",
+        "endAt": "12-22-2016",
+        "companyName": "Deevo Studio",
+        "internationalizations": [
+            {
+                "language": "pt",
+                "city": "São Paulo",
+                "country": "Brasil",
+                "role": "Desenvolvedor Mobile",
+                "description": "Uma empresa de São Paulo - Brasil, especializada em desenvolvimento web e design. Com extenso portfólio, resultado de 20 anos de experiência no mercado com Agências e o mercado corporativo. As criações vão desde o desenvolvimento da marca e identidade visual até a criação de aplicativos e sites com amplo conhecimento do Wordpress."
+            },
+            {
+                "language": "en",
+                "city": "São Paulo",
+                "country": "Brazil",
+                "role": "Mobile Developer",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "http": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "http": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "http": "http://facebook.com"
+            }
+        ],
+        "backgroundUrl": "../../assets/template/experience/sao-paulo.jpg"
+    },
+    {
+        "id": 3,
+        "position": 3,
+        "startAt": "01-02-2017",
+        "endAt": "11-28-2017",
+        "companyName": "Skydreamer Startup",
+        "internationalizations": [
+            {
+                "language": "pt",
+                "city": "Utrecht",
+                "country": "Países Baixos",
+                "role": "Desenvolvedor Full-stack",
+                "description": "Lorem (PT) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            },
+            {
+                "language": "en",
+                "city": "Utrecht",
+                "country": "Netherlands",
+                "role": "Full-stack Developer",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "http": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "http": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "http": "http://facebook.com"
+            }
+        ],
+        "backgroundUrl": "../../assets/template/experience/utrecht.jpg"
+    },
+    {
+        "id": 4,
+        "position": 4,
+        "startAt": "12-18-2017",
+        "endAt": "04-15-2020",
+        "companyName": "QAT Global",
+        "internationalizations": [
+            {
+                "language": "pt",
+                "city": "Uberaba",
+                "country": "Brasil",
+                "role": "Engenheiro de Software",
+                "description": "Na QAT Global, sou responsável por ser o 'Pod Leader' de back-end. Trabalhamos com Big Data Analysis para o maior fornecedor americano de tecnologia de água, permitindo que os clientes em todo o mundo transportem, tratem, testem e usem com eficiência a água em serviços públicos, residenciais, comerciais, agrícolas e industriais. A empresa faz negócios em mais de 150 países. Meu trabalho é garantir que todos os desenvolvedores estão aplicando os melhores padrões, práticas e padrões necessários para um aplicativo corporativo."
+            },
+            {
+                "language": "en",
+                "city": "Uberaba",
+                "country": "Brazil",
+                "role": "Software Engeneer",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB"
+        ],
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "http": "http://linkedin.com"
+            },
+            {
+                "icon": "github",
+                "title": "GitHub",
+                "http": "http://github.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "http": "http://facebook.com"
+            }
+        ],
+        "backgroundUrl": "../../assets/template/experience/uberaba.jpg"
+    },
+    {
+        "id": 5,
+        "position": 5,
+        "startAt": "05-01-2020",
+        "companyName": "Swisscom AG",
+        "internationalizations": [
+            {
+                "language": "pt",
+                "city": "Rotterdão",
+                "country": "Países Baixos",
+                "role": "Engenheiro DevOps",
+                "description": "Lorem (PT) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            },
+            {
+                "language": "en",
+                "city": "Rotterdam",
+                "country": "Netherlands",
+                "role": "DevOps Engeneer",
+                "description": "Lorem (EN) ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Aenean at interdum leo. In molestie diam convallis volutpat molestie. Nulla in eros imperdiet, gravida nulla consectetur, accumsan est. Quisque imperdiet sapien a luctus ultricies. Donec sit amet nisi ut dui sodales varius vel ut nisi. Nunc imperdiet neque quam, id rutrum quam pulvinar a. Mauris quis lectus eu augue porta consequat. Proin leo felis, euismod ac ligula a, efficitur egestas nisi. Sed non rhoncus lacus."
+            }
+        ],
+        "technologies": [
+            "HTML", "CSS", "Javascript", "Java", "Spring Boot", "Angular", "PHP", "MongoDB", "DevOps"
+        ],
+        "medias": [
+            {
+                "icon": "linkedin",
+                "title": "LinkedIn",
+                "http": "http://linkedin.com"
+            },
+            {
+                "icon": "instagram",
+                "title": "Instagram",
+                "http": "http://instagram.com"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook",
+                "http": "http://facebook.com"
+            }
+        ],
+        "backgroundUrl": "../../assets/template/experience/rotterdam.jpg"
+    }
+]
