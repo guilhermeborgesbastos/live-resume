@@ -28,9 +28,12 @@ export class TypingAnimationDirective implements OnInit {
         @Inject(LOCALE_ID) public locale: string
     ) {}
 
+    _flatMap = (f,xs) => xs.reduce((acc,x) => acc.concat(f(x)), []);
+
     ngOnInit () {
-        this.phrases = this.data.filter(el => el.language === (this.locale || 'en'))
-                                .flatMap(el => el.phrases);
+        
+        const nestedArr: IPhrase[] = this.data.filter(el => el.language === (this.locale || 'en'));
+        this.phrases = this._flatMap(el => el.phrases, nestedArr);
 
         if(this.checkContent()) {
             this.createTyped();
