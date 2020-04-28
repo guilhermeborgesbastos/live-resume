@@ -1,8 +1,13 @@
 import {
     Directive, OnInit,
-    ElementRef, Input
+    ElementRef, Input, Inject, LOCALE_ID
 } from '@angular/core';
 import { Typed } from './typed';
+
+interface IPhrase {
+    language: string;
+    phrases: string[];
+}
 
 @Directive({
     selector: '[typingAnimation]'
@@ -10,19 +15,26 @@ import { Typed } from './typed';
 
 export class TypingAnimationDirective implements OnInit {
 
-    typed: Typed;
     @Input('phrasePeriod') phrasePeriod: number;
     @Input('typeSpeed') typeSpeed: number;
     @Input('startDelay') startDelay: number;
-    @Input('phrases') phrases: string[];
+    @Input('data') data: IPhrase[];
+    
+    typed: Typed;
+    phrases: string[] = [];
 
-    constructor (private elRef: ElementRef) {}
+    constructor (
+        private elRef: ElementRef,
+        @Inject(LOCALE_ID) public locale: string
+    ) {}
 
     ngOnInit () {
-        if (!this.checkContent()) {
-            return;
+        this.phrases = this.data.filter(el => el.language === (this.locale || 'en'))
+                                .flatMap(el => el.phrases);
+
+        if(this.checkContent()) {
+            this.createTyped();
         }
-        this.createTyped();
     }
 
     private checkContent() {

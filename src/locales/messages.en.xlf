@@ -90,6 +90,15 @@
         </context-group>
         <note priority="1" from="description">about</note>
       </trans-unit>
+      <trans-unit id="hello" datatype="html">
+        <source>Hello!</source>
+        <target>Hello!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/welcome/welcome-dialog/welcome-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">dialog</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,13 +1,22 @@
 <div class="dialog-container">
     <img src="../../../assets/template/welcome/bubble-frame.svg" alt="Welcome Speech Bobble"/>
     <div class="console">
-        <p class="hello">Hello!</p>
+        <p class="hello" i18n="dialog@@hello">Hello!</p>
         <span
             class="txt-rotate" 
             typingAnimation
             [phrasePeriod]="2000"
             [startDelay]="1500"
             [typeSpeed]="200"
-            [phrases]='[ "My name is Guilherme.", "Be welcome to my Live Resume.", "Down below, you will know me better... :)" ]'></span>
+            [data]='[
+                { 
+                    "language": "pt",
+                    "phrases": [ "Meu nome é Guilherme.", "Seja bem-vindo ao meu resumo online.", "Abaixo, você me conhecerá melhor... :)" ]
+                },
+                { 
+                    "language": "en",
+                    "phrases": [ "My name is Guilherme.", "Be welcome to my Live Resume.", "Down below, you will know me better... :)" ]
+                }
+            ]'></span>
     </div>
 </div>
