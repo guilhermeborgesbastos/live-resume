@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy  {
     
     // Debounces the resize screen actions to not affect the performance of the browser,
     // as JavaScript is a single threaded language.
-    this.resizeObservable$.pipe(debounceTime(50)).subscribe(
+    this.resizeObservable$.pipe(debounceTime(25)).subscribe(
       res => {
         this.zone.run(() => this.onDetectScreenSize(res))
       }

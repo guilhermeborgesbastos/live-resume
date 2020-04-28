@@ -1,6 +1,7 @@
 #welcome {
     flex-direction: column;
     height: 780px;
+    padding-top: 5em;
 }
 
 .layer_one {
