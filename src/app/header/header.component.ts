@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { Component, NgZone, OnInit, HostListener, OnDestroy, Input, OnChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { faBars, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -9,57 +9,72 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent implements OnInit, OnDestroy  {
-  
-  resizeObservable$ = new Subject();
+export class HeaderComponent implements OnInit {
+    
+  private _activeSection: any;
+  private _pageXOffset: any;
   
   hasMenuToggled: boolean;
   faBars: IconDefinition;
   title: string;
 
-  /*
-   * If you are mutating data outside of the angular context (i.e., externally),
-   * then angular will not know of the changes. You need to use ChangeDetectorRef
-   * or NgZone in your component for making angular aware of external changes and
-   * thereby triggering change detection.
-  */
-  constructor(private zone: NgZone) { }
+  @ViewChild('nav') nav: ElementRef;
 
-  @HostListener('window:resize', ['$event.target'])
-  onResize(target) {
-    this.zone.run(()=> this.resizeObservable$.next(target.innerWidth));
+  constructor(private renderer: Renderer2) {}
+
+  // use getter setter to define the property
+  get activeSection(): any { 
+    return this._activeSection;
+  }
+  
+  get pageXOffset(): any { 
+    return this._pageXOffset;
+  }
+
+  @Input()
+  set pageXOffset(value: any) {
+    this._pageXOffset = value;
+    this.onDetectScreenSize();
+  }
+
+  @Input()
+  set activeSection(value: any) {
+    this._activeSection = value;
+    this.updateNavegation();
   }
 
   ngOnInit(): void {
     this.title = 'gbastos';
     this.faBars = faBars;
-    
-    // Debounces the resize screen actions to not affect the performance of the browser,
-    // as JavaScript is a single threaded language.
-    this.resizeObservable$.pipe(debounceTime(50)).subscribe(
-      res => {
-        this.zone.run(() => this.onDetectScreenSize(res))
-      }
-    );
-
-    // Executes the necessary adjustment based on screen properties
-    this.onDetectScreenSize(window.innerWidth);
   }
 
-  ngOnDestroy() {
-    this.resizeObservable$.unsubscribe();
+  private updateNavegation() {
+
+    if(this._activeSection && this.renderer) {
+      
+      // remove any selected achor
+      const activePreviousElem = this.nav.nativeElement.querySelector('a.active');
+      
+      if(activePreviousElem) {
+        this.renderer.removeClass(activePreviousElem, 'active');
+      }
+
+      const targetElem = this.nav.nativeElement.querySelector(`a[href^="#${this._activeSection}"]`);
+      if(targetElem) {
+        this.renderer.addClass(targetElem, 'active');
+      }
+    }
   }
 
   /*
    * For media types such as tablets and mobile devices, the nav-bar navigation should be
    * collapsed by default.
   */
-  onDetectScreenSize(innerWidth) {
-    this.hasMenuToggled = innerWidth > 1024;
+  private onDetectScreenSize() {
+    this.hasMenuToggled = this.pageXOffset > 1024;
   }
 
   onToggleBar() {
     this.hasMenuToggled = !this.hasMenuToggled;
   }
-
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
+import { debounce } from '../core/utils';
 
 @Component({
   selector: 'app-resume',
@@ -7,9 +8,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResumeComponent implements OnInit {
 
-  constructor() { }
+  isSticky: boolean = false;
+  activeSection: string;
 
-  ngOnInit(): void {
+  pageYOffset: number = 0;
+  pageXOffset: number;
+
+  constructor() {
+    this.checkResize();
   }
 
+  @HostListener('window:scroll', ['$event'])
+  @debounce() 
+  checkScroll() {
+    this.pageYOffset = window.pageYOffset;
+    this.isSticky = pageYOffset >= 250;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  @debounce(25) 
+  checkResize() {
+    this.pageXOffset = window.innerWidth;
+  }
+
+  ngOnInit(): void { }
+
+  @debounce()
+  onViewport(isOnViewPort: any, element?: string) {
+    console.log(`isOnViewPort... [${element}]`);
+    this.activeSection = element;
+  }
 }

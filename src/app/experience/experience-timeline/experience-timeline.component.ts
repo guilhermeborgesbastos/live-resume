@@ -25,7 +25,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
 
   public removeEventListener: () => void;
 
-  @ViewChild('line', { static: false }) line: ElementRef;
+  @ViewChild('line') line: ElementRef;
 
   constructor(
     private elRef: ElementRef,

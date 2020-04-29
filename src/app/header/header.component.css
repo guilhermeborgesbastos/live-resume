@@ -1,7 +1,6 @@
 header {
     display: flex;
     background: transparent;
-    padding-top: 18px;
     flex-flow: row wrap;
     align-items: center;
 }
@@ -115,6 +114,12 @@ header .child.language-container .frame ul li a.active {
 
 header .child.language-container .frame ul li a:hover {
     color: #222F5C;
+}
+
+header .child.nav-container ul li a.active {
+    background-color: #222f5c;
+    color: #fff !important;
+    font-weight: 600 !important;
 }
 
 /* navbar-toggle styles */
