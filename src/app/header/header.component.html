@@ -8,7 +8,7 @@
         <a href="#" class="logo">{{title}}</a>
     </div>
 
-    <div class="child nav-container" [hidden]="!hasMenuToggled">
+    <div class="child nav-container" #nav [hidden]="!hasMenuToggled">
         <ul>
             <li><a href="#about" i18n="nav@@aboutMe">About me</a></li>
             <li><a href="#experience" i18n="nav@@experiences">Experiences</a></li>
