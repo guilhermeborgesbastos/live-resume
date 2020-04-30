@@ -1,12 +1,10 @@
-import { Component, NgZone, OnInit, HostListener, OnDestroy, Input, OnChanges, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { faBars, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss', './header.component.responsivity.scss']
 })
 
 export class HeaderComponent implements OnInit {
