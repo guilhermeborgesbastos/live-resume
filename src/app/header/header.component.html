@@ -21,8 +21,8 @@
     <div class="child language-container">
         <div class="frame">
             <ul>
-                <li><a href="/en" class="active">EN</a></li>
-                <li><a href="/pt">PT</a></li>
+                <li><a href="/en" [ngClass]="{'active': locale === 'en'}">EN</a></li>
+                <li><a href="/pt" [ngClass]="{'active': locale === 'pt'}">PT</a></li>
             </ul>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID } from '@angular/core';
 import { faBars, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,7 +18,10 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('nav') nav: ElementRef;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    @Inject(LOCALE_ID) public locale: string,
+    private renderer: Renderer2
+  ) {}
 
   // use getter setter to define the property
   get activeSection(): any { 
