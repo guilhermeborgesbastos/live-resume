@@ -4,7 +4,7 @@ import { debounce } from '../core/utils';
 @Component({
   selector: 'app-resume',
   templateUrl: './resume.component.html',
-  styleUrls: ['./resume.component.css']
+  styleUrls: ['./resume.component.css', './resume.component.responsivity.css']
 })
 export class ResumeComponent implements OnInit {
 

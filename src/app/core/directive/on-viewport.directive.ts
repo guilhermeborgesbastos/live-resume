@@ -36,8 +36,9 @@ export class InViewportDirective implements OnInit, OnChanges {
             height: window.innerHeight
         };
 
-        const tViz = rec.top >= 0 && rec.top < (vp.height - 150);
-        const bViz = rec.bottom > 0 && rec.bottom <= (vp.height - 150);
+        const sectionMarging = 370;
+        const tViz = rec.top >= 0 && rec.top < (vp.height - sectionMarging);
+        const bViz = rec.bottom > 0 && rec.bottom <= (vp.height - sectionMarging);
 
         const vVisible = partial ? tViz || bViz : tViz && bViz;
 
