@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css', './about.component-responsivity.css']
+  styleUrls: ['./about.component.css', './about.component.responsivity.css']
 })
 export class AboutComponent implements OnInit, OnDestroy {
   
