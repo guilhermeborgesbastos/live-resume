@@ -1,1 +1,87 @@
-<p>posts works!</p>
+<section id="posts">
+    <div class="container">
+        <div class="top-container">
+            <div class="title">
+                <h1 i18n="nav@@posts">Posts</h1>
+            </div>
+            <div class="navigation">
+                <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
+                    <fa-icon [icon]="['fas', 'chevron-left']" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
+                    <span i18n="exp.nav@@previous">Previous</span>
+                </div>
+                <div class="devider">|</div>
+                <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == posts?.length}">
+                    <span i18n="exp.nav@@next">Next</span>
+                    <fa-icon [icon]="['fas', 'chevron-right']" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <p class="synopsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus.</p>
+        <div class="middle-container">
+            <div class="events-content">
+                <ol>
+                    <li>
+                        <div class="card">
+                            <div class="thumbnail"></div>
+                            <div class="content">
+                                <h2 class="title">Lorem Ipsum Dolor</h2>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor sit...
+                                </p>
+                                <button class="read-more">Read more</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="card">
+                            <div class="thumbnail"></div>
+                            <div class="content">
+                                <h2 class="title">Lorem Ipsum Dolor</h2>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor sit...
+                                </p>
+                                <button class="read-more">Read more</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="card">
+                            <div class="thumbnail"></div>
+                            <div class="content">
+                                <h2 class="title">Lorem Ipsum Dolor</h2>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor sit...
+                                </p>
+                                <button class="read-more">Read more</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="card">
+                            <div class="thumbnail"></div>
+                            <div class="content">
+                                <h2 class="title">Lorem Ipsum Dolor</h2>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor sit...
+                                </p>
+                                <button class="read-more">Read more</button>
+                            </div>
+                        </div>                        
+                    </li>
+                    <li>
+                        <div class="card">
+                            <div class="thumbnail"></div>
+                            <div class="content">
+                                <h2 class="title">Lorem Ipsum Dolor</h2>
+                                <p class="description">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor sit...
+                                </p>
+                                <button class="read-more">Read more</button>
+                            </div>
+                        </div>                        
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>

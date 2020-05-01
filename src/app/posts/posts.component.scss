@@ -1,0 +1,160 @@
+#posts {
+    top: -4em;
+    position: relative;
+    justify-content: center;
+    background-color: #fbfafa;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
+    max-width: 1400px;
+
+    h1 {
+        font-size: 42px;
+        font-weight: 600;
+        color: #222F5C;
+    }
+
+    p.synopsis {
+        font-size: 18px;
+        font-weight: 500;
+        color: #5E6788;
+        text-align: left;
+        margin-top: 0;
+    }
+    
+    .top-container {
+        display: flex;
+        color: #fff;
+        flex-wrap: wrap;
+
+        .title {
+            flex-grow: 4;
+        }
+
+        .navigation {
+            display: flex;
+            flex-grow: 1;
+            font-size: 32px;
+            font-weight: 500;
+            align-items: center;
+            text-align: center;
+            color: #222f5c;
+
+            .previous {
+                flex-grow: 2;
+                cursor: pointer;
+                text-align: left;
+                transition: text-shadow 0.3s linear;            
+            }
+
+            .devider {
+                flex-grow: 1;
+            }
+
+            .next {
+                flex-grow: 2;
+                cursor: pointer;
+                text-align: right;
+                -webkit-transition: text-shadow .3s linear;
+                -moz-transition: text-shadow .3s linear;
+                -ms-transition: text-shadow .3s linear;
+                -o-transition: text-shadow .3s linear;
+                transition: text-shadow .3s linear;
+                
+                &.disabled {
+                    cursor: no-drop;
+                    opacity: .6;
+                    pointer-events: none;
+                }
+                &:hover {
+                    text-shadow: 0 0 15px white;
+                }
+            }
+
+            span {
+                margin: 10px;
+            }
+        }
+    }
+
+    .middle-container {
+        padding-bottom: 3em;  
+        display: flex;
+
+        .events-content {
+            flex-grow: 4;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            transition: height 0.4s;
+
+            ol {
+                list-style: none;
+                padding: 0;
+                /* display: flex;*/
+                display: -webkit-inline-box;
+
+                li {
+                    display: flex;
+                    position: relative;
+                    z-index: 2;
+                    opacity: 1;
+                    transform: translateX(0);
+                    margin-right: 1em;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+
+                .card {
+                    flex-grow: 1;
+                    background-color: #fff;
+                    flex-direction: row;
+                    border-radius: 15px;
+                    box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
+                    min-height: 400px;
+                    max-width: 335px;
+
+                    .thumbnail {
+                        height: 200px;
+                        background-color: #ccc;
+                        border-top-left-radius: 15px;
+                        border-top-right-radius: 15px;
+                    }
+
+                    .content {
+                        padding: 1em;
+
+                        h2.title {
+                            margin-top: 0;
+                            color: #222F5C;
+                            font-weight: 600;
+                            font-size: 18px;
+                        }
+    
+                        p.description {
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: #5E6788;
+                            text-align: justify;
+                        }
+    
+                        button.read-more {
+                            border: 1px solid #ccc;
+                            background-color: #fff;
+                            padding: 5px 10px;
+                            border-radius: 15px;
+                            font-family: 'Montserrat';
+                            font-size: 14px;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
