@@ -35,7 +35,6 @@ export class ResumeComponent implements OnInit {
 
   @debounce()
   onViewport(isOnViewPort: any, element?: string) {
-    console.log(`isOnViewPort... [${element}]`);
     this.activeSection = element;
   }
 }

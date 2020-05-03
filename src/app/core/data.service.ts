@@ -6,6 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import { IExperience } from '../experience/experience-interfaces';
 import { IAbout } from '../about/about-interfaces';
+import { IPost } from '../posts/posts-interfaces';
 
 @Injectable()
 export class DataService {
@@ -26,6 +27,13 @@ export class DataService {
           .pipe(
               catchError(this.handleError)
           );
+    }
+
+    getPosts() : Observable<IPost[]> {
+        return this.http.get<IPost[]>(this.baseUrl + 'posts.json')
+            .pipe(
+                catchError(this.handleError)
+            );
     }
 
     private handleError(error: any) {
