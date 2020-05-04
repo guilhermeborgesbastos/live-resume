@@ -1,0 +1,16 @@
+<div class="events-content">
+    <ol #orderedList [style.transform]="'translateX('+value+')'">
+        <li *ngFor="let post of _posts" data-id="{{ post.id }}">
+            <div class="card">
+                <div class="thumbnail" [style.backgroundImage]="'url('+post.thumbnail+')'">
+                    <span class="date">{{ post.date | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
+                </div>
+                <div class="content">
+                    <h2 class="title" internationalization [data]="post.internationalizations" property='title'>Loading...</h2>
+                    <p class="description" internationalization [data]="post.internationalizations" property='description'>Loading...</p>
+                    <a class="read-more" href="post.http">Read more</a>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>

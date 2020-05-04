@@ -5,11 +5,11 @@ import { ResumeRoutingModule } from './resume-routing.module';
 import { HeaderComponent } from '../header/header.component';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
-import { PostsComponent } from '../posts/posts.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WelcomeModule } from '../welcome/welcome.molule';
 import { ExperienceModule } from '../experience/experience.module';
 import { CoreModule } from '../core/core.module';
+import { PostsModule } from '../posts/posts.molule';
 
 @NgModule({
   imports: [
@@ -18,16 +18,16 @@ import { CoreModule } from '../core/core.module';
     ResumeRoutingModule,
     FontAwesomeModule,
     WelcomeModule,
-    ExperienceModule
+    ExperienceModule,
+    PostsModule
   ],
   declarations: [ 
     ResumeComponent,
     HeaderComponent,
     AboutComponent,
-    PostsComponent,
     ContactComponent
   ],
-  exports: [ResumeComponent ]
+  exports: [ ResumeComponent ]
 })
 
 export class ResumeModule { }

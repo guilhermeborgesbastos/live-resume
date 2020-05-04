@@ -6,34 +6,21 @@
             </div>
             <div class="navigation">
                 <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
-                    <fa-icon [icon]="['fas', 'chevron-left']" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
+                    <fa-icon [icon]="faChevronLeft" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
                     <span i18n="exp.nav@@previous">Previous</span>
                 </div>
                 <div class="devider">|</div>
                 <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == posts?.length}">
                     <span i18n="exp.nav@@next">Next</span>
-                    <fa-icon [icon]="['fas', 'chevron-right']" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
+                    <fa-icon [icon]="faChevronRight" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
                 </div>
             </div>
         </div>
         <p class="synopsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus.</p>
         <div class="middle-container">
-            <div class="events-content">
-                <ol>
-                    <li *ngFor="let post of postsOrdered" data-id="{{ post.id }}">
-                        <div class="card">
-                            <div class="thumbnail" [style.backgroundImage]="'url('+post.thumbnail+')'">
-                                <span class="date">{{ post.date | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
-                            </div>
-                            <div class="content">
-                                <h2 class="title" internationalization [data]="post.internationalizations" property='title'>Loading...</h2>
-                                <p class="description" internationalization [data]="post.internationalizations" property='description'>Loading...</p>
-                                <a class="read-more" href="post.http">Read more</a>
-                            </div>
-                        </div>
-                    </li>
-                </ol>
-            </div>
+            <app-posts-carousel
+                [posts]="posts"
+                [currentPosition]="currentPosition"></app-posts-crousel>
         </div>
     </div>
 </section>
