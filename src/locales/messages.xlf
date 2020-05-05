@@ -28,6 +28,14 @@
           <context context-type="sourcefile">src/app/experience/experience.component.html</context>
           <context context-type="linenumber">25</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
         <note priority="1" from="description">exp.nav</note>
       </trans-unit>
       <trans-unit id="next" datatype="html">
@@ -44,7 +52,39 @@
           <context context-type="sourcefile">src/app/experience/experience.component.html</context>
           <context context-type="linenumber">31</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
         <note priority="1" from="description">exp.nav</note>
+      </trans-unit>
+      <trans-unit id="posts" datatype="html">
+        <source>Posts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts-carousel/posts-carousel.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <note priority="1" from="description">nav</note>
+      </trans-unit>
+      <trans-unit id="synopsis" datatype="html">
+        <source>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">posts</note>
       </trans-unit>
       <trans-unit id="aboutMe" datatype="html">
         <source>About me</source>
@@ -55,14 +95,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/about/about.component.html</context>
           <context context-type="linenumber">4</context>
-        </context-group>
-        <note priority="1" from="description">nav</note>
-      </trans-unit>
-      <trans-unit id="posts" datatype="html">
-        <source>Posts</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/header/header.component.html</context>
-          <context context-type="linenumber">15</context>
         </context-group>
         <note priority="1" from="description">nav</note>
       </trans-unit>
@@ -97,6 +129,14 @@
           <context context-type="linenumber">4</context>
         </context-group>
         <note priority="1" from="description">dialog</note>
+      </trans-unit>
+      <trans-unit id="of" datatype="html">
+        <source>of</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts-carousel/posts-carousel.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">posts</note>
       </trans-unit>
     </body>
   </file>

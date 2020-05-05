@@ -8,6 +8,7 @@
         list-style: none;
         padding: 0;
         display: flex;
+        justify-content: space-around;
 
         li {
             margin-right: 1em;
@@ -23,14 +24,16 @@
             flex-direction: row;
             border-radius: 15px;
             box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
-            max-width: 360px;
 
             .thumbnail {
-                height: 200px;
+                height: 220px;
                 background-color: #c1c7dc;
                 border-top-left-radius: 15px;
                 border-top-right-radius: 15px;
                 position: relative;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
 
                 .date {
                     position: absolute;
@@ -71,8 +74,39 @@
                     font-size: 14px;
                     font-weight: 600;
                     text-decoration: none;
+                    color: #3d4870;
+
+                    &:hover {
+                        background-color: #ededef;
+                    }
                 }
             }
+        }
+        &.partial{
+            justify-content: start;
+
+            .card {
+                max-width: 360px;
+            }
+        } 
+    }
+
+    .paginator {
+        text-align: right;
+        color: #222f5c;
+        font-style: italic;
+
+        span {
+            font-size: 16px;
+            margin-left: 5px;
+        }
+
+        .range {
+            font-weight: 600;
+        }
+
+        .label {
+            text-transform: lowercase;
         }
     }
 }

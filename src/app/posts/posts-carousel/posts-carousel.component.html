@@ -1,5 +1,5 @@
 <div class="events-content">
-    <ol>
+    <ol [ngClass]="{'partial': _posts.length < 3}">
         <li *ngFor="let post of _posts">
             <div class="card" [@fadeInOut]>
                 <div class="thumbnail" [style.backgroundImage]="'url('+post.thumbnail+')'">
@@ -8,9 +8,19 @@
                 <div class="content">
                     <h2 class="title" internationalization [data]="post.internationalizations" property='title'>Loading...</h2>
                     <p class="description" internationalization [data]="post.internationalizations" property='description'>Loading...</p>
-                    <a class="read-more" href="{{ post.http }}">Read more</a>
+                    <a class="read-more" target="_blank" href="{{ post.http }}">Read more</a>
                 </div>
             </div>
         </li>
     </ol>
+    <p class="paginator">
+        <span class="range">
+            <span class="start">{{ start + 1 }}</span>
+            <span class="devider">-</span>
+            <span class="end">{{ end > _originalPosts?.length ? _originalPosts?.length : end }}</span>
+        </span>
+        <span i18n="posts@@of">of</span>
+        <span>{{ _originalPosts?.length }}</span>
+        <span class="label" i18n="nav@@posts">posts</span>
+    </p>
 </div>

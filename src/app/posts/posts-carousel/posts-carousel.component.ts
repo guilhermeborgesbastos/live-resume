@@ -1,6 +1,12 @@
-import { Component, OnInit, Input, HostListener, HostBinding, ElementRef, AfterViewInit } from '@angular/core';
+import { 
+    Component, OnInit,
+    Input, HostListener,
+    EventEmitter, ElementRef,
+    Output
+} from '@angular/core';
 import { IPost } from '../posts-interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { debounce } from '../../core/utils';
 
 @Component({
     selector: 'app-posts-carousel',
@@ -22,8 +28,12 @@ export class PostsCarouselComponent implements OnInit {
     public _originalPosts: IPost[] = [];
     public _currentPage: number;
 
+    @Output() onResultsPerPageChanged = new EventEmitter<number>();
+
     resultsPerPage: number;
     elWidth: number;
+    start: number;
+    end: number;
 
     constructor(private elRef: ElementRef) { }
 
@@ -51,14 +61,15 @@ export class PostsCarouselComponent implements OnInit {
     
     ngOnInit(): void {}
 
-    @HostListener('window:resize', ['$event.target']) 
+    @HostListener('window:resize')
+    @debounce(25) 
     onResize() { 
         this.onResizeElement();
     }
 
     private onResizeElement(): void {
         this.elWidth = this.elRef.nativeElement.clientWidth;
-        this.resultsPerPage = Math.ceil(this.elWidth / 460);
+        this.resultsPerPage = Math.ceil(this.elWidth / 465);
 
         this.populateCarousel();
     }
@@ -66,11 +77,13 @@ export class PostsCarouselComponent implements OnInit {
     private populateCarousel(): void {
 
         if(this._currentPage && this._posts) {
-            const start =  (this._currentPage - 1) * this.resultsPerPage;
-            const end = this._currentPage * this.resultsPerPage;
+            this.start =  (this._currentPage - 1) * this.resultsPerPage;
+            this.end = this._currentPage * this.resultsPerPage;
 
-            this._posts = this._originalPosts.slice(start, end);
+            this._posts = this._originalPosts.slice(this.start, this.end);
             this._posts.sort((a:any, b:any) => +new Date (b.date) - +new Date(a.date));
+
+            this.onResultsPerPageChanged.emit(this.resultsPerPage);
         }
     }
 }

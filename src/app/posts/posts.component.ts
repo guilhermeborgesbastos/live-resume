@@ -12,6 +12,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 export class PostsComponent implements OnInit {
 
   currentPage: number = 1;
+  resultsPerPage: number;
   posts: IPost[] = [];
   
   faChevronLeft: IconDefinition;
@@ -30,7 +31,7 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  public ceil(val: number): number {
+  ceil(val: number): number {
     return Math.ceil(val);
   }
 
@@ -40,5 +41,9 @@ export class PostsComponent implements OnInit {
 
   onClickNext() {
       this.currentPage++;
+  }
+
+  updateNavigation(resultsPerPage: number) {
+    this.resultsPerPage = resultsPerPage;
   }
 }

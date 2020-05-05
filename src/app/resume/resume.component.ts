@@ -18,14 +18,14 @@ export class ResumeComponent implements OnInit {
     this.checkResize();
   }
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll')
   @debounce() 
   checkScroll() {
     this.pageYOffset = window.pageYOffset;
     this.isSticky = pageYOffset >= 250;
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   @debounce(25) 
   checkResize() {
     this.pageXOffset = window.innerWidth;
