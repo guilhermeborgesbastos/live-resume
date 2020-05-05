@@ -47,7 +47,13 @@
                 flex-grow: 2;
                 cursor: pointer;
                 text-align: left;
-                transition: text-shadow 0.3s linear;            
+                transition: text-shadow 0.3s linear;  
+                
+                &.disabled {
+                    cursor: no-drop;
+                    opacity: .6;
+                    pointer-events: none;
+                }
             }
 
             .devider {
@@ -58,11 +64,6 @@
                 flex-grow: 2;
                 cursor: pointer;
                 text-align: right;
-                -webkit-transition: text-shadow .3s linear;
-                -moz-transition: text-shadow .3s linear;
-                -ms-transition: text-shadow .3s linear;
-                -o-transition: text-shadow .3s linear;
-                transition: text-shadow .3s linear;
                 
                 &.disabled {
                     cursor: no-drop;
@@ -83,5 +84,9 @@
     .middle-container {
         padding-bottom: 3em;  
         display: flex;
+
+        app-posts-carousel {
+            width: 100%;
+        }
     }
 }

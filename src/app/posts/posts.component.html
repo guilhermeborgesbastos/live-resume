@@ -5,12 +5,12 @@
                 <h1 i18n="nav@@posts">Posts</h1>
             </div>
             <div class="navigation">
-                <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
+                <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPage === 1}">
                     <fa-icon [icon]="faChevronLeft" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
                     <span i18n="exp.nav@@previous">Previous</span>
                 </div>
                 <div class="devider">|</div>
-                <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == posts?.length}">
+                <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPage === ceil(posts?.length / 4) }">
                     <span i18n="exp.nav@@next">Next</span>
                     <fa-icon [icon]="faChevronRight" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
                 </div>
@@ -20,7 +20,7 @@
         <div class="middle-container">
             <app-posts-carousel
                 [posts]="posts"
-                [currentPosition]="currentPosition"></app-posts-crousel>
+                [currentPage]="currentPage"></app-posts-carousel>
         </div>
     </div>
 </section>

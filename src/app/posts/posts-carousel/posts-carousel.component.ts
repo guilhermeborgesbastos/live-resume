@@ -1,33 +1,40 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, HostBinding, ElementRef, AfterViewInit } from '@angular/core';
 import { IPost } from '../posts-interfaces';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
-  selector: 'app-posts-carousel',
-  templateUrl: './posts-carousel.component.html',
-  styleUrls: ['./posts-carousel.component.scss', './posts-carousel.component.responsivity.scss']
+    selector: 'app-posts-carousel',
+    templateUrl: './posts-carousel.component.html',
+    styleUrls: ['./posts-carousel.component.scss', './posts-carousel.component.responsivity.scss'],
+    animations: [
+        trigger('fadeInOut', [
+            state('void', style({
+                opacity: 0
+            })),
+            transition('void <=> *', animate(300)),
+        ])
+    ]
 })
 
 export class PostsCarouselComponent implements OnInit {
-  
-    MOVE_NEXT_CLASS: string = 'move-next';
-    MOVE_PREVIOUS_CLASS: string = 'move-previous';
-    TRANSITION_TIME: number = 400;
     
     public _posts: IPost[] = [];
-    public _currentPosition: number;
+    public _originalPosts: IPost[] = [];
+    public _currentPage: number;
 
-    value: string = '-100%';
+    resultsPerPage: number;
+    elWidth: number;
 
-    constructor() { }
+    constructor(private elRef: ElementRef) { }
 
-    @Input() get currentPosition(): number {
-        return this._currentPosition;
+    @Input() get currentPage(): number {
+        return this._currentPage;
     }
     
-    set currentPosition(value: number) {
+    set currentPage(value: number) {
         if(value) {
-            this._currentPosition = value;
-            //this.updateTimelineNavigation();
+            this._currentPage = value;
+            this.populateCarousel();
         }
     }
 
@@ -37,12 +44,33 @@ export class PostsCarouselComponent implements OnInit {
   
     set posts(value: IPost[]) {
         if(value) {
-          this._posts = value;
-          this._posts.sort((a:any, b:any) => +new Date(a.date) - +new Date (b.date));
+            this._originalPosts = value;
+            this.onResizeElement();
         }
     }
+    
+    ngOnInit(): void {}
 
-    ngOnInit(): void {
-        
+    @HostListener('window:resize', ['$event.target']) 
+    onResize() { 
+        this.onResizeElement();
+    }
+
+    private onResizeElement(): void {
+        this.elWidth = this.elRef.nativeElement.clientWidth;
+        this.resultsPerPage = Math.ceil(this.elWidth / 460);
+
+        this.populateCarousel();
+    }
+
+    private populateCarousel(): void {
+
+        if(this._currentPage && this._posts) {
+            const start =  (this._currentPage - 1) * this.resultsPerPage;
+            const end = this._currentPage * this.resultsPerPage;
+
+            this._posts = this._originalPosts.slice(start, end);
+            this._posts.sort((a:any, b:any) => +new Date (b.date) - +new Date(a.date));
+        }
     }
 }

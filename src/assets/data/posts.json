@@ -134,5 +134,22 @@
                 "description": "(PT) Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor sitte. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor."
             }
         ]
+    },
+    {
+        "thumbnail": "../../assets/posts/thumbnail.jpg",
+        "http": "http://article.address.com",
+        "date": "04-07-2013",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Lorem Ipsum Dolor",
+                "description": "(EN) Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor sitte. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor."
+            },
+            {
+                "language": "pt",
+                "title": "Lorem Ipsum Dolor",
+                "description": "(PT) Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor sitte. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus. Morbi vel diam dignissim, malesuada orci vitae, elementum leo. Lorem ipsum dolor."
+            }
+        ]
     }
 ]

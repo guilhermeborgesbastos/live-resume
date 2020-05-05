@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../core/data.service';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { IPost } from './posts-interfaces';
@@ -11,7 +11,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 })
 export class PostsComponent implements OnInit {
 
-  currentPosition: number = 0;
+  currentPage: number = 1;
   posts: IPost[] = [];
   
   faChevronLeft: IconDefinition;
@@ -26,16 +26,19 @@ export class PostsComponent implements OnInit {
     // Fetch the Posts from the Data Service
     this.dataService.getPosts()
       .subscribe((posts: IPost[]) => {
-        this.currentPosition = posts.length;
         this.posts = posts;
       });
   }
 
+  public ceil(val: number): number {
+    return Math.ceil(val);
+  }
+
   onClickPrevious() {
-      this.currentPosition =  this.currentPosition - 1;
+      this.currentPage--;
   }
 
   onClickNext() {
-      this.currentPosition =  this.currentPosition + 1;
+      this.currentPage++;
   }
 }
