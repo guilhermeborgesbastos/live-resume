@@ -35,7 +35,6 @@ export class ExperienceComponent implements OnInit {
     private dataService: DataService,
     private sortService: SorterService,
     private renderer: Renderer2,
-    private elRef: ElementRef,
     private library: FaIconLibrary
   ) {
     library.addIconPacks(fas, fab);

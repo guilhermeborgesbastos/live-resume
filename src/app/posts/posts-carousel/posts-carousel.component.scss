@@ -1,0 +1,112 @@
+.events-content {
+    flex-grow: 4;
+    position: relative;
+    width: 100%;
+    transition: height 0.4s;
+
+    ol {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+
+        li {
+            margin-right: 1em;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        .card {
+            flex-grow: 1;
+            background-color: #fff;
+            flex-direction: row;
+            border-radius: 15px;
+            box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
+
+            .thumbnail {
+                height: 220px;
+                background-color: #c1c7dc;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+                position: relative;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+
+                .date {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    background-color: #fff;
+                    padding: 5px 5px 0 5px;
+                    border-radius: 10px 0 0 0;
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: #222f5c;
+                }
+            }
+
+            .content {
+                padding: 1em;
+
+                h2.title {
+                    margin-top: 0;
+                    color: #222F5C;
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+
+                p.description {
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #5E6788;
+                    text-align: justify;
+                }
+
+                a.read-more {
+                    border: 1px solid #ccc;
+                    background-color: #fff;
+                    padding: 5px 10px;
+                    border-radius: 15px;
+                    font-family: 'Montserrat';
+                    font-size: 14px;
+                    font-weight: 600;
+                    text-decoration: none;
+                    color: #3d4870;
+
+                    &:hover {
+                        background-color: #ededef;
+                    }
+                }
+            }
+        }
+        &.partial{
+            justify-content: start;
+
+            .card {
+                max-width: 360px;
+            }
+        } 
+    }
+
+    .paginator {
+        text-align: right;
+        color: #222f5c;
+        font-style: italic;
+
+        span {
+            font-size: 16px;
+            margin-left: 5px;
+        }
+
+        .range {
+            font-weight: 600;
+        }
+
+        .label {
+            text-transform: lowercase;
+        }
+    }
+}

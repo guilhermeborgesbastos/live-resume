@@ -1,1 +1,27 @@
-<p>posts works!</p>
+<section id="posts">
+    <div class="container">
+        <div class="top-container">
+            <div class="title">
+                <h1 i18n="nav@@posts">Posts</h1>
+            </div>
+            <div class="navigation">
+                <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPage === 1}">
+                    <fa-icon [icon]="faChevronLeft" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
+                    <span i18n="exp.nav@@previous">Previous</span>
+                </div>
+                <div class="devider">|</div>
+                <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPage === ceil(posts?.length / resultsPerPage) }">
+                    <span i18n="exp.nav@@next">Next</span>
+                    <fa-icon [icon]="faChevronRight" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
+                </div>
+            </div>
+        </div>
+        <p class="synopsis" i18n="posts@@synopsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus.</p>
+        <div class="middle-container">
+            <app-posts-carousel
+                [posts]="posts"
+                [currentPage]="currentPage"
+                (onResultsPerPageChanged)="updateNavigation($event)"></app-posts-carousel>
+        </div>
+    </div>
+</section>
