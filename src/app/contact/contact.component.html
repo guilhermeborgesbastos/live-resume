@@ -8,7 +8,7 @@
                 <div class="picture"></div>
                 <div class="info">
                     <p class="name">{{ name }}</p>
-                    <p class="email"><fa-icon [icon]="faEnvelope" class="icon" title="Email"></fa-icon>{{ email }}</p>
+                    <p class="email"><fa-icon [icon]="faEnvelope" class="icon" title="Email"></fa-icon><a  href="mailto:{{ email }}">{{ email }}</a></p>
                     <p class="phone"><fa-icon [icon]="faPhone" class="icon" title="Phone"></fa-icon>{{ phone }}</p>
                     <p class="location"><fa-icon [icon]="faMapMarkerAlt" class="icon" title="Location"></fa-icon>{{ location }}</p>
                 </div>
