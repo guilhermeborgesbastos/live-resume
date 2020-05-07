@@ -2,6 +2,114 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="requiredMessageError" datatype="html">
+        <source>The message is required.</source>
+        <target>A mensagem é obrigatória.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="requiredEmailError" datatype="html">
+        <source>The email is required.</source>
+        <target>O e-mail é obrigatório.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="invalidEmailError" datatype="html">
+        <source>Please, provide a valid email address.</source>
+        <target>Por favor, insira um e-mail válido.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="requiredNameError" datatype="html">
+        <source>The name is required.</source>
+        <target>O nome é obrigatório.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="invalidNameError" datatype="html">
+        <source>Please, provide a valid name.</source>
+        <target>Por favor, insira um nome válido.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="messagePlaceholder" datatype="html">
+        <source>Write here your message... I will reply to you soon.</source>
+        <target>Escreva aqui sua mensagem, irei responder em breve.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="emailPlaceholder" datatype="html">
+        <source>mark@gmail.com</source>
+        <target>joão@gmail.com</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="namePlaceholder" datatype="html">
+        <source>Mark</source>
+        <target>João da Silva</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="send" datatype="html">
+        <source>Send</source>
+        <target>Enviar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="name" datatype="html">
+        <source>Your name:</source>
+        <target>Seu nome:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="email" datatype="html">
+        <source>Email:</source>
+        <target>E-mail:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="message" datatype="html">
+        <source>Your message:</source>
+        <target>Sua mensagem:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
       <trans-unit id="of" datatype="html">
         <source>of</source>
         <target>de</target>

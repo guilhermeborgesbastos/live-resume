@@ -1,0 +1,25 @@
+
+@media screen and (max-width: 1400px) {
+
+    #contact {
+    
+        .illustration {
+           display: none;
+        }
+    
+        .half-circle {
+            display: none;
+        }
+    }
+
+    .container {
+        
+        .left-side {
+            flex-grow: 1;
+        }
+
+        .right-side {
+            flex-grow: 0;
+        }
+    }
+}

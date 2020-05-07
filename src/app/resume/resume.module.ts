@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ResumeComponent } from '../resume/resume.component';
 import { ResumeRoutingModule } from './resume-routing.module';
@@ -13,6 +14,7 @@ import { PostsModule } from '../posts/posts.molule';
 
 @NgModule({
   imports: [
+    ReactiveFormsModule,
     CommonModule, 
     CoreModule,
     ResumeRoutingModule,
