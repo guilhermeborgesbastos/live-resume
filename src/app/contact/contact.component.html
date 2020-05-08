@@ -1,5 +1,15 @@
 <section id="contact">
-    <div class="container">
+    <div class="feedback-container" [ngClass]="feedbackStatus">
+        <p class="success">
+            <span i18n="contact@@successfulSubmit">Thank you for contacting me, I'll reply to you very soon.</span>
+            <fa-icon [icon]="faTimes" class="icon" title="Close" (click)="closeFeedbackMessage()"></fa-icon>
+        </p>
+        <p class="error">
+            <span i18n="contact@@errorSubmit">Sorry, there is an instability, try again later, or contact me via email or social media.</span>
+            <fa-icon [icon]="faTimes" class="icon" title="Close" (click)="closeFeedbackMessage()"></fa-icon>
+        </p>
+    </div>
+    <div class="container" [ngClass]="{'fade': hasBeenSubmited}">
         <div class="left-side">
             <div class="title">
                 <h1 i18n="nav@@contact">Contact</h1>
@@ -14,10 +24,10 @@
                 </div>
             </div>
             <div class="bottom-container">
-                <form [formGroup]="formContact">
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactNgForm)" #contactNgForm="ngForm" [ngClass]="{'loading': isLoading}">
                     <div class="form-group">
                         <label for="name" i18n="contact@@name">Your name:</label>
-                        <input [class.is-invalid]="formContact.get('name').invalid && formContact.get('name').touched"
+                        <input [class.is-invalid]="senderName.invalid && senderName.touched"
                             type="text" name="name" i18n-placeholder="contact@@namePlaceholder" placeholder="Mark" formControlName="name" >
                         <div class="warnings" *ngIf="(senderName.invalid && senderName.touched) || senderName.dirty">
                             <!--question mark(?) is a safe navigation operator-->
@@ -27,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email" i18n="contact@@email">Email:</label>
-                        <input [class.is-invalid]="formContact.get('email').invalid && formContact.get('email').touched"
+                        <input [class.is-invalid]="senderEmail.invalid && senderEmail.touched"
                             type="email" name="email" i18n-placeholder="contact@@emailPlaceholder" placeholder="mark@gmail.com" formControlName="email" required>
                         <div class="warnings" *ngIf="(senderEmail.invalid && senderEmail.touched) || senderEmail.dirty">
                             <!--question mark(?) is a safe navigation operator-->
@@ -37,14 +47,14 @@
                     </div>
                     <div class="form-group">
                         <label for="message" i18n="contact@@message">Your message:</label>
-                        <textarea [class.is-invalid]="formContact.get('message').invalid && formContact.get('message').touched"
+                        <textarea [class.is-invalid]="senderMessage.invalid && senderMessage.touched"
                             name="message" i18n-placeholder="contact@@messagePlaceholder" placeholder="Write here your message... I will reply to you soon." formControlName="message" required></textarea>
                         <div class="warnings" *ngIf="(senderMessage.invalid && senderMessage.touched) || senderMessage.dirty">
                             <!--question mark(?) is a safe navigation operator-->
                             <small *ngIf="senderMessage.errors?.required" class="text-danger" i18n="contact@@requiredMessageError">The message is required.</small>
                         </div>
                     </div>
-                    <input type="submit" (click)="submitEmail()" i18n-value="contact@@send" value="Send">                
+                    <input type="submit" i18n-value="contact@@send" value="Send">                
                 </form>
             </div>
         </div>

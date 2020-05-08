@@ -11,6 +11,7 @@ import { WelcomeModule } from '../welcome/welcome.molule';
 import { ExperienceModule } from '../experience/experience.module';
 import { CoreModule } from '../core/core.module';
 import { PostsModule } from '../posts/posts.molule';
+import { ContactService } from '../contact/contact.service';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { PostsModule } from '../posts/posts.molule';
     AboutComponent,
     ContactComponent
   ],
-  exports: [ ResumeComponent ]
+  exports: [ ResumeComponent ],
+  providers: [ ContactService ]
 })
 
 export class ResumeModule { }

@@ -1,5 +1,19 @@
 @media screen and (max-width: 1400px) {
 
+    .container {
+        
+        .left-side {
+            flex-grow: 1;
+        }
+
+        .right-side {
+            flex-grow: 3;
+        }
+    }
+}
+
+@media screen and (max-width: 1280px) {
+
     #contact {
     
         .illustration {

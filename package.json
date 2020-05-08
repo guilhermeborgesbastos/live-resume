@@ -20,6 +20,7 @@
     "@angular/common": "~9.0.2",
     "@angular/compiler": "~9.0.2",
     "@angular/core": "~9.0.2",
+    "@angular/fire": "^6.0.0",
     "@angular/forms": "~9.0.2",
     "@angular/localize": "^9.1.0",
     "@angular/platform-browser": "~9.0.2",
@@ -30,6 +31,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "compass-mixins": "^0.12.10",
+    "firebase": "^7.14.2",
     "rxjs": "^6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
