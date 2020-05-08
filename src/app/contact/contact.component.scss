@@ -4,6 +4,67 @@
     justify-content: center;
     background-color: #d4e7fe;
 
+    .feedback-container {
+        display: none;
+        position: absolute;
+        padding: 1em;
+        border-radius: 15px;
+        z-index: 3;
+        top: 50%;
+        box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
+        margin: 0 1em;
+
+        .icon {
+            margin-left: 15px;
+            font-size: 22px;
+            top: 2px;
+            position: relative;
+            cursor: pointer;
+
+            &:hover {
+                color: #656565;
+            }
+        }
+
+        p {
+            display: block;
+            font-weight: 600;
+        }
+
+        .error {
+            display: none;
+            color: #77242c;
+        }
+
+        .success {
+            display: none;
+            color: #373837;
+        }
+
+        &.success {
+            display: block;
+            background-color: #c4e4c6;
+            border: 1px solid #cecece;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+
+            .success { 
+                display: inline;
+            }
+        }
+        &.error {
+            display: block;
+            background-color: #e6adb2;
+            border: 1px solid #d49399;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+
+            .error { 
+                display: inline;
+            }
+        }
+    }
+
     .illustration {
         position: absolute;
         height: 105%;
@@ -37,6 +98,7 @@
     flex-direction: row;
     width: 85vw;
     max-width: 1400px;
+    opacity: 1;
     
     .left-side {
         flex-grow: 4;
@@ -77,6 +139,11 @@
                     margin-right: 10px;
                     color: #222F5C;
                 }
+
+                a {
+                    text-decoration: none;
+                    color: #646D8D;
+                }
                 
                 p {
                     margin: 0 0 8px 0;
@@ -99,7 +166,7 @@
             box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
             padding: 1em;
             margin-top: 1em;
-
+            
             form {
                 display: flex;
                 flex-direction: column;
@@ -178,6 +245,11 @@
                     font-family: "Montserrat";
                 }
 
+                &.loading {
+                    pointer-events: none;
+                    opacity: .6;
+                }
+
                 &.ng-invalid {
                     
                     input[type=submit] {
@@ -193,4 +265,21 @@
     .right-side {
         flex-grow: 6;
     }
+
+    &.fade {
+        pointer-events: none;
+        -webkit-animation: fadeOut 1s;
+        animation: fadeOut 1s;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+      to { opacity: .3; }
 }

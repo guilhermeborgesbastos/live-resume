@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  faEnvelope, faPhone,
+  faEnvelope, faPhone, faTimes,
   faMapMarkerAlt, IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ContactService } from './contact.service';
+import { Contact } from '../model/contact.model';
 
 @Component({
   selector: 'app-contact',
@@ -12,7 +14,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 
 export class ContactComponent implements OnInit {
-
+  
   name: string;
   email: string;
   phone: string;
@@ -21,34 +23,42 @@ export class ContactComponent implements OnInit {
   faEnvelope: IconDefinition;
   faPhone: IconDefinition;
   faMapMarkerAlt: IconDefinition;
+  faTimes: IconDefinition;
 
-  constructor() { }
+  isLoading: boolean = false;
+  hasBeenSubmited: boolean = false;
+  feedbackStatus: string;
 
-  formContact: FormGroup = new FormGroup({
-    email: new FormControl('',[
-      Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
-    ]),
+  constructor(private contactService: ContactService) { }
+
+  contactForm: FormGroup = new FormGroup({
     name: new FormControl('',[
       Validators.required,
       Validators.pattern("[A-zÀ-ú ]*")
     ]),
+    email: new FormControl('',[
+      Validators.required,
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+    ]),
     message: new FormControl('',[
       Validators.required
-      // Validators.pattern("^(?!\s*$).+")
-    ]),
+    ])
   }); 
 
-  get senderEmail(){
-    return this.formContact.get('email')
+  get senderEmail() {
+    return this.contactForm.get('email')
   }
 
-  get senderName(){
-    return this.formContact.get('name')
+  get senderName() {
+    return this.contactForm.get('name')
   }
 
-  get senderMessage(){
-    return this.formContact.get('message')
+  get senderMessage() {
+    return this.contactForm.get('message')
+  }
+
+  get options() {
+    return this.contactForm.get('options')
   }
 
   ngOnInit(): void {
@@ -60,9 +70,41 @@ export class ContactComponent implements OnInit {
     this.faEnvelope = faEnvelope;
     this.faPhone = faPhone;
     this.faMapMarkerAlt = faMapMarkerAlt;
+    this.faTimes = faTimes;
   }
 
-  submitEmail() {
-    console.log('sensing email...');
+  saveContact(contact: Contact){
+    this.contactService.createContact(contact).then(() => {
+      this.displayUserInterfaceMessage(true);
+    })
+    .catch(error => {
+      this.displayUserInterfaceMessage(false);
+      console.log(error);
+    });
+  }
+  
+  displayUserInterfaceMessage(hasBeenSuccessfuly: boolean) {
+    this.isLoading = false;
+    this.hasBeenSubmited = true;
+    this.feedbackStatus = hasBeenSuccessfuly? "success" : "error";
+    this.contactForm.reset();
+  }
+
+  closeFeedbackMessage() {
+    this.hasBeenSubmited = false;
+    this.feedbackStatus = "";
+  }
+
+  onSubmit(contactForm) {
+    this.isLoading = true;
+
+    const contactValues: Contact = {
+      name: this.senderName.value,
+      email: this.senderEmail.value,
+      message: this.senderMessage.value,
+      date: new Date()
+    } as Contact;
+
+    this.saveContact(contactValues);
   }
 }

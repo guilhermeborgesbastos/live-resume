@@ -13,6 +13,10 @@ import localeEn from '@angular/common/locales/en';
 import localePt from '@angular/common/locales/pt';
 import localePtExtra from '@angular/common/locales/extra/pt';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+
 registerLocaleData(localeEn, 'en');
 registerLocaleData(localePt, 'pt-BR', localePtExtra);
 @NgModule({
@@ -22,7 +26,9 @@ registerLocaleData(localePt, 'pt-BR', localePtExtra);
     CoreModule,
     ResumeModule,
     PageNotFoundModule,
-    PageNotFoundRoutingModule
+    PageNotFoundRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]

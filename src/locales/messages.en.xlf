@@ -2,6 +2,24 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="successfulSubmit" datatype="html">
+        <source>Thank you for contacting me, I&apos;ll reply to you very soon.</source>
+        <target>Thank you for contacting me, I&apos;ll reply to you very soon.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
+      <trans-unit id="errorSubmit" datatype="html">
+        <source>Sorry, there is an instability, try again later, or contact me via email or social media.</source>
+        <target>Sorry, there is an instability, try again later, or contact me via email or social media.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/contact/contact.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">contact</note>
+      </trans-unit>
       <trans-unit id="requiredMessageError" datatype="html">
         <source>The message is required.</source>
         <target>The message is required.</target>
