@@ -1,0 +1,14 @@
+footer {
+    background-color: #3A5F8E;
+}
+
+.copyright {
+    text-align: right;
+    color: #fff;
+    font-weight: 600;
+}
+
+p {
+    margin: 0;
+    padding: 1em;
+}

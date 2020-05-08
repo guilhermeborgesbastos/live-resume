@@ -11,3 +11,8 @@ app-header.sticky {
     background-color: #fff;
     box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.43);
 }
+
+app-footer {
+    position: relative;
+    top: -3em;
+}
