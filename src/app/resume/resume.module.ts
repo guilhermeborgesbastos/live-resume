@@ -12,6 +12,7 @@ import { ExperienceModule } from '../experience/experience.module';
 import { CoreModule } from '../core/core.module';
 import { PostsModule } from '../posts/posts.molule';
 import { ContactService } from '../contact/contact.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { ContactService } from '../contact/contact.service';
     ResumeComponent,
     HeaderComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    FooterComponent
   ],
   exports: [ ResumeComponent ],
   providers: [ ContactService ]
