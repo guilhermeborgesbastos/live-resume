@@ -72,24 +72,31 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
   }
   
   updateTimelineNavigation() {
-    const activePreviousElem = this.line.nativeElement.querySelector('.circle.active.current');
+    const activePreviousElem = this.line.nativeElement.querySelector('.milestone.active.current');
     this.renderer.removeClass(activePreviousElem, 'current');
     
     const targetElem = this.line.nativeElement.querySelector('div[id-position="' + this.currentPosition + '"]');
     this.renderer.addClass(targetElem, 'current');
   }
+  
+  private daysBetween(startDate: string, endDate: string): number {
+    // The .replace() is necessary in order to avoid issues in the Firefox browser.
+    const pointA = new Date(startDate.replace(/-/g,'/'));
+    const pointB = new Date(endDate.replace(/-/g,'/'));
+    return Math.round(Math.abs(+pointA - +pointB) / 8.64e7);
+  }
 
-  // TO-DO: not working properly on Firefox
-  daysBetween(startDate: string, endDate: string): number {
-    return Math.round(Math.abs((+new Date(startDate)) - (+new Date(endDate)))/8.64e7);
+  private retrieveTodayDateAsString(): string {
+    const today = new Date();
+    return `${today.getMonth()+1}-${today.getDate()}-${today.getFullYear()}`;
   }
 
   populateExperienceTimeline(): void {
 
     let dates: string[] = this._experiences.map(experience => experience.startAt);
 
-    // TO-DO: Adding the current day in order to complete the timeline...
-    dates.push('02-22-2021');
+    // Adding the current day in order to complete the timeline.
+    dates.push(this.retrieveTodayDateAsString());
 
     if(dates && dates.length < 2) {
       this.renderer.setStyle(this.elRef.nativeElement, 'visibility', 'hidden');
@@ -98,28 +105,28 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
       const daysBetween: number = this.daysBetween(dates[0], dates[dates.length - 1]);
       const oneDayInPixels: number = this.offsetWidth / daysBetween;
       
-      // Draw first date circle      
-      this.renderer.appendChild(this.line.nativeElement, this.createCircle(1, 0, dates[0]));
+      // Draw first date milestone      
+      this.renderer.appendChild(this.line.nativeElement, this.createMilestone(1, 0, dates[0]));
 
       let i: number;
       const lastFrameLoop = dates.length - 1;
 
-      // Draw the middle date circles
+      // Draw the middle date milestones
       for (i = 1; i < lastFrameLoop; i++) {
         const periodInDays: number = this.daysBetween(dates[0], dates[i]);
         const periodWidth: number = periodInDays * oneDayInPixels;
-        const circleElement = this.createCircle((i + 1), periodWidth, dates[i]);
+        const milestoneElement = this.createMilestone((i + 1), periodWidth, dates[i]);
 
         if(i == lastFrameLoop - 1) {
-          this.renderer.addClass(circleElement, 'current');
+          this.renderer.addClass(milestoneElement, 'current');
         }
 
-        this.renderer.appendChild(this.line.nativeElement, circleElement);        
+        this.renderer.appendChild(this.line.nativeElement, milestoneElement);        
       }
 
-      // Draw last date circle ( the current frame )
-      const lastDataCircle = this.createCurrentTriangle(i + 1);
-      this.renderer.appendChild(this.line.nativeElement, lastDataCircle);
+      // Draw last date milestone ( the current frame )
+      const lastDataMilestone = this.createCurrentTriangle(i + 1);
+      this.renderer.appendChild(this.line.nativeElement, lastDataMilestone);
     }
   }
 
@@ -127,34 +134,32 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
     return (leftPosition * 100) / offsetWidth;
   }
 
-  // TO-DO: Replace 'circle' for the 'milestone', for meaningful purposes...
-  createCircle(index: number, left: number, date: string): any {
-    const circleElement = this.renderer.createElement('div');
-    this.renderer.addClass(circleElement, 'circle');
-    this.renderer.addClass(circleElement, 'active');
+  createMilestone(index: number, left: number, date: string): any {
+    const milestoneElement = this.renderer.createElement('div');
+    this.renderer.addClass(milestoneElement, 'milestone');
+    this.renderer.addClass(milestoneElement, 'active');
     const leftPos = this.calculatePosition(left, this.offsetWidth);
-    this.renderer.setStyle(circleElement, 'left', `${leftPos}%`);
-    this.renderer.setAttribute(circleElement, 'id-position', index.toString());
+    // Uses at most 95% instead of 100% in order to avoid collision to the arrow icon on the right side of the timeline.
+    this.renderer.setStyle(milestoneElement, 'left', `${Math.min(95, leftPos)}%`);
+    this.renderer.setAttribute(milestoneElement, 'id-position', index.toString());
 
     const labelElement = this.createLabelElement(date.toString());
 
-    this.renderer.appendChild(circleElement, labelElement);
+    this.renderer.appendChild(milestoneElement, labelElement);
 
-    return circleElement;
+    return milestoneElement;
   }
 
   createCurrentTriangle(index: number): any {
-    const circleElement = this.renderer.createElement('div');
-    this.renderer.addClass(circleElement, 'circle');
-    this.renderer.addClass(circleElement, 'active');
-    this.renderer.addClass(circleElement, 'future');
-    this.renderer.setStyle(circleElement, 'left', '100%');
-    return circleElement;
+    const milestoneElement = this.renderer.createElement('div');
+    this.renderer.addClass(milestoneElement, 'milestone');
+    this.renderer.addClass(milestoneElement, 'active');
+    this.renderer.addClass(milestoneElement, 'future');
+    this.renderer.setStyle(milestoneElement, 'left', '100%');
+    return milestoneElement;
   }
 
-  /*
-   * Update this function based on the desired date label formatting.
-  */
+  // Update this function based on the desired date label formatting.
   createLabelElement(date: string): string {
 
     const safariDateFormatterPipe = new SafariDateFormatterPipe();
