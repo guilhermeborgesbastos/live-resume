@@ -2,7 +2,8 @@ header {
     display: flex;
     background: transparent;
     flex-flow: row wrap;
-    align-items: center;
+    max-width: 1400px;
+    width: 100%;
 
     ul {
         display: flex;
@@ -14,7 +15,7 @@ header {
 
     .child.logo-container {
         flex-grow: 2;
-        text-align: center;
+        text-align: left;
 
         a {
             width: 125px;
@@ -67,7 +68,6 @@ header {
     }
 
     .child.language-container {
-        flex-grow: 1;
 
         .frame {
             background-color: #fff;
