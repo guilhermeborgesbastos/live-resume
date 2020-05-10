@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     private renderer: Renderer2
   ) {}
 
-  // use getter setter to define the property
+  // use getter setter to define the properties
   get activeSection(): any { 
     return this._activeSection;
   }
@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
   @Input()
   set activeSection(value: any) {
     this._activeSection = value;
-    this.updateNavegation();
+    this.updateNavigation();
   }
 
   ngOnInit(): void {
@@ -49,11 +49,11 @@ export class HeaderComponent implements OnInit {
     this.faBars = faBars;
   }
 
-  private updateNavegation() {
+  private updateNavigation() {
 
     if(this._activeSection && this.renderer) {
       
-      // remove any selected achor
+      // Remove any selected anchor
       const activePreviousElem = this.nav.nativeElement.querySelector('a.active');
       
       if(activePreviousElem) {
@@ -77,5 +77,9 @@ export class HeaderComponent implements OnInit {
 
   onToggleBar() {
     this.hasMenuToggled = !this.hasMenuToggled;
+  }
+
+  resetMenu() {
+    this.hasMenuToggled = this.pageXOffset > 1024;
   }
 }
