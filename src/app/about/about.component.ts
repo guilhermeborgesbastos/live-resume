@@ -9,14 +9,14 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css', './about.component.responsivity.css']
+  styleUrls: ['./about.component.scss', './about.component.responsivity.scss']
 })
 export class AboutComponent implements OnInit, OnDestroy {
-  
+
   name: string;
   yearsOld: number;
-  subscription: Subscription;
 
+  subscription: Subscription;
   aboutData: IAbout;
 
   constructor(
@@ -30,7 +30,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     this.name = 'Guilherme Borges Bastos' // Sets here, your full name
     this.yearsOld = this.calcAge("1993-06-29"); // Sets here, your date birthday
 
-    // Fetch the About information from the Data Service (about.json file).
+    // Fetches the About information from the Data Service (about.json file).
     this.subscription = this.dataService.getAbout()
         .subscribe((about: IAbout) => this.aboutData = about);
   }
@@ -41,9 +41,9 @@ export class AboutComponent implements OnInit, OnDestroy {
   }
 
   private calcAge(dateString: string) {
-    const birthday = new Date(dateString);
-    const ageDifMs = Date.now() - birthday.getTime();
-    const ageDate = new Date(ageDifMs); // miliseconds from epoch
+    const birthday: Date = new Date(dateString);
+    const ageDifMs: number = Date.now() - birthday.getTime();
+    const ageDate: Date = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getFullYear() - 1970);
   }
 }
