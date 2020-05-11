@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
     selector: 'app-welcome-background',
     templateUrl: './welcome-background.component.html',
-    styleUrls: [ './welcome-background.css', './welcome-background.reponsivity.css' ]
+    styleUrls: [ './welcome-background.scss', './welcome-background.reponsivity.scss' ]
 })
 
 export class WelcomeBackgroundComponent implements OnInit {
