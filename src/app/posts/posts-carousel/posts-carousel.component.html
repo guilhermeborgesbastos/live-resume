@@ -1,14 +1,14 @@
 <div class="events-content">
-    <ol [ngClass]="{'partial': _posts.length < 3}">
+    <ol [ngClass]="{'partial': _posts.length < 3 && currentPage >= (_originalPosts.length / resultsPerPage)}">
         <li *ngFor="let post of _posts">
-            <div class="card" [@fadeInOut]>
+            <div class="card" [@fadeInOut] (click)="openPostURL(post.http)">
                 <div class="thumbnail" [style.backgroundImage]="'url('+post.thumbnail+')'">
                     <span class="date">{{ post.date | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
                 </div>
                 <div class="content">
                     <h2 class="title" internationalization [data]="post.internationalizations" property='title'>Loading...</h2>
                     <p class="description" internationalization [data]="post.internationalizations" property='description'>Loading...</p>
-                    <a class="read-more" target="_blank" href="{{ post.http }}">Read more</a>
+                    <button class="read-more" i18n="posts@@readMore">Read more</button>
                 </div>
             </div>
         </li>

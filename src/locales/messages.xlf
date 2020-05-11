@@ -98,23 +98,15 @@
         </context-group>
         <note priority="1" from="description">nav</note>
       </trans-unit>
-      <trans-unit id="projects" datatype="html">
-        <source>Projects</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/header/header.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <note priority="1" from="description">nav</note>
-      </trans-unit>
       <trans-unit id="contact" datatype="html">
         <source>Contact</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header/header.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <note priority="1" from="description">nav</note>
       </trans-unit>
@@ -130,7 +122,7 @@
         <source>Thank you for contacting me, I&apos;ll reply to you very soon.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">4</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -138,7 +130,7 @@
         <source>Sorry, there is an instability, try again later, or contact me via email or social media.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">8</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -146,7 +138,7 @@
         <source>Your name:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">29</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -154,7 +146,7 @@
         <source>Mark</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -162,7 +154,7 @@
         <source>The name is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">34</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -170,7 +162,7 @@
         <source>Please, provide a valid name.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -178,7 +170,7 @@
         <source>Email:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -186,7 +178,7 @@
         <source>mark@gmail.com</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -194,7 +186,7 @@
         <source>The email is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -202,7 +194,7 @@
         <source>Please, provide a valid email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">45</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -210,7 +202,7 @@
         <source>Your message:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">49</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -218,7 +210,7 @@
         <source>Write here your message... I will reply to you soon.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">51</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -226,7 +218,7 @@
         <source>The message is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">54</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -234,7 +226,7 @@
         <source>Send</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">57</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -245,6 +237,14 @@
           <context context-type="linenumber">4</context>
         </context-group>
         <note priority="1" from="description">dialog</note>
+      </trans-unit>
+      <trans-unit id="readMore" datatype="html">
+        <source>Read more</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts-carousel/posts-carousel.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">posts</note>
       </trans-unit>
       <trans-unit id="of" datatype="html">
         <source>of</source>

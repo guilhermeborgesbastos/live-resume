@@ -12,6 +12,7 @@
 
         li {
             margin-right: 1em;
+            text-align: right;
 
             &:last-child {
                 margin-right: 0;
@@ -20,10 +21,12 @@
 
         .card {
             flex-grow: 1;
+            cursor: pointer;
             background-color: #fff;
             flex-direction: row;
             border-radius: 15px;
             box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
+            transition: all .2s ease-in-out;
 
             .thumbnail {
                 height: 220px;
@@ -56,6 +59,7 @@
                     color: #222F5C;
                     font-weight: 600;
                     font-size: 18px;
+                    text-align: left;
                 }
 
                 p.description {
@@ -65,7 +69,7 @@
                     text-align: justify;
                 }
 
-                a.read-more {
+                button.read-more {
                     border: 1px solid #ccc;
                     background-color: #fff;
                     padding: 5px 10px;
@@ -75,11 +79,16 @@
                     font-weight: 600;
                     text-decoration: none;
                     color: #3d4870;
+                    cursor: pointer;
 
                     &:hover {
                         background-color: #ededef;
                     }
                 }
+            }
+
+            &:hover {
+                transform: scale(1.025);
             }
         }
         &.partial{
