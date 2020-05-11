@@ -1,0 +1,363 @@
+@media screen and (max-width: 1024px) {
+
+    .skills {
+        top: 140px;
+
+        img.background {
+            width: 390px;
+        }
+
+        .skill-icon {
+            width: 40px;
+
+            // Specifications for each icon positioning.
+            &.docker {
+                top: 310px;
+                left: -15px;
+            }
+
+            &.css {
+                top: 250px;
+                left: -50px;
+            }
+
+            &.git {
+                top: 175px;
+                left: -60px;
+            }
+
+            &.html {
+                top: 100px;
+                left: -45px;
+            }
+
+            &.sql {
+                top: 30px;
+                left: -10px;
+            }
+
+            &.php {
+                top: -20px;
+                left: 50px;
+            }
+
+            &.java {
+                top: -20px;
+                right: 40px;
+            }
+
+            &.bitbucket {
+                bottom: 80px;
+                right: -40px;
+            }
+
+            &.android {
+                bottom: 30px;
+                right: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 880px) {
+
+    .skills {
+
+        img.background {
+            width: 300px;
+        }
+
+        .skill-icon {
+            width: 35px;
+
+            // Specifications for each icon positioning.
+            &.docker {
+                top: 220px;
+                left: -25px;
+            }
+
+            &.css {
+                top: 170px;
+                left: -45px;
+            }
+
+            &.git {
+                top: 115px;
+                left: -50px;
+            }
+
+            &.html {
+                top: 60px;
+                left: -35px;
+            }
+
+            &.sql {
+                top: 10px;
+                left: 0px;
+            }
+
+            &.php {
+                top: -30px;
+                left: 40px;
+            }
+
+            &.java {
+                top: -30px;
+                right: 15px;
+            }
+
+            &.bitbucket {
+                bottom: 85px;
+                right: -40px;
+            }
+
+            &.android {
+                bottom: 45px;
+                right: -15px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 720px) {
+
+    .skills {
+
+        img.background {
+            width: 230px;
+        }
+
+        .skill-icon {
+            width: 27px;
+
+            // Specifications for each icon positioning.
+            &.docker {
+                top: 165px;
+                left: -20px;
+            }
+
+            &.css {
+                top: 130px;
+                left: -35px;
+            }
+
+            &.git {
+                top: 90px;
+                left: -35px;
+            }
+
+            &.html {
+                top: 50px;
+                left: -30px;
+            }
+
+            &.sql {
+                top: 10px;
+                left: -5px;
+            }
+
+            &.php {
+                top: -20px;
+                left: 20px;
+            }
+
+            &.java {
+                top: 0;
+                right: 0;
+            }
+
+            &.bitbucket {
+                bottom: 85px;
+                right: -35px;
+            }
+
+            &.android {
+                bottom: 50px;
+                right: -25px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .skills {
+        top: 100px;
+
+        img.background {
+            width: 180px;
+        }
+
+        .skill-icon {
+            width: 22px;
+
+            // Specifications for each icon positioning.
+            &.docker {
+                top: 135px;
+                left: -15px;
+            }
+
+            &.css {
+                top: 105px;
+                left: -25px;
+            }
+
+            &.git {
+                top: 70px;
+                left: -30px;
+            }
+
+            &.html {
+                top: 35px;
+                left: -20px;
+            }
+
+            &.sql {
+                top: 5px;
+                left: -3px;
+            }
+
+            &.php {
+                top: -20px;
+                left: 20px;
+            }
+
+            &.java {
+                top: -5px;
+                right: 5px;
+            }
+
+            &.bitbucket {
+                bottom: 70px;
+                right: -30px;
+            }
+
+            &.android {
+                bottom: 40px;
+                right: -20px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .skills {
+        top: 70px;
+
+        img.background {
+            width: 170px;
+        }
+
+        .skill-icon {
+            width: 18px;
+
+            // Specifications for each icon positioning.
+            &.docker {
+                top: 115px;
+                left: -15px;
+            }
+
+            &.css {
+                top: 85px;
+                left: -25px;
+            }
+
+            &.git {
+                top: 55px;
+                left: -25px;
+            }
+
+            &.html {
+                top: 30px;
+                left: -15px;
+            }
+
+            &.sql {
+                top: 5px;
+                left: 0px;
+            }
+
+            &.php {
+                top: -10px;
+                left: 20px;
+            }
+
+            &.java {
+                top: -10px;
+                right: 20px;
+            }
+
+            &.bitbucket {
+                bottom: 55px;
+                right: -20px;
+            }
+
+            &.android {
+                bottom: 30px;
+                right: -10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+ 
+    .skills {
+        top: 50px;
+
+        img.background {
+            width: 150px;
+        }
+
+        .skill-icon {
+            width: 16px;
+
+            // Specifications for each icon positioning.
+            &.docker {
+                top: 110px;
+                left: -13px;
+            }
+        
+            &.css {
+                top: 85px;
+                left: -20px;
+            }
+        
+            &.git {
+                top: 55px;
+                left: -25px;
+            }
+        
+            &.html {
+                top: 30px;
+                left: -15px;
+            }
+        
+            &.sql {
+                top: 5px;
+                left: 0px;
+            }
+        
+            &.php {
+                top: -10px;
+                left: 20px;
+            }
+        
+            &.java {
+                top: -5px;
+                right: 15px;
+            }
+        
+            &.bitbucket {
+                bottom: 35px;
+                right: -15px;
+            }
+        
+            &.android {
+                bottom: 15px;
+                right: 0;
+            }
+        }
+    }
+}

@@ -156,14 +156,43 @@
 
 @media screen and (max-width: 320px) {
 
-    .top-container .navigation-mobile{
-        
-        .current {        
-            font-size: 32px;        
+    .top-container {
+
+        .title h1 {
+            font-size: 34px;
         }
 
-        .molding {
-            padding: 10px 5px 10px 6px;        
+        .navigation-mobile {
+    
+            .current {        
+                font-size: 32px;        
+            }
+    
+            .molding {
+                padding: 10px 5px 10px 6px;        
+            }
+        }
+    }
+
+    .middle-container {
+
+        .events-content {
+
+            .description {
+                font-size: 14px;
+            }
+
+            .technologies span.hashtag {
+                font-size: 12px;
+            }
+
+            .social-media {
+                margin-top: 1em;
+
+                .icon {
+                    font-size: 35px;
+                }
+            }
         }
     }
 }
