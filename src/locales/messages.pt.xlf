@@ -2,6 +2,15 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="readMore" datatype="html">
+        <source>Read more</source>
+        <target>Saiba mais</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/posts/posts-carousel/posts-carousel.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">posts</note>
+      </trans-unit>
       <trans-unit id="successfulSubmit" datatype="html">
         <source>Thank you for contacting me, I&apos;ll reply to you very soon.</source>
         <target>Obrigado por entrar em contato, em breve responderei sua mensagem.</target>
