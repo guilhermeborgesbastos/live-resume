@@ -2,18 +2,17 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-/*
- * Replace below the properties according to the Firebase configurations.
-*/
 export const environment = {
   production: false,
-  firebaseConfig : {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID"
+  firebaseConfig: {
+    apiKey: "AIzaSyC2frVRAAltsVTmdwgFnATGHoVUzNHfzsM",
+    authDomain: "live-resume-a575a.firebaseapp.com",
+    databaseURL: "https://live-resume-a575a.firebaseio.com",
+    projectId: "live-resume-a575a",
+    storageBucket: "live-resume-a575a.appspot.com",
+    messagingSenderId: "681076751855",
+    appId: "1:681076751855:web:18bae3866ebfcc4fcd8a1a",
+    measurementId: "G-00VXD77WNG"
   }
 };
 
