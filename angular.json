@@ -55,11 +55,10 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ],
+              ]
             },
             "en": {
               "aot": true,
-              "outputPath": "dist/under-construction-en/",
               "i18nFile": "src/locales/messages.en.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "en",
@@ -67,11 +66,13 @@
             },
             "pt": {
               "aot": true,
-              "outputPath": "dist/under-construction-pt/",
               "i18nFile": "src/locales/messages.pt.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "pt",
               "i18nMissingTranslation": "error"
+            },
+            "es5": {
+              "tsConfig": "./tsconfig.es5.json"
             }
           }
         },
@@ -89,6 +90,9 @@
             },
             "pt": {
               "browserTarget": "live-resume:build:pt"
+            },
+            "es5": {
+              "browserTarget": "live-resume:build:es5"
             }
           }
         },
