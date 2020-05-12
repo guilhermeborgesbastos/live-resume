@@ -33,7 +33,7 @@ export class ResumeComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  @debounce()
+  @debounce(150)
   onViewport(isOnViewPort: any, element?: string) {
     this.activeSection = element;
   }
