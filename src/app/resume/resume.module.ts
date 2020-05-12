@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ResumeComponent } from '../resume/resume.component';
-import { ResumeRoutingModule } from './resume-routing.module';
 import { HeaderComponent } from '../header/header.component';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
@@ -19,7 +18,6 @@ import { FooterComponent } from '../footer/footer.component';
     ReactiveFormsModule,
     CommonModule, 
     CoreModule,
-    ResumeRoutingModule,
     FontAwesomeModule,
     WelcomeModule,
     ExperienceModule,
