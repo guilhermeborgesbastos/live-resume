@@ -7,9 +7,9 @@
                 </div>
                 <div class="content">
                     <h2 class="title" internationalization [data]="post.internationalizations" property='title'>Loading...</h2>
-                    <p class="description" internationalization [data]="post.internationalizations" property='description'>Loading...</p>
-                    <button class="read-more" i18n="posts@@readMore">Read more</button>
+                    <p class="description" internationalization [data]="post.internationalizations" property='description' ellipsis='275'>Loading...</p>
                 </div>
+                <button class="read-more" i18n="posts@@readMore">Read more</button>
             </div>
         </li>
     </ol>

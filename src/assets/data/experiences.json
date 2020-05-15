@@ -27,19 +27,9 @@
         ],
         "medias": [
             {
-                "icon": "linkedin",
-                "title": "LinkedIn E-tática",
-                "http": "https://www.linkedin.com/company/etatica/"
-            },
-            {
                 "icon": "facebook",
-                "title": "Facebook E-tática",
-                "http": "https://www.facebook.com/etatica/"
-            },
-            {
-                "icon": "instagram",
-                "title": "Instagram E-tática",
-                "http": "https://www.instagram.com/somos_etatica/"
+                "title": "Facebook Editora Nosso Trânsito",
+                "http": "https://www.facebook.com/editoranossotransito/"
             }
         ],
         "backgroundUrl": "../../assets/template/experience/uberaba.jpg"
