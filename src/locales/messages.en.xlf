@@ -147,8 +147,8 @@
         <note priority="1" from="description">posts</note>
       </trans-unit>
       <trans-unit id="synopsis" datatype="html">
-        <source>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus.</source>
-        <target>(EN) Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vulputate sagittis velit, eget scelerisque arcu semper finibus.</target>
+        <source>In countless times, an article or a simple piece of information saved me hours of research, so whenever is possible, I try to do my humble contributions:</source>
+        <target>In countless times, an article or a simple piece of information saved me hours of research, so whenever is possible, I try to do my humble contributions:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/posts/posts.component.html</context>
           <context context-type="linenumber">19</context>

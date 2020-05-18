@@ -7,12 +7,13 @@ import { SafariDateFormatterPipe } from './pipe/safari-date-formatter.pipe';
 import { LocalizedDatePipe } from './pipe/localized-date.pipe';
 import { InternationalizationDirective } from './directive/internationalization.directive';
 import { InViewportDirective } from './directive/on-viewport.directive';
+import { EllipsisPipe } from './pipe/ellipsis.pipe';
 
 @NgModule({
     imports: [ HttpClientModule ],
-    declarations: [ SafariDateFormatterPipe, LocalizedDatePipe, InternationalizationDirective, InViewportDirective],
+    declarations: [ SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective],
     providers: [ DataService, SorterService ],
-    exports: [ SafariDateFormatterPipe, LocalizedDatePipe, InternationalizationDirective, InViewportDirective ]
+    exports: [ SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective ]
 })
 
 export class CoreModule { }

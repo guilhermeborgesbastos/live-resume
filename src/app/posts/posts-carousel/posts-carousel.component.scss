@@ -29,7 +29,7 @@
             transition: all .2s ease-in-out;
 
             .thumbnail {
-                height: 220px;
+                height: 170px;
                 background-color: #c1c7dc;
                 border-top-left-radius: 15px;
                 border-top-right-radius: 15px;
@@ -53,6 +53,7 @@
 
             .content {
                 padding: 1em;
+                min-height: 220px;
 
                 h2.title {
                     margin-top: 0;
@@ -68,22 +69,23 @@
                     color: #5E6788;
                     text-align: justify;
                 }
+            }
 
-                button.read-more {
-                    border: 1px solid #ccc;
-                    background-color: #fff;
-                    padding: 5px 10px;
-                    border-radius: 15px;
-                    font-family: 'Montserrat';
-                    font-size: 14px;
-                    font-weight: 600;
-                    text-decoration: none;
-                    color: #3d4870;
-                    cursor: pointer;
+            button.read-more {
+                border: 1px solid #ccc;
+                background-color: #fff;
+                padding: 5px 10px;
+                border-radius: 15px;
+                font-family: 'Montserrat';
+                font-size: 14px;
+                font-weight: 600;
+                text-decoration: none;
+                color: #3d4870;
+                cursor: pointer;
+                margin: 0 15px 15px 0;
 
-                    &:hover {
-                        background-color: #ededef;
-                    }
+                &:hover {
+                    background-color: #ededef;
                 }
             }
 

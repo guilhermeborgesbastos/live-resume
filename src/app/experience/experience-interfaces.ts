@@ -2,6 +2,7 @@ export interface IExperience {
     id: number;
     position: number;
     companyName: string;
+    website?: string;
     internationalizations: IExperienceInternationalization[];
     startAt: string; // For the purpose of stringifying MM-DD-YYYY date format
     endAt?: string;  // For the purpose of stringifying MM-DD-YYYY date format
