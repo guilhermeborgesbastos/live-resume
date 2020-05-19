@@ -21,8 +21,8 @@ pipeline {
         */       
         stage('Deploy') {
             steps {
-                sh 'rm -r /var/www/guilhermeborgesbastos.com/html/*'
-                sh 'cp -r ./dist/* /var/www/guilhermeborgesbastos.com/html/'
+                sh 'sudo rm -r /var/www/guilhermeborgesbastos.com/html/*'
+                sh 'sudo cp -r ./dist/* /var/www/guilhermeborgesbastos.com/html/'
             }
         }             
     }
