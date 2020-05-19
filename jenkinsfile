@@ -24,6 +24,13 @@ pipeline {
                 sh 'sudo rm -r /var/www/guilhermeborgesbastos.com/html/*'
                 sh 'sudo cp -r ./dist/* /var/www/guilhermeborgesbastos.com/html/'
             }
-        }             
+        }
+        // Crawlers don't check for robots.txt files in subdirectories, therefore, copy the default (en) files to the root folder.
+        stage('SEO Optimizations') {
+            steps {
+                sh 'sudo cp /var/www/guilhermeborgesbastos.com/html/en/sitemap.xml /var/www/guilhermeborgesbastos.com/html/sitemap.xml'
+                sh 'sudo cp /var/www/guilhermeborgesbastos.com/html/en/robot.txt /var/www/guilhermeborgesbastos.com/html/robot.txt'
+            }
+        }            
     }
 }
