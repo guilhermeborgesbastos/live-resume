@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { IExperience } from '../experience/experience-interfaces';
 import { IAbout } from '../about/about-interfaces';
@@ -11,7 +11,7 @@ import { IPost } from '../posts/posts-interfaces';
 @Injectable()
 export class DataService {
 
-    baseUrl: string = 'assets/data/';
+    baseUrl: string = 'https://assets.guilhermeborgesbastos.com/live-resume/data/';
     
     constructor(private http: HttpClient) { }
 
