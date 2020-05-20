@@ -14,8 +14,8 @@
 .dialog-container .console {
 	position: absolute;
     top: 7em;
-    left: 0;
-	width: 370px;
+    left: -5px;
+    width: 380px;
 	text-align: center;
 }
 
