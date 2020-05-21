@@ -6,13 +6,17 @@
             </div>
             <div class="navigation">
                 <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPage === 1}">
-                    <fa-icon [icon]="faChevronLeft" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
-                    <span i18n="exp.nav@@previous">Previous</span>
+                    <div class="molding">
+                        <fa-icon [icon]="faChevronLeft" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
+                        <span i18n="exp.nav@@previous">Previous</span>
+                    </div>
                 </div>
-                <div class="devider">|</div>
+                <div class="divider">|</div>
                 <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPage === ceil(posts?.length / resultsPerPage) }">
-                    <span i18n="exp.nav@@next">Next</span>
-                    <fa-icon [icon]="faChevronRight" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
+                    <div class="molding">
+                        <span i18n="exp.nav@@next">Next</span>
+                        <fa-icon [icon]="faChevronRight" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
+                    </div>
                 </div>
             </div>
         </div>
