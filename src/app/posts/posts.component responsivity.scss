@@ -58,7 +58,7 @@
         }
     
         p.synopsis {
-            margin-top: 2em;
+            margin-top: 0;
         }
 
         .top-container {
@@ -91,5 +91,12 @@
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+    .container p.synopsis {
+        display: none;
     }
 }
