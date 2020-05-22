@@ -52,10 +52,20 @@ export class ExperienceComponent implements OnInit {
           this.experiencesOrdered.sort(this.sortService.sort('position', 'desc'));       
           this.backgroundUrl = this.retrieveBackgroundUrl();
           this.updateMobileNavigationView();
+          this.preloadBounderyImages(experiences.map(xp => xp.backgroundUrl));
         });
   }
 
-  createListSelector(position: number): string {
+  // Preloads the boundaries images related to the current position in order to avoid the 'blinking' of the background while navigating.
+  private preloadBounderyImages(images: string[]) {
+    images.forEach(function (image, i) {
+      const preloadImages = new Array();
+      preloadImages[i] = new Image();
+      preloadImages[i].src = image;
+    });
+  }
+
+  private createListSelector(position: number): string {
     return `li[id="${position}"]`;
   } 
 
@@ -116,11 +126,11 @@ export class ExperienceComponent implements OnInit {
     }
   }
 
-  retrieveBackgroundUrl(): string {
+  private retrieveBackgroundUrl(): string {
     return this.experiences[this.currentPosition - 1].backgroundUrl;
   }
 
-  updateMobileNavigationView() {
+  private updateMobileNavigationView() {
     this.previousYear = 
       this.experiences[this.currentPosition - 2]?.startAt || this.experiences[this.currentPosition - 1].startAt;
     this.currentYear = 
