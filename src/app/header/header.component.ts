@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
   
   hasMenuToggled: boolean;
   faBars: IconDefinition;
-  title: string;
 
   @ViewChild('nav') nav: ElementRef;
 
@@ -45,7 +44,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.title = 'gbastos';
     this.faBars = faBars;
   }
 
