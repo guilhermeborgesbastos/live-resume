@@ -1,14 +1,14 @@
-<header itemscope itemtype="http://schema.org/WPHeader">
+<header itemscope itemtype="https://schema.org/WPHeader">
 
     <div class="child navbar-toggle">
         <fa-icon [icon]="faBars" class="bar-icon" (click)="onToggleBar()"></fa-icon>
     </div>
 
-    <div class="child logo-container" itemprop="brand" itemscope itemtype="http://schema.org/Brand">
+    <div class="child logo-container" itemprop="brand" itemscope itemtype="https://schema.org/Brand">
         <a (click)="resetMenu()" href="#" class="logo" itemprop="name" itemprop="logo">gbastos</a>
     </div>
 
-    <div class="child nav-container" #nav [hidden]="!hasMenuToggled" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <div class="child nav-container" #nav [hidden]="!hasMenuToggled" itemscope itemtype="https://schema.org/SiteNavigationElement">
         <ul>
             <li><a (click)="resetMenu()" href="#about" i18n="nav@@aboutMe" itemprop="url"><span itemprop="name">About me</span></a></li>
             <li><a (click)="resetMenu()" href="#experience" i18n="nav@@experiences" itemprop="url"><span itemprop="name">Experiences</span></a></li>
@@ -20,10 +20,10 @@
     <div class="child language-container">
         <div class="frame">
             <ul>
-                <li itemprop="availableLanguage" itemscope itemtype="http://schema.org/Language">
+                <li itemprop="availableLanguage" itemscope itemtype="https://schema.org/Language">
                     <a href="/en" [ngClass]="{'active': locale === 'en'}" itemprop="name">EN</a>
                 </li>
-                <li itemprop="availableLanguage" itemscope itemtype="http://schema.org/Language">
+                <li itemprop="availableLanguage" itemscope itemtype="https://schema.org/Language">
                     <a href="/pt" [ngClass]="{'active': locale === 'pt'}" itemprop="name">PT</a>
                 </li>
             </ul>
