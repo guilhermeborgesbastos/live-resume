@@ -1,27 +1,31 @@
-<header>
+<header itemscope itemtype="https://schema.org/WPHeader">
 
     <div class="child navbar-toggle">
         <fa-icon [icon]="faBars" class="bar-icon" (click)="onToggleBar()"></fa-icon>
     </div>
 
-    <div class="child logo-container">
-        <a (click)="resetMenu()" href="#" class="logo">{{ title }}</a>
+    <div class="child logo-container" itemprop="brand" itemscope itemtype="https://schema.org/Brand">
+        <a (click)="resetMenu()" href="#" class="logo" itemprop="name" itemprop="logo">gbastos</a>
     </div>
 
-    <div class="child nav-container" #nav [hidden]="!hasMenuToggled">
+    <div class="child nav-container" #nav [hidden]="!hasMenuToggled" itemscope itemtype="https://schema.org/SiteNavigationElement">
         <ul>
-            <li><a (click)="resetMenu()" href="#about" i18n="nav@@aboutMe">About me</a></li>
-            <li><a (click)="resetMenu()" href="#experience" i18n="nav@@experiences">Experiences</a></li>
-            <li><a (click)="resetMenu()" href="#posts" i18n="nav@@posts">Posts</a></li>
-            <li><a (click)="resetMenu()" href="#contact" i18n="nav@@contact">Contact</a></li>
+            <li><a (click)="resetMenu()" href="#about" i18n="nav@@aboutMe" itemprop="url"><span itemprop="name">About me</span></a></li>
+            <li><a (click)="resetMenu()" href="#experience" i18n="nav@@experiences" itemprop="url"><span itemprop="name">Experiences</span></a></li>
+            <li><a (click)="resetMenu()" href="#posts" i18n="nav@@posts" itemprop="url"><span itemprop="name">Posts</span></a></li>
+            <li><a (click)="resetMenu()" href="#contact" i18n="nav@@contact" itemprop="url"><span itemprop="name">Contact</span></a></li>
         </ul>
     </div>
 
     <div class="child language-container">
         <div class="frame">
             <ul>
-                <li><a href="/en" [ngClass]="{'active': locale === 'en'}">EN</a></li>
-                <li><a href="/pt" [ngClass]="{'active': locale === 'pt'}">PT</a></li>
+                <li itemprop="availableLanguage" itemscope itemtype="https://schema.org/Language">
+                    <a href="/en" [ngClass]="{'active': locale === 'en'}" itemprop="name">EN</a>
+                </li>
+                <li itemprop="availableLanguage" itemscope itemtype="https://schema.org/Language">
+                    <a href="/pt" [ngClass]="{'active': locale === 'pt'}" itemprop="name">PT</a>
+                </li>
             </ul>
         </div>
     </div>
