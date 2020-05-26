@@ -1,4 +1,4 @@
-<section id="contact">
+<section id="contact" itemscope itemtype="https://schema.org/ContactPage">
     <div class="feedback-container" [ngClass]="feedbackStatus">
         <p class="success">
             <span i18n="contact@@successfulSubmit">Thank you for contacting me, I'll reply to you very soon.</span>
@@ -17,10 +17,10 @@
             <div class="top-container">
                 <div class="picture"></div>
                 <div class="info">
-                    <p class="name" *ngIf="name">{{ name }}</p>
-                    <p class="email" *ngIf="email"><fa-icon [icon]="faEnvelope" class="icon" title="Email"></fa-icon><a  href="mailto:{{ email }}">{{ email }}</a></p>
-                    <p class="phone" *ngIf="phone"><fa-icon [icon]="faPhone" class="icon" title="Phone"></fa-icon>{{ phone }}</p>
-                    <p class="location" *ngIf="location"><fa-icon [icon]="faMapMarkerAlt" class="icon" title="Location"></fa-icon>{{ location }}</p>
+                    <p class="name" *ngIf="name"><span itemprop="name">{{ name }}</span></p>
+                    <p class="email" *ngIf="email"><fa-icon [icon]="faEnvelope" class="icon" title="Email"></fa-icon><a  href="mailto:{{ email }}" itemprop="email">{{ email }}</a></p>
+                    <p class="phone" *ngIf="phone"><fa-icon [icon]="faPhone" class="icon" title="Phone"></fa-icon><span itemprop="telephone">{{ phone }}</span></p>
+                    <p class="location" *ngIf="location"><fa-icon [icon]="faMapMarkerAlt" class="icon" title="City"></fa-icon><span itemprop="city">{{ location }}</span></p>
                 </div>
             </div>
             <div class="bottom-container">
@@ -60,6 +60,6 @@
         </div>
         <div class="right-side"></div>
     </div>
-    <img loading="lazy" height="705" src="https://assets.guilhermeborgesbastos.com/live-resume/template/contact/gbastos-Illustration.png" class="illustration" alt="illustration">
+    <img loading="lazy" height="705" src="https://assets.guilhermeborgesbastos.com/live-resume/template/contact/gbastos-Illustration.png" class="illustration" alt="illustration" itemprop="avatar">
     <div class="half-circle"></div>
 </section>

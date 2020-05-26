@@ -43,6 +43,11 @@
             text-align: center;
             color: #222f5c;
 
+            a {
+                text-decoration: none;
+                color: #222f5c;
+            }
+
             .previous {
                 flex-grow: 2;
                 cursor: pointer;

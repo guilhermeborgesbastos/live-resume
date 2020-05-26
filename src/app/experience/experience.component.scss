@@ -66,6 +66,11 @@
     // Disabled for desktop resolutions or higher.
     .navigation-mobile {
         display: none;
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
     }
 
     .navigation {
@@ -75,6 +80,11 @@
         font-weight: 500;
         align-items: center;
         text-align: center;
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
     
         .previous {
             flex-grow: 2;

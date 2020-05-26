@@ -6,32 +6,32 @@
                     <h1 i18n="nav@@experiences">Experiences</h1>
                 </div>
                 <div class="navigation">
-                    <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
+                    <a href="javascript:void(0)" class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
                         <fa-icon [icon]="['fas', 'chevron-left']" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
                         <span i18n="exp.nav@@previous">Previous</span>
-                    </div>
+                    </a>
                     <div class="devider">|</div>
-                    <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
+                    <a href="javascript:void(0)" class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
                         <span i18n="exp.nav@@next">Next</span>
                         <fa-icon [icon]="['fas', 'chevron-right']" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- Custom mobile menu active under 600px wide resolution -->
                 <div class="navigation-mobile">
-                    <div class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
+                    <a href="javascript:void(0)" class="previous" (click)="onClickPrevious()" [ngClass]="{'disabled': currentPosition == 1}">
                        <div class="molding">
                            <span [innerHtml]="previousYear | safariDateFormatter | localizedDate:'yyyy'"></span>
                            <fa-icon [icon]="['fas', 'chevron-left']" class="icon" i18n-title="exp.nav@@previous" title="Previous"></fa-icon>
                         </div>
-                    </div>
+                    </a>
                     <div class="current"><span [innerHtml]="currentYear | safariDateFormatter | localizedDate:'yyyy'"></span></div>
-                    <div class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
+                    <a href="javascript:void(0)" class="next" (click)="onClickNext()" [ngClass]="{'disabled': currentPosition == experiencesOrdered?.length}">
                         <div class="molding">
                             <fa-icon [icon]="['fas', 'chevron-right']" class="icon" i18n-title="exp.nav@@next" title="Next"></fa-icon>
                             <span [innerHtml]="nextYear | safariDateFormatter | localizedDate:'yyyy'"></span>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
                 <div class="events-content">
                     <ol #orderedList>
                         <li *ngFor="let exp of experiencesOrdered; let i = index" [ngClass]="{'selected': i == 0}" data-id="{{ exp.id }}">
-                            <div class="company-name"><a href="{{ exp.website }}" target="blank">{{ exp.companyName }}</a></div>
+                            <div class="company-name"><a href="{{ exp.website }}" target="_blank">{{ exp.companyName }}</a></div>
                             <div class="role"  internationalization [data]="exp.internationalizations" property='role'>Loading...</div>
                             <div class="period">
                                 <span>{{ exp.startAt | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
@@ -56,7 +56,7 @@
                                 <span class="hashtag" *ngFor="let technology of exp.technologies">{{ technology }}</span>
                             </div>
                             <div class="social-media">
-                                <a *ngFor="let media of exp.medias" href="{{ media.http }}" target="blank">
+                                <a *ngFor="let media of exp.medias" href="{{ media.http }}" target="_blank">
                                     <fa-icon [icon]="['fab', media.icon]" class="icon" title="{{ media.title }}"></fa-icon>
                                 </a>
                             </div>

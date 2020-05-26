@@ -86,8 +86,4 @@ export class PostsCarouselComponent implements OnInit {
             this.onResultsPerPageChanged.emit(this.resultsPerPage);
         }
     }
-
-    openPostURL(url: string): void {
-        window.open(url, '_blank');
-    }
 }
