@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
 
     // Share button available only for browsers that do support it.
     if (this.ngNavigatorShareService.canShare()) {
-      this.nav.nativeElement.style.display='block';
+      this.shareBtn.nativeElement.style.display='block';
     }
   }
 
