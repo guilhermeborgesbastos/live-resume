@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID } from '@angular/core';
-import { faBars, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faShareAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   
   hasMenuToggled: boolean;
   faBars: IconDefinition;
+  faShareAlt: IconDefinition;
 
   @ViewChild('nav') nav: ElementRef;
 
@@ -45,6 +46,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.faBars = faBars;
+    this.faShareAlt = faShareAlt;
   }
 
   private updateNavigation() {
@@ -79,5 +81,9 @@ export class HeaderComponent implements OnInit {
 
   resetMenu() {
     this.hasMenuToggled = this.pageXOffset > 1024;
+  }
+
+  share() {
+    console.log('sahre');
   }
 }

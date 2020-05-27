@@ -1,12 +1,13 @@
 @media screen and (max-width: 1420px) {
 
     header {
+
         .child.logo-container {
             text-align: center;
         }
 
-        .child.language-container {
-            flex-grow: 1;
+        .child.share-container {
+            margin-right: 1em;
         }
     }
 }
@@ -105,6 +106,9 @@
 @media screen and (max-width: 500px) {
 
     header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         .child.navbar-toggle .bar-icon{
             font-size: 20px;
@@ -125,10 +129,19 @@
                 }
             }
         }
+
+        .child.share-container {
+            padding: 8px;
+            border-radius: 10px;
+
+            .icon {
+                font-size: 21px;
+            }        
+        }
     }
 }
 
-@media screen and (max-width: 384px) {
+@media screen and (max-width: 460px) {
 
     header {
         
@@ -159,6 +172,52 @@
 
         .child.logo-container a {
             font-size: 28px;
+        }
+    }
+}
+
+@media screen and (max-width: 380px) {
+
+    header {
+        
+        .child.navbar-toggle .bar-icon{
+            font-size: 15px;
+            border: 1px solid #b3b7c61f;
+            padding: 5px 10px 5px 10px;
+        }
+
+        .child.nav-container ul li a {
+            font-size: 18px;
+        }
+
+        .child.language-container .frame ul {
+            height: 35px;
+
+            li {
+                height: 20px;
+                margin: 8px 0 0 0;
+                border-right: 2px solid #bfbfbf3b;
+    
+                a {
+                    font-size: 15px;
+                    margin: 0 8px;
+                }
+            }
+        } 
+
+        .child.logo-container a {
+            font-size: 24px;
+        }
+
+        .child.share-container {
+            padding: 0;
+            border-radius: 0;
+            margin-right: 5px;
+            box-shadow: none;
+
+            .icon {
+                font-size: 20px;
+            }        
         }
     }
 }
