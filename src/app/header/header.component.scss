@@ -68,7 +68,6 @@ header {
     }
 
     .child.language-container {
-        margin-right: 10px;
 
         .frame {
             background-color: #fff;
@@ -129,6 +128,7 @@ header {
     .child.share-container {
         // visible only for mobile browsers that accept share intent.
         display: none;
+        margin-left: 10px;
         background-color: #fff;
         padding: 11px;
         border-radius: 15px;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID, AfterViewInit } from '@angular/core';
 import { faBars, faShareAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 
@@ -8,7 +8,7 @@ import { NgNavigatorShareService } from 'ng-navigator-share';
   styleUrls: ['./header.component.scss', './header.component.responsivity.scss']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
     
   private _activeSection: any;
   private _pageXOffset: any;
@@ -50,14 +50,16 @@ export class HeaderComponent implements OnInit {
     this.updateNavigation();
   }
 
+  ngAfterViewInit() {    
+      // Share button available only for browsers that do support it.
+      if (this.ngNavigatorShareService.canShare()) {
+        this.shareBtn.nativeElement.style.display='block';
+      }
+  }
+
   ngOnInit(): void {
     this.faBars = faBars;
     this.faShareAlt = faShareAlt;
-
-    // Share button available only for browsers that do support it.
-    if (this.ngNavigatorShareService.canShare()) {
-      this.shareBtn.nativeElement.style.display='block';
-    }
   }
 
   private updateNavigation() {
