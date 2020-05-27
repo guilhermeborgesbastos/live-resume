@@ -35,6 +35,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "compass-mixins": "^0.12.10",
     "firebase": "^7.14.2",
+    "ng-navigator-share": "^1.0.3",
     "rxjs": "^6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

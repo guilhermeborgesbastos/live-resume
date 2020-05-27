@@ -68,6 +68,7 @@ header {
     }
 
     .child.language-container {
+        margin-right: 10px;
 
         .frame {
             background-color: #fff;
@@ -123,5 +124,24 @@ header {
         display: none;
         justify-content: center;
         cursor: pointer;
+    }
+
+    .child.share-container {
+        // visible only for mobile browsers that accept share intent.
+        display: none;
+        background-color: #fff;
+        padding: 11px;
+        border-radius: 15px;
+        box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
+        cursor: pointer;
+
+        .icon {
+            font-size: 25px;
+            color: #4e5562;
+
+            &:hover {
+                color: #222F5C;
+            }
+        }        
     }
 }
