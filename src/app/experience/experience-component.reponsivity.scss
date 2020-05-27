@@ -46,6 +46,13 @@
     }
 }
 
+@media screen and (max-width: 1024px) {
+
+    .landscape {
+        background-attachment: scroll;
+    }
+}
+
 @media screen and (max-width: 880px) {
 
     .top-container {
