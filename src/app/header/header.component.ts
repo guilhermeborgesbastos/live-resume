@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID } from '@angular/core';
 import { faBars, faShareAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { NgNavigatorShareService } from 'ng-navigator-share';
 
 @Component({
   selector: 'app-header',
@@ -11,17 +12,22 @@ export class HeaderComponent implements OnInit {
     
   private _activeSection: any;
   private _pageXOffset: any;
+  private ngNavigatorShareService: NgNavigatorShareService;
   
   hasMenuToggled: boolean;
   faBars: IconDefinition;
   faShareAlt: IconDefinition;
 
   @ViewChild('nav') nav: ElementRef;
+  @ViewChild('shareBtn') shareBtn: ElementRef;
 
   constructor(
     @Inject(LOCALE_ID) public locale: string,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    ngNavigatorShareService: NgNavigatorShareService
+  ) {
+    this.ngNavigatorShareService = ngNavigatorShareService;
+  }
 
   // use getter setter to define the properties
   get activeSection(): any { 
@@ -47,6 +53,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.faBars = faBars;
     this.faShareAlt = faShareAlt;
+
+    // Share button available only for browsers that do support it.
+    if (this.ngNavigatorShareService.canShare()) {
+      this.nav.nativeElement.style.display='block';
+    }
   }
 
   private updateNavigation() {
@@ -83,7 +94,19 @@ export class HeaderComponent implements OnInit {
     this.hasMenuToggled = this.pageXOffset > 1024;
   }
 
-  share() {
-    console.log('sahre');
+  async share() {
+    try{
+      const sharedResponse = await this.ngNavigatorShareService.share({
+        title:'`Live Resume - Guilherme Borges Bastos',
+        text: `Hello, I'm a Full-stack Java Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!`,
+        url: 'https://guilhermeborgesbastos.com'
+      });
+      console.log(sharedResponse);
+    } catch(error) {
+      console.log('You app is not shared, reason: ',error);
+      if(error.shared === false) {
+        alert(`Sorry, this service/api is not supported in your Browser.`);
+      }
+    }    
   }
 }
