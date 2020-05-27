@@ -106,9 +106,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       console.log(sharedResponse);
     } catch(error) {
       console.log('You app is not shared, reason: ',error);
-      if(error.shared === false) {
-        alert(`Sorry, this service/api is not supported in your Browser.`);
-      }
     }    
   }
 }
