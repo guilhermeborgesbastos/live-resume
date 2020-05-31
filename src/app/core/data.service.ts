@@ -11,7 +11,7 @@ import { IPost } from '../posts/posts-interfaces';
 @Injectable()
 export class DataService {
 
-    baseUrl: string = 'assets/data/';
+    baseUrl: string = 'https://assets.guilhermeborgesbastos.com/live-resume/data/';
     
     constructor(private http: HttpClient) { }
 

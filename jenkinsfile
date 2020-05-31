@@ -21,15 +21,16 @@ pipeline {
         */       
         stage('Deploy') {
             steps {
-                sh 'sudo rm -r /var/www/stage.guilhermeborgesbastos.com/html/*'
-                sh 'sudo cp -r ./dist/* /var/www/stage.guilhermeborgesbastos.com/html/'
+                sh 'sudo rm -r /var/www/guilhermeborgesbastos.com/html/*'
+                sh 'sudo cp -r ./dist/* /var/www/guilhermeborgesbastos.com/html/'
             }
         }
         // Crawlers don't check for robots.txt files in subdirectories, therefore, copy the default (en) files to the root folder.
         stage('SEO Optimizations') {
             steps {
-                sh 'sudo cp /var/www/stage.guilhermeborgesbastos.com/html/en/robots.txt /var/www/stage.guilhermeborgesbastos.com/html/robots.txt'
-                sh 'sudo cp /var/www/stage.guilhermeborgesbastos.com/index.html /var/www/stage.guilhermeborgesbastos.com/html/index.html'
+                sh 'sudo cp /var/www/guilhermeborgesbastos.com/html/en/sitemap.xml /var/www/guilhermeborgesbastos.com/html/sitemap.xml'
+                sh 'sudo cp /var/www/guilhermeborgesbastos.com/html/en/robots.txt /var/www/guilhermeborgesbastos.com/html/robots.txt'
+                sh 'sudo cp /var/www/guilhermeborgesbastos.com/index.html /var/www/guilhermeborgesbastos.com/html/index.html'
             }
         }            
     }
