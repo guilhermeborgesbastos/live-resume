@@ -1,6 +1,25 @@
-# LiveResume
+# The Live Resume
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
+> This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
+
+You as a web developer should say no for the conventional text curriculum! **Why not make your own 'Live Resume' instead of an ordinary CV?!** The video below shows the final result of the website developed to replace my latest curriculum vitae, using Angular 9.
+
+[![Watch the video](http://i3.ytimg.com/vi/oI9QCslM4tU/maxresdefault.jpg)](https://youtu.be/oI9QCslM4tU)
+
+# Demo example
+
+This repository was deployed on the address below:
+> https://guilhermeborgesbastos.com/
+
+**Check it out!**
+
+# Adobe XD Template
+
+The Adobe XD template file can be downloaded [here](https://drive.google.com/file/d/1zNLb6hENYFOkfpRuSU-SyOZo5z-2-5WP/view?usp=sharing).
+
+```
+Please, feel free to FORK the repository, make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
+```
 
 ## Development server
 
