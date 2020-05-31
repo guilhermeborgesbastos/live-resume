@@ -13,6 +13,10 @@ This repository was deployed on the address below:
 
 **Check it out!**
 
+# Adobe XD Template
+
+The Adobe XD template file can be downloaded [here](https://drive.google.com/file/d/1zNLb6hENYFOkfpRuSU-SyOZo5z-2-5WP/view?usp=sharing).
+
 ```
 Please, feel free to FORK the repository, make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
 ```
