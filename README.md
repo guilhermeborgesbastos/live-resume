@@ -4,7 +4,7 @@
 
 You as a web developer should say no for the conventional text curriculum! **Why not make your own 'Live Resume' instead of an ordinary CV?!** The video below shows the final result of the website developed to replace my latest curriculum vitae, using Angular 9.
 
-[![Watch the video](http://i3.ytimg.com/vi/oI9QCslM4tU/maxresdefault.jpg)](https://youtu.be/oI9QCslM4tU)
+[![Watch the video](https://assets.guilhermeborgesbastos.com/live-resume/github-preview.jpg)](https://youtu.be/oI9QCslM4tU)
 
 # Demo example
 
