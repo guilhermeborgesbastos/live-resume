@@ -4,7 +4,7 @@
         height: 585px;
     }
     
-    .layer_one .avatar-container img.illustration {
+    .layer_one .avatar-container .illustration {
         height: 585px;
     }
 }
@@ -14,7 +14,7 @@
         height: 465px;
     }
     
-    .layer_one .avatar-container img.illustration {
+    .layer_one .avatar-container .illustration {
         height: 465px;
     }
 }
@@ -24,7 +24,7 @@
         height: 385px;
     }
     
-    .layer_one .avatar-container img.illustration {
+    .layer_one .avatar-container .illustration {
         height: 385px;
     }
 }
@@ -34,7 +34,7 @@
         height: 290px;
     }
     
-    .layer_one .avatar-container img.illustration {
+    .layer_one .avatar-container .illustration {
         height: 290px;
     } 
 }
@@ -45,7 +45,7 @@
         height: 250px;
     }
     
-    .layer_one .avatar-container img.illustration {
+    .layer_one .avatar-container .illustration {
         height: 250px;
     } 
 }
@@ -55,7 +55,7 @@
         height: 220px;
     }
     
-    .layer_one .avatar-container img.illustration {
+    .layer_one .avatar-container .illustration {
         height: 220px;
     } 
 }

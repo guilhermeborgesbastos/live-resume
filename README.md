@@ -6,26 +6,24 @@ You as a web developer should say no for the conventional text curriculum! **Why
 
 [![Watch the video](https://assets.guilhermeborgesbastos.com/live-resume/github-preview.jpg)](https://guilhermeborgesbastos.com/?source=github)
 
-# View Demo
+## View Demo
 
 This repository was deployed on the address below:
 > [https://guilhermeborgesbastos.com](https://guilhermeborgesbastos.com/?source=github)
 
 **Check it out!**
 
-# View Demo video
+## View Demo video
 
 Click in the image below to see the video on YouTube:
 
 [![Watch the video](http://i3.ytimg.com/vi/oI9QCslM4tU/maxresdefault.jpg)](https://youtu.be/oI9QCslM4tU)
 
-# Adobe XD Template
+## Adobe XD Template
 
 The Adobe XD template file can be downloaded [here](https://drive.google.com/file/d/1zNLb6hENYFOkfpRuSU-SyOZo5z-2-5WP/view?usp=sharing).
 
-```
-Please, feel free to FORK the repository, make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
-```
+> Please, feel free to FORK the repository, make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
 
 ## Development server
 
@@ -47,10 +45,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help 
+## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
 
 ## License
 

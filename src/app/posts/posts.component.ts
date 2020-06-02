@@ -7,7 +7,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss', './posts.component responsivity.scss']
+  styleUrls: ['./posts.component.scss', './posts.component.responsivity.scss']
 })
 export class PostsComponent implements OnInit {
 

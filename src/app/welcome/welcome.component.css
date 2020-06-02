@@ -15,7 +15,7 @@
     position: relative;
 }
 
-.layer_one .avatar-container img.illustration {
+.layer_one .avatar-container .illustration {
     height: 780px;
     z-index: 1;
     position: relative;
