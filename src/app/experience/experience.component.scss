@@ -52,7 +52,7 @@
 
 .top-container {
     display: flex;
-    color: #fff;
+    color: #ffffff;
     flex-wrap: wrap;
 
     .title {
@@ -102,7 +102,8 @@
                 cursor: no-drop;
                 opacity: 0.6;
                 pointer-events: none;
-            }        
+            }
+     
             &:hover {
                 text-shadow: 0 0 15px white;
             }
@@ -143,7 +144,7 @@
 
     flex-direction: column;
     text-align: right;
-    color: #fff;
+    color: #ffffff;
 
     .events-content {
         position: relative;
@@ -161,7 +162,7 @@
 
             a {
                 text-decoration: none;
-                color: #fff;
+                color: #ffffff;
             }
         }
 
@@ -278,7 +279,7 @@
 
             .icon {
                 font-size: 50px;
-                color: #fff;
+                color: #ffffff;
                 margin: 0 20px 0 20px;
                 transition: 0.3s;
 

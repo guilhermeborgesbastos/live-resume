@@ -1,5 +1,5 @@
 $color-black: #2a3c52;
-$color-white: #fff;
+$color-white: #ffffff;
 $color-blue-1: #3a5f8e;
 $color-blue-2: #3f5571;
 $color-skin-1: #e2af90;
@@ -38,7 +38,7 @@ a {
     margin-top: 12em;
     background-color: $color-blue-1;
     border: 0;
-    color: #fff;
+    color: #ffffff;
     font-size: 20px;
     padding: 10px;
     border-radius: 15px;
@@ -110,9 +110,10 @@ a {
   top: 25px;
   width: 65px;
   &:after, &:before {
-    content: "";
-    @include position;
 
+    @include position;
+    
+    content: "";
     background-color: $color-black;
     border-radius: 10px;
     height: 20px;
@@ -268,7 +269,7 @@ a {
       border-radius: 50%;
       left: 0;
     }
-    &:after   {
+    &:after {
       height: 20px;
       width: 20px;
       top: -10px;

@@ -90,7 +90,7 @@
             text-align: center;
 
             .molding {
-                border: 3px solid #fff;
+                border: 3px solid #ffffff;
                 display: inline-block;
                 padding: 10px 1em 10px 1em;
                 border-radius: 10px;
@@ -108,7 +108,8 @@
                     cursor: no-drop;
                     opacity: 0.6;
                     pointer-events: none;
-                }        
+                }
+        
                 &:hover {
                     text-shadow: 0 0 15px white;
                 }

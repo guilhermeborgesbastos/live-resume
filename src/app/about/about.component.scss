@@ -10,10 +10,10 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    background-color: #ffffff;
     flex-direction: row;
     border-radius: 15px;
-    box-shadow: 0 0 9px 0 rgba(112,112,112,0.16);
+    box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
     width: 85vw;
     z-index: 2;
     padding: 2em;
@@ -28,7 +28,7 @@
         flex-grow: 2;
     
         h1 {
-            color: #7D7D7D;
+            color: #7d7d7d;
             font-size: 22px;
             font-weight: normal;
             text-transform: uppercase;
@@ -45,7 +45,7 @@
         h3 {
             font-size: 22px;
             font-weight: 600;
-            color: #7D7D7D;
+            color: #7d7d7d;
             margin-bottom: 10px;
         }
     
@@ -70,7 +70,7 @@
     
         .icon {
             font-size: 40px;
-            color: #555F81;
+            color: #555f81;
             margin-right: 1em;
             transition: 0.3s;
     

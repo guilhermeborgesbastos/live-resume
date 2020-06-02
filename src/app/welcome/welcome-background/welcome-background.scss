@@ -75,37 +75,17 @@
 }
 
 @keyframes floating-icons {
-	0% {
-		transform: translate(0%, 0%);	
-	}
-	25% {
-		transform: translate(5%, 15%);	
-	}	
-	50% {
-		transform: translate(10%, 5%);	
-	}	
-	75% {
-		transform: translate(0%, 15%);	
-	}	
-	100% {
-		transform: translate(0%, 0%);
-	}			
+	0% { ransform: translate(0%, 0%); }
+	25% { ransform: translate(5%, 15%); }	
+	50% { ransform: translate(10%, 5%); }	
+	75% { ransform: translate(0%, 15%); }	
+	100% { ransform: translate(0%, 0%); }			
 }
 
 @-webkit-keyframes floating-icons {
-	0% {
-		-webkit-transform: translate(0%, 0%);	
-	}
-	25% {
-		-webkit-transform: translate(5%, 15%);	
-	}	
-	50% {
-		-webkit-transform: translate(10%, 5%);	
-	}	
-	75% {
-		-webkit-transform: translate(0%, 15%);	
-	}	
-	100% {
-		-webkit-transform: translate(0%, 0%);
-	}			
+	0% { webkit-transform: translate(0%, 0%); }
+	25% { webkit-transform: translate(5%, 15%); }	
+	50% { webkit-transform: translate(10%, 5%); }	
+	75% { webkit-transform: translate(0%, 15%); }	
+	100% { webkit-transform: translate(0%, 0%); }			
 }
