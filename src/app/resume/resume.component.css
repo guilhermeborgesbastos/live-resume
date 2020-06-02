@@ -8,10 +8,10 @@ app-header {
     transition: 0.3s;
 }
 
-app-header.sticky {
+.sticky {
     position: fixed;
     background-color: #fff;
-    box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.43);
+    box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.43);
 }
 
 app-footer {

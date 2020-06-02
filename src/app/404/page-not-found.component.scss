@@ -1,13 +1,13 @@
-$color-black:     #2a3c52;
-$color-white:     #fff;
-$color-blue-1:     #3a5f8e;
-$color-blue-2:     #3f5571;
-$color-skin-1:    #e2af90;
-$color-skin-2:    #d6a486;
-$color-skin-3:    #bf9176;
-$color-hair:      #2a3c52;
-$color-wood-1:    #601513;
-$color-wood-2:    #410a09;
+$color-black: #2a3c52;
+$color-white: #fff;
+$color-blue-1: #3a5f8e;
+$color-blue-2: #3f5571;
+$color-skin-1: #e2af90;
+$color-skin-2: #d6a486;
+$color-skin-3: #bf9176;
+$color-hair: #2a3c52;
+$color-wood-1: #601513;
+$color-wood-2: #410a09;
 
 @mixin position {
   position: absolute;
@@ -83,6 +83,8 @@ a {
     left: 80px;
     width: 350px;
     z-index: -1;
+    animation: shadow-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
+    animation-delay: 0.1s;
   }
 }
 
@@ -119,12 +121,12 @@ a {
   &:after {
     left: 35px;
     top: -8px;
-    transform:rotate(20deg);
+    transform: rotate(20deg);
   }
   &:before {
     left: 30px;
     top: -8px;
-    transform:rotate(-20deg);
+    transform: rotate(-20deg);
   }
   .eye {
     @include left50;
@@ -136,9 +138,9 @@ a {
     top: 40px;
     width: 48px;
     &:after, &:before {
-      content: "";
       @include top50;
-
+      
+      content: "";
       background-color: $color-black;
       border-radius: 50%;
       height: 5px;
@@ -180,15 +182,21 @@ a {
     height: 60px;
     width: 60px;
     &:after, &:before {
-      content:"";
+      content: "";
       @include position;      
 
       border-radius: 50%;
       height: 20px;      
       width: 20px;
     }
-    &:after { left: 50px; top: 10px; }
-    &:before { left: 60px; top: 45px; }
+    &:after {
+      left: 50px;
+      top: 10px;
+    }
+    &:before {
+      left: 60px;
+      top: 45px;
+    }
   }
   .circle:nth-child(1) {
     left: -12px;
@@ -197,7 +205,7 @@ a {
 
   .circle:nth-child(2) {
     right: 10px;
-    top: 0px;
+    top: 0;
     transform: rotate(90deg);
     &:after {
       left: 65px;
@@ -305,7 +313,7 @@ a {
 
       background-color: $color-skin-1;
       border-radius: 50%;
-      bottom: 0px;
+      bottom: 0;
       height: 15px;
       transform-origin: bottom;
       width: 15px;
@@ -331,7 +339,7 @@ a {
   }
 }
 
-.leg:nth-child(1)   { 
+.leg:nth-child(1) { 
   background-color: $color-skin-3;
   left: 95px;
   &:after { background-color: $color-skin-3; }
@@ -351,11 +359,11 @@ a {
 
 /* animation */
 .caveman:nth-child(1) .arm-right {
-  animation: arm-anima 1.2s infinite cubic-bezier(.55,.01,.16,1.34);
+  animation: arm-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
 }
 
 .caveman:nth-child(2) .arm-right {
-  animation: arm-anima 1.2s infinite cubic-bezier(.55,.01,.16,1.34);
+  animation: arm-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
   animation-delay: 0.6s;
 }
 
@@ -365,11 +373,11 @@ a {
 }
 
 .caveman:nth-child(2) .head {
-  animation: head-anima 1.2s infinite cubic-bezier(.55,.01,.16,1.34);
+  animation: head-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
 }
 
 .caveman:nth-child(1) .head {
-  animation: head-anima 1.2s infinite cubic-bezier(.55,.01,.16,1.34);
+  animation: head-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
   animation-delay: 0.6s;
 }
 
@@ -382,12 +390,12 @@ a {
 
 .caveman:nth-child(2) .eye:after, 
 .caveman:nth-child(2) .eye:before {
-  animation: eye-anima 1.2s infinite cubic-bezier(.55,.01,.16,1.34);
+  animation: eye-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
 }
 
 .caveman:nth-child(1) .eye:after, 
 .caveman:nth-child(1) .eye:before {
-  animation: eye-anima 1.2s infinite cubic-bezier(.55,.01,.16,1.34);
+  animation: eye-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
   animation-delay: 0.6s;
 }
 
@@ -398,17 +406,25 @@ a {
   100% { height: 5px; }
 }
 
-.container {
-  &:after {
-    animation: shadow-anima 1.2s infinite cubic-bezier(.55,.01,.16,1.34);
-    animation-delay: 0.1s;
-  }
-}
-
 @keyframes shadow-anima {
-  0% { width: 350px; left: 80px; }
-  25% { width: 450px; left: 80px; }
-  50% { width: 350px; left: 80px; }
-  75% { width: 450px; left: 0px; }
-  100% { width: 350px; left: 80px; }
+  0% {
+    width: 350px;
+    left: 80px;
+  }
+  25% {
+    width: 450px;
+    left: 80px;
+  }
+  50% {
+    width: 350px;
+    left: 80px;
+  }
+  75% {
+    width: 450px;
+    left: 0;
+  }
+  100% {
+    width: 350px;
+    left: 80px;
+  }
 }

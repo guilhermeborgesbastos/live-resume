@@ -84,6 +84,7 @@
 
         .navigation-mobile {
             @include display-flex;
+
             flex-direction: row;
             flex-wrap: nowrap;
             text-align: center;
@@ -105,7 +106,7 @@
 
                 &.disabled {
                     cursor: no-drop;
-                    opacity: .6;
+                    opacity: 0.6;
                     pointer-events: none;
                 }        
                 &:hover {
@@ -126,7 +127,7 @@
 
                 &.disabled {
                     cursor: no-drop;
-                    opacity: .6;
+                    opacity: 0.6;
                     pointer-events: none;
                 }
                 &:hover {

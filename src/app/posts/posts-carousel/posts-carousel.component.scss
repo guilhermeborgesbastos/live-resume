@@ -25,7 +25,8 @@
             background-color: #fff;
             flex-direction: row;
             border-radius: 15px;
-            box-shadow: 0px 0px 9px 0px rgba(240, 223, 223, 0.16);
+            box-shadow: 0 0 9px 0 rgba(240, 223, 223, 0.16);
+            border: 1px solid #c8cad547;
             transition: all .2s ease-in-out;
 
             a {
@@ -97,13 +98,13 @@
                 transform: scale(1.025);
             }
         }
-        &.partial{
+        &.partial {
             justify-content: start;
 
             .card {
                 max-width: 360px;
             }
-        } 
+        }
     }
 
     .paginator {

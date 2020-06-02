@@ -21,7 +21,6 @@ header {
             width: 125px;
             text-decoration: none;
             text-transform: uppercase;
-            text-decoration: none;
             font-size: 35px;
             font-weight: 700;
             color: #222F5C;
@@ -53,8 +52,8 @@ header {
 
                     &:not(.active):hover {
                         background-color: #fff;
-                        -webkit-box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16); 
-                        box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16);
+                        -webkit-box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16); 
+                        box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
                     }
                 }
 
@@ -73,8 +72,8 @@ header {
             background-color: #fff;
             display: inline-block; 
             border-radius: 15px;
-            -webkit-box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16); 
-            box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16);
+            -webkit-box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16); 
+            box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
 
             ul {
                 height: 52px;
@@ -98,12 +97,12 @@ header {
                         transition: 0.3s;
 
                         &:hover {
-                            color: #222F5C;
+                            color: #222f5c;
                         }
                     }
 
                     .active {
-                        color: #222F5C;
+                        color: #222f5c;
                     }
 
                     &:last-of-type {
@@ -111,8 +110,8 @@ header {
                     }
                 }
 
-                &:before{
-                    content:"\202f\202d";
+                &:before {
+                    content: "\202f\202d";
                 }
             }
         }

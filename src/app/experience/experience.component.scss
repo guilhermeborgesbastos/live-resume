@@ -7,9 +7,10 @@
 }
 
 .overlay {
-    background: rgb(2,0,36);
-    background: linear-gradient(180deg, rgba(2,0,36,0.6418942577030813) 0%, rgba(0,0,0,0.773546918767507) 65%, rgba(0,0,0,0.8379726890756303) 75%, rgba(0,0,0,0.9724264705882353) 100%);
     @include display-flex;
+
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2, 0, 36, 0.6418942577030813) 0%, rgba(0, 0, 0, 0.773546918767507) 65%, rgba(0, 0, 0, 0.8379726890756303) 75%, rgba(0, 0, 0, 0.9724264705882353) 100%);
     width: 100%;
     flex-direction: column;
     justify-content: flex-start;
@@ -42,6 +43,7 @@
 
 .container {
     @include display-flex;
+
     flex-direction: column;
     max-width: 1400px;
     align-self: center;
@@ -74,6 +76,7 @@
 
     .navigation {
         @include display-flex;
+
         flex-grow: 1;
         font-size: 32px;
         font-weight: 500;
@@ -89,15 +92,15 @@
             flex-grow: 2;
             cursor: pointer;
             text-align: left;
-            -webkit-transition: text-shadow .3s linear;
-            -moz-transition: text-shadow .3s linear;
-            -ms-transition: text-shadow .3s linear;
-            -o-transition: text-shadow .3s linear;
-            transition: text-shadow .3s linear;
+            -webkit-transition: text-shadow 0.3s linear;
+            -moz-transition: text-shadow 0.3s linear;
+            -ms-transition: text-shadow 0.3s linear;
+            -o-transition: text-shadow 0.3s linear;
+            transition: text-shadow 0.3s linear;
     
             &.disabled {
                 cursor: no-drop;
-                opacity: .6;
+                opacity: 0.6;
                 pointer-events: none;
             }        
             &:hover {
@@ -117,15 +120,15 @@
             flex-grow: 2;
             cursor: pointer;
             text-align: right;
-            -webkit-transition: text-shadow .3s linear;
-            -moz-transition: text-shadow .3s linear;
-            -ms-transition: text-shadow .3s linear;
-            -o-transition: text-shadow .3s linear;
-            transition: text-shadow .3s linear;
+            -webkit-transition: text-shadow 0.3s linear;
+            -moz-transition: text-shadow 0.3s linear;
+            -ms-transition: text-shadow 0.3s linear;
+            -o-transition: text-shadow 0.3s linear;
+            transition: text-shadow 0.3s linear;
             
             &.disabled {
                 cursor: no-drop;
-                opacity: .6;
+                opacity: 0.6;
                 pointer-events: none;
             }
             &:hover {
@@ -137,6 +140,7 @@
 
 .middle-container {
     @include display-flex;
+
     flex-direction: column;
     text-align: right;
     color: #fff;
@@ -275,7 +279,7 @@
             .icon {
                 font-size: 50px;
                 color: #fff;
-                margin: 0px 20px 0px 20px;
+                margin: 0 20px 0 20px;
                 transition: 0.3s;
 
                 &:last-child {

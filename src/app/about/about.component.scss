@@ -13,7 +13,7 @@
     background-color: #fff;
     flex-direction: row;
     border-radius: 15px;
-    box-shadow: 0px 0px 9px 0px rgba(112,112,112,0.16);
+    box-shadow: 0 0 9px 0 rgba(112,112,112,0.16);
     width: 85vw;
     z-index: 2;
     padding: 2em;
@@ -38,8 +38,8 @@
         h2 {
             font-size: 35px;
             font-weight: 600;
-            color: #222F5C;
-            margin: 5px 0 0 0px;
+            color: #222f5c;
+            margin: 5px 0 0 0;
         }
     
         h3 {
@@ -52,7 +52,7 @@
         p {
     
             &.years-old {
-                color: #B2B6C6;
+                color: #b2b6c6;
                 font-size: 18px;
                 font-style: italic;
             }
@@ -104,7 +104,7 @@
             .icon {
                 font-size: 60px;
                 color: #414C73;
-                margin: 0px 20px 0px 20px;
+                margin: 0 20px 0 20px;
                 transition: 0.3s;
     
                 &:hover {

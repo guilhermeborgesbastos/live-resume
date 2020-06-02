@@ -1,6 +1,6 @@
 @media screen and (max-width: 1400px) {
 
-    .container {
+    #contact .container {
         
         .left-side {
             flex-grow: 1;
@@ -23,23 +23,24 @@
         .half-circle {
             display: none;
         }
+
+        .container {
+            
+            .left-side {
+                flex-grow: 1;
+            }
+    
+            .right-side {
+                flex-grow: 0;
+            }
+        }
     }
 
-    .container {
-        
-        .left-side {
-            flex-grow: 1;
-        }
-
-        .right-side {
-            flex-grow: 0;
-        }
-    }
 }
 
 @media screen and (max-width: 600px) {
 
-    .container {
+    #contact .container {
         
         .left-side {
             
@@ -53,7 +54,7 @@
                 justify-content: center;
     
                 .picture {
-                    display: none
+                    display: none;
                 }
     
                 .info {
@@ -105,11 +106,12 @@
             }
         }
     }
+
 }
 
 @media screen and (max-width: 420px) {
 
-    .container {
+    #contact .container {
         
         .left-side {
             
@@ -160,7 +162,7 @@
 
 @media screen and (max-width: 370px) {
 
-    .container {
+    #contact .container {
         
         .left-side {
             
@@ -173,7 +175,7 @@
                     }
                     
                     .name {
-                        font-size: 14x;
+                        font-size: 14px;
                     }
                 }
             }
@@ -201,4 +203,5 @@
             }
         }
     }
+
 }

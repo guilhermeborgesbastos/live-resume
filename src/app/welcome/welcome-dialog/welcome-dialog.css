@@ -31,7 +31,7 @@
     color: #222F5C;
 }
 
-.dialog-container .console span.txt-rotate {
+.dialog-container .console .txt-rotate {
 	font-size: 40px;
     color: #576183;
 	font-weight: 600;
