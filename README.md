@@ -5,6 +5,7 @@
 You as a web developer should say no for the conventional text curriculum! **Why not make your own 'Live Resume' instead of an ordinary CV?!** The video below shows the final result of the website developed to replace my latest curriculum vitae, using Angular 9.
 
 [![Watch the video](https://assets.guilhermeborgesbastos.com/live-resume/github-preview.jpg)](https://guilhermeborgesbastos.com/?source=github)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_shield)
 
 ## View Demo
 
@@ -52,3 +53,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## License
 
 The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_large)
