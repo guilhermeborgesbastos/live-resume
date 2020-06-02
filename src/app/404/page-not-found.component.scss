@@ -9,10 +9,6 @@ $color-hair: #2a3c52;
 $color-wood-1: #601513;
 $color-wood-2: #410a09;
 
-@mixin position {
-  position: absolute;
-}
-
 @mixin top50 {
   position: absolute;
   top: 50%;
@@ -73,8 +69,7 @@ a {
   height: 300px;
   width: 500px;
   &:after {
-    @include position;
-
+    position: absolute;
     content: "";
     background-color: rgba($color-black, 0.1);
     border-radius: 12px;
@@ -101,8 +96,7 @@ a {
   transform: rotateY(180deg);
 }
 .head {
-  @include position;
-
+  position: absolute;
   background-color: $color-hair;
   border-radius: 50px;
   height: 140px;
@@ -110,9 +104,7 @@ a {
   top: 25px;
   width: 65px;
   &:after, &:before {
-
-    @include position;
-    
+    position: absolute;    
     content: "";
     background-color: $color-black;
     border-radius: 10px;
@@ -177,15 +169,13 @@ a {
   top: 70px;
   width: 140px;
   .circle {
-    @include position;
-
+    position: absolute;
     border-radius: 50%;
     height: 60px;
     width: 60px;
     &:after, &:before {
       content: "";
-      @include position;      
-
+      position: absolute;
       border-radius: 50%;
       height: 20px;      
       width: 20px;
@@ -236,8 +226,7 @@ a {
 }
 
 .arm-right {
-  @include position;
-
+  position: absolute;
   background-color: $color-skin-1;
   border-left: 8px solid rgba($color-black, 0.1);
   border-radius: 50px;
@@ -250,8 +239,7 @@ a {
   z-index: 1;
 
   .club {
-    @include position;
-
+    position: absolute;
 	  border-bottom: 110px solid $color-wood-1;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
@@ -262,8 +250,7 @@ a {
     width: 20px;
 
     &:after, &:before {
-      @include position;
-
+      position: absolute;
       content: "";
       background-color: $color-wood-1;
       border-radius: 50%;
@@ -284,15 +271,13 @@ a {
 }
 
 .leg {
-  @include position;
-
+  position: absolute;
   border-radius: 10px;
   height: 55px;  
   top: 200px;
   width: 10px;
   &:after {
-    @include position;
-
+    position: absolute;
     content: "";
     border-radius: 50%;
     height: 10px;
@@ -302,16 +287,14 @@ a {
   }
 
   .foot {
-    @include position;
-
+    position: absolute;
     border-radius: 25px 25px 0 0;
     height: 25px;
     left: -38px;
     top: 30px;
     width: 50px;
     &:after, &:before, .fingers, .fingers:after {
-      @include position;
-
+      position: absolute;
       background-color: $color-skin-1;
       border-radius: 50%;
       bottom: 0;
