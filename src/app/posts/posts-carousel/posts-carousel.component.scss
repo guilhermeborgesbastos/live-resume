@@ -27,7 +27,7 @@
             border-radius: 15px;
             box-shadow: 0 0 9px 0 rgba(240, 223, 223, 0.16);
             border: 1px solid #c8cad547;
-            transition: all .2s ease-in-out;
+            transition: all 0.2s ease-in-out;
 
             a {
                 text-decoration: none;
@@ -62,7 +62,7 @@
 
                 h2.title {
                     margin-top: 0;
-                    color: #222F5C;
+                    color: #222f5c;
                     font-weight: 600;
                     font-size: 18px;
                     text-align: left;
@@ -71,7 +71,7 @@
                 p.description {
                     font-size: 14px;
                     font-weight: 500;
-                    color: #5E6788;
+                    color: #5e6788;
                     text-align: justify;
                 }
             }

@@ -9,7 +9,7 @@
 .overlay {
     @include display-flex;
 
-    background: rgb(2,0,36);
+    background: rgb(2, 0, 36);
     background: linear-gradient(180deg, rgba(2, 0, 36, 0.6418942577030813) 0%, rgba(0, 0, 0, 0.773546918767507) 65%, rgba(0, 0, 0, 0.8379726890756303) 75%, rgba(0, 0, 0, 0.9724264705882353) 100%);
     width: 100%;
     flex-direction: column;

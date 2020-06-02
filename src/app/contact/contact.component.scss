@@ -76,16 +76,14 @@
     .half-circle {
         width: 550px;
         height: 450px;
-        background-color: #C1D5EE;
+        background-color: #c1d5ee;
         border-top-left-radius: 100%;
         border: 0;
         border-right: 0;
-        border-bottom: 0;
-        
+        border-bottom: 0;        
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-
         position: absolute;
         bottom: -1em;
         right: 0;
@@ -142,12 +140,12 @@
     
                     a {
                         text-decoration: none;
-                        color: #646D8D;
+                        color: #646d8d;
                     }
                     
                     p {
                         margin: 0 0 8px 0;
-                        color: #646D8D;
+                        color: #646d8d;
                         font-weight: 600;
                     }
                     
@@ -194,7 +192,7 @@
                     }
     
                     input {
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                     }
     
                     input[type=text], input[type=email] {
@@ -242,7 +240,7 @@
                         color: #848484;
                         font-weight: 600;
                         margin-bottom: 5px;
-                        font-family: "Montserrat";
+                        font-family: "Montserrat", sans-serif;
                     }
     
                     &.loading {
