@@ -1,17 +1,23 @@
-# The Live Resume
+# The Personal Live Resume/CV using Angular 9
 
 > This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
 
 You as a web developer should say no for the conventional text curriculum! **Why not make your own 'Live Resume' instead of an ordinary CV?!** The video below shows the final result of the website developed to replace my latest curriculum vitae, using Angular 9.
 
-[![Watch the video](https://assets.guilhermeborgesbastos.com/live-resume/github-preview.jpg)](https://youtu.be/oI9QCslM4tU)
+[![Watch the video](https://assets.guilhermeborgesbastos.com/live-resume/github-preview.jpg)](https://guilhermeborgesbastos.com/?source=github)
 
-# Demo example
+# View Demo
 
 This repository was deployed on the address below:
-> https://guilhermeborgesbastos.com/
+> [https://guilhermeborgesbastos.com](https://guilhermeborgesbastos.com/?source=github)
 
 **Check it out!**
+
+# View Demo video
+
+Click in the image below to see the video on YouTube:
+
+[![Watch the video](http://i3.ytimg.com/vi/oI9QCslM4tU/maxresdefault.jpg)](https://youtu.be/oI9QCslM4tU)
 
 # Adobe XD Template
 
@@ -44,3 +50,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help 
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## License
+
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
