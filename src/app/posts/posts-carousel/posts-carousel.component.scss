@@ -22,7 +22,7 @@
         .card {
             flex-grow: 1;
             cursor: pointer;
-            background-color: #ffffff;
+            background-color: #fff;
             flex-direction: row;
             border-radius: 15px;
             box-shadow: 0 0 9px 0 rgba(240, 223, 223, 0.16);
@@ -47,7 +47,7 @@
                     position: absolute;
                     bottom: 0;
                     right: 0;
-                    background-color: #ffffff;
+                    background-color: #fff;
                     padding: 5px 5px 0 5px;
                     border-radius: 10px 0 0 0;
                     font-size: 12px;
@@ -78,7 +78,7 @@
 
             button.read-more {
                 border: 1px solid #ccc;
-                background-color: #ffffff;
+                background-color: #fff;
                 padding: 5px 10px;
                 border-radius: 15px;
                 font-family: "Montserrat", sans-serif;

@@ -19,7 +19,7 @@
 @media screen and (max-width: 1024px) {
 
     header {
-        background: #ffffff;
+        background: #fff;
         border-radius: 0 0 15px 15px;
         -webkit-box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16); 
         box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
@@ -57,7 +57,7 @@
                         }
 
                         &.active {
-                            background-color: #ffffff;
+                            background-color: #fff;
                             color: #222f5c;
                         }
 

@@ -51,7 +51,7 @@ header {
                     transition: 0.3s;
 
                     &:not(.active):hover {
-                        background-color: #ffffff;
+                        background-color: #fff;
                         -webkit-box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16); 
                         box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
                     }
@@ -59,7 +59,7 @@ header {
 
                 .active {
                     background-color: #222f5c;
-                    color: #ffffff;
+                    color: #fff;
                     font-weight: 600;
                 }
             }
@@ -69,7 +69,7 @@ header {
     .child.language-container {
 
         .frame {
-            background-color: #ffffff;
+            background-color: #fff;
             display: inline-block; 
             border-radius: 15px;
             -webkit-box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16); 
@@ -128,7 +128,7 @@ header {
         // visible only for mobile browsers that accept share intent.
         display: none;
         margin-left: 10px;
-        background-color: #ffffff;
+        background-color: #fff;
         padding: 11px;
         border-radius: 15px;
         box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
