@@ -1,5 +1,7 @@
 # The Personal Live Resume/CV using Angular 9
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6f04e1e3103a4af58e5398e23106bb93)](https://www.codacy.com/manual/guilhermeborgesbastos/live-resume?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guilhermeborgesbastos/live-resume&amp;utm_campaign=Badge_Grade)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_shield)
+
 > This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
 
 You as a web developer should say no for the conventional text curriculum! **Why not make your own 'Live Resume' instead of an ordinary CV?!** The video below shows the final result of the website developed to replace my latest curriculum vitae, using Angular 9.
