@@ -6,13 +6,13 @@
 
 <div align="center">
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6f04e1e3103a4af58e5398e23106bb93)](https://www.codacy.com/manual/guilhermeborgesbastos/live-resume?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guilhermeborgesbastos/live-resume&amp;utm_campaign=Badge_Grade) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_shield) [![Gitter](https://badges.gitter.im/live-resume/community.svg)](https://gitter.im/live-resume/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6f04e1e3103a4af58e5398e23106bb93)](https://www.codacy.com/manual/guilhermeborgesbastos/live-resume?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guilhermeborgesbastos/live-resume&amp;utm_campaign=Badge_Grade)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_shield) [![Gitter](https://badges.gitter.im/live-resume/community.svg)](https://gitter.im/live-resume/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 </div>
 
 <h4 align="center">
-  :necktie: :briefcase: Build fast :rocket: and easy the best Personal Web Application resume!
-  <br>:anchor: Stand out of the crowd by showing a professional website/resume.
+:anchor: Stand out of the crowd by showing a professional website/resume.
+  <br>:necktie: :briefcase: Build fast :rocket: and easy the best Personal Web Application resume!
 </h4>
 
 <div align="center">
@@ -22,13 +22,15 @@
 
 </div>
 
-You as a **Web Developer** should say no for the conventional text curriculum! **Why not make your own 'Live Resume' instead of an ordinary CV?!** All the code is fully available on this respository.
+You as a **Web Developer** should say no for the conventional *text curriculum*! **Why not make your own 'Live Resume' instead of an ordinary CV?!** All the code is fully available on this repository.
 
 ## What's included?
 
 * A fully functional _Angular 9_ application with a customizable template and content;
 * Totally responsive for the mobile and desktop devices;
 * Internationalization for English and Portuguese _(easy for adding/removing new languages - in18 lib)_;
+* Mobile navigation sharing _(Share the resume with native apps like Whatsapp, LinkedIn, Facebook, etc...)_;
+* A complete [Wiki](https://github.com/guilhermeborgesbastos/live-resume/wiki) that provides support;
 * Integrated with Google Analytics;
 * Optimized for SEO  _( Crawler and Bots from Google, Bing, etc... )_;
 * Using the schemas for structured data (schema.org);
@@ -36,7 +38,13 @@ You as a **Web Developer** should say no for the conventional text curriculum! *
 * Composed of 5 custom sections ([Welcome](https://guilhermeborgesbastos.com/), [About Me](https://guilhermeborgesbastos.com/about), [Experiences](https://guilhermeborgesbastos.com/experience), [Posts](https://guilhermeborgesbastos.com/posts), and [Contact](https://guilhermeborgesbastos.com/contact));
 * Router fragment friendly (e.g: https://guilhermeborgesbastos.com/posts );
 * Source code verified by static code analyzers (safe and ready for production);
-* Ready for CND usage.
+
+## Wiki Documentation & Community Chat
+
+To get more help on the setup, customization or any other aspect, accessing the folowing:
+
+* [Wiki on GitHub](https://github.com/guilhermeborgesbastos/live-resume/wiki) - A complete documentation, from _getting started_ until _deploy_.
+* [![Gitter](https://badges.gitter.im/live-resume/community.svg)](https://gitter.im/live-resume/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) - A _Community Chat_ for further discussions.
 
 ## Prerequisite
 
@@ -54,7 +62,7 @@ npm -v
 
 4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM.
 
-## How to install and Execute locally
+## Installing and Executing locally
 
 1. Fork this repository, by clicking the `Fork` button at the top-right on this page.
 [![Learn how to fork GitHub projects](/markdown/fork.png)](https://guides.github.com/activities/forking/)
@@ -80,13 +88,28 @@ ng serve --host 0.0.0.0 --configuration=en
 
 > Please, feel free to make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
 
-## Adobe XD Template
+## How to customize?
 
-The Adobe XD template file can be downloaded [here](https://drive.google.com/file/d/1zNLb6hENYFOkfpRuSU-SyOZo5z-2-5WP/view?usp=sharing). With it, you can have full access to the layout resources.
+In the [Wiki Doc.](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations) there is an specific page supporting you on how to apply customizations to the layout and more... [See page](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)
 
-## Further help
+## Contribute
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Feel free to add new features, language supports, fix bugs, or improve the docs. Any kind of help is appreciated! If you make any kind of improvements, please, send them back as a **Pull Request**. Let's keep making it better and up-to-date.
+
+## Credits
+
+This project uses several open source packages:
+
+- [Angular](https://github.com/angular)
+- [Angular CLI](https://cli.angular.io)
+- [Navigator Share](https://www.npmjs.com/package/ng-navigator-share)
+- [Font Awesome](https://fontawesome.com)
+
+---
+
+> Site [www.guilhermeborgesbastos.com](https://www.guilhermeborgesbastos.com)<br>
+> LinkedIn [profile](https://github.com/guilhermeborgesbastos)<br>
+> Facebook [profile](https://www.facebook.com/guilherme.borgesbastos)
 
 ## License
 
