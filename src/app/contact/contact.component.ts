@@ -79,7 +79,6 @@ export class ContactComponent implements OnInit {
     })
     .catch(error => {
       this.displayUserInterfaceMessage(false);
-      console.log(error);
     });
   }
   
