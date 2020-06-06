@@ -1,5 +1,31 @@
 footer {
-    background-color: #3A5F8E;
+    background-color: #3a5f8e;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fork-github {
+    text-align: left;
+    font-weight: 500;
+    flex-grow: 1;
+}
+
+.fork-github a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.fork-github span {
+    margin-left: 0.5em;
+}
+
+.fork-github a:hover {
+    text-decoration: underline;
+}
+
+.icon {
+    font-size: 18px;
+    color: #fff;
 }
 
 .copyright {
