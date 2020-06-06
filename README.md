@@ -69,7 +69,7 @@ npm -v
 
 2. Clone the forked repository from your GitHub account.
 ```
-https://github.com/[replace-with-your-github-username]/live-resume.git
+git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 ```
 
 3. Go to the cloned directory (e.g. `cd live-resume`).
