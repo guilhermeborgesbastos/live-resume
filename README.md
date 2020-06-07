@@ -116,3 +116,5 @@ This project uses several open source packages:
 ## License
 
 The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+[![Analytics](https://ga-beacon.appspot.com/UA-165889560-1/github-home-page)](https://github.com/guilhermeborgesbastos/live-resume)
