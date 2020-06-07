@@ -13,10 +13,6 @@
             left: -40px;
             font-size: 15px;
         }
-        &.active.current .popupSpan {
-            top: -45px;
-            left: -40px;
-        }
         &.current {
             width: 12px;
             height: 12px;
@@ -25,6 +21,10 @@
             .popupSpan {
                 font-size: 18px;
             }
+        }
+        &.active.current .popupSpan {
+            top: -45px;
+            left: -40px;
         }
     }
 }

@@ -11,7 +11,7 @@
         border-radius: 15px;
         z-index: 3;
         top: 50%;
-        box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
+        box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
         margin: 0 1em;
 
         .icon {
@@ -76,211 +76,209 @@
     .half-circle {
         width: 550px;
         height: 450px;
-        background-color: #C1D5EE;
+        background-color: #c1d5ee;
         border-top-left-radius: 100%;
         border: 0;
         border-right: 0;
-        border-bottom: 0;
-        
+        border-bottom: 0;        
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
-
         position: absolute;
         bottom: -1em;
         right: 0;
         z-index: 0;
     }
-}
 
-.container {
-    display: flex;
-    flex-direction: row;
-    width: 85vw;
-    max-width: 1400px;
-    opacity: 1;
-    
-    .left-side {
-        flex-grow: 4;
-        z-index: 2;
-        margin-bottom: 1em;
+    .container {
+        display: flex;
+        flex-direction: row;
+        width: 85vw;
+        max-width: 1400px;
+        opacity: 1;
         
-        .title {
+        .left-side {
+            flex-grow: 4;
+            z-index: 2;
+            margin-bottom: 1em;
             
-            h1 {
-                font-size: 42px;
-                font-weight: 600;
-                color: #222F5C;
-            }
-        }
-        
-        .top-container {
-            display: flex;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
-            padding: 1em;
-
-            .picture {
-                display: block;
-                width: 110px;
-                height: 110px;
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center center;
-                border-radius: 99em;
-                background-image: url('https://assets.guilhermeborgesbastos.com/live-resume/template/about/guilherme-borges-bastos-picture.jpg');
-                border: 1px solid #d4e7fe;
-                margin-right: 1em;
-            }
-
-            .info {
-
-                .icon {
-                    margin-right: 10px;
-                    color: #222F5C;
-                }
-
-                a {
-                    text-decoration: none;
-                    color: #646D8D;
-                }
+            .title {
                 
-                p {
-                    margin: 0 0 8px 0;
-                    color: #646D8D;
+                h1 {
+                    font-size: 42px;
                     font-weight: 600;
-                }
-                
-                .name {
-                    font-size: 18px;
-                    font-weight: bold;
-                    color: #222F5C;
-                    margin-bottom: 10px;
+                    color: #222f5c;
                 }
             }
-        }
-
-        .bottom-container {
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0px 0px 9px 0px rgba(112, 112, 112, 0.16);
-            padding: 1em;
-            margin-top: 1em;
             
-            form {
+            .top-container {
                 display: flex;
-                flex-direction: column;
-
-                .form-group {
+                background-color: #fff;
+                border-radius: 15px;
+                box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
+                padding: 1em;
+    
+                .picture {
+                    display: block;
+                    width: 110px;
+                    height: 110px;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    border-radius: 99em;
+                    background-image: url('../../assets/template/about/guilherme-borges-bastos-picture.jpg');
+                    border: 1px solid #d4e7fe;
+                    margin-right: 1em;
+                }
+    
+                .info {
+    
+                    .icon {
+                        margin-right: 10px;
+                        color: #222f5c;
+                    }
+    
+                    a {
+                        text-decoration: none;
+                        color: #646d8d;
+                    }
+                    
+                    p {
+                        margin: 0 0 8px 0;
+                        color: #646d8d;
+                        font-weight: 600;
+                    }
+                    
+                    .name {
+                        font-size: 18px;
+                        font-weight: bold;
+                        color: #222f5c;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+    
+            .bottom-container {
+                background-color: #fff;
+                border-radius: 15px;
+                box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
+                padding: 1em;
+                margin-top: 1em;
+                
+                form {
                     display: flex;
-                    margin-bottom: 1em;
                     flex-direction: column;
-
-                    .warnings {
-
-                        small {
-                            margin-left: 10px;
-                            color: red;
+    
+                    .form-group {
+                        display: flex;
+                        margin-bottom: 1em;
+                        flex-direction: column;
+    
+                        .warnings {
+    
+                            small {
+                                margin-left: 10px;
+                                color: red;
+                            }
+                        }
+                    }
+    
+                    label {
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #222f5c;
+                        margin-bottom: 5px;
+                        margin-left: 10px;
+                    }
+    
+                    input {
+                        font-family: "Montserrat", sans-serif;
+                    }
+    
+                    input[type=text], input[type=email] {
+                        font-size: 16px;
+                        padding: 10px 0 10px 15px;
+                        border: 0;
+                        border-radius: 15px;
+                        background-color: #f6f6f6;
+                        color: #848484;
+                        font-weight: 600;
+                        margin-bottom: 5px;
+    
+                        &.is-invalid {
+                            border: 2px solid red;
+                        }
+                    }
+    
+                    input[type=submit] {
+                        background-color: #70c576;
+                        font-size: 22px;
+                        color: #fff;
+                        padding: 1em;
+                        border: 0;
+                        border-radius: 15px;
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        cursor: pointer;
+    
+                        &.is-invalid {
+                            border: 2px solid red;
+                        }
+    
+                        &:hover {
+                            color: #2c612f;
+                            background-color: #68bd6e;
+                        }
+                    }
+    
+                    textarea {
+                        font-size: 16px;
+                        padding: 10px 0 10px 15px;
+                        border: 0;
+                        border-radius: 15px;
+                        background-color: #f6f6f6;
+                        color: #848484;
+                        font-weight: 600;
+                        margin-bottom: 5px;
+                        font-family: "Montserrat", sans-serif;
+                    }
+    
+                    &.loading {
+                        pointer-events: none;
+                        opacity: 0.6;
+                    }
+    
+                    &.ng-invalid {
+                        
+                        input[type=submit] {
+                            pointer-events: none;
+                            opacity: 0.6;
+                            cursor: pointer;
                         }
                     }
                 }
-
-                label {
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: #222f5c;
-                    margin-bottom: 5px;
-                    margin-left: 10px;
-                }
-
-                input {
-                    font-family: "Montserrat";
-                }
-
-                input[type=text], input[type=email] {
-                    font-size: 16px;
-                    padding: 10px 0 10px 15px;
-                    border: 0;
-                    border-radius: 15px;
-                    background-color: #f6f6f6;
-                    color: #848484;
-                    font-weight: 600;
-                    margin-bottom: 5px;
-
-                    &.is-invalid {
-                        border: 2px solid red;
-                    }
-                }
-
-                input[type=submit] {
-                    background-color: #70C576;
-                    font-size: 22px;
-                    color: #fff;
-                    padding: 1em;
-                    border: 0;
-                    border-radius: 15px;
-                    text-transform: uppercase;
-                    font-weight: 600;
-                    cursor: pointer;
-
-                    &.is-invalid {
-                        border: 2px solid red;
-                    }
-
-                    &:hover {
-                        color: #2c612f;
-                        background-color: #68bd6e;
-                    }
-                }
-
-                textarea {
-                    font-size: 16px;
-                    padding: 10px 0 10px 15px;
-                    border: 0;
-                    border-radius: 15px;
-                    background-color: #f6f6f6;
-                    color: #848484;
-                    font-weight: 600;
-                    margin-bottom: 5px;
-                    font-family: "Montserrat";
-                }
-
-                &.loading {
-                    pointer-events: none;
-                    opacity: .6;
-                }
-
-                &.ng-invalid {
-                    
-                    input[type=submit] {
-                        pointer-events: none;
-                        opacity: .6;
-                        cursor: pointer;
-                    }
-                }
             }
         }
-    }
-
-    .right-side {
-        flex-grow: 6;
-    }
-
-    &.fade {
-        pointer-events: none;
-        -webkit-animation: fadeOut 1s;
-        animation: fadeOut 1s;
-        animation-fill-mode: forwards;
+    
+        .right-side {
+            flex-grow: 6;
+        }
+    
+        &.fade {
+            pointer-events: none;
+            -webkit-animation: fadeOut 1s;
+            animation: fadeOut 1s;
+            animation-fill-mode: forwards;
+        }
     }
 }
 
 @keyframes fadeIn {
     from { opacity: 0; }
-      to { opacity: 1; }
+    to { opacity: 1; }
 }
 
 @keyframes fadeOut {
     from { opacity: 1; }
-      to { opacity: .3; }
+    to { opacity: 0.3; }
 }

@@ -73,13 +73,12 @@ export class ContactComponent implements OnInit {
     this.faTimes = faTimes;
   }
 
-  saveContact(contact: Contact){
+  saveContact(contact: Contact) {
     this.contactService.createContact(contact).then(() => {
       this.displayUserInterfaceMessage(true);
     })
     .catch(error => {
       this.displayUserInterfaceMessage(false);
-      console.log(error);
     });
   }
   

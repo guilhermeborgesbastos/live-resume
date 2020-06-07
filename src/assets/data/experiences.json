@@ -32,7 +32,7 @@
                 "http": "https://www.facebook.com/editoranossotransito/"
             }
         ],
-        "backgroundUrl": "https://assets.guilhermeborgesbastos.com/live-resume/template/experience/uberaba.jpg"
+        "backgroundUrl": "../../assets/template/experience/uberaba.jpg"
     },
     {
         "id": 2,
@@ -77,7 +77,7 @@
                 "http": "https://www.instagram.com/somos_etatica/"
             }
         ],
-        "backgroundUrl": "https://assets.guilhermeborgesbastos.com/live-resume/template/experience/rio.jpg"
+        "backgroundUrl": "../../assets/template/experience/rio.jpg"
     },
     {
         "id": 3,
@@ -112,7 +112,7 @@
                 "http": "https://www.linkedin.com/company/deevo/about/"
             }
         ],
-        "backgroundUrl": "https://assets.guilhermeborgesbastos.com/live-resume/template/experience/sao-paulo.jpg"
+        "backgroundUrl": "../../assets/template/experience/sao-paulo.jpg"
     },
     {
         "id": 4,
@@ -151,7 +151,7 @@
                 "http": "https://www.facebook.com/skydreamer.io/"
             }
         ],
-        "backgroundUrl": "https://assets.guilhermeborgesbastos.com/live-resume/template/experience/utrecht.jpg"
+        "backgroundUrl": "../../assets/template/experience/utrecht.jpg"
     },
     {
         "id": 5,
@@ -196,7 +196,7 @@
                 "http": "https://www.youtube.com/c/QatGlobal-USA"
             }
         ],
-        "backgroundUrl": "https://assets.guilhermeborgesbastos.com/live-resume/template/experience/uberaba.jpg"
+        "backgroundUrl": "../../assets/template/experience/uberaba.jpg"
     },
     {
         "id": 6,
@@ -240,6 +240,6 @@
                 "http": "https://www.youtube.com/swisscom"
             }
         ],
-        "backgroundUrl": "https://assets.guilhermeborgesbastos.com/live-resume/template/experience/rotterdam.jpg"
+        "backgroundUrl": "../../assets/template/experience/rotterdam.jpg"
     }
 ]

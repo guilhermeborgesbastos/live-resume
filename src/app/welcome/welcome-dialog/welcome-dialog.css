@@ -28,10 +28,10 @@
 .dialog-container .console .hello {
 	font-size: 60px;
     font-weight: 600;
-    color: #222F5C;
+    color: #222f5c;
 }
 
-.dialog-container .console span.txt-rotate {
+.dialog-container .console .txt-rotate {
 	font-size: 40px;
     color: #576183;
 	font-weight: 600;

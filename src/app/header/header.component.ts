@@ -103,7 +103,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         text: `Hello, I'm a Full-stack Java Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!`,
         url: 'https://guilhermeborgesbastos.com'
       });
-      console.log(sharedResponse);
     } catch(error) {
       console.log('You app is not shared, reason: ',error);
     }    

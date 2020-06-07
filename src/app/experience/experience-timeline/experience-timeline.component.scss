@@ -20,7 +20,7 @@
   .line {
     height: 3px;
     width: 100%;
-    background:rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 5px;
     margin: auto;
     top: 50%;
@@ -45,12 +45,10 @@
     height: auto;
     padding: 10px;
     white-space: nowrap;
-    display: inline-block;
     color: white;
     position: absolute;
     top: 20px;
     left: -35px;
-    display: none;
     transition: all 0.1s ease-out;
     pointer-events: none; /* Only the Circles in the timeline are listened by events. */
 
@@ -59,7 +57,7 @@
       text-transform: capitalize;
     }
   }
-  &.current{
+  &.current {
     width: 15px;
     height: 15px;
     background: #414c73;
@@ -72,8 +70,8 @@
     display: block;
   }
   &.active.future {
-    width: 0px;
-    height: 0px;
+    width: 1px;
+    height: 1px;
     border-top: 7px solid transparent;
     border-bottom: 8px solid transparent;
     border-left: 13px solid white;
@@ -89,27 +87,27 @@
 }
 
 @keyframes grow {
-   0% {
-    -webkit-transform: scale( 0.98 );
-    -moz-transform: scale( 0.98 );
-    -o-transform: scale( 0.98 );
-    -ms-transform: scale( 0.98 );
-    transform: scale( 0.98 );    
-   }
+  0% {
+    -webkit-transform: scale(0.98);
+    -moz-transform: scale(0.98);
+    -o-transform: scale(0.98);
+    -ms-transform: scale(0.98);
+    transform: scale(0.98);    
+  }
    
-   50% {
-   -webkit-transform: scale( 0.99 );
-   -moz-transform: scale( 0.99 );
-   -o-transform: scale( 0.99 );
-   -ms-transform: scale( 0.99 );
-   transform: scale( 0.99 );
-   }
+  50% {
+   -webkit-transform: scale(0.99);
+   -moz-transform: scale(0.99);
+   -o-transform: scale(0.99);
+   -ms-transform: scale(0.99);
+   transform: scale(0.99);
+  }
    
-   100% {
-     -webkit-transform: scale( 0.98 );
-     -moz-transform: scale( 0.98 );
-     -o-transform: scale( 0.98 );
-     -ms-transform: scale( 0.98 );
-     transform: scale( 0.98 );
-   }
- }
+  100% {
+     -webkit-transform: scale(0.98);
+     -moz-transform: scale(0.98);
+     -o-transform: scale(0.98);
+     -ms-transform: scale(0.98);
+     transform: scale(0.98);
+  }
+}
