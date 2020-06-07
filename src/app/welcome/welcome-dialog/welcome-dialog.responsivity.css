@@ -14,7 +14,7 @@
         font-size: 40px;
     }
 
-    .dialog-container .console span.txt-rotate {
+    .dialog-container .console .txt-rotate {
         font-size: 25px;
     }
 
@@ -37,7 +37,7 @@
         font-size: 30px;
     }
 
-    .dialog-container .console span.txt-rotate {
+    .dialog-container .console .txt-rotate {
         font-size: 22px;
     }
 }
@@ -63,7 +63,7 @@
         font-size: 30px;
     }
 
-    .dialog-container .console span.txt-rotate {
+    .dialog-container .console .txt-rotate {
         font-size: 22px;
     }
 }
@@ -90,7 +90,7 @@
         font-size: 22px;
     }
 
-    .dialog-container .console span.txt-rotate {
+    .dialog-container .console .txt-rotate {
         font-size: 16px;
     }
 }
@@ -117,7 +117,7 @@
         font-size: 14px;
     }
 
-    .dialog-container .console span.txt-rotate {
+    .dialog-container .console .txt-rotate {
         font-size: 11px;
         line-height: 15px;
         display: inline-block;
@@ -147,7 +147,7 @@
         font-size: 14px;
     }
 
-    .dialog-container .console span.txt-rotate {
+    .dialog-container .console .txt-rotate {
         font-size: 12px;
         line-height: 15px;
         display: inline-block;

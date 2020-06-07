@@ -1,6 +1,6 @@
 @media screen and (max-width: 1400px) {
 
-    .container {
+    #contact .container {
         
         .left-side {
             flex-grow: 1;
@@ -23,23 +23,24 @@
         .half-circle {
             display: none;
         }
+
+        .container {
+            
+            .left-side {
+                flex-grow: 1;
+            }
+    
+            .right-side {
+                flex-grow: 0;
+            }
+        }
     }
 
-    .container {
-        
-        .left-side {
-            flex-grow: 1;
-        }
-
-        .right-side {
-            flex-grow: 0;
-        }
-    }
 }
 
 @media screen and (max-width: 600px) {
 
-    .container {
+    #contact .container {
         
         .left-side {
             
@@ -49,11 +50,11 @@
             
             .top-container {
                 flex-wrap: wrap;
-                padding: .7em;
+                padding: 0.7em;
                 justify-content: center;
     
                 .picture {
-                    display: none
+                    display: none;
                 }
     
                 .info {
@@ -70,12 +71,12 @@
             }
     
             .bottom-container {
-                padding: .7em;
+                padding: 0.7em;
 
                 form {
     
                     .form-group {
-                        margin-bottom: .7em;
+                        margin-bottom: 0.7em;
                     }
     
                     label {
@@ -105,16 +106,17 @@
             }
         }
     }
+
 }
 
 @media screen and (max-width: 420px) {
 
-    .container {
+    #contact .container {
         
         .left-side {
             
             .top-container {
-                padding: .5em;
+                padding: 0.5em;
     
                 .info {
                     
@@ -129,12 +131,12 @@
             }
     
             .bottom-container {
-                padding: .5em;
+                padding: 0.5em;
     
                 form {
     
                     .form-group {
-                        margin-bottom: .5em;
+                        margin-bottom: 0.5em;
                     }
     
                     label {
@@ -160,7 +162,7 @@
 
 @media screen and (max-width: 370px) {
 
-    .container {
+    #contact .container {
         
         .left-side {
             
@@ -173,13 +175,13 @@
                     }
                     
                     .name {
-                        font-size: 14x;
+                        font-size: 14px;
                     }
                 }
             }
     
             .bottom-container {
-                padding: .5em;
+                padding: 0.5em;
     
                 form {
                     label {
@@ -201,4 +203,5 @@
             }
         }
     }
+
 }

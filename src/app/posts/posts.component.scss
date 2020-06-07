@@ -14,13 +14,13 @@
     h1 {
         font-size: 42px;
         font-weight: 600;
-        color: #222F5C;
+        color: #222f5c;
     }
 
     p.synopsis {
         font-size: 18px;
         font-weight: 500;
-        color: #5E6788;
+        color: #5e6788;
         text-align: left;
         margin-top: 0;
     }
@@ -56,7 +56,7 @@
                 
                 &.disabled {
                     cursor: no-drop;
-                    opacity: .6;
+                    opacity: 0.6;
                     pointer-events: none;
                 }
             }
@@ -72,7 +72,7 @@
                 
                 &.disabled {
                     cursor: no-drop;
-                    opacity: .6;
+                    opacity: 0.6;
                     pointer-events: none;
                 }
                 &:hover {

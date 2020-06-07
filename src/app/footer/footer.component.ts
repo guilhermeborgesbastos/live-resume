@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faGithubSquare, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-footer',
@@ -7,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  faGithubSquare: IconDefinition;
+
   year: Date;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.faGithubSquare = faGithubSquare;
     this.year = new Date();
   }
 

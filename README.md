@@ -1,46 +1,120 @@
-# The Live Resume
+<h1 align="center">
+  <br>
+  The Ultimate Personal Web Resume
+  <br>
+</h1>
 
-> This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
+<div align="center">
 
-You as a web developer should say no for the conventional text curriculum! **Why not make your own 'Live Resume' instead of an ordinary CV?!** The video below shows the final result of the website developed to replace my latest curriculum vitae, using Angular 9.
+[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://GitHub.com/guilhermeborgesbastos/live-resume/stargazers/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6f04e1e3103a4af58e5398e23106bb93)](https://www.codacy.com/manual/guilhermeborgesbastos/live-resume?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guilhermeborgesbastos/live-resume&amp;utm_campaign=Badge_Grade)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_shield) [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/guilhermeborgesbastos/live-resume/wiki) [![GitHub tag](https://img.shields.io/github/tag/guilhermeborgesbastos/live-resume.svg)](https://github.com/guilhermeborgesbastos/live-resume/tags/)
 
-[![Watch the video](http://i3.ytimg.com/vi/oI9QCslM4tU/maxresdefault.jpg)](https://youtu.be/oI9QCslM4tU)
+ [![Gitter](https://badges.gitter.im/live-resume/community.svg)](https://gitter.im/live-resume/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://opensource.org/licenses/MIT) [![GitHub forks](https://img.shields.io/github/forks/guilhermeborgesbastos/live-resume.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/guilhermeborgesbastos/live-resume/network/) [![GitHub stars](https://img.shields.io/github/stars/guilhermeborgesbastos/live-resume.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/guilhermeborgesbastos/live-resume/stargazers/)
 
-# Demo example
+</div>
 
-This repository was deployed on the address below:
-> https://guilhermeborgesbastos.com/
+<h4 align="center">
+:anchor: Stand out of the crowd by showing a professional website/resume.
+  <br>:necktie: :briefcase: Build fast :rocket: and easy the best Personal Web Application resume!
+</h4>
 
-**Check it out!**
+<div align="center">
+<br>
 
-# Adobe XD Template
+[![Watch the video](/markdown/LiveResumePreview.gif)](https://guilhermeborgesbastos.com/?source=github)
 
-The Adobe XD template file can be downloaded [here](https://drive.google.com/file/d/1zNLb6hENYFOkfpRuSU-SyOZo5z-2-5WP/view?usp=sharing).
+</div>
 
+You as a **Web Developer** should say no for the conventional *text curriculum*! **Why not make your own 'Live Resume' instead of an ordinary CV?!** All the code is fully available on this repository.
+
+## What's included?
+
+* A fully functional _Angular 9_ application with a customizable template and content;
+* Totally responsive for the mobile and desktop devices;
+* Internationalization for English and Portuguese _(easy for adding/removing new languages - in18 lib)_;
+* Mobile navigation sharing _(Share the resume with native apps like Whatsapp, LinkedIn, Facebook, etc...)_;
+* A complete [Wiki](https://github.com/guilhermeborgesbastos/live-resume/wiki) that provides support;
+* Integrated with Google Analytics;
+* Optimized for SEO  _( Crawler and Bots from Google, Bing, etc... )_;
+* Using the schemas for structured data (schema.org);
+* Firebase integration in the contact form;
+* Composed of 5 custom sections ([Welcome](https://guilhermeborgesbastos.com/), [About Me](https://guilhermeborgesbastos.com/about), [Experiences](https://guilhermeborgesbastos.com/experience), [Posts](https://guilhermeborgesbastos.com/posts), and [Contact](https://guilhermeborgesbastos.com/contact));
+* Router fragment friendly (e.g: https://guilhermeborgesbastos.com/posts );
+* Source code verified by static code analyzers (safe and ready for production);
+
+## Wiki Documentation & Community Chat
+
+To get more help on the setup, customization or any other aspect, accessing the folowing:
+
+* [Wiki on GitHub](https://github.com/guilhermeborgesbastos/live-resume/wiki) - A complete documentation, from _getting started_ until _deploy_.
+* [![Gitter](https://badges.gitter.im/live-resume/community.svg)](https://gitter.im/live-resume/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) - A _Community Chat_ for further discussions.
+
+## Prerequisite
+
+1. It is required to have Node.js with version _12.18.0_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
 ```
-Please, feel free to FORK the repository, make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
+node -v
 ```
 
-## Development server
+2. If you haven't installed Node.js in your machine then go to [this link](https://nodejs.org/en/download/) in order to install node.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+3. It is required to have NPM with version _6.14.0_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
+```
+npm -v
+```
 
-## Code scaffolding
+4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Installing and Executing locally
 
-## Build
+1. Fork this repository, by clicking the `Fork` button at the top-right on this page.
+[![Learn how to fork GitHub projects](/markdown/fork.png?cache=off)](https://guides.github.com/activities/forking/)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2. Clone the forked repository from your GitHub account.
+```
+git clone https://github.com/[replace-with-your-github-username]/live-resume.git
+```
 
-## Running unit tests
+3. Go to the cloned directory (e.g. `cd live-resume`).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+4. Run `npm install`.
 
-## Running end-to-end tests
+5. Inner the folder of the cloned project, start the application:
+```
+ng serve --host 0.0.0.0 --configuration=en
+```
+**Note:** the optional parameters:
+* ` --host 0.0.0.0` useful if you want to see how your application runs on a mobile or from some other laptop/computer/network. 
+* ` --configuration=en` in this example the application will be displayed in **en-US**, by replacing the `en`with `pt` => `--configuration=pt`, the application language would be **pt-BR**. 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+6. After that, the command will start a server instance and listen on port `4200`. Open (http://localhost:4200/) in your browser. The **Live Resume** will be displayed.
 
-## Further help 
+> Please, feel free to make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## How to customize?
+
+In the [Wiki Doc.](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations) there is an specific page supporting you on how to apply customizations to the layout and more... [See page](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)
+
+## Contribute
+
+Feel free to add new features, language supports, fix bugs, or improve the docs. Any kind of help is appreciated! If you make any kind of improvements, please, send them back as a **Pull Request**. Let's keep making it better and up-to-date.
+
+## Credits
+
+This project uses several open source packages:
+
+- [Angular](https://github.com/angular)
+- [Angular CLI](https://cli.angular.io)
+- [Navigator Share](https://www.npmjs.com/package/ng-navigator-share)
+- [Font Awesome](https://fontawesome.com)
+
+---
+
+> Site [www.guilhermeborgesbastos.com](https://www.guilhermeborgesbastos.com)<br>
+> LinkedIn [profile](https://github.com/guilhermeborgesbastos)<br>
+> Facebook [profile](https://www.facebook.com/guilherme.borgesbastos)
+
+## License
+
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+[![Analytics](https://ga-beacon.appspot.com/UA-168686195-1/live-resume/home-page?pixel)](https://github.com/igrigorik/ga-beacon)

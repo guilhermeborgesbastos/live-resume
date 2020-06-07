@@ -31,7 +31,7 @@ export class InternationalizationDirective implements OnInit{
 
     private retrievePropertyValueByLocation(): any {
         
-        if(this._data)  {
+        if(this._data) {
 
             const value: string[] = this._data
                 .filter(element => element.language === (this.locale || 'en'))
