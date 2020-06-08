@@ -50,6 +50,8 @@ To get more help on the setup, customization or any other aspect, accessing the 
 
 ## Prerequisite
 
+> A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q).
+
 1. It is required to have Node.js with version _12.18.0_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
 ```
 node -v
@@ -65,6 +67,8 @@ npm -v
 4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM.
 
 ## Installing and Executing locally
+
+> A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q).
 
 1. Fork this repository, by clicking the `Fork` button at the top-right on this page.
 [![Learn how to fork GitHub projects](/markdown/fork.png?cache=off)](https://guides.github.com/activities/forking/)
