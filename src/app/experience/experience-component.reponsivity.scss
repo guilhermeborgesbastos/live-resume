@@ -28,7 +28,7 @@
             }
 
             .role, .period, .location {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .description {
@@ -44,9 +44,6 @@
             font-size: 40px;
         }
     }
-}
-
-@media screen and (max-width: 1024px) {
 
     .landscape {
         background-attachment: scroll;
@@ -73,7 +70,7 @@
     }    
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 720px) {
        
     .overlay {
         padding-bottom: 1em;
@@ -147,6 +144,14 @@
         
         .events-content {
 
+            .company-name {
+                font-size: 28px;
+            }
+
+            .header-block .logo-block {
+                justify-content: center;
+            }
+
             .company-name, .role, .period, .location {
                 text-align: center;
             }
@@ -186,6 +191,10 @@
     .middle-container {
 
         .events-content {
+
+            .header-block .logo-block img {
+                height: 70px;
+            }
 
             .description {
                 font-size: 14px;
