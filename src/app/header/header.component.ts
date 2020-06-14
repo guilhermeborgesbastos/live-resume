@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID, AfterViewInit } from '@angular/core';
-import { faBars, faShareAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 
 @Component({
@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   hasMenuToggled: boolean;
   faBars: IconDefinition;
   faShareAlt: IconDefinition;
+  faCloudDownloadAlt: IconDefinition;
 
   @ViewChild('nav') nav: ElementRef;
   @ViewChild('shareBtn') shareBtn: ElementRef;
@@ -60,6 +61,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.faBars = faBars;
     this.faShareAlt = faShareAlt;
+    this.faCloudDownloadAlt = faCloudDownloadAlt;
   }
 
   private updateNavigation() {
