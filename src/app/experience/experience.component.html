@@ -39,17 +39,24 @@
                 <div class="events-content">
                     <ol #orderedList>
                         <li *ngFor="let exp of experiencesOrdered; let i = index" [ngClass]="{'selected': i == 0}" data-id="{{ exp.id }}">
-                            <div class="company-name"><a href="{{ exp.website }}" target="_blank">{{ exp.companyName }}</a></div>
-                            <div class="role"  internationalization [data]="exp.internationalizations" property='role'>Loading...</div>
-                            <div class="period">
-                                <span>{{ exp.startAt | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
-                                <span class="devider">-</span>
-                                <span>{{ (exp.endAt | safariDateFormatter | localizedDate:'MMM yyyy') }}</span>
-                            </div>
-                            <div class="location">
-                                <span class="city" internationalization [data]="exp.internationalizations" property='city'>Loading...</span>
-                                <span class="devider">,&nbsp;</span>
-                                <span class="country" internationalization [data]="exp.internationalizations" property='country'>Loading...</span>
+                            <div class="header-block">
+                                <div class="logo-block">
+                                    <a href="{{ exp.website }}" target="_blank"><img src="{{ exp.logo }}" alt="{{ exp.companyName }}"></a>
+                                </div>
+                                <div class="info-block">
+                                    <div class="company-name"><a href="{{ exp.website }}" target="_blank">{{ exp.companyName }}</a></div>
+                                    <div class="role"  internationalization [data]="exp.internationalizations" property='role'>Loading...</div>
+                                    <div class="period">
+                                        <span>{{ exp.startAt | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
+                                        <span class="devider">-</span>
+                                        <span>{{ (exp.endAt | safariDateFormatter | localizedDate:'MMM yyyy') }}</span>
+                                    </div>
+                                    <div class="location">
+                                        <span class="city" internationalization [data]="exp.internationalizations" property='city'>Loading...</span>
+                                        <span class="devider">,&nbsp;</span>
+                                        <span class="country" internationalization [data]="exp.internationalizations" property='country'>Loading...</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="description" internationalization [data]="exp.internationalizations" property='description'>Loading...</div>
                             <div class="technologies">

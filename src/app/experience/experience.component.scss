@@ -10,7 +10,7 @@
     @include display-flex;
 
     background: rgb(2, 0, 36);
-    background: linear-gradient(180deg, rgba(2, 0, 36, 0.6418942577030813) 0%, rgba(0, 0, 0, 0.773546918767507) 65%, rgba(0, 0, 0, 0.8379726890756303) 75%, rgba(0, 0, 0, 0.9724264705882353) 100%);
+    background: linear-gradient(180deg, rgba(2, 0, 36, 0.6418942577030813) 0%, rgba(0, 0, 0, 0.773546918767507) 25%, rgba(0, 0, 0, 0.9079726890756303) 75%, rgba(0, 0, 0, 0.9924264705882353) 100%);
     width: 100%;
     flex-direction: column;
     justify-content: flex-start;
@@ -78,7 +78,7 @@
         @include display-flex;
 
         flex-grow: 1;
-        font-size: 32px;
+        font-size: 30px;
         font-weight: 500;
         align-items: center;
         text-align: center;
@@ -153,7 +153,27 @@
         -webkit-transition: height 0.4s;
         -moz-transition: height 0.4s;
         transition: height 0.4s;
-        min-height: 520px;
+        min-height: 570px;
+
+        .header-block {
+            display: flex;
+            flex-wrap: wrap;
+
+            .logo-block {
+                flex-grow: 1;
+                display: flex;
+                align-items: center;
+                justify-content: left;
+
+                img {
+                    height: 90px;
+                }
+            }
+
+            .info-block {
+                flex-grow: 1;
+            }
+        }
 
         .company-name {
             font-size: 35px;
@@ -175,7 +195,7 @@
         }
 
         .period {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 400;
 
             span {
@@ -185,15 +205,16 @@
         }
 
         .location {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 400;
         }
 
         .description {
             margin-top: 1em;
+            line-height: 1.5em;
             font-size: 20px;
             font-weight: normal;
-            text-align: justify;
+            text-align: left;
         }
 
         ol {

@@ -4,8 +4,9 @@
         "position": 1,
         "startAt": "02-02-2009",
         "endAt": "12-24-2010",
-        "companyName": "Fácil Tecnologias LTDA",
+        "companyName": "Fácil Tecnologias",
         "website": "http://www.faciltecnologias.com.br/",
+        "logo": "../../assets/template/experience/logo/facil-logo.png",
         "internationalizations": [
             {
                 "language": "pt",
@@ -41,6 +42,7 @@
         "endAt": "06-16-2014",
         "companyName": "E-tática",
         "website": "https://www.e-tatica.com/",
+        "logo": "../../assets/template/experience/logo/etatica-logo.png",
         "internationalizations": [
             {
                 "language": "pt",
@@ -86,6 +88,7 @@
         "endAt": "12-23-2016",
         "companyName": "Deevo Studio",
         "website": "http://deevo.com.br/",
+        "logo": "../../assets/template/experience/logo/deevo-logo.png",
         "internationalizations": [
             {
                 "language": "pt",
@@ -119,14 +122,15 @@
         "position": 4,
         "startAt": "01-02-2017",
         "endAt": "11-30-2017",
-        "companyName": "Skydreamer Startup",
+        "companyName": "Skydreamer",
+        "logo": "../../assets/template/experience/logo/skydreamer-logo.png",
         "internationalizations": [
             {
                 "language": "pt",
                 "city": "Utrecht",
                 "country": "Países Baixos",
                 "role": "Desenvolvedor Full-stack",
-                "description": "Na <b>Skydreamer</b>, fui convidado para fazer parte da equipe de desenvolvimento do primeiro aplicativo móvel europeu que transformaria o planejamento de viagens entre amigos em um <i>Jogo de Swipe & Match</i>, oferecendo milhares de destinos em todo o mundo. Sempre com as melhores ofertas de voos, hotéis e apartamentos.<br><br>Na <i>Skydreamer</i>, tive a incrível experiência de vivenciar um <i> ambiente de startup</i>, os prós e os contras , expandindo minha mente de como liderar com o gerenciamento remoto, com prazos curtos e recursos muito limitados. Em setembro de 2017, com a versão <i>Beta</i> em execução e com vários usuários reais, fomos até a <i>TechCrunch Disrupt<i> em São Francisco, onde recebemos uma oferta de uma agência internacional de esportes e entretenimento."
+                "description": "Na <b>Skydreamer Startup</b>, fui convidado para fazer parte da equipe de desenvolvimento do primeiro aplicativo móvel europeu que transformaria o planejamento de viagens entre amigos em um <i>Jogo de Swipe & Match</i>, oferecendo milhares de destinos em todo o mundo. Sempre com as melhores ofertas de voos, hotéis e apartamentos.<br><br>Na <i>Skydreamer</i>, tive a incrível experiência de vivenciar um <i> ambiente de startup</i>, os prós e os contras , expandindo minha mente de como liderar com o gerenciamento remoto, com prazos curtos e recursos muito limitados. Em setembro de 2017, com a versão <i>Beta</i> em execução e com vários usuários reais, fomos até a <i>TechCrunch Disrupt<i> em São Francisco, onde recebemos uma oferta de uma agência internacional de esportes e entretenimento."
             },
             {
                 "language": "en",
@@ -160,6 +164,7 @@
         "endAt": "04-15-2020",
         "companyName": "QAT Global",
         "website": "https://www.qat.com/",
+        "logo": "../../assets/template/experience/logo/qat-global-logo.png",
         "internationalizations": [
             {
                 "language": "pt",
@@ -204,19 +209,20 @@
         "startAt": "05-01-2020",
         "companyName": "Swisscom AG",
         "website": "https://www.swisscom.ch/",
+        "logo": "../../assets/template/experience/logo/swisscom-logo.png",
         "internationalizations": [
             {
                 "language": "pt",
                 "city": "Rotterdão",
                 "country": "Países Baixos",
-                "role": "Engenheiro DevOps",
+                "role": "Engenheiro Full-stack",
                 "description": "<b>Swisscom</b> é a empresa <b>#1</b> de telecomunicações e uma das principais empresas de TI da Suíça. Seus produtos e serviços variam de soluções B2C, como a Swisscom TV, a soluções de TI B2B em vários setores, como Bancos, Saúde, Energia, Entretenimento e Publicidade.<br><br>Na <i>Swisscom DevOps Center</i>, inovação e experimentação estão profundamente enraizadas no DNA da empresa. O ambiente multicultural com 15 nacionalidades, somado à cultura de <i>Tribos/Esquadrões</i>, contribui para colocar nós, funcionários, como parte de uma equipe virtual internacional, especializada em DevOps, entre várias outras tecnologias de ponta."
             },
             {
                 "language": "en",
                 "city": "Rotterdam",
                 "country": "Netherlands",
-                "role": "DevOps Engeneer",
+                "role": "Full-stack Engineer",
                 "description": "<b>Swisscom</b> is the <b>#1</b> telecommunications company and one of the leading IT companies in Switzerland. Its products and services range from B2C products, such as <i>Swisscom TV</i>, to B2B IT solutions in multiple industries, such as <i>Banking, Health, Energy, Entertainment, and Advertising</i>.<br><br>In the <i>Swisscom DevOps Center</i> innovation and experimenting are deeply rooted in the DNA of the company. The multicultural environment with 15 nationalities, and a <i>Tribe/Squad</i> culture, contribute to putting us, the employees, as part of an international virtual team, specialized in DevOps among various other top technologies."
             }
         ],
