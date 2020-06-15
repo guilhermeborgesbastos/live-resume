@@ -8,7 +8,7 @@
 
 [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://GitHub.com/guilhermeborgesbastos/live-resume/stargazers/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6f04e1e3103a4af58e5398e23106bb93)](https://www.codacy.com/manual/guilhermeborgesbastos/live-resume?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guilhermeborgesbastos/live-resume&amp;utm_campaign=Badge_Grade)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_shield) [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/guilhermeborgesbastos/live-resume/wiki) [![GitHub tag](https://img.shields.io/github/tag/guilhermeborgesbastos/live-resume.svg)](https://github.com/guilhermeborgesbastos/live-resume/tags/)
 
- [![Gitter](https://badges.gitter.im/live-resume/community.svg)](https://gitter.im/live-resume/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://opensource.org/licenses/MIT) [![GitHub forks](https://img.shields.io/github/forks/guilhermeborgesbastos/live-resume.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/guilhermeborgesbastos/live-resume/network/) [![GitHub stars](https://img.shields.io/github/stars/guilhermeborgesbastos/live-resume.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/guilhermeborgesbastos/live-resume/stargazers/)
+ [![Gitter](https://badges.gitter.im/live-resume/community.svg)](https://gitter.im/live-resume/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://opensource.org/licenses/MIT) [![GitHub forks](https://img.shields.io/github/forks/guilhermeborgesbastos/live-resume.svg?style=social&label=Fork&maxAge=259100)](https://GitHub.com/guilhermeborgesbastos/live-resume/network/) [![GitHub stars](https://img.shields.io/github/stars/guilhermeborgesbastos/live-resume.svg?style=social&label=Star&maxAge=259100)](https://GitHub.com/guilhermeborgesbastos/live-resume/stargazers/)
 
 </div>
 
@@ -24,7 +24,7 @@
 
 </div>
 
-You as a **Web Developer** should say no for the conventional *text curriculum*! **Why not make your own 'Live Resume' instead of an ordinary CV?!** All the code is fully available on this repository.
+Get rid of your old and deprecated text resume by using the first **Open-source Web Application** _(100% free)_, which makes a professional personal website and portfolio easy and quick to build.
 
 ## What's included?
 
@@ -50,6 +50,8 @@ To get more help on the setup, customization or any other aspect, accessing the 
 
 ## Prerequisite
 
+> A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q).
+
 1. It is required to have Node.js with version _12.18.0_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
 ```
 node -v
@@ -65,6 +67,8 @@ npm -v
 4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM.
 
 ## Installing and Executing locally
+
+> A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q).
 
 1. Fork this repository, by clicking the `Fork` button at the top-right on this page.
 [![Learn how to fork GitHub projects](/markdown/fork.png?cache=off)](https://guides.github.com/activities/forking/)
