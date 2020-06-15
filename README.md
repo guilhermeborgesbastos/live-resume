@@ -20,7 +20,7 @@
 <div align="center">
 <br>
 
-[![Watch the video](/markdown/LiveResume-v1.2.gif)](https://guilhermeborgesbastos.com/?source=github)
+[![Watch the video](/markdown/LiveResumeGuilhermeBorgesBastos-v1.2.gif)](https://guilhermeborgesbastos.com/?source=github)
 
 </div>
 
@@ -114,7 +114,7 @@ This project uses several open source packages:
 ---
 
 > Site [www.guilhermeborgesbastos.com](https://www.guilhermeborgesbastos.com)<br>
-> LinkedIn [profile](https://github.com/guilhermeborgesbastos)<br>
+> LinkedIn [profile](https://www.linkedin.com/in/guilhermeborgesbastos)<br>
 > Facebook [profile](https://www.facebook.com/guilherme.borgesbastos)
 
 ## License
