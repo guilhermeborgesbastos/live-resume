@@ -20,7 +20,7 @@
 <div align="center">
 <br>
 
-[![Watch the video](/markdown/LiveResumePreview.gif)](https://guilhermeborgesbastos.com/?source=github)
+[![Watch the video](/markdown/LiveResume-v1.2.gif)](https://guilhermeborgesbastos.com/?source=github)
 
 </div>
 
