@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  The Ultimate Personal Web Resume
+  My Resume
   <br>
 </h1>
 
