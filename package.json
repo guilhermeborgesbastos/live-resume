@@ -34,6 +34,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "compass-mixins": "^0.12.10",
+    "elliptic": "^6.5.3",
     "firebase": "^7.14.2",
     "ng-navigator-share": "^1.0.3",
     "rxjs": "^6.5.5",
