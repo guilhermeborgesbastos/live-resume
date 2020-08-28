@@ -1,8 +1,8 @@
 import {
     Directive, OnInit,
     ElementRef, Input, Inject, LOCALE_ID
-} from '@angular/core';
-import { Typed } from './typed';
+} from "@angular/core";
+import { Typed } from "./typed";
 
 interface IPhrase {
     language: string;
@@ -10,15 +10,15 @@ interface IPhrase {
 }
 
 @Directive({
-    selector: '[typingAnimation]'
+    selector: "[typingAnimation]"
 })
 
 export class TypingAnimationDirective implements OnInit {
 
-    @Input('phrasePeriod') phrasePeriod: number;
-    @Input('typeSpeed') typeSpeed: number;
-    @Input('startDelay') startDelay: number;
-    @Input('data') data: IPhrase[];
+    @Input("phrasePeriod") phrasePeriod: number;
+    @Input("typeSpeed") typeSpeed: number;
+    @Input("startDelay") startDelay: number;
+    @Input("data") data: IPhrase[];
     
     typed: Typed;
     phrases: string[] = [];
@@ -28,11 +28,11 @@ export class TypingAnimationDirective implements OnInit {
         @Inject(LOCALE_ID) public locale: string
     ) {}
 
-    _flatMap = (f,xs) => xs.reduce((acc,x) => acc.concat(f(x)), []);
+    _flatMap = (f, xs) => xs.reduce((acc,x) => acc.concat(f(x)), []);
 
     ngOnInit () {
         
-        const nestedArr: IPhrase[] = this.data.filter(el => el.language === (this.locale || 'en'));
+        const nestedArr: IPhrase[] = this.data.filter(el => el.language === (this.locale || "en"));
         this.phrases = this._flatMap(el => el.phrases, nestedArr);
 
         if(this.checkContent()) {
@@ -53,7 +53,7 @@ export class TypingAnimationDirective implements OnInit {
                 phrasePeriod: this.phrasePeriod
             },
             this.phrases
-        )
+        );
         
         this.typed.begin();
     }

@@ -1,10 +1,10 @@
-import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
-import { debounce } from '../core/utils';
+import { Component, OnInit, HostListener } from "@angular/core";
+import { debounce } from "../core/utils";
 
 @Component({
-  selector: 'app-resume',
-  templateUrl: './resume.component.html',
-  styleUrls: ['./resume.component.css', './resume.component.responsivity.css']
+  selector: "app-resume",
+  templateUrl: "./resume.component.html",
+  styleUrls: ["./resume.component.css", "./resume.component.responsivity.css"]
 })
 export class ResumeComponent implements OnInit {
 
@@ -18,14 +18,14 @@ export class ResumeComponent implements OnInit {
     this.checkResize();
   }
 
-  @HostListener('window:scroll')
+  @HostListener("window:scroll")
   @debounce() 
   checkScroll() {
     this.pageYOffset = window.pageYOffset;
     this.isSticky = pageYOffset >= 250;
   }
 
-  @HostListener('window:resize')
+  @HostListener("window:resize")
   @debounce(25) 
   checkResize() {
     this.pageXOffset = window.innerWidth;

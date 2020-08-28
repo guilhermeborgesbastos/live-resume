@@ -3,21 +3,21 @@ import {
     Input, HostListener,
     EventEmitter, ElementRef,
     Output
-} from '@angular/core';
-import { IPost } from '../posts-interfaces';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { debounce } from '../../core/utils';
+} from "@angular/core";
+import { IPost } from "../posts-interfaces";
+import { trigger, state, style, animate, transition } from "@angular/animations";
+import { debounce } from "../../core/utils";
 
 @Component({
-    selector: 'app-posts-carousel',
-    templateUrl: './posts-carousel.component.html',
-    styleUrls: ['./posts-carousel.component.scss', './posts-carousel.component.responsivity.scss'],
+    selector: "app-posts-carousel",
+    templateUrl: "./posts-carousel.component.html",
+    styleUrls: ["./posts-carousel.component.scss", "./posts-carousel.component.responsivity.scss"],
     animations: [
-        trigger('fadeInOut', [
-            state('void', style({
+        trigger("fadeInOut", [
+            state("void", style({
                 opacity: 0
             })),
-            transition('void <=> *', animate(300)),
+            transition("void <=> *", animate(300)),
         ])
     ]
 })
@@ -61,7 +61,7 @@ export class PostsCarouselComponent implements OnInit {
     
     ngOnInit(): void {}
 
-    @HostListener('window:resize')
+    @HostListener("window:resize")
     @debounce(25) 
     onResize() { 
         this.onResizeElement();

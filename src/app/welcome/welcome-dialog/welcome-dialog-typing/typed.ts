@@ -1,4 +1,4 @@
-import { TypingAnimationOptions } from './typingAnimationOptions.interface';
+import { TypingAnimationOptions } from "./typingAnimationOptions.interface";
 
 export class Typed {
 
@@ -15,9 +15,9 @@ export class Typed {
             typeSpeed: 250,
             startDelay: 2000,
             phrasePeriod: 200
-        }
+        };
         
-        this.text = '';
+        this.text = "";
         this.isDeleting = false;
         this.loopNum = 0;
         this.element = element
@@ -33,7 +33,7 @@ export class Typed {
     }
 
     private insertSpan (text: string) {
-        this.element.innerHTML = '<span class="wrap">'+text+'</span>';
+        this.element.innerHTML = `<span class="wrap">${text}</span>`;
     }
 
 
@@ -57,7 +57,7 @@ export class Typed {
         if (!this.isDeleting && this.text === fullTxt) {
             delta = this.options.phrasePeriod;
             this.isDeleting = true;
-        } else if (this.isDeleting && this.text === '') {
+        } else if (this.isDeleting && this.text === "") {
             this.isDeleting = false;
             this.loopNum++;
             delta = 500;
@@ -69,9 +69,9 @@ export class Typed {
     }
 
     private appendAnimationCss () {
-        let css = document.createElement('style');
-        css.type = 'text/css';
-        css.id = 'typing';
+        let css = document.createElement("style");
+        css.type = "text/css";
+        css.id = "typing";
 
         const innerCss = `
             .txt-rotate > .wrap::after {

@@ -1,13 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DataService } from '../core/data.service';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { IPost } from './posts-interfaces';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { DataService } from "../core/data.service";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IPost } from "./posts-interfaces";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss', './posts.component.responsivity.scss']
+  selector: "app-posts",
+  templateUrl: "./posts.component.html",
+  styleUrls: ["./posts.component.scss", "./posts.component.responsivity.scss"]
 })
 export class PostsComponent implements OnInit {
 
