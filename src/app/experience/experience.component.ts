@@ -6,6 +6,11 @@ import { DataService } from "../core/data.service";
 import { SorterService } from "../core/sorter.service";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 
+enum Direction {
+  Left,
+  Right,
+}
+
 @Component({
   selector: "app-experience",
   templateUrl: "./experience.component.html",
@@ -55,6 +60,23 @@ export class ExperienceComponent implements OnInit {
           this.preloadBounderyImages(experiences.map(xp => xp.backgroundUrl));
         });
   }
+
+  public onSwipe(event) {
+    const direction: Direction = Math.abs(event.deltaX) > 40 ? (event.deltaX > 0 ? Direction.Right : Direction.Left) : undefined;
+    if(!this.disablePreviousNavigation() && direction === Direction.Right) {
+      this.onClickPrevious();
+    } else if(!this.disableNextNavigation() && direction === Direction.Left) {
+      this.onClickNext();
+    } 
+  }
+
+  public disablePreviousNavigation(): boolean {
+    return this.currentPosition === 1;
+  }
+
+  public disableNextNavigation(): boolean {
+    return this.currentPosition === this.experiencesOrdered?.length;
+  } 
 
   // Preloads the boundaries images related to the current position in order to avoid the "blinking" of the background while navigating.
   private preloadBounderyImages(images: string[]) {
