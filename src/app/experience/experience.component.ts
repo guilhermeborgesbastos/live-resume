@@ -6,7 +6,7 @@ import { DataService } from "../core/data.service";
 import { SorterService } from "../core/sorter.service";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 
-enum Direction {
+export enum Direction {
   Left,
   Right,
 }

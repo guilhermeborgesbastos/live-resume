@@ -3,6 +3,7 @@ import { DataService } from "../core/data.service";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { IPost } from "./posts-interfaces";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { Direction } from '../experience/experience.component';
 
 @Component({
   selector: "app-posts",
@@ -31,19 +32,32 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  ceil(val: number): number {
-    return Math.ceil(val);
+  public onClickPrevious(): void {
+    this.currentPage--;
   }
 
-  onClickPrevious() {
-      this.currentPage--;
+  public onClickNext() {
+    this.currentPage++;
   }
 
-  onClickNext() {
-      this.currentPage++;
-  }
-
-  updateNavigation(resultsPerPage: number) {
+  public updateNavigation(resultsPerPage: number) {
     this.resultsPerPage = resultsPerPage;
   }
+
+  public onSwipe(event) {
+    const direction: Direction = Math.abs(event.deltaX) > 40 ? (event.deltaX > 0 ? Direction.Right : Direction.Left) : undefined;
+    if(!this.disablePreviousNavigation() && direction === Direction.Right) {
+      this.onClickPrevious();
+    } else if(!this.disableNextNavigation() && direction === Direction.Left) {
+      this.onClickNext();
+    }
+  }
+
+  public disablePreviousNavigation(): boolean {
+    return this.currentPage === 1;
+  }
+
+  public disableNextNavigation(): boolean {
+    return this.currentPage === Math.ceil(this.posts?.length / this.resultsPerPage);
+  } 
 }
