@@ -43,6 +43,7 @@
         }
 
         .middle-container {
+            touch-action: pan-y !important;
             padding-bottom: 1em;
         }
     }
