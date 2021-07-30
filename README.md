@@ -26,10 +26,10 @@
 
 Get rid of your old and deprecated text resume by using the first **Open-source Web Application** _(100% free)_, which makes a professional personal website and portfolio easy and quick to build.
 
-## What's included❓
+## What is included❓
 
 * A fully functional _Angular 9_ application with a customizable template and content;
-* Totally responsive for the mobile and desktop devices;
+* Totally responsive for the mobile and desktop devices _(allow mobile gestures too... ;))_;
 * Internationalization for English and Portuguese _(easy for adding/removing new languages - in18 lib)_;
 * Mobile navigation sharing _(Share the resume with native apps like Whatsapp, LinkedIn, Facebook, etc...)_;
 * A complete [Wiki](https://github.com/guilhermeborgesbastos/live-resume/wiki) that provides support;
@@ -39,9 +39,12 @@ Get rid of your old and deprecated text resume by using the first **Open-source 
 * Firebase integration in the contact form;
 * Composed of 5 custom sections ([Welcome](https://guilhermeborgesbastos.com/), [About Me](https://guilhermeborgesbastos.com/about), [Experiences](https://guilhermeborgesbastos.com/experience), [Posts](https://guilhermeborgesbastos.com/posts), and [Contact](https://guilhermeborgesbastos.com/contact));
 * Router fragment friendly (e.g: https://guilhermeborgesbastos.com/posts );
-* Source code verified by static code analyzers (safe and ready for production);
+* Source code verified by static code analyzers _(safe and ready for production)_;
 
-## 🗂Wiki Documentation & 💬Community Chat
+## Changelog
+[Learn about the latest improvements.](https://github.com/guilhermeborgesbastos/live-resume/CHANGELOG.md)
+
+## 🗂 Wiki Documentation & 💬 Community Chat
 
 To get more help on the setup, customization or any other aspect, accessing the following:
 
@@ -66,7 +69,7 @@ npm -v
 
 4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM.
 
-## 📥Installing and 📁Executing locally
+## 📥 Installing and Executing locally
 
 > A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q).
 
@@ -94,11 +97,11 @@ ng serve --host 0.0.0.0 --configuration=en
 
 > Please, feel free to make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
 
-## How to 🔨customize?
+## 🔨 How to customize?
 
 In the [Wiki Doc.](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations) there is a specific page supporting you on how to apply customizations to the layout and more... [See page](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)
 
-## 🖋Contribute
+## 🖋 Contribute
 
 Feel free to add new features, language supports, fix bugs, or improve the docs. Any kind of help is appreciated! If you make any kind of improvements, please, send them back as a **Pull Request**. Let's keep making it better and up-to-date.
 
@@ -117,11 +120,8 @@ This project uses several open source packages:
 > LinkedIn [profile](https://www.linkedin.com/in/guilhermeborgesbastos)<br>
 > Facebook [profile](https://www.facebook.com/guilherme.borgesbastos)
 
-## 📝License
+## 📝 License
 
 The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 [![Analytics](https://ga-beacon.appspot.com/UA-168686195-1/live-resume/home-page?pixel)](https://github.com/igrigorik/ga-beacon)
-
-
-
