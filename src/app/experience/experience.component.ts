@@ -5,18 +5,14 @@ import { IExperience } from "./experience-interfaces";
 import { DataService } from "../core/data.service";
 import { SorterService } from "../core/sorter.service";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
-
-export enum Direction {
-  Left,
-  Right,
-}
+import { AbstractSwipeSection } from '../core/shared/abstract.swipe.section';
 
 @Component({
   selector: "app-experience",
   templateUrl: "./experience.component.html",
   styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"]
 })
-export class ExperienceComponent implements OnInit {
+export class ExperienceComponent extends AbstractSwipeSection implements OnInit {
   
   SELECTED_CLASS: string = "selected";
   LEAVE_RIGHT_CLASS: string = "leave-right";
@@ -42,6 +38,7 @@ export class ExperienceComponent implements OnInit {
     private renderer: Renderer2,
     private library: FaIconLibrary
   ) {
+    super();
     library.addIconPacks(fas, fab);
   }
 
@@ -59,15 +56,6 @@ export class ExperienceComponent implements OnInit {
           this.updateMobileNavigationView();
           this.preloadBounderyImages(experiences.map(xp => xp.backgroundUrl));
         });
-  }
-
-  public onSwipe(event) {
-    const direction: Direction = Math.abs(event.deltaX) > 40 ? (event.deltaX > 0 ? Direction.Right : Direction.Left) : undefined;
-    if(!this.disablePreviousNavigation() && direction === Direction.Right) {
-      this.onClickPrevious();
-    } else if(!this.disableNextNavigation() && direction === Direction.Left) {
-      this.onClickNext();
-    } 
   }
 
   public disablePreviousNavigation(): boolean {

@@ -3,14 +3,14 @@ import { DataService } from "../core/data.service";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { IPost } from "./posts-interfaces";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { Direction } from '../experience/experience.component';
+import { AbstractSwipeSection } from '../core/shared/abstract.swipe.section';
 
 @Component({
   selector: "app-posts",
   templateUrl: "./posts.component.html",
   styleUrls: ["./posts.component.scss", "./posts.component.responsivity.scss"]
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent extends AbstractSwipeSection implements OnInit {
 
   currentPage: number = 1;
   resultsPerPage: number;
@@ -19,7 +19,9 @@ export class PostsComponent implements OnInit {
   faChevronLeft: IconDefinition;
   faChevronRight: IconDefinition;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+    super();
+   }
 
   ngOnInit(): void {
     this.faChevronLeft = faChevronLeft;
@@ -42,15 +44,6 @@ export class PostsComponent implements OnInit {
 
   public updateNavigation(resultsPerPage: number) {
     this.resultsPerPage = resultsPerPage;
-  }
-
-  public onSwipe(event) {
-    const direction: Direction = Math.abs(event.deltaX) > 40 ? (event.deltaX > 0 ? Direction.Right : Direction.Left) : undefined;
-    if(!this.disablePreviousNavigation() && direction === Direction.Right) {
-      this.onClickPrevious();
-    } else if(!this.disableNextNavigation() && direction === Direction.Left) {
-      this.onClickNext();
-    }
   }
 
   public disablePreviousNavigation(): boolean {
