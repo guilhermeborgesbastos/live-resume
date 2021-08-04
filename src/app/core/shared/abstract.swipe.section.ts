@@ -1,22 +1,35 @@
 import { SwipeSection } from './swipe.section';
 
-export enum Direction {
-    Left,
-    Right,
+enum Direction {
+    LEFT,
+    RIGHT,
+    NOT_READABLE
 }
 
 export abstract class AbstractSwipeSection implements SwipeSection {
 
-    constructor() {
+    private horizontalSwipeRatio: number;
+
+    private readonly horizontalStartPoint = 0;
+
+    constructor(horizontalSwipeRatio: number = 40) {
+        this.horizontalSwipeRatio = horizontalSwipeRatio;
     }
 
     onSwipe(event: any): void {
-        const direction: Direction = Math.abs(event.deltaX) > 40 ? (event.deltaX > 0 ? Direction.Right : Direction.Left) : undefined;
-        if(!this.disablePreviousNavigation() && direction === Direction.Right) {
+        const direction: Direction = this.getEventSwipeDirection(event);
+        if(!this.disablePreviousNavigation() && direction === Direction.RIGHT) {
             this.onClickPrevious();
-        } else if(!this.disableNextNavigation() && direction === Direction.Left) {
+        } else if(!this.disableNextNavigation() && direction === Direction.LEFT) {
             this.onClickNext();
         } 
+    }
+
+    private getEventSwipeDirection(event: any): Direction | undefined {
+        if(Math.abs(event.deltaX) > this.horizontalSwipeRatio) {
+            return event.deltaX > this.horizontalStartPoint ? Direction.RIGHT : Direction.LEFT;
+        }
+        return Direction.NOT_READABLE;
     }
 
     abstract disablePreviousNavigation(): boolean;
