@@ -5,7 +5,7 @@ import { IExperience } from "./experience-interfaces";
 import { DataService } from "../core/data.service";
 import { SorterService } from "../core/sorter.service";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
-import { AbstractSwipeSection } from '../core/shared/abstract.swipe.section';
+import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
 
 @Component({
   selector: "app-experience",

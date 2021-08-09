@@ -44,6 +44,7 @@
     "rxjs": "^6.5.5",
     "serialize-javascript": "^4.0.0",
     "socket.io": "^2.4.1",
+    "tar": "^4.4.15",
     "tslib": "^1.13.0",
     "webpack-subresource-integrity": "^1.5.2",
     "websocket-extensions": "^0.1.4",

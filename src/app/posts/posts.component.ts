@@ -3,7 +3,7 @@ import { DataService } from "../core/data.service";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { IPost } from "./posts-interfaces";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { AbstractSwipeSection } from '../core/shared/abstract.swipe.section';
+import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
 
 @Component({
   selector: "app-posts",

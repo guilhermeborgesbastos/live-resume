@@ -1,4 +1,4 @@
-import { SwipeSection } from './swipe.section';
+import { SwipeSection } from "./swipe.section";
 
 enum Direction {
     LEFT,
