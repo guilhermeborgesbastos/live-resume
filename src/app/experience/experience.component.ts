@@ -5,13 +5,14 @@ import { IExperience } from "./experience-interfaces";
 import { DataService } from "../core/data.service";
 import { SorterService } from "../core/sorter.service";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
 
 @Component({
   selector: "app-experience",
   templateUrl: "./experience.component.html",
   styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"]
 })
-export class ExperienceComponent implements OnInit {
+export class ExperienceComponent extends AbstractSwipeSection implements OnInit {
   
   SELECTED_CLASS: string = "selected";
   LEAVE_RIGHT_CLASS: string = "leave-right";
@@ -37,6 +38,7 @@ export class ExperienceComponent implements OnInit {
     private renderer: Renderer2,
     private library: FaIconLibrary
   ) {
+    super();
     library.addIconPacks(fas, fab);
   }
 
@@ -55,6 +57,14 @@ export class ExperienceComponent implements OnInit {
           this.preloadBounderyImages(experiences.map(xp => xp.backgroundUrl));
         });
   }
+
+  public disablePreviousNavigation(): boolean {
+    return this.currentPosition === 1;
+  }
+
+  public disableNextNavigation(): boolean {
+    return this.currentPosition === this.experiencesOrdered?.length;
+  } 
 
   // Preloads the boundaries images related to the current position in order to avoid the "blinking" of the background while navigating.
   private preloadBounderyImages(images: string[]) {
