@@ -1,15 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DataService } from '../core/data.service';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { IPost } from './posts-interfaces';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { DataService } from "../core/data.service";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IPost } from "./posts-interfaces";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss', './posts.component.responsivity.scss']
+  selector: "app-posts",
+  templateUrl: "./posts.component.html",
+  styleUrls: ["./posts.component.scss", "./posts.component.responsivity.scss"]
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent extends AbstractSwipeSection implements OnInit {
 
   currentPage: number = 1;
   resultsPerPage: number;
@@ -18,7 +19,9 @@ export class PostsComponent implements OnInit {
   faChevronLeft: IconDefinition;
   faChevronRight: IconDefinition;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+    super();
+   }
 
   ngOnInit(): void {
     this.faChevronLeft = faChevronLeft;
@@ -31,19 +34,23 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  ceil(val: number): number {
-    return Math.ceil(val);
+  public onClickPrevious(): void {
+    this.currentPage--;
   }
 
-  onClickPrevious() {
-      this.currentPage--;
+  public onClickNext() {
+    this.currentPage++;
   }
 
-  onClickNext() {
-      this.currentPage++;
-  }
-
-  updateNavigation(resultsPerPage: number) {
+  public updateNavigation(resultsPerPage: number) {
     this.resultsPerPage = resultsPerPage;
   }
+
+  public disablePreviousNavigation(): boolean {
+    return this.currentPage === 1;
+  }
+
+  public disableNextNavigation(): boolean {
+    return this.currentPage === Math.ceil(this.posts?.length / this.resultsPerPage);
+  } 
 }

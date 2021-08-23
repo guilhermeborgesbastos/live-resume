@@ -142,6 +142,7 @@
 .middle-container {
     @include display-flex;
 
+    touch-action: pan-y !important;
     flex-direction: column;
     text-align: right;
     color: #fff;

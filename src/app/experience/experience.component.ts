@@ -1,23 +1,24 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import { IExperience } from './experience-interfaces';
-import { DataService } from '../core/data.service';
-import { SorterService } from '../core/sorter.service';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { IExperience } from "./experience-interfaces";
+import { DataService } from "../core/data.service";
+import { SorterService } from "../core/sorter.service";
+import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
 
 @Component({
-  selector: 'app-experience',
-  templateUrl: './experience.component.html',
-  styleUrls: ['./experience.component.scss', 'experience-component.reponsivity.scss']
+  selector: "app-experience",
+  templateUrl: "./experience.component.html",
+  styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"]
 })
-export class ExperienceComponent implements OnInit {
+export class ExperienceComponent extends AbstractSwipeSection implements OnInit {
   
-  SELECTED_CLASS: string = 'selected';
-  LEAVE_RIGHT_CLASS: string = 'leave-right';
-  ENTER_RIGHT_CLASS: string = 'enter-right';
-  LEAVE_LEFT_CLASS: string = 'leave-left';
-  ENTER_LEFT_CLASS: string = 'enter-left';
+  SELECTED_CLASS: string = "selected";
+  LEAVE_RIGHT_CLASS: string = "leave-right";
+  ENTER_RIGHT_CLASS: string = "enter-right";
+  LEAVE_LEFT_CLASS: string = "leave-left";
+  ENTER_LEFT_CLASS: string = "enter-left";
   TRANSITION_TIME: number = 400;
 
   experiences: IExperience[];
@@ -29,7 +30,7 @@ export class ExperienceComponent implements OnInit {
   currentYear: string;
   nextYear: string;
 
-  @ViewChild('orderedList') orderedList: ElementRef;
+  @ViewChild("orderedList") orderedList: ElementRef;
 
   constructor(
     private dataService: DataService,
@@ -37,6 +38,7 @@ export class ExperienceComponent implements OnInit {
     private renderer: Renderer2,
     private library: FaIconLibrary
   ) {
+    super();
     library.addIconPacks(fas, fab);
   }
 
@@ -49,14 +51,22 @@ export class ExperienceComponent implements OnInit {
           this.experiences = experiences;
 
           this.experiencesOrdered = [...experiences];
-          this.experiencesOrdered.sort(this.sortService.sort('position', 'desc'));       
+          this.experiencesOrdered.sort(this.sortService.sort("position", "desc"));       
           this.backgroundUrl = this.retrieveBackgroundUrl();
           this.updateMobileNavigationView();
           this.preloadBounderyImages(experiences.map(xp => xp.backgroundUrl));
         });
   }
 
-  // Preloads the boundaries images related to the current position in order to avoid the 'blinking' of the background while navigating.
+  public disablePreviousNavigation(): boolean {
+    return this.currentPosition === 1;
+  }
+
+  public disableNextNavigation(): boolean {
+    return this.currentPosition === this.experiencesOrdered?.length;
+  } 
+
+  // Preloads the boundaries images related to the current position in order to avoid the "blinking" of the background while navigating.
   private preloadBounderyImages(images: string[]) {
     images.forEach(function (image, i) {
       const preloadImages = new Array();

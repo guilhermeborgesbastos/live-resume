@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DataService } from '../core/data.service';
-import { IAbout } from './about-interfaces';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { DataService } from "../core/data.service";
+import { IAbout } from "./about-interfaces";
+import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss', './about.component.responsivity.scss']
+  selector: "app-about",
+  templateUrl: "./about.component.html",
+  styleUrls: ["./about.component.scss", "./about.component.responsivity.scss"]
 })
 export class AboutComponent implements OnInit, OnDestroy {
 
@@ -27,7 +27,7 @@ export class AboutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.name = 'Guilherme Borges Bastos' // Sets here, your full name
+    this.name = "Guilherme Borges Bastos"; // Sets here, your full name
     this.yearsOld = this.calcAge("1993-06-29"); // Sets here, your date birthday
 
     // Fetches the About information from the Data Service (about.json file).

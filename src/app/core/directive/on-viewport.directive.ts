@@ -3,16 +3,16 @@ import {
     ElementRef, Output,
     EventEmitter, Input,
     OnChanges
-} from '@angular/core';
+} from "@angular/core";
 
 @Directive({
-  selector: '[in-viewport]'
+  selector: "[in-viewport]"
 })
 
 export class InViewportDirective implements OnInit, OnChanges {
 
-    @Input('pageYOffset') pageYOffset: number;
-    @Output('inViewport') inViewport:EventEmitter<Object>;
+    @Input("pageYOffset") pageYOffset: number;
+    @Output("inViewport") inViewport:EventEmitter<Object>;
 
     constructor(private _el:ElementRef) {
         this.inViewport = new EventEmitter();
@@ -47,9 +47,9 @@ export class InViewportDirective implements OnInit, OnChanges {
             value: false
         };
 
-        event['value'] = (elSize && vVisible);       
+        event["value"] = (elSize && vVisible);       
 
-        if(event['value']) {
+        if(event["value"]) {
             this.inViewport.emit(event);
         }
     }

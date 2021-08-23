@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { PageNotFoundComponent } from "./page-not-found.component";
 
 const routes: Routes = [
-    { path: 'page-not-found', component: PageNotFoundComponent }
+    { path: "page-not-found", component: PageNotFoundComponent }
 ];
 
 @NgModule({

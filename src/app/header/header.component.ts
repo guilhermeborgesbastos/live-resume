@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID, AfterViewInit } from '@angular/core';
-import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { NgNavigatorShareService } from 'ng-navigator-share';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID, AfterViewInit } from "@angular/core";
+import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { NgNavigatorShareService } from "ng-navigator-share";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss', './header.component.responsivity.scss']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss", "./header.component.responsivity.scss"]
 })
 
 export class HeaderComponent implements OnInit, AfterViewInit {
@@ -19,8 +19,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   faShareAlt: IconDefinition;
   faCloudDownloadAlt: IconDefinition;
 
-  @ViewChild('nav') nav: ElementRef;
-  @ViewChild('shareBtn') shareBtn: ElementRef;
+  @ViewChild("nav") nav: ElementRef;
+  @ViewChild("shareBtn") shareBtn: ElementRef;
 
   constructor(
     @Inject(LOCALE_ID) public locale: string,
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {    
       // Share button available only for browsers that do support it.
       if (this.ngNavigatorShareService.canShare()) {
-        this.shareBtn.nativeElement.style.display='block';
+        this.shareBtn.nativeElement.style.display = "block";
       }
   }
 
@@ -69,15 +69,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     if(this._activeSection && this.renderer) {
       
       // Remove any selected anchor
-      const activePreviousElem = this.nav.nativeElement.querySelector('a.active');
+      const activePreviousElem = this.nav.nativeElement.querySelector("a.active");
       
       if(activePreviousElem) {
-        this.renderer.removeClass(activePreviousElem, 'active');
+        this.renderer.removeClass(activePreviousElem, "active");
       }
 
       const targetElem = this.nav.nativeElement.querySelector(`a[href^="#${this._activeSection}"]`);
       if(targetElem) {
-        this.renderer.addClass(targetElem, 'active');
+        this.renderer.addClass(targetElem, "active");
       }
     }
   }
@@ -100,13 +100,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   async share() {
     try{
-      const sharedResponse = await this.ngNavigatorShareService.share({
-        title:'`Live Resume - Guilherme Borges Bastos',
-        text: `Hello, I'm a Full-stack Java Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!`,
-        url: 'https://guilhermeborgesbastos.com'
+      await this.ngNavigatorShareService.share({
+        title: "Live Resume - Guilherme Borges Bastos",
+        text: "Hello, I'm a Full-stack Java Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!",
+        url: "https://guilhermeborgesbastos.com"
       });
     } catch(error) {
-      console.log('You app is not shared, reason: ',error);
+      console.log("You app is not shared, reason: ", error);
     }    
   }
 }
