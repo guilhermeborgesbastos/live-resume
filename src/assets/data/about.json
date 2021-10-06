@@ -1,47 +1,43 @@
 {
     "internationalizations": [
         {
-            "language": "pt",
-            "description": "Minha caminhada como <i>programador</i> teve início aos nove anos de idade quando me apaixonei pelo <i>Logo</i>, uma linguagem de programação educacional usada para cativar crianças nas maravilhosas terras da <i>Programação</i>. Costumava passar horas seguidas tentando criar figuras e animações, usando matemática e geometria. Naquela época, eu simplesmente não conhecia os desafios emocionantes que ainda estavam por vir.<br><br>Alguns anos depois, consegui um estágio como <i>Webmaster</i>, desde então, nunca mais parei, sendo mais de uma década, onde venho tendo a chance de trabalhar com pessoas maravilhosas, aprendendo todos os dias, viajando pelo mundo e, principalmente, sempre fazendo grandes amizades.<br><br>Tive experiência como empreendedor, quando um amigo apresentou-me <i>Magento</i>, um framework de comércio eletrônico extremamente popular. Depois de fazer vários cursos e muita prática, consegui contratos com agências de São Paulo e Rio de Janeiro, Brasil. Essa experiência de empreendedorismo me deu a chance de ver o outro lado da moeda, o que contribuiu para expandir um pouco mais minha consciência como colaborador.<br><br>Atualmente, continuo buscando novas habilidades, aprendendo e compartilhando meu humilde conhecimento, tanto quanto possível."
-        },
-        {
             "language": "en",
-            "description": "My path as a <i>programmer</i> has started at nineish years old, when I've fallen in love with <i>Logo</i>, an educational programming language used to captivate kids in the wonderful lands of <i>Programming</i>. I used to spend hours in a row trying to build figures and animations, using math and geometry. At that time, I just did not know the exciting challenges that were yet to come.<br><br>A few years later, I got an internship as a <i>Webmaster</i>, since then, I have never stopped. It has been more than a decade, where I'm having the chance to work with marvelous people, learning every day, traveling the world, and mainly, always making great friendships.<br><br>I had an entrepreneurship experience, when a friend of mine presented me <i>Magento</i>, an extremely popular e-commerce framework. After doing several courses and a lot of practice, I got contracts with agencies from São Paulo and Rio de Janeiro, Brazil. This entrepreneurship experience gave me the chance to see the other side of the coin, which contributed to sort of expand a bit more my consciousness as an employee.<br><br>Nowadays, I keep seeking new skills, learning and sharing my humble knowledge as much as possible."
+            "description": "As the world around us continues to evolve, Artificial Intelligence has established to be a field which exponentially embarks into our day-to-day capacity. In the quest to expand my knowledge horizons, I have constantly aimed at pursuing diverse interests and in addition to academic proficiency, I have taken it on myself to explore how computer science can be used to identify and solve open problems. I am an enthusiast in Research and Game development. I am keen about taking on new projects that help me explore new aspects of Machine Learning, or broadly Artificial Intelligence.<br><br> Currently, my research revolves around ML and IoT. In 2020, I published my first research under the supervision of Dr. Sung-Hyuk Cha and Dr. Yoo-Jung Ann which was based on Computer Vision wherein, I used Ensemble methods and came up with a new metric that helped in achieving better results. I took a lot of time to evaluate this metric and after applying it on several datasets and different classes along with combination of several different ML algorithms, I published a second paper in 2021, where I evaluated the formula on Multiple Class Classification.<br><br> I have also tried to play around with Statistical Parameters wherein, we used BCI as an application and evaluated EEG signals using 7 statistical parameters. Recently, I have been co-working on a medical journal alongside Dr. Altion Simo, where we are using IoT and Machine Learning to collect data using WIREPAS and wearable devices to track and evaluate ADL of the silver tsunami coming our way, when it comes to seniors residing in the USA. This paper is discussing a system that is used to draw reports on the behavior progression for seniors. After introducing a very resilient mesh system on collecting high quality data from the home environment where the seniors live, we propose comparatively different methods in finding the best results on machine learning analyses when it comes to calculating projections, trends, seasonalities and other parameters related to their behavior.<br><br> My Future Goals are to pursue a PhD where I am able to gain expertise in Artificial Intelligence, Algorithms, gameplay systems and probablistic inferential learning. I am enthusiastic about these domains and wish to continue research in the same. I am keen, hard-working and have been looking for opportunities where I can step into the field. I am only a beginner and feel that there is a lot that I have to learn."
         }
     ],
-    "medias": [        
+    "medias": [
         {
             "icon": "linkedin",
             "title": "LinkedIn",
-            "http": "https://www.linkedin.com/in/guilhermeborgesbastos/"
+            "http": "https://www.linkedin.com/in/vaibhav-katturu-559787185/"
         },
         {
             "icon": "github",
             "title": "GitHub",
-            "http": "https://github.com/guilhermeborgesbastos"
+            "http": "https://github.com/vaiv26"
         },
         {
-            "icon": "facebook",
-            "title": "Facebook",
-            "http": "https://www.facebook.com/guilherme.borgesbastos"
+            "icon": "google",
+            "title": "Google",
+            "http": "https://scholar.google.com/citations?user=aI0-WxYAAAAJ&hl=en&oi=ao"
         }
     ],
-    "hobbies": [        
+    "hobbies": [
         {
             "icon": "biking",
             "title": "Cycling"
         },
         {
-            "icon": "dumbbell",
-            "title": "Gym"
+            "icon": "futbol",
+            "title": "Soccer"
         },
         {
             "icon": "suitcase-rolling",
             "title": "Travel"
         },
         {
-            "icon": "book",
-            "title": "Read"
+            "icon": "gamepad",
+            "title": "Playing video Games"
         }
     ]
 }

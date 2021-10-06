@@ -35,7 +35,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "compass-mixins": "^0.12.10",
     "elliptic": "^6.5.4",
-    "firebase": "^7.14.2",
+    "firebase": "^7.24.0",
     "hammerjs": "^2.0.8",
     "http-proxy": "^1.18.1",
     "ini": "^1.3.8",

@@ -16,7 +16,7 @@ export class Typed {
             startDelay: 2000,
             phrasePeriod: 200
         };
-        
+
         this.text = "";
         this.isDeleting = false;
         this.loopNum = 0;

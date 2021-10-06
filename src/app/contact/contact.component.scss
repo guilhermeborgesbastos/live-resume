@@ -48,7 +48,7 @@
             -webkit-animation: fadeIn 1s;
             animation: fadeIn 1s;
 
-            .success { 
+            .success {
                 display: inline;
             }
         }
@@ -59,7 +59,7 @@
             -webkit-animation: fadeIn 1s;
             animation: fadeIn 1s;
 
-            .error { 
+            .error {
                 display: inline;
             }
         }
@@ -80,7 +80,7 @@
         border-top-left-radius: 100%;
         border: 0;
         border-right: 0;
-        border-bottom: 0;        
+        border-bottom: 0;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -96,28 +96,28 @@
         width: 85vw;
         max-width: 1400px;
         opacity: 1;
-        
+
         .left-side {
             flex-grow: 4;
             z-index: 2;
             margin-bottom: 1em;
-            
+
             .title {
-                
+
                 h1 {
                     font-size: 42px;
                     font-weight: 600;
                     color: #222f5c;
                 }
             }
-            
+
             .top-container {
                 display: flex;
                 background-color: #fff;
                 border-radius: 15px;
                 box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
                 padding: 1em;
-    
+
                 .picture {
                     display: block;
                     width: 110px;
@@ -126,29 +126,29 @@
                     background-repeat: no-repeat;
                     background-position: center center;
                     border-radius: 99em;
-                    background-image: url('../../assets/template/about/guilherme-borges-bastos-picture.jpg');
+                    background-image: url('../../assets/template/about/download.png');
                     border: 1px solid #d4e7fe;
                     margin-right: 1em;
                 }
-    
+
                 .info {
-    
+
                     .icon {
                         margin-right: 10px;
                         color: #222f5c;
                     }
-    
+
                     a {
                         text-decoration: none;
                         color: #646d8d;
                     }
-                    
+
                     p {
                         margin: 0 0 8px 0;
                         color: #646d8d;
                         font-weight: 600;
                     }
-                    
+
                     .name {
                         font-size: 18px;
                         font-weight: bold;
@@ -157,32 +157,32 @@
                     }
                 }
             }
-    
+
             .bottom-container {
                 background-color: #fff;
                 border-radius: 15px;
                 box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
                 padding: 1em;
                 margin-top: 1em;
-                
+
                 form {
                     display: flex;
                     flex-direction: column;
-    
+
                     .form-group {
                         display: flex;
                         margin-bottom: 1em;
                         flex-direction: column;
-    
+
                         .warnings {
-    
+
                             small {
                                 margin-left: 10px;
                                 color: red;
                             }
                         }
                     }
-    
+
                     label {
                         font-size: 14px;
                         font-weight: 600;
@@ -190,11 +190,11 @@
                         margin-bottom: 5px;
                         margin-left: 10px;
                     }
-    
+
                     input {
                         font-family: "Montserrat", sans-serif;
                     }
-    
+
                     input[type=text], input[type=email] {
                         font-size: 16px;
                         padding: 10px 0 10px 15px;
@@ -204,12 +204,12 @@
                         color: #848484;
                         font-weight: 600;
                         margin-bottom: 5px;
-    
+
                         &.is-invalid {
                             border: 2px solid red;
                         }
                     }
-    
+
                     input[type=submit] {
                         background-color: #70c576;
                         font-size: 22px;
@@ -220,17 +220,17 @@
                         text-transform: uppercase;
                         font-weight: 600;
                         cursor: pointer;
-    
+
                         &.is-invalid {
                             border: 2px solid red;
                         }
-    
+
                         &:hover {
                             color: #2c612f;
                             background-color: #68bd6e;
                         }
                     }
-    
+
                     textarea {
                         font-size: 16px;
                         padding: 10px 0 10px 15px;
@@ -242,14 +242,14 @@
                         margin-bottom: 5px;
                         font-family: "Montserrat", sans-serif;
                     }
-    
+
                     &.loading {
                         pointer-events: none;
                         opacity: 0.6;
                     }
-    
+
                     &.ng-invalid {
-                        
+
                         input[type=submit] {
                             pointer-events: none;
                             opacity: 0.6;
@@ -259,11 +259,11 @@
                 }
             }
         }
-    
+
         .right-side {
             flex-grow: 6;
         }
-    
+
         &.fade {
             pointer-events: none;
             -webkit-animation: fadeOut 1s;

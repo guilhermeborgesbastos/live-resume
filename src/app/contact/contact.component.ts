@@ -14,12 +14,12 @@ import { Contact } from "../model/contact.model";
 })
 
 export class ContactComponent implements OnInit {
-  
+
   name: string;
   email: string;
   phone: string;
   location: string;
-    
+
   faEnvelope: IconDefinition;
   faPhone: IconDefinition;
   faMapMarkerAlt: IconDefinition;
@@ -43,7 +43,7 @@ export class ContactComponent implements OnInit {
     message: new FormControl("",[
       Validators.required
     ])
-  }); 
+  });
 
   get senderEmail() {
     return this.contactForm.get("email")
@@ -62,10 +62,10 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.name = "Guilherme Borges Bastos";
-    this.email = "guilhermeborgesbastos@gmail.com";
-    this.phone = "+55 34 98400 9731";
-    this.location = "Rotterdam, South Holland, Netherlands";
+    this.name = "Vaibhav Kumar Katturu";
+    this.email = "vaibhavkumar651@gmail.com";
+    this.phone = "+91801766XXXX";
+    this.location = "Kolkata, India";
 
     this.faEnvelope = faEnvelope;
     this.faPhone = faPhone;
@@ -81,7 +81,7 @@ export class ContactComponent implements OnInit {
       this.displayUserInterfaceMessage(false);
     });
   }
-  
+
   displayUserInterfaceMessage(hasBeenSuccessfuly: boolean) {
     this.isLoading = false;
     this.hasBeenSubmited = true;

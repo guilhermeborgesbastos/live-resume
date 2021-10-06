@@ -26,7 +26,7 @@
 
     .first-column {
         flex-grow: 2;
-    
+
         h1 {
             color: #7d7d7d;
             font-size: 22px;
@@ -34,29 +34,29 @@
             text-transform: uppercase;
             margin: 0;
         }
-    
+
         h2 {
             font-size: 35px;
             font-weight: 600;
             color: #222f5c;
             margin: 5px 0 0 0;
         }
-    
+
         h3 {
             font-size: 22px;
             font-weight: 600;
             color: #7d7d7d;
             margin-bottom: 10px;
         }
-    
+
         p {
-    
+
             &.years-old {
                 color: #b2b6c6;
                 font-size: 18px;
                 font-style: italic;
             }
-            
+
             &.text {
                 margin-top: 1em;
                 font-size: 18px;
@@ -68,22 +68,22 @@
                 line-height: 1.5em;
             }
         }
-    
+
         .icon {
             font-size: 40px;
             color: #555f81;
             margin-right: 1em;
             transition: 0.3s;
-    
+
             &:hover {
                 color: #8087a1;
             }
         }
     }
-    
+
     .second-column {
         flex-grow: 1;
-    
+
         .profile-picture {
             display: block;
             width: 450px;
@@ -94,20 +94,20 @@
             -webkit-border-radius: 99em;
             -moz-border-radius: 99em;
             border-radius: 99em;
-            background-image: url('../../assets/template/about/guilherme-borges-bastos-picture.jpg');
+            background-image: url('../../assets/template/about/download.png');
             border: 3px solid #d4e7fe;
         }
-    
+
         .social-media {
             text-align: center;
             margin-top: 1em;
-    
+
             .icon {
                 font-size: 60px;
                 color: #414c73;
                 margin: 0 20px 0 20px;
                 transition: 0.3s;
-    
+
                 &:hover {
                     color: #8087a1;
                 }

@@ -9,11 +9,11 @@ import { NgNavigatorShareService } from "ng-navigator-share";
 })
 
 export class HeaderComponent implements OnInit, AfterViewInit {
-    
+
   private _activeSection: any;
   private _pageXOffset: any;
   private ngNavigatorShareService: NgNavigatorShareService;
-  
+
   hasMenuToggled: boolean;
   faBars: IconDefinition;
   faShareAlt: IconDefinition;
@@ -31,11 +31,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   // use getter setter to define the properties
-  get activeSection(): any { 
+  get activeSection(): any {
     return this._activeSection;
   }
-  
-  get pageXOffset(): any { 
+
+  get pageXOffset(): any {
     return this._pageXOffset;
   }
 
@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.updateNavigation();
   }
 
-  ngAfterViewInit() {    
+  ngAfterViewInit() {
       // Share button available only for browsers that do support it.
       if (this.ngNavigatorShareService.canShare()) {
         this.shareBtn.nativeElement.style.display = "block";
@@ -67,10 +67,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   private updateNavigation() {
 
     if(this._activeSection && this.renderer) {
-      
+
       // Remove any selected anchor
       const activePreviousElem = this.nav.nativeElement.querySelector("a.active");
-      
+
       if(activePreviousElem) {
         this.renderer.removeClass(activePreviousElem, "active");
       }
@@ -101,12 +101,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   async share() {
     try{
       await this.ngNavigatorShareService.share({
-        title: "Live Resume - Guilherme Borges Bastos",
-        text: "Hello, I'm a Full-stack Java Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!",
-        url: "https://guilhermeborgesbastos.com"
+        title: "Vaibhav Kumar Katturu",
+        text: "Hello, I am Recent Graduate from Pace University, currently I working as a Research Assistant in a two person team",
+        url: "https://vaibhavkatturu.com"
       });
     } catch(error) {
       console.log("You app is not shared, reason: ", error);
-    }    
+    }
   }
 }
