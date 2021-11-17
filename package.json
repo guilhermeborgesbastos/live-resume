@@ -45,7 +45,7 @@
     "serialize-javascript": "^4.0.0",
     "socket.io": "^2.4.1",
     "tar": "^6.1.11",
-    "tslib": "^1.13.0",
+    "tslib": "^1.14.1",
     "webpack-subresource-integrity": "^1.5.2",
     "websocket-extensions": "^0.1.4",
     "zone.js": "~0.10.2"
