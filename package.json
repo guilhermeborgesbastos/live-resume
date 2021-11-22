@@ -23,7 +23,7 @@
     "@angular/common": "^9.0.7",
     "@angular/compiler": "^9.0.7",
     "@angular/core": "^9.0.7",
-    "@angular/fire": "^6.0.0",
+    "@angular/fire": "^6.1.5",
     "@angular/forms": "^9.0.7",
     "@angular/localize": "^9.1.0",
     "@angular/platform-browser": "^9.0.7",
