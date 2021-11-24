@@ -42,7 +42,7 @@
     "ng-navigator-share": "^1.0.4",
     "node-forge": "^0.10.0",
     "rxjs": "^6.6.7",
-    "serialize-javascript": "^4.0.0",
+    "serialize-javascript": "^6.0.0",
     "socket.io": "^2.4.1",
     "tar": "^6.1.11",
     "tslib": "^1.14.1",
