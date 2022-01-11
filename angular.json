@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "live-resume": {
@@ -9,6 +9,19 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "pt": {
+            "translation": "src/locales/messages.pt.xlf",
+            "baseHref": ""
+          },
+          "en": {
+            "translation": "src/locales/messages.en.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -28,7 +41,13 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "hammerjs",
+              "@firebase/app",
+              "@firebase/firestore",
+              "@firebase/database"
+            ]
           },
           "configurations": {
             "production": {
@@ -60,17 +79,13 @@
               ]
             },
             "en": {
-              "aot": true,
-              "i18nFile": "src/locales/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
+              "localize": ["en"],
+              "outputPath": "dist/en/",
               "i18nMissingTranslation": "error"
             },
             "pt": {
-              "aot": true,
-              "i18nFile": "src/locales/messages.pt.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "pt",
+              "localize": ["pt"],
+              "outputPath": "dist/pt/",
               "i18nMissingTranslation": "error"
             },
             "es5": {
