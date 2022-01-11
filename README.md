@@ -28,7 +28,7 @@ Get rid of your old and deprecated text resume by using the first **Open-source 
 
 ## What is included❓
 
-* A fully functional _Angular 9_ application with a customizable template and content;
+* A fully functional _Angular 10_ application with a customizable template and content;
 * Totally responsive for the mobile and desktop devices _(allow mobile gestures too... ;))_;
 * Internationalization for English and Portuguese _(easy for adding/removing new languages - in18 lib)_;
 * Mobile navigation sharing _(Share the resume with native apps like Whatsapp, LinkedIn, Facebook, etc...)_;
@@ -87,9 +87,10 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 
 5. Inner the folder of the cloned project, start the application:
 ```
-ng serve --host 0.0.0.0 --configuration=en
+ng serve -o --host 0.0.0.0 --configuration=en
 ```
 **Note:** the optional parameters:
+* `-o` aliases for opening the default browser as soon the application is served.
 * ` --host 0.0.0.0` is useful if you want to see how your application runs on a mobile or from some other laptop/computer/network. 
 * ` --configuration=en` in this example the application will be displayed in **en-US**, by replacing the `en`with `pt` => `--configuration=pt`, the application language would be **pt-BR**. 
 
