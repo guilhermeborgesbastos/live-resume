@@ -8,6 +8,7 @@ import { ResumeModule } from "./resume/resume.module";
 import { PageNotFoundRoutingModule } from "./404/page-not-found-routing.module";
 import { PageNotFoundModule } from "./404/page-not-found.module";
 import { CoreModule } from "./core/core.module";
+import { Injectable } from "@angular/core";
 
 import localeEn from "@angular/common/locales/en";
 import localePt from "@angular/common/locales/pt";
@@ -19,11 +20,12 @@ import { AngularFireAnalyticsModule } from "@angular/fire/analytics";
 import { environment } from "../environments/environment";
 
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
-import * as Hammer from "hammerjs";
+import { DIRECTION_ALL } from "hammerjs";
 
-export class MyHammerConfig extends HammerGestureConfig {
+@Injectable()
+export class HammerConfig  extends HammerGestureConfig {
     overrides = <any> {
-        swipe: { direction: Hammer.DIRECTION_ALL },
+        swipe: { direction: DIRECTION_ALL },
     };
 }
 
@@ -47,7 +49,7 @@ registerLocaleData(localePt, "pt-BR", localePtExtra);
   providers: [
     {
       provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig,
+      useClass: HammerConfig,
     },
   ]
 })
