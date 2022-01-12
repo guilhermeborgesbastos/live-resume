@@ -1,0 +1,41 @@
+@keyframes arm-anima {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes head-anima {
+  0% { top: 25px; }
+  42% { top: 25px; }
+  45% { top: 50px; }
+  100% { top: 25px; }
+}
+
+@keyframes eye-anima {
+  0% { height: 5px; }
+  42% { height: 5px; }
+  45% { height: 1px; }
+  100% { height: 5px; }
+}
+
+@keyframes shadow-anima {
+  0% {
+    width: 350px;
+    left: 80px;
+  }
+  25% {
+    width: 450px;
+    left: 80px;
+  }
+  50% {
+    width: 350px;
+    left: 80px;
+  }
+  75% {
+    width: 450px;
+    left: 0;
+  }
+  100% {
+    width: 350px;
+    left: 80px;
+  }
+}
