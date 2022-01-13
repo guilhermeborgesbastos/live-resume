@@ -1,3 +1,13 @@
+#[1.5.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.5) (2022-01-13)
+###📃 release notes
+- Upgrade to Angular 11.2.14;
+- Upgrade to Typescript 4;
+- Support for IE9, IE10, and IE mobile has been removed.
+
+#[1.4.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.4) (2022-01-11)
+###📃 release notes
+- Upgrade to Angular 10.2.5.
+
 #[1.3.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.3) (2021-07-29)
 ###📃 release notes
 - Add horizontal gestures to navigate the profile experience.

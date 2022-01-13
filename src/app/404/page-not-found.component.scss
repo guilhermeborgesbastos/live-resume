@@ -104,7 +104,7 @@ a {
   top: 25px;
   width: 65px;
   &:after, &:before {
-    position: absolute;    
+    position: absolute;
     content: "";
     background-color: $color-black;
     border-radius: 10px;
@@ -132,7 +132,7 @@ a {
     width: 48px;
     &:after, &:before {
       @include top50;
-      
+
       content: "";
       background-color: $color-black;
       border-radius: 50%;
@@ -161,7 +161,7 @@ a {
 }
 
 .shape {
-  @include left50; 
+  @include left50;
 
   border-radius: 50%;
   height: 140px;
@@ -177,7 +177,7 @@ a {
       content: "";
       position: absolute;
       border-radius: 50%;
-      height: 20px;      
+      height: 20px;
       width: 20px;
     }
     &:after {
@@ -211,8 +211,8 @@ a {
 .caveman:nth-child(1) .shape {
   background-color: $color-blue-1;
 
-  .circle { 
-    background-color: $color-blue-2; 
+  .circle {
+    background-color: $color-blue-2;
     &:after, &:before { background-color: $color-blue-2; }
   }
 }
@@ -220,7 +220,7 @@ a {
 .caveman:nth-child(2) .shape {
   background-color: $color-blue-2;
   .circle {
-      background-color: $color-blue-1; 
+      background-color: $color-blue-1;
       &:after, &:before { background-color: $color-blue-1; }
   }
 }
@@ -232,7 +232,7 @@ a {
   border-radius: 50px;
   box-sizing: border-box;
   height: 180px;
-  left: 135px; 
+  left: 135px;
   top: 80px;
   transform-origin: 30px 30px;
   width: 60px;
@@ -273,7 +273,7 @@ a {
 .leg {
   position: absolute;
   border-radius: 10px;
-  height: 55px;  
+  height: 55px;
   top: 200px;
   width: 10px;
   &:after {
@@ -323,20 +323,20 @@ a {
   }
 }
 
-.leg:nth-child(1) { 
+.leg:nth-child(1) {
   background-color: $color-skin-3;
   left: 95px;
   &:after { background-color: $color-skin-3; }
   .foot {
-    background-color: $color-skin-3; 
+    background-color: $color-skin-3;
     &:after { background-color: $color-skin-3; }
     &:before { display: none; }
   }
 }
 
-.leg:nth-child(2) { 
+.leg:nth-child(2) {
   background-color: $color-skin-2;
-  left: 115px;   
+  left: 115px;
   &:after { background-color: $color-skin-2; }
   .foot { background-color: $color-skin-2; }
 }
@@ -351,11 +351,6 @@ a {
   animation-delay: 0.6s;
 }
 
-@keyframes arm-anima {
-  0% { transform: rotate(0); }
-  100% { transform: rotate(-360deg); }
-}
-
 .caveman:nth-child(2) .head {
   animation: head-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
 }
@@ -365,50 +360,13 @@ a {
   animation-delay: 0.6s;
 }
 
-@keyframes head-anima {
-  0% { top: 25px; }
-  42% { top: 25px; }
-  45% { top: 50px; }
-  100% { top: 25px; }
-}
-
-.caveman:nth-child(2) .eye:after, 
+.caveman:nth-child(2) .eye:after,
 .caveman:nth-child(2) .eye:before {
   animation: eye-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
 }
 
-.caveman:nth-child(1) .eye:after, 
+.caveman:nth-child(1) .eye:after,
 .caveman:nth-child(1) .eye:before {
   animation: eye-anima 1.2s infinite cubic-bezier(0.55, 0.01, 0.16, 1.34);
   animation-delay: 0.6s;
-}
-
-@keyframes eye-anima {
-  0% { height: 5px; }
-  42% { height: 5px; }
-  45% { height: 1px; }
-  100% { height: 5px; }
-}
-
-@keyframes shadow-anima {
-  0% {
-    width: 350px;
-    left: 80px;
-  }
-  25% {
-    width: 450px;
-    left: 80px;
-  }
-  50% {
-    width: 350px;
-    left: 80px;
-  }
-  75% {
-    width: 450px;
-    left: 0;
-  }
-  100% {
-    width: 350px;
-    left: 80px;
-  }
 }
