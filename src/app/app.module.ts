@@ -14,9 +14,9 @@ import localeEn from "@angular/common/locales/en";
 import localePt from "@angular/common/locales/pt";
 import localePtExtra from "@angular/common/locales/extra/pt";
 
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { AngularFireAnalyticsModule } from "@angular/fire/analytics";
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
+import { AngularFireAnalyticsModule } from "@angular/fire/compat/analytics";
 import { environment } from "../environments/environment";
 
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";

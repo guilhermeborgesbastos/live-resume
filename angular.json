@@ -46,7 +46,9 @@
               "hammerjs",
               "@firebase/app",
               "@firebase/firestore",
-              "@firebase/database"
+              "@firebase/database",
+              "@firebase/component",
+              "@firebase/util"
             ]
           },
           "configurations": {
