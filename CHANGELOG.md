@@ -1,3 +1,11 @@
+#[1.6.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.6) (2022-01-14)
+###📃 release notes
+- Upgrade to Angular 12.2.15;
+- Upgrade to Typescript 4.3.5;
+- Upgrade to Firebase 9.6.3;
+- Reduce overall bundle size;
+- IE11 support has been deprecated.
+
 #[1.5.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.5) (2022-01-13)
 ###📃 release notes
 - Upgrade to Angular 11.2.14;
