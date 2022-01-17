@@ -41,13 +41,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "allowedCommonJsDependencies": [
-              "hammerjs",
-              "@firebase/app",
-              "@firebase/firestore",
-              "@firebase/database"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
