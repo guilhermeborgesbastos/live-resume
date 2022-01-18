@@ -1,3 +1,9 @@
+#[1.7.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.7) (2022-01-18)
+###📃 release notes
+- Upgrade to Angular 13.1.2;
+- Replace TSLint by ESLint;
+- Upgrade to Typescript 4.5.4.
+
 #[1.6.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.6) (2022-01-14)
 ###📃 release notes
 - Upgrade to Angular 12.2.15;
