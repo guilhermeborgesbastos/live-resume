@@ -28,7 +28,7 @@ Get rid of your old and deprecated text resume by using the first **Open-source 
 
 ## What is included❓
 
-* A fully functional _Angular 12_ application with a customizable template and content;
+* A fully functional _Angular 13_ application with a customizable template and content;
 * Totally responsive for the mobile and desktop devices _(allow mobile gestures too... ;))_;
 * Internationalization for English and Portuguese _(easy for adding/removing new languages - in18 lib)_;
 * Mobile navigation sharing _(Share the resume with native apps like Whatsapp, LinkedIn, Facebook, etc...)_;

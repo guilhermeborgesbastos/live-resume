@@ -72,12 +72,16 @@
               ]
             },
             "en": {
-              "localize": ["en"],
+              "localize": [
+                "en"
+              ],
               "outputPath": "dist/en/",
               "i18nMissingTranslation": "error"
             },
             "pt": {
-              "localize": ["pt"],
+              "localize": [
+                "pt"
+              ],
               "outputPath": "dist/pt/",
               "i18nMissingTranslation": "error"
             },
@@ -129,19 +133,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -153,8 +144,21 @@
               "devServerTarget": "live-resume:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
-    }},
-  "defaultProject": "live-resume"
+    }
+  },
+  "defaultProject": "live-resume",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
