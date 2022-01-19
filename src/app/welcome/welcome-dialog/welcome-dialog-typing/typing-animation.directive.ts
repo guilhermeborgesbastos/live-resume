@@ -10,16 +10,16 @@ interface IPhrase {
 }
 
 @Directive({
-    selector: "[typingAnimation]"
+    selector: "[appTypingAnimation]"
 })
 
 export class TypingAnimationDirective implements OnInit {
 
-    @Input("phrasePeriod") phrasePeriod: number;
-    @Input("typeSpeed") typeSpeed: number;
-    @Input("startDelay") startDelay: number;
-    @Input("data") data: IPhrase[];
-    
+    @Input() phrasePeriod: number;
+    @Input() typeSpeed: number;
+    @Input() startDelay: number;
+    @Input() data: IPhrase[];
+
     typed: Typed;
     phrases: string[] = [];
 
@@ -31,7 +31,7 @@ export class TypingAnimationDirective implements OnInit {
     _flatMap = (f, xs) => xs.reduce((acc,x) => acc.concat(f(x)), []);
 
     ngOnInit () {
-        
+
         const nestedArr: IPhrase[] = this.data.filter(el => el.language === (this.locale || "en"));
         this.phrases = this._flatMap(el => el.phrases, nestedArr);
 
@@ -54,7 +54,7 @@ export class TypingAnimationDirective implements OnInit {
             },
             this.phrases
         );
-        
+
         this.typed.begin();
     }
 }

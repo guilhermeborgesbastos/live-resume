@@ -2,13 +2,13 @@ import { Directive, ElementRef, Input, OnInit} from "@angular/core";
 import { LOCALE_ID, Inject } from "@angular/core";
 import { EllipsisPipe } from "../pipe/ellipsis.pipe";
 
-@Directive({ selector: "[internationalization]" })
-export class InternationalizationDirective implements OnInit{
+@Directive({ selector: "[appInternationalization]" })
+export class InternationalizationDirective {
 
     private _data: any[] = [];
 
     @Input() property :string;
-    
+
     @Input() get data(): any[] {
         return this._data;
     }
@@ -27,10 +27,8 @@ export class InternationalizationDirective implements OnInit{
         }
     }
 
-    ngOnInit(): void {}
-
     private retrievePropertyValueByLocation(): any {
-        
+
         if(this._data) {
 
             const value: string[] = this._data

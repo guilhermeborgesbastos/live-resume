@@ -6,10 +6,8 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: [ "./welcome-background.scss", "./welcome-background.reponsivity.scss" ]
 })
 
-export class WelcomeBackgroundComponent implements OnInit {
-    
-    constructor() {}
+export class WelcomeBackgroundComponent {
 
-    ngOnInit() {}
+    constructor() {}
 
 }

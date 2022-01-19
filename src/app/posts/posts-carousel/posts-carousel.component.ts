@@ -1,4 +1,4 @@
-import { 
+import {
     Component, OnInit,
     Input, HostListener,
     EventEmitter, ElementRef,
@@ -22,13 +22,13 @@ import { debounce } from "../../core/utils";
     ]
 })
 
-export class PostsCarouselComponent implements OnInit {
-    
+export class PostsCarouselComponent {
+
     public _posts: IPost[] = [];
     public _originalPosts: IPost[] = [];
     public _currentPage: number;
 
-    @Output() onResultsPerPageChanged = new EventEmitter<number>();
+    @Output() resultsPerPageChanged = new EventEmitter<number>();
 
     resultsPerPage: number;
     elWidth: number;
@@ -40,7 +40,7 @@ export class PostsCarouselComponent implements OnInit {
     @Input() get currentPage(): number {
         return this._currentPage;
     }
-    
+
     set currentPage(value: number) {
         if(value) {
             this._currentPage = value;
@@ -51,19 +51,17 @@ export class PostsCarouselComponent implements OnInit {
     @Input() get posts(): IPost[] {
         return this._posts;
     }
-  
+
     set posts(value: IPost[]) {
         if(value) {
             this._originalPosts = value;
             this.onResizeElement();
         }
     }
-    
-    ngOnInit(): void {}
 
     @HostListener("window:resize")
-    @debounce(25) 
-    onResize() { 
+    @debounce(25)
+    onResize() {
         this.onResizeElement();
     }
 
@@ -83,7 +81,7 @@ export class PostsCarouselComponent implements OnInit {
             this._posts = this._originalPosts.slice(this.start, this.end);
             this._posts.sort((a:any, b:any) => +new Date (b.date) - +new Date(a.date));
 
-            this.onResultsPerPageChanged.emit(this.resultsPerPage);
+            this.resultsPerPageChanged.emit(this.resultsPerPage);
         }
     }
 }
