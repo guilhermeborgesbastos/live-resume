@@ -6,9 +6,7 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./page-not-found.component.scss", "./page-not-found.component.responsivity.scss", "./page-not-found.keyframes.component.scss"]
 })
 
-export class PageNotFoundComponent implements OnInit {
+export class PageNotFoundComponent {
 
     constructor() {}
-
-    ngOnInit(): void {}
 }

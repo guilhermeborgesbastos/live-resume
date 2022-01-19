@@ -6,23 +6,21 @@ import {
 } from "@angular/core";
 
 @Directive({
-  selector: "[in-viewport]"
+  selector: "[appInViewport]"
 })
 
-export class InViewportDirective implements OnInit, OnChanges {
+export class InViewportDirective implements OnChanges {
 
-    @Input("pageYOffset") pageYOffset: number;
-    @Output("inViewport") inViewport:EventEmitter<Object>;
+    @Input() pageYOffset: number;
+    @Output() inViewport:EventEmitter<Object>;
 
     constructor(private _el:ElementRef) {
         this.inViewport = new EventEmitter();
     }
 
-    public ngOnChanges() : void {
+    public ngOnChanges(): void {
         this.check();
-	}
-
-    ngOnInit() { }
+    }
 
     check(partial:boolean = true) {
 
@@ -47,7 +45,7 @@ export class InViewportDirective implements OnInit, OnChanges {
             value: false
         };
 
-        event["value"] = (elSize && vVisible);       
+        event["value"] = (elSize && vVisible);
 
         if(event["value"]) {
             this.inViewport.emit(event);

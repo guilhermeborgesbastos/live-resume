@@ -6,7 +6,7 @@ import { debounce } from "../core/utils";
   templateUrl: "./resume.component.html",
   styleUrls: ["./resume.component.css", "./resume.component.responsivity.css"]
 })
-export class ResumeComponent implements OnInit {
+export class ResumeComponent {
 
   isSticky: boolean = false;
   activeSection: string;
@@ -19,19 +19,17 @@ export class ResumeComponent implements OnInit {
   }
 
   @HostListener("window:scroll")
-  @debounce() 
+  @debounce()
   checkScroll() {
     this.pageYOffset = window.pageYOffset;
     this.isSticky = pageYOffset >= 250;
   }
 
   @HostListener("window:resize")
-  @debounce(25) 
+  @debounce(25)
   checkResize() {
     this.pageXOffset = window.innerWidth;
   }
-
-  ngOnInit(): void { }
 
   @debounce(150)
   onViewport(isOnViewPort: any, element?: string) {

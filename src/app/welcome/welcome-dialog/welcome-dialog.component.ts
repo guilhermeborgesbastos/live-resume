@@ -6,10 +6,8 @@ import { Component, OnInit, Input } from "@angular/core";
     styleUrls: [ "./welcome-dialog.css", "./welcome-dialog.responsivity.css" ]
 })
 
-export class WelcomeDialogComponent implements OnInit {
-    
-    constructor() {}
+export class WelcomeDialogComponent {
 
-    ngOnInit() {}
+    constructor() {}
 
 }

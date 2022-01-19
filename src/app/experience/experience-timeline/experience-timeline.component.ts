@@ -1,4 +1,4 @@
-import { 
+import {
   Component, OnInit,
   Input, ElementRef,
   ViewChild, EventEmitter,
@@ -21,7 +21,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
   private _currentPosition: number;
   private offsetWidth: number;
 
-  @Output() onTimelineChanged = new EventEmitter<number>();
+  @Output() timelineChanged = new EventEmitter<number>();
 
   public removeEventListener: () => void;
 
@@ -61,7 +61,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
     this.removeEventListener = this.renderer.listen(this.elRef.nativeElement, "click", (event) => {
       if (event.target && event.target.getAttribute("id-position")) {
         const targetId: number = event.target.getAttribute("id-position");
-        this.onTimelineChanged.emit(targetId);
+        this.timelineChanged.emit(targetId);
       }
     });
   }
@@ -70,15 +70,15 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
   public ngOnDestroy() {
     this.removeEventListener();
   }
-  
+
   updateTimelineNavigation() {
     const activePreviousElem = this.line.nativeElement.querySelector(".milestone.active.current");
     this.renderer.removeClass(activePreviousElem, "current");
-    
+
     const targetElem = this.line.nativeElement.querySelector(`div[id-position="${this.currentPosition}"]`);
     this.renderer.addClass(targetElem, "current");
   }
-  
+
   private daysBetween(startDate: string, endDate: string): number {
     // The .replace() is necessary in order to avoid issues in the Firefox browser.
     const pointA = new Date(startDate.replace(/-/g,'/'));
@@ -100,12 +100,12 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
 
     if(dates && dates.length < 2) {
       this.renderer.setStyle(this.elRef.nativeElement, "visibility", "hidden");
-    } 
+    }
     else if (dates.length >= 2) {
       const daysBetween: number = this.daysBetween(dates[0], dates[dates.length - 1]);
       const oneDayInPixels: number = this.offsetWidth / daysBetween;
-      
-      // Draw first date milestone      
+
+      // Draw first date milestone
       this.renderer.appendChild(this.line.nativeElement, this.createMilestone(1, 0, dates[0]));
 
       let i: number;
@@ -121,7 +121,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
           this.renderer.addClass(milestoneElement, "current");
         }
 
-        this.renderer.appendChild(this.line.nativeElement, milestoneElement);        
+        this.renderer.appendChild(this.line.nativeElement, milestoneElement);
       }
 
       // Draw last date milestone ( the current frame )
@@ -164,7 +164,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
 
     const safariDateFormatterPipe = new SafariDateFormatterPipe();
     const safariDateFormatterPipeValue = safariDateFormatterPipe.transform(date);
-    
+
     const localizedDatePipe = new LocalizedDatePipe(this.locale);
 
     let month: any = localizedDatePipe.transform(safariDateFormatterPipeValue, "MMM");
