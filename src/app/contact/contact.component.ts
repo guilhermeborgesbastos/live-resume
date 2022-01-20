@@ -6,6 +6,7 @@ import {
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ContactService } from "./contact.service";
 import { Contact } from "../model/contact.model";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: "app-contact",
@@ -14,12 +15,12 @@ import { Contact } from "../model/contact.model";
 })
 
 export class ContactComponent implements OnInit {
-  
+
   name: string;
   email: string;
   phone: string;
   location: string;
-    
+
   faEnvelope: IconDefinition;
   faPhone: IconDefinition;
   faMapMarkerAlt: IconDefinition;
@@ -43,7 +44,7 @@ export class ContactComponent implements OnInit {
     message: new FormControl("",[
       Validators.required
     ])
-  }); 
+  });
 
   get senderEmail() {
     return this.contactForm.get("email")
@@ -62,10 +63,11 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.name = "Guilherme Borges Bastos";
-    this.email = "guilhermeborgesbastos@gmail.com";
-    this.phone = "+55 34 98400 9731";
-    this.location = "Rotterdam, South Holland, Netherlands";
+    const personalData = environment.personal;
+    this.name = personalData.name;
+    this.email = personalData.email;
+    this.phone = personalData.phone;
+    this.location = personalData.location;
 
     this.faEnvelope = faEnvelope;
     this.faPhone = faPhone;
@@ -81,7 +83,7 @@ export class ContactComponent implements OnInit {
       this.displayUserInterfaceMessage(false);
     });
   }
-  
+
   displayUserInterfaceMessage(hasBeenSuccessfuly: boolean) {
     this.isLoading = false;
     this.hasBeenSubmited = true;

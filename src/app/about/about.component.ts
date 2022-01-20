@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { environment } from '../../environments/environment';
 import { DataService } from "../core/data.service";
 import { IAbout } from "./about-interfaces";
 import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
@@ -27,14 +28,14 @@ export class AboutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.name = "Guilherme Borges Bastos"; // Sets here, your full name
-    this.yearsOld = this.calcAge("1993-06-29"); // Sets here, your date birthday
+    this.name = environment.personal.name;
+    this.yearsOld = this.calcAge(environment.personal.birth);
 
     // Fetches the About information from the Data Service (about.json file).
     this.subscription = this.dataService.getAbout()
         .subscribe((about: IAbout) => this.aboutData = about);
   }
-  
+
   ngOnDestroy() {
     // Only need to unsubscribe if its a multi event Observable
     this.subscription.unsubscribe();

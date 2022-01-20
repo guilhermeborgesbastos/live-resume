@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: "app-welcome",
@@ -9,5 +10,13 @@ import { Component, OnInit } from "@angular/core";
 export class WelcomeComponent {
 
   constructor() {}
+
+  get characterIllustration(): string {
+    return environment.personal.caricature;
+  }
+
+  get characterName(): string {
+    return environment.personal.name;
+  }
 
 }
