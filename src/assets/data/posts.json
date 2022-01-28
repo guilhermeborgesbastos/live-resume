@@ -1,6 +1,6 @@
 [
     {
-        "thumbnail": "../../assets/posts/post-11-03-2019.jpg",
+        "thumbnail": "assets/posts/post-11-03-2019.jpg",
         "http": "https://www.linkedin.com/pulse/anti-traversing-2d-array-formula-guilherme-borges-bastos/",
         "date": "11-03-2019",
         "internationalizations": [
@@ -17,7 +17,7 @@
         ]
     },
     {
-        "thumbnail": "../../assets/posts/post-01-15-2019.jpg",
+        "thumbnail": "assets/posts/post-01-15-2019.jpg",
         "http": "https://www.linkedin.com/pulse/em-2019-saia-do-desemprego-seja-voc%C3%AA-um-web-developer-borges-bastos/",
         "date": "01-15-2019",
         "internationalizations": [
@@ -34,7 +34,7 @@
         ]
     },
     {
-        "thumbnail": "../../assets/posts/post-07-10-2016.jpg",
+        "thumbnail": "assets/posts/post-07-10-2016.jpg",
         "http": "https://www.linkedin.com/pulse/map-item-navigation-android-opensource-en-guilherme-borges-bastos/",
         "date": "07-10-2016",
         "internationalizations": [
@@ -51,7 +51,7 @@
         ]
     },
     {
-        "thumbnail": "../../assets/posts/post-05-07-2016.jpg",
+        "thumbnail": "assets/posts/post-05-07-2016.jpg",
         "http": "https://www.linkedin.com/pulse/geo-distance-search-mysql-php-guilherme-borges-bastos/",
         "date": "05-07-2016",
         "internationalizations": [
@@ -68,7 +68,7 @@
         ]
     },
     {
-        "thumbnail": "../../assets/posts/post-06-18-2016.jpg",
+        "thumbnail": "assets/posts/post-06-18-2016.jpg",
         "http": "https://www.linkedin.com/pulse/envio-de-e-mail-autenticado-php-guilherme-borges-bastos/",
         "date": "06-18-2016",
         "internationalizations": [
@@ -85,7 +85,7 @@
         ]
     },
     {
-        "thumbnail": "../../assets/posts/post-06-04-2016.jpg",
+        "thumbnail": "assets/posts/post-06-04-2016.jpg",
         "http": "https://www.linkedin.com/pulse/sharing-android-6-opensource-download-guilherme-borges-bastos/",
         "date": "06-04-2016",
         "internationalizations": [
@@ -102,7 +102,7 @@
         ]
     },
     {
-        "thumbnail": "../../assets/posts/post-05-28-2016.jpg",
+        "thumbnail": "assets/posts/post-05-28-2016.jpg",
         "http": "https://www.linkedin.com/pulse/capturing-contact-list-android-open-source-en-borges-bastos/",
         "date": "05-28-2016",
         "internationalizations": [
@@ -119,7 +119,7 @@
         ]
     },
     {
-        "thumbnail": "../../assets/posts/post-05-14-2016.jpg",
+        "thumbnail": "assets/posts/post-05-14-2016.jpg",
         "http": "https://www.linkedin.com/pulse/tinder-slide-card-android-open-source-en-guilherme-borges-bastos/",
         "date": "05-14-2016",
         "internationalizations": [
@@ -136,7 +136,7 @@
         ]
     },
     {
-        "thumbnail": "../../assets/posts/post-05-21-2016.jpg",
+        "thumbnail": "assets/posts/post-05-21-2016.jpg",
         "http": "https://www.linkedin.com/pulse/push-notification-para-android-totorial-open-source-borges-bastos/",
         "date": "05-21-2016",
         "internationalizations": [
