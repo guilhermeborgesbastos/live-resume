@@ -87,7 +87,7 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 
 5. Inner the folder of the cloned project, start the application:
 ```
-ng serve -o --host 0.0.0.0 --configuration=en
+ng serve -o --host 0.0.0.0 --configuration en
 ```
 **Note:** the optional parameters:
 * `-o` aliases for opening the default browser as soon the application is served.
