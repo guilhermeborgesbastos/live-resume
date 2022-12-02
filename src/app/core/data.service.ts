@@ -23,6 +23,7 @@ export class DataService {
     }
     
     getAbout() : Observable<IAbout> {
+        //console.log("URL =>. " + JSON.stringify(this.baseUrl)); ULR GIUSTO
       return this.http.get<IAbout>(this.baseUrl + "about.json")
           .pipe(
               catchError(this.handleError)

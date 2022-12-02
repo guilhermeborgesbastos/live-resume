@@ -30,11 +30,9 @@ export class InternationalizationDirective {
     private retrievePropertyValueByLocation(): any {
 
         if(this._data) {
-
-            const value: string[] = this._data
-                .filter(element => element.language === (this.locale || "en"))
+            const value: string[] = this._data.filter(element => element.language === (this.locale || "en" || "it" || "en-US"))
                 .map(element => element[this.property]) || [""];
-
+            //console.log("data || >>> " + JSON.stringify(this.ellipsis));
             return this.ellipsis > 0 ? new EllipsisPipe().transform(value[0], this.ellipsis) : value;
 
         }

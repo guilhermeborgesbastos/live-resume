@@ -1,29 +1,34 @@
 {
     "internationalizations": [
         {
-            "language": "pt",
-            "description": "Minha caminhada como <i>programador</i> teve início aos nove anos de idade quando me apaixonei pelo <i>Logo</i>, uma linguagem de programação educacional usada para cativar crianças nas maravilhosas terras da <i>Programação</i>. Costumava passar horas seguidas tentando criar figuras e animações, usando matemática e geometria. Naquela época, eu simplesmente não conhecia os desafios emocionantes que ainda estavam por vir.<br><br>Alguns anos depois, consegui um estágio como <i>Webmaster</i>, desde então, nunca mais parei, sendo mais de uma década, onde venho tendo a chance de trabalhar com pessoas maravilhosas, aprendendo todos os dias, viajando pelo mundo e, principalmente, sempre fazendo grandes amizades.<br><br>Tive experiência como empreendedor, quando um amigo apresentou-me <i>Magento</i>, um framework de comércio eletrônico extremamente popular. Depois de fazer vários cursos e muita prática, consegui contratos com agências de São Paulo e Rio de Janeiro, Brasil. Essa experiência de empreendedorismo me deu a chance de ver o outro lado da moeda, o que contribuiu para expandir um pouco mais minha consciência como colaborador.<br><br>Atualmente, continuo buscando novas habilidades, aprendendo e compartilhando meu humilde conhecimento, tanto quanto possível."
+            "language": "it",
+            "description": "Sin da piccolo sono sempre stato appassionato del mondo digital e di tutto ciò che vive attorno ad esso,<br><br>amo scrivere codice ed imparare nuovi linguaggi di programmazione.<br><br>Dammi un notebook, del codice da scrivere, una tazza di caffè e mi vedrai felice,almeno finché il codice non inizierà a buggarsi.<br><br>L'altra faccia della medaglia, amante dello sport.<br><br>Pratico a livello amatoriale vari sport: corsa, cross-training, arrampicata, nuoto, snowboard e calcio.<br><br>Quando non sono davanti ad un pc per programmare pratico sport, molti week-end li dedico alle gare di corsa, alle Ocr e alle Spartan race.<br><br>Pieno di energia! sono una persona attiva che non si tira indietro,come nel lavoro, così nella vita privata.Amo viaggiare, conoscere nuove persone, scoprire posti nuovi immersi nella natura.Quando non faccio follie come lanciarmi con il paracadute mi aggiorno nel campo della programmazione, leggo o guardo serie tv"
         },
         {
             "language": "en",
-            "description": "My path as a <i>programmer</i> has started at nineish years old, when I've fallen in love with <i>Logo</i>, an educational programming language used to captivate kids in the wonderful lands of <i>Programming</i>. I used to spend hours in a row trying to build figures and animations, using math and geometry. At that time, I just did not know the exciting challenges that were yet to come.<br><br>A few years later, I got an internship as a <i>Webmaster</i>, since then, I have never stopped. It has been more than a decade, where I'm having the chance to work with marvelous people, learning every day, traveling the world, and mainly, always making great friendships.<br><br>I had an entrepreneurship experience, when a friend of mine presented me <i>Magento</i>, an extremely popular e-commerce framework. After doing several courses and a lot of practice, I got contracts with agencies from São Paulo and Rio de Janeiro, Brazil. This entrepreneurship experience gave me the chance to see the other side of the coin, which contributed to sort of expand a bit more my consciousness as an employee.<br><br>Nowadays, I keep seeking new skills, learning and sharing my humble knowledge as much as possible."
+            "description": "Since I was a child I have always been passionate about the digital world and everything that lives around it,<br><br>I love writing code and learning new programming languages.<br><br>Give me a notebook, some code to write, a cup of coffee and you'll see me happy,at least until the code starts to bug.<br><br>The other side of the coin: sports lover.<br><br>I practice various sports at an amateur level: running, cross-training, climbing, swimming, snowboarding and soccer.<br><br>When I'm not in front of a PC to plan sports, I dedicate many weekends to running races, OCR and Spartan races.Full of energy! I am an active person who does not hold back,as in work, so in private life.I love travelling, meeting new people, discovering new places surrounded by nature.When I'm not doing crazy things like skydiving, I'm learning programming, reading or watching TV series"
         }
     ],
     "medias": [        
         {
             "icon": "linkedin",
             "title": "LinkedIn",
-            "http": "https://www.linkedin.com/in/guilhermeborgesbastos/"
+            "http": "https://www.linkedin.com/in/marco-polello-a762b0175/"
         },
         {
             "icon": "github",
             "title": "GitHub",
-            "http": "https://github.com/guilhermeborgesbastos"
+            "http": "https://github.com/marcopolello"
         },
         {
             "icon": "facebook",
             "title": "Facebook",
-            "http": "https://www.facebook.com/guilherme.borgesbastos"
+            "http": "https://www.facebook.com/marco.pol.54"
+        },
+        {
+            "icon": "instagram",
+            "title": "Instagram",
+            "http": "https://www.instagram.com/marco_pol_94/"
         }
     ],
     "hobbies": [        

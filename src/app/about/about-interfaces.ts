@@ -1,5 +1,5 @@
 export interface IAbout {
-    internationalizations: IAboutInternationalization[];
+    internationalizations?: IAboutInternationalization[];
     medias?: IAboutMedia[];
     hobbies?: IAboutHobby[];
 }

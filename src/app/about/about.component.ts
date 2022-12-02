@@ -30,10 +30,14 @@ export class AboutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.name = environment.personal.name;
     this.yearsOld = this.calcAge(environment.personal.birth);
-
+    console.log("ABOUT DATA" + JSON.stringify(this.dataService));
+    console.log("dataservice se arrivano dati =>" + this.dataService);
     // Fetches the About information from the Data Service (about.json file).
     this.subscription = this.dataService.getAbout()
-        .subscribe((about: IAbout) => this.aboutData = about);
+        .subscribe((about: IAbout) => { 
+          //console.log("ABOUT || >>> " + JSON.stringify(about));
+          this.aboutData = about;
+        });
   }
 
   ngOnDestroy() {

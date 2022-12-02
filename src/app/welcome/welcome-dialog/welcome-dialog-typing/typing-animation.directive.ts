@@ -15,10 +15,10 @@ interface IPhrase {
 
 export class TypingAnimationDirective implements OnInit {
 
-    @Input() phrasePeriod: number;
-    @Input() typeSpeed: number;
-    @Input() startDelay: number;
-    @Input() data: IPhrase[];
+    @Input("phrasePeriod") phrasePeriod: number;
+    @Input("typeSpeed") typeSpeed: number;
+    @Input("startDelay") startDelay: number;
+    @Input("data") data: IPhrase[];
 
     typed: Typed;
     phrases: string[] = [];
@@ -32,7 +32,9 @@ export class TypingAnimationDirective implements OnInit {
 
     ngOnInit () {
 
-        const nestedArr: IPhrase[] = this.data.filter(el => el.language === (this.locale || "en"));
+        const nestedArr: IPhrase[] = this.data.filter(el => el.language === (this.locale || "en" || "en-US"));
+        //console.log("NESTED array" + JSON.stringify(this.data));
+        //console.log("nestedArr =>" + JSON.stringify(this.locale));
         this.phrases = this._flatMap(el => el.phrases, nestedArr);
 
         if(this.checkContent()) {
