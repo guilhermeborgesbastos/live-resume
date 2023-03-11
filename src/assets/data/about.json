@@ -21,11 +21,6 @@
             "http": "https://github.com/soslant"
         },
         {
-            "icon": "facebook",
-            "title": "Facebook",
-            "http": "https://www.facebook.com/guilherme.borgesbastos"
-        },
-        {
             "icon": "gitlab",
             "title": "GitLab",
             "http": "https://gitlab.com/SoslanT"
@@ -33,8 +28,8 @@
     ],
     "hobbies": [
         {
-            "icon": "hiking",
-            "title": "Hiking"
+            "icon": "camera",
+            "title": "Photography"
         },
         {
             "icon": "dumbbell",
