@@ -16,11 +16,6 @@
             "http": "https://www.linkedin.com/in/soslant/"
         },
         {
-            "icon": "github",
-            "title": "GitHub",
-            "http": "https://github.com/soslant"
-        },
-        {
             "icon": "gitlab",
             "title": "GitLab",
             "http": "https://gitlab.com/SoslanT"
