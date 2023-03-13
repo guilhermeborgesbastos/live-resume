@@ -46,12 +46,8 @@
         >
       </li>
       <li>
-        <a
-          (click)="resetMenu()"
-          href="#projects"
-          i18n="nav@@projects"
-          itemprop="url"
-          ><span itemprop="name">Projects</span></a
+        <a (click)="resetMenu()" href="#posts" i18n="nav@@posts" itemprop="url"
+          ><span itemprop="name">Posts</span></a
         >
       </li>
       <li>
@@ -67,7 +63,7 @@
       <li>
         <a
           (click)="resetMenu()"
-          href="assets/cv-english-guilherme-bastos-v2.0.pdf"
+          href="assets/resume.pdf"
           i18n-title="nav@@open.as.pdf"
           title="Open Resume as PDF"
           target="_blank"
@@ -92,18 +88,7 @@
             >EN</a
           >
         </li>
-        <li
-          itemprop="availableLanguage"
-          itemscope
-          itemtype="https://schema.org/Language"
-        >
-          <a
-            href="/pt/index.html"
-            [ngClass]="{ active: locale === 'pt' }"
-            itemprop="name"
-            >PT</a
-          >
-        </li>
+        <!-- Additional language if needed -->
       </ul>
     </div>
   </div>
