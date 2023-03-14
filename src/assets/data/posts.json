@@ -134,22 +134,6 @@
                 "description": "Quem nunca encontrou uma notificação de usuário antes? Todos nós, usuários de smartphones, os vemos todos os dias. Neste artigo, ensinarei como enviar notificações quase em tempo real para qualquer dispositivo Android, como smartphone, smartwatch, etc."
             }
         ]
-    },
-    {
-        "thumbnail": "assets/posts/post-05-21-2016.jpg",
-        "http": "https://www.linkedin.com/pulse/push-notification-para-android-totorial-open-source-borges-bastos/",
-        "date": "05-21-2016",
-        "internationalizations": [
-            {
-                "language": "en",
-                "title": "Push Notification for Android - <i>Open-source component</i>.",
-                "description": "A complete component for those who need a deck of dynamic cards woth interactive charts for Android. Much like what we found in <i>Tinder</i>. Fully open-source for changes and improvements."
-            },
-            {
-                "language": "pt",
-                "title": "Notificação de usuário no Android - <i>Componente de código aberto</i>.",
-                "description": "Um componente completo para quem precisa de um baralho de cartas dinâmicas com gráficos interativos para Android. Muito parecido com o que encontramos em <i> Tinder </i>. Código-fonte totalmente aberto para alterações e melhorias."
-            }
-        ]
     }
+
 ]

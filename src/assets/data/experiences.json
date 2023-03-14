@@ -2,19 +2,13 @@
     {
         "id": 1,
         "position": 1,
-        "startAt": "02-02-2009",
+        "startAt": "03-02-2009",
         "endAt": "12-24-2010",
         "companyName": "Fácil Tecnologias",
         "website": "http://www.faciltecnologias.com.br/",
         "logo": "assets/template/experience/logo/facil-logo.png",
         "internationalizations": [
-            {
-                "language": "pt",
-                "city": "Uberaba",
-                "country": "Brasil",
-                "role": "Estágio Webmaster",
-                "description": "A <b>Fácil Tecnologias LTDA</b> é uma empresa focada em soluções para educação, seu principal produto é um conjunto de soluções para estudos na obtenção da <i>carteira nacional de habilitação (CNH)</i>, entre elas, multimídias, aplicativos on-line, aplicativos móveis, livros, entre outros. <br><br>Na <i>Fácil Tecnologias LTDA</i>, entrei em contato com desenvolvedores seniores, aprendendo as melhores práticas, padrões e como debater idéias e oferecer soluções diversas para o mesmo problema. Foi o ponto de partida, uma oportunidade única de transformar o conhecimento teórico em soluções concretas que estavam sendo usadas por centenas de pessoas todos os dias."
-            },
+
             {
                 "language": "en",
                 "city": "Uberaba",
