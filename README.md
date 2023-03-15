@@ -53,21 +53,23 @@ To get more help on the setup, customization or any other aspect, accessing the 
 
 ## ⚓Prerequisite
 
-> A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q).
+> A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q) _[Video is outdated, use as guideline, if needed]_.
 
-1. It is required to have Node.js with version _12.18.0_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
+1. It is required to have Node.js with version _14.20.x_, _16.13.x_ or _18.10.x_. To see what version of Node.js is installed on your machine type the following command in the terminal:
 ```
 node -v
 ```
 
 2. If you haven't installed Node.js in your machine then go to [this link](https://nodejs.org/en/download/) in order to install node.
 
-3. It is required to have NPM with version _6.14.0_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
+3. It is required to have NPM with version _8.1_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
 ```
 npm -v
 ```
 
-4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM.
+4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM;
+
+5. TypeScript version _4.8.x_ or later. 
 
 ## 📥 Installing and Executing locally
 
@@ -89,6 +91,12 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 ```
 ng serve -o --host 0.0.0.0 --configuration en
 ```
+
+**P.S:** In case of `ng` command is not found,  run the follow command:
+```
+npm install -g @angular/cli
+```
+
 **Note:** the optional parameters:
 * `-o` aliases for opening the default browser as soon the application is served.
 * ` --host 0.0.0.0` is useful if you want to see how your application runs on a mobile or from some other laptop/computer/network. 
