@@ -100,7 +100,7 @@ npm install -g @angular/cli
 **Note:** the optional parameters:
 * `-o` aliases for opening the default browser as soon the application is served.
 * ` --host 0.0.0.0` is useful if you want to see how your application runs on a mobile or from some other laptop/computer/network. 
-* ` --configuration=en` in this example the application will be displayed in **en-US**, by replacing the `en`with `pt` => `--configuration=pt`, the application language would be **pt-BR**. 
+* ` --configuration=en` in this example the application will be displayed in **en-US**, by replacing the `en`with `pt` => `--configuration pt`, the application language would be **pt-BR**. 
 
 6. After that, the command will start a server instance and listen on port `4200`. Open (http://localhost:4200/) in your browser. The **Live Resume** will be displayed.
 

@@ -3,7 +3,7 @@ import {
   faEnvelope, faPhone, faTimes,
   faMapMarkerAlt, IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormControl, Validators } from "@angular/forms";
 import { ContactService } from "./contact.service";
 import { Contact } from "../model/contact.model";
 import { environment } from '../../environments/environment';
@@ -32,16 +32,16 @@ export class ContactComponent implements OnInit {
 
   constructor(private contactService: ContactService) { }
 
-  contactForm: FormGroup = new FormGroup({
-    name: new FormControl("",[
+  contactForm: UntypedFormGroup = new UntypedFormGroup({
+    name: new UntypedFormControl("",[
       Validators.required,
       Validators.pattern("[A-zÀ-ú ]*")
     ]),
-    email: new FormControl("",[
+    email: new UntypedFormControl("",[
       Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
     ]),
-    message: new FormControl("",[
+    message: new UntypedFormControl("",[
       Validators.required
     ])
   });
