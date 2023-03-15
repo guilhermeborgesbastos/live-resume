@@ -1,35 +1,71 @@
 <div class="events-content" itemscope itemtype="https://schema.org/Article">
-    <meta itemprop="publisher" content="Guilherme Borges Bastos" />
-    <meta itemprop="author" content="Guilherme Borges Bastos" />
-    <ol [ngClass]="{'partial': _posts.length < 3 && currentPage >= (_originalPosts.length / resultsPerPage)}">
-        <li *ngFor="let post of _posts" itemprop="techArticle" itemscope itemtype="https://schema.org/TechArticle">
-            <div class="card" [@fadeInOut] itemprop="item">
-                <a href="{{ post.http }}" rel="nofollow" target="_blank" itemprop="url">
-                    <div class="thumbnail" [style.backgroundImage]="'url('+post.thumbnail+')'">
-                        <meta itemprop="thumbnailUrl" content="{{ post.thumbnail }}" />
-                        <meta itemprop="image" content="{{ post.thumbnail }}" />
-                        <span class="date" itemprop="datePublished">{{ post.date | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
-                    </div>
-                    <div class="content">
-                        <meta itemprop="author" content="Guilherme Borges Bastos" />
-                        <meta itemprop="creator" content="Guilherme Borges Bastos" />
-                        <meta itemprop="publisher" content="Guilherme Borges Bastos" />
-                        <h2 class="title" appInternationalization [data]="post.internationalizations" property='title' itemprop="name" itemprop="headline">Loading...</h2>
-                        <p class="description" appInternationalization [data]="post.internationalizations" property='description' ellipsis='275' itemprop="description">Loading...</p>
-                    </div>
-                    <button class="read-more" i18n="posts@@readMore">Read more</button>
-                </a>
-            </div>
-        </li>
-    </ol>
-    <p class="paginator">
-        <span class="range">
-            <span class="start">{{ start + 1 }}</span>
-            <span class="devider">-</span>
-            <span class="end">{{ end > _originalPosts?.length ? _originalPosts?.length : end }}</span>
-        </span>
-        <span i18n="posts@@of">of</span>
-        <span>{{ _originalPosts?.length }}</span>
-        <span class="label" i18n="nav@@posts">posts</span>
-    </p>
+  <meta itemprop="publisher" content="Guilherme Borges Bastos" />
+  <meta itemprop="author" content="Guilherme Borges Bastos" />
+  <ol
+    [ngClass]="{
+      partial:
+        _posts.length < 3 &&
+        currentPage >= _originalPosts.length / resultsPerPage
+    }"
+  >
+    <li
+      *ngFor="let post of _posts"
+      itemprop="techArticle"
+      itemscope
+      itemtype="https://schema.org/TechArticle"
+    >
+      <div class="card" [@fadeInOut] itemprop="item">
+        <a href="{{ post.http }}" rel="nofollow" target="_blank" itemprop="url">
+          <div
+            class="thumbnail"
+            [style.backgroundImage]="'url(' + post.thumbnail + ')'"
+          >
+            <meta itemprop="thumbnailUrl" content="{{ post.thumbnail }}" />
+            <meta itemprop="image" content="{{ post.thumbnail }}" />
+            <span class="date" itemprop="datePublished">{{
+              post.date | safariDateFormatter | localizedDate : "MMM yyyy"
+            }}</span>
+          </div>
+          <div class="content">
+            <meta itemprop="author" content="Guilherme Borges Bastos" />
+            <meta itemprop="creator" content="Guilherme Borges Bastos" />
+            <meta itemprop="publisher" content="Guilherme Borges Bastos" />
+            <h2
+              class="title"
+              appInternationalization
+              [data]="post.internationalizations"
+              property="title"
+              itemprop="name"
+              itemprop="headline"
+            >
+              Loading...
+            </h2>
+            <p
+              class="description"
+              appInternationalization
+              [data]="post.internationalizations"
+              property="description"
+              ellipsis="275"
+              itemprop="description"
+            >
+              Loading...
+            </p>
+          </div>
+          <button class="read-more" i18n="posts@@readMore">Visit</button>
+        </a>
+      </div>
+    </li>
+  </ol>
+  <p class="paginator">
+    <span class="range">
+      <span class="start">{{ start + 1 }}</span>
+      <span class="devider">-</span>
+      <span class="end">{{
+        end > _originalPosts?.length ? _originalPosts?.length : end
+      }}</span>
+    </span>
+    <span i18n="posts@@of">of</span>
+    <span>{{ _originalPosts?.length }}</span>
+    <span class="label" i18n="nav@@posts">projects</span>
+  </p>
 </div>

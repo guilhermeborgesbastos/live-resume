@@ -18,7 +18,7 @@
             }
         ],
         "technologies": [
-            "Frilli Impianti", "Ethanol", "Biofuel"
+            "Frilli Impianti", "Ethanol", "Biofuel", "Spirit"
         ],
         "medias": [
 
@@ -28,69 +28,64 @@
     {
         "id": 2,
         "position": 2,
-        "startAt": "01-03-2011",
-        "endAt": "06-16-2014",
-        "companyName": "E-tática",
-        "website": "https://www.e-tatica.com/",
-        "logo": "assets/template/experience/logo/etatica-logo.png",
+        "startAt": "01-15-2014",
+        "endAt": "09-01-2022",
+        "companyName": "ANG Transportation inc.",
+        "website": "https://angtransportation.com/",
+        "logo": "assets/template/experience/logo/ang-transportation.png",
         "internationalizations": [
             {
                 "language": "en",
-                "city": "Rio de Janeiro",
-                "country": "Brazil",
-                "role": "Full-stack Developer",
-                "description": "<b>E-tática</b> is an agency specialized in solutions for <i>e-commerce</i>, digital marketing, and visual identity since 2008, working with large, small, and medium-sized businesses, offering to their clients the know-how in the integration of <i>enterprise resource planning (ERP)</i> and <i>third-party APIs</i>, such as custom <i>payment providers</i>. It does the integration of the internal management of the online platform and physical store, being certified by the main platforms in the market.<br><br>At <i>E-tática</i> I have worked to develop custom solutions for clients wholesale and retail, valuing the quality and continuity of projects in the medium and long term."
+                "city": "Chciago",
+                "country": "USA",
+                "role": "Driver-Contractor",
+                "description": ""
             }
         ],
         "technologies": [
-            "Magento 1.X", "PHP", "Zend Framework", "HTML", "CSS", "CSS3", "Javascript", "jQuery", "SOAP", "Wordpress", "SVN", "Payment Services", "SSH", "SSL", "Linux"
+             "Freightliner"
         ],
         "medias": [
             {
-                "icon": "linkedin",
-                "title": "LinkedIn E-tática",
-                "http": "https://www.linkedin.com/company/etatica/"
-            },
-            {
                 "icon": "facebook",
-                "title": "Facebook E-tática",
-                "http": "https://www.facebook.com/etatica/"
-            },
-            {
-                "icon": "instagram",
-                "title": "Instagram E-tática",
-                "http": "https://www.instagram.com/somos_etatica/"
+                "title": "Facebook ANG Transportation",
+                "http": "https://www.facebook.com/ANGTransportation"
             }
         ],
-        "backgroundUrl": "assets/template/experience/rio.jpg"
+        "backgroundUrl": "assets/template/experience/transportation2.jpg"
     },
     {
         "id": 3,
         "position": 3,
-        "startAt": "07-01-2014",
-        "endAt": "12-23-2016",
-        "companyName": "Deevo Studio",
-        "website": "http://deevo.com.br/",
-        "logo": "assets/template/experience/logo/deevo-logo.png",
+        "startAt": "11-07-2022",
+        "endAt": "03-24-2023",
+        "companyName": "Hack-Reactor by Galvanize",
+        "website": "https://www.hackreactor.com/",
+        "logo": "assets/template/experience/logo/hack-reactor.jpg",
         "internationalizations": [
             {
                 "language": "en",
-                "city": "São Paulo",
-                "country": "Brazil",
-                "role": "Mobile Developer",
-                "description": "At <b>Deevo Studio</b> is a company specializing in <i>web design</i> and <i>development</i> with an extensive portfolio of cases, the result of <i>20 years</i> of experience with other agencies and the corporate market. Their creations involve everything from brand development and visual identity to the creation of applications and websites, with a wide knowledge of Wordpress and Web Technologies.<br><br>At <i>Deevo Studio</i>, I had the chance to use the previously back-end knowledge combined with practical experience in JAVA development to accept the challenge to start an <i>Android Development Department</i> in the company, delivering complex <i>Android Applications</i> to companies in Brazil."
+                "city": "Remote",
+                "country": "USA",
+                "role": "Full-Stack Software Engineer Student",
+                "description": "<b>Hack Reactor</b> has a strong reputation in the tech industry and has been recognized as one of the best coding bootcamps by various publications, including TechCrunch, Forbes, and SwitchUp.The program focuses on teaching the latest web development technologies and best practices, including <i>JavaScript, Node.js, React, Redux</i>, and more.<br></br>Through <b>Hack-Reactor</b>, I gained valuable hands-on experience and learned a wide range of skills that I am excited to apply to real-world projects.On this site, you will find examples of my work, including three projects that I am particularly proud of. In addition to my technical skills, I am committed to ongoing learning and personal growth."
             }
         ],
         "technologies": [
-            "Java (Android)", "Wordpress", "HTML", "HTML5", "CSS", "CSS3", "Javascript", "jQuery", "Google APIs", "SQL", "MySQL", "PHP", "Slim Framework", "Laravel", "SMTP", "Versioning Control", "BitBucket", "Jira", "Git", "Kanban framework"
+            "HTML", "HTML5", "CSS", "CSS3", "Javascript", "React", "Django", "Python", "jQuery", "SQL", "MySQL", "MongoDB", "Versioning Control", "Git", "Docker"
         ],
         "medias": [
             {
                 "icon": "linkedin",
-                "title": "LinkedIn Deevo Studio",
-                "http": "https://www.linkedin.com/company/deevo/about/"
+                "title": "LinkedIn Galvanize",
+                "http": "https://www.linkedin.com/company/galvanize-it"
+            },
+            {
+                "icon": "facebook",
+                "title": "Facebook Galvanize",
+                "http": "https://www.facebook.com/GalvanizeHQ"
             }
         ],
-        "backgroundUrl": "assets/template/experience/sao-paulo.jpg"
+        "backgroundUrl": "assets/template/experience/austin.jpg"
     }
 ]
