@@ -1,37 +1,37 @@
 [
     {
         "thumbnail": "assets/posts/post-11-03-2019.jpg",
-        "http": "https://www.linkedin.com/pulse/anti-traversing-2d-array-formula-guilherme-borges-bastos/",
-        "date": "11-03-2019",
+        "http": "https://gitlab.com/SoslanT/fearless-frontend",
+        "date": "11-03-2022",
         "internationalizations": [
             {
                 "language": "en",
-                "title": "The anti-traversing 2D Array formula.",
-                "description": "Have you ever thought about the <b>mathematical relation</b> between the <i>columns</i> and <i>rows</i> of a bidimensional array <i>(2d matrix)</i>? This data structure hides a <b>data location formula</b> that helped me to avoid the <i>time complexity of O(n²)</i>, which is a terrible scenario, turning it into a <i>constant time complexity - O(1)</i>. A full explanation, with real test cases and Unit Tests are waiting for you."
+                "title": "CoferenceGO.",
+                "description": ""
             }
         ]
     },
     {
         "thumbnail": "assets/posts/post-01-15-2019.jpg",
-        "http": "https://www.linkedin.com/pulse/em-2019-saia-do-desemprego-seja-voc%C3%AA-um-web-developer-borges-bastos/",
-        "date": "01-15-2019",
+        "http": "https://gitlab.com/SoslanT/project-beta",
+        "date": "02-15-2023",
         "internationalizations": [
             {
                 "language": "en",
-                "title": "In 2019, get out of unemployment! Be a Web Developer.",
-                "description": "There were numerous vacancies for <i>web developers</i> on the wall, at the same time, <b>12.7 million people were unemployed</b> in Brazil, such a sad situation persisted in my mind. Back at my house, I've recalled a free course, offered by the renowned <i>Bob Tabor (Senior Program Manager at Microsoft)</i>, present at Microsoft Virtual Academy."
+                "title": "CarCar.",
+                "description": ""
             }
         ]
     },
     {
-        "thumbnail": "assets/posts/post-07-10-2016.jpg",
-        "http": "https://www.linkedin.com/pulse/map-item-navigation-android-opensource-en-guilherme-borges-bastos/",
-        "date": "07-10-2016",
+        "thumbnail": "assets/posts/snowbum.jpg",
+        "http": "https://snowbum-api.onrender.com/",
+        "date": "03-16-2023",
         "internationalizations": [
             {
                 "language": "en",
-                "title": "Map Item Navigation for Android - <i>Open-source component</i>.",
-                "description": "For great user experience, the usage of maps together with the ordered list is used very often in mobile applications. This article presents an open-source application for Android that provides a fully functional component."
+                "title": "SnowBum",
+                "description": "Snowboard and ski lovers site, which has a hundreed resorts around US, with information of mountain, map and API weather data.<br></br>User friendly and fun."
             }
 
         ]
