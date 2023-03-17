@@ -1,25 +1,25 @@
 [
     {
-        "thumbnail": "assets/posts/post-11-03-2019.jpg",
+        "thumbnail": "assets/posts/conferencego.jpeg",
         "http": "https://gitlab.com/SoslanT/fearless-frontend",
         "date": "11-03-2022",
         "internationalizations": [
             {
                 "language": "en",
                 "title": "CoferenceGO.",
-                "description": ""
+                "description": "<b>Create your own conference or attend existing</b>."
             }
         ]
     },
     {
-        "thumbnail": "assets/posts/post-01-15-2019.jpg",
+        "thumbnail": "assets/posts/carcar.jpeg",
         "http": "https://gitlab.com/SoslanT/project-beta",
         "date": "02-15-2023",
         "internationalizations": [
             {
                 "language": "en",
                 "title": "CarCar.",
-                "description": ""
+                "description": "<b>Simple Dealership app build with microservices</b>."
             }
         ]
     },
@@ -31,7 +31,7 @@
             {
                 "language": "en",
                 "title": "SnowBum",
-                "description": "Snowboard and ski lovers site, which has a hundreed resorts around US, with information of mountain, map and API weather data.<br></br>User friendly and fun."
+                "description": "<b>Plan your next snowboard trip</b>."
             }
 
         ]

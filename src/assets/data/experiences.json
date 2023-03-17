@@ -43,7 +43,7 @@
             }
         ],
         "technologies": [
-             "Freightliner"
+            "Freightliner"
         ],
         "medias": [
             {
@@ -68,11 +68,11 @@
                 "city": "Remote",
                 "country": "USA",
                 "role": "Full-Stack Software Engineer Student",
-                "description": "<b>Hack Reactor</b> has a strong reputation in the tech industry and has been recognized as one of the best coding bootcamps by various publications, including TechCrunch, Forbes, and SwitchUp.The program focuses on teaching the latest web development technologies and best practices, including <i>JavaScript, Node.js, React, Redux</i>, and more.<br></br>Through <b>Hack-Reactor</b>, I gained valuable hands-on experience and learned a wide range of skills that I am excited to apply to real-world projects.On this site, you will find examples of my work, including three projects that I am particularly proud of. In addition to my technical skills, I am committed to ongoing learning and personal growth."
+                "description": "<b>Hack Reactor</b> has a strong reputation in the tech industry and has been recognized as one of the best coding bootcamps by various publications, including TechCrunch, Forbes, and SwitchUp.The program focuses on teaching the latest web development technologies and best practices, including <i>JavaScript, Node.js, React, Redux</i>, and more.<br></br>Through <b>Hack-Reactor</b>, I gained valuable hands-on experience and learned a wide range of skills that I am excited to apply to real-world projects.On this site, you will find examples of my work, including three projects that I am particularly proud of."
             }
         ],
         "technologies": [
-            "HTML", "HTML5", "CSS", "CSS3", "Javascript", "React", "Django", "Python", "jQuery", "SQL", "MySQL", "MongoDB", "Versioning Control", "Git", "Docker"
+            "HTML5", "CSS", "Javascript", "React", "Django", "Python", "jQuery", "SQL", "MySQL", "MongoDB", "Versioning Control", "Git", "Docker"
         ],
         "medias": [
             {
