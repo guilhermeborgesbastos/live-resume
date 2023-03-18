@@ -10,19 +10,17 @@ export const environment = {
     name: "Soslan Tmenov",
     birth: "1989-03-23",
     email: "tmenatisoslan@gmail.com",
-    phone: "+1 202 779 2619",
+    phone: "+1 xxx xxx xx xx",
     location: "Sevierville, TN"
   },
   // replace the dummy data below with the real firebase configs
   firebaseConfig: {
-    apiKey: "AIzaSyC2frVRAAltsVTmdwgFnATGHoVUzNHfzsM",
-    authDomain: "live-resume-a575a.firebaseapp.com",
-    databaseURL: "https://live-resume-a575a.firebaseio.com",
-    projectId: "live-resume-a575a",
-    storageBucket: "live-resume-a575a.appspot.com",
-    messagingSenderId: "681076751855",
-    appId: "1:681076751855:web:18bae3866ebfcc4fcd8a1a",
-    measurementId: "G-00VXD77WNG"
+    apiKey: "AIzaSyAsyh5bMztJ4Jl8w27VtpNeISBxK6G0C20",
+    authDomain: "live-resume-54ff3.firebaseapp.com",
+    projectId: "live-resume-54ff3",
+    storageBucket: "live-resume-54ff3.appspot.com",
+    messagingSenderId: "1025552431094",
+    appId: "1:1025552431094:web:afaba7bedffec312a2b9d7"
   }
 };
 
