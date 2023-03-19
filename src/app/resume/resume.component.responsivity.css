@@ -1,9 +1,0 @@
-@media screen and (max-width: 1024px) {
-
-    app-header { padding: 0; }
-
-    .sticky {
-        background-color: transparent;
-        box-shadow: none;
-    }
-}
