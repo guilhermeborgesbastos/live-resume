@@ -17,6 +17,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: "AIzaSyAsyh5bMztJ4Jl8w27VtpNeISBxK6G0C20",
     authDomain: "live-resume-54ff3.firebaseapp.com",
+    databaseURL: "https://live-resume-54ff3-default-rtdb.firebaseio.com/",
     projectId: "live-resume-54ff3",
     storageBucket: "live-resume-54ff3.appspot.com",
     messagingSenderId: "1025552431094",
