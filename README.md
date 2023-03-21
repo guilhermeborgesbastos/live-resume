@@ -55,14 +55,14 @@ To get more help on the setup, customization or any other aspect, accessing the 
 
 > A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q) _[Video is outdated, use as guideline, if needed]_.
 
-1. It is required to have Node.js with version _14.20.x_, _16.13.x_ or _18.10.x_. To see what version of Node.js is installed on your machine type the following command in the terminal:
+1. It is required to have Node.js with version _18.15.x_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
 ```
 node -v
 ```
 
 2. If you haven't installed Node.js in your machine then go to [this link](https://nodejs.org/en/download/) in order to install node.
 
-3. It is required to have NPM with version _8.1_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
+3. It is required to have NPM with version _9.5_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
 ```
 npm -v
 ```
@@ -85,7 +85,7 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 
 3. Go to the cloned directory (e.g. `cd live-resume`).
 
-4. Run `npm install`.
+4. Run `npm install --force`.
 
 5. Inner the folder of the cloned project, start the application:
 ```
