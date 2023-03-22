@@ -1,3 +1,8 @@
+#[1.8.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.8) (2023-03-22)
+###📃 release notes
+- Upgrade to Angular 15.2.3;
+- Upgrade to Typescript 4.8.4.
+
 #[1.7.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.7) (2022-01-18)
 ###📃 release notes
 - Upgrade to Angular 13.1.2;

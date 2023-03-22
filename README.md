@@ -28,7 +28,7 @@ Get rid of your old and deprecated text resume by using the first **Open-source 
 
 ## What is included❓
 
-* A fully functional _Angular 13_ application with a customizable template and content;
+* A fully functional _Angular 15_ application with a customizable template and content;
 * Totally responsive for the mobile and desktop devices _(allow mobile gestures too... ;))_;
 * Internationalization for English and Portuguese _(easy for adding/removing new languages - in18 lib)_;
 * Mobile navigation sharing _(Share the resume with native apps like Whatsapp, LinkedIn, Facebook, etc...)_;
@@ -55,21 +55,21 @@ To get more help on the setup, customization or any other aspect, accessing the 
 
 > A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q) _[Video is outdated, use as guideline, if needed]_.
 
-1. It is required to have Node.js with version _18.15.x_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
+1. It is required to have Node.js with version _14.18.1_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
 ```
 node -v
 ```
 
 2. If you haven't installed Node.js in your machine then go to [this link](https://nodejs.org/en/download/) in order to install node.
 
-3. It is required to have NPM with version _9.5_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
+3. It is required to have NPM with version _6.14.15_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
 ```
 npm -v
 ```
 
 4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM;
 
-5. TypeScript version _4.8.x_ or later. 
+5. TypeScript version _4.8.4_ or later. 
 
 ## 📥 Installing and Executing locally
 
