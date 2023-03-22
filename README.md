@@ -28,7 +28,7 @@ Get rid of your old and deprecated text resume by using the first **Open-source 
 
 ## What is included❓
 
-* A fully functional _Angular 13_ application with a customizable template and content;
+* A fully functional _Angular 15_ application with a customizable template and content;
 * Totally responsive for the mobile and desktop devices _(allow mobile gestures too... ;))_;
 * Internationalization for English and Portuguese _(easy for adding/removing new languages - in18 lib)_;
 * Mobile navigation sharing _(Share the resume with native apps like Whatsapp, LinkedIn, Facebook, etc...)_;
@@ -53,21 +53,23 @@ To get more help on the setup, customization or any other aspect, accessing the 
 
 ## ⚓Prerequisite
 
-> A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q).
+> A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q) _[Video is outdated, use as guideline, if needed]_.
 
-1. It is required to have Node.js with version _12.18.0_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
+1. It is required to have Node.js with version _14.18.1_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
 ```
 node -v
 ```
 
 2. If you haven't installed Node.js in your machine then go to [this link](https://nodejs.org/en/download/) in order to install node.
 
-3. It is required to have NPM with version _6.14.0_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
+3. It is required to have NPM with version _6.14.15_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
 ```
 npm -v
 ```
 
-4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM.
+4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM;
+
+5. TypeScript version _4.8.4_ or later. 
 
 ## 📥 Installing and Executing locally
 
@@ -83,16 +85,22 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 
 3. Go to the cloned directory (e.g. `cd live-resume`).
 
-4. Run `npm install`.
+4. Run `npm install --force`.
 
 5. Inner the folder of the cloned project, start the application:
 ```
 ng serve -o --host 0.0.0.0 --configuration en
 ```
+
+**P.S:** In case of `ng` command is not found,  run the follow command:
+```
+npm install -g @angular/cli
+```
+
 **Note:** the optional parameters:
 * `-o` aliases for opening the default browser as soon the application is served.
 * ` --host 0.0.0.0` is useful if you want to see how your application runs on a mobile or from some other laptop/computer/network. 
-* ` --configuration=en` in this example the application will be displayed in **en-US**, by replacing the `en`with `pt` => `--configuration=pt`, the application language would be **pt-BR**. 
+* ` --configuration=en` in this example the application will be displayed in **en-US**, by replacing the `en`with `pt` => `--configuration pt`, the application language would be **pt-BR**. 
 
 6. After that, the command will start a server instance and listen on port `4200`. Open (http://localhost:4200/) in your browser. The **Live Resume** will be displayed.
 
