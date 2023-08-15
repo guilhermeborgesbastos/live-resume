@@ -4,9 +4,10 @@ import { ExperienceTimelineComponent } from "./experience-timeline/experience-ti
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CommonModule } from "@angular/common";
 import { CoreModule } from "../core/core.module";
+import { TranslatePipeModule } from "src/pipes/translate/translate.pipe.module";
 
 @NgModule({
-    imports: [ CommonModule, FontAwesomeModule, CoreModule ],
+    imports: [ CommonModule, FontAwesomeModule, CoreModule, TranslatePipeModule ],
     declarations: [ ExperienceComponent, ExperienceTimelineComponent ],
     exports: [ ExperienceComponent ]
 })

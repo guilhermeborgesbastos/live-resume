@@ -21,6 +21,7 @@ import { environment } from "../environments/environment";
 
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
 import { DIRECTION_ALL } from "hammerjs";
+import { TranslatePipeModule } from "src/pipes/translate/translate.pipe.module";
 
 @Injectable()
 export class HammerConfig  extends HammerGestureConfig {
@@ -42,7 +43,8 @@ registerLocaleData(localePt, "pt-BR", localePtExtra);
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAnalyticsModule,
-    HammerModule
+    HammerModule,
+    TranslatePipeModule
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ],
