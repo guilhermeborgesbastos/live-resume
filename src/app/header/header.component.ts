@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID, AfterViewInit } from "@angular/core";
 import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { NgNavigatorShareService } from "ng-navigator-share";
+import { tags } from "src/assets/tags/tags";
 
 @Component({
   selector: "app-header",
@@ -101,9 +102,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   async share() {
     try{
       await this.ngNavigatorShareService.share({
-        title: "Live Resume - Guilherme Borges Bastos",
-        text: "Hello, I'm a Full-stack Java Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!",
-        url: "https://guilhermeborgesbastos.com"
+        title: "Live Resume - " + tags.tag_name,
+        text: tags.tag_share_text,
+        url: tags.tag_share_url
       });
     } catch(error) {
       console.log("You app is not shared, reason: ", error);

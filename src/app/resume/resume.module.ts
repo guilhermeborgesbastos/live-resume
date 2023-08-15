@@ -12,6 +12,7 @@ import { CoreModule } from "../core/core.module";
 import { PostsModule } from "../posts/posts.molule";
 import { ContactService } from "../contact/contact.service";
 import { FooterComponent } from "../footer/footer.component";
+import { TranslatePipeModule } from "src/pipes/translate/translate.pipe.module";
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { FooterComponent } from "../footer/footer.component";
     FontAwesomeModule,
     WelcomeModule,
     ExperienceModule,
-    PostsModule
+    PostsModule,
+    TranslatePipeModule
   ],
   declarations: [ 
     ResumeComponent,

@@ -1,26 +1,26 @@
 <section id="contact" itemscope itemtype="https://schema.org/ContactPage">
     <div class="feedback-container" [ngClass]="feedbackStatus">
         <p class="success">
-            <span i18n="contact@@successfulSubmit">Thank you for contacting me, I'll reply to you very soon.</span>
+            <span i18n="contact@@successfulSubmit">{{ 'tag_contact_success' | translate }}</span>
             <fa-icon [icon]="faTimes" class="icon" title="Close" (click)="closeFeedbackMessage()"></fa-icon>
         </p>
         <p class="error">
-            <span i18n="contact@@errorSubmit">Sorry, there is an instability, try again later, or contact me via email or social media.</span>
+            <span i18n="contact@@errorSubmit">{{ 'tag_contact_failure' | translate }}</span>
             <fa-icon [icon]="faTimes" class="icon" title="Close" (click)="closeFeedbackMessage()"></fa-icon>
         </p>
     </div>
     <div class="container" [ngClass]="{'fade': hasBeenSubmited}">
         <div class="left-side">
             <div class="title">
-                <h1 i18n="nav@@contact">Contact</h1>
+                <h1 i18n="nav@@contact">{{ 'tag_contact' | translate }}</h1>
             </div>
             <div class="top-container">
                 <div class="picture"></div>
                 <div class="info">
-                    <p class="name" *ngIf="name"><span itemprop="name">{{ name }}</span></p>
-                    <p class="email" *ngIf="email"><fa-icon [icon]="faEnvelope" class="icon" title="Email"></fa-icon><a  href="mailto:{{ email }}" itemprop="email">{{ email }}</a></p>
-                    <p class="phone" *ngIf="phone"><fa-icon [icon]="faPhone" class="icon" title="Phone"></fa-icon><span itemprop="telephone">{{ phone }}</span></p>
-                    <p class="location" *ngIf="location"><fa-icon [icon]="faMapMarkerAlt" class="icon" title="City"></fa-icon><span itemprop="city">{{ location }}</span></p>
+                    <p class="name" *ngIf="name"><span itemprop="name">{{ 'tag_name' | translate }}</span></p>
+                    <p class="email" *ngIf="email"><fa-icon [icon]="faEnvelope" class="icon" title="Email"></fa-icon><a  href="mailto:{{ 'tag_email' | translate }}" itemprop="email">{{ 'tag_email' | translate }}</a></p>
+                    <p class="phone" *ngIf="phone"><fa-icon [icon]="faPhone" class="icon" title="Phone"></fa-icon><span itemprop="telephone">{{ 'tag_phone' | translate }}</span></p>
+                    <p class="location" *ngIf="location"><fa-icon [icon]="faMapMarkerAlt" class="icon" title="City"></fa-icon><span itemprop="city">{{ 'tag_location' | translate }}</span></p>
                 </div>
             </div>
             <div class="bottom-container">
