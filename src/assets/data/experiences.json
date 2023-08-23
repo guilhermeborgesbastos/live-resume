@@ -2,250 +2,32 @@
     {
         "id": 1,
         "position": 1,
-        "startAt": "02-02-2009",
-        "endAt": "12-24-2010",
-        "companyName": "Fácil Tecnologias",
-        "website": "http://www.faciltecnologias.com.br/",
+        "startAt": "06-06-2022",
+        "endAt": "01-01-2023",
+        "companyName": "SMECLABS",
+        "website": "https://www.smeclabs.com/internship/",
         "logo": "assets/template/experience/logo/facil-logo.png",
         "internationalizations": [
-            {
-                "language": "pt",
-                "city": "Uberaba",
-                "country": "Brasil",
-                "role": "Estágio Webmaster",
-                "description": "A <b>Fácil Tecnologias LTDA</b> é uma empresa focada em soluções para educação, seu principal produto é um conjunto de soluções para estudos na obtenção da <i>carteira nacional de habilitação (CNH)</i>, entre elas, multimídias, aplicativos on-line, aplicativos móveis, livros, entre outros. <br><br>Na <i>Fácil Tecnologias LTDA</i>, entrei em contato com desenvolvedores seniores, aprendendo as melhores práticas, padrões e como debater idéias e oferecer soluções diversas para o mesmo problema. Foi o ponto de partida, uma oportunidade única de transformar o conhecimento teórico em soluções concretas que estavam sendo usadas por centenas de pessoas todos os dias."
-            },
+            
             {
                 "language": "en",
-                "city": "Uberaba",
-                "country": "Brazil",
-                "role": "Webmaster intern",
-                "description": "<b>Fácil Tecnologias LTDA</b> is a company focused in solutions for education, its main product is a set of solutions for studying for getting the <i>driver license</i>, among them, there are multimedia, online applications, mobile apps, books, and others.<br><br>At <i>Fácil Tecnologias LTDA</i>, I got in touch with senior developers, learning best practices, patterns, and how to debate ideas and offer various solutions for the very same problem. It was the start point, a unique opportunity to turn theoretical knowledge into concrete solutions that were being used by hundreds of people every day."
+                "city": "Kerala",
+                "country": "India",
+                "role": "Python Fullstack Development intern",
+                "description": "<b>SMECLABS</b> Established in the early 2001 as the R&D and training hub of SMEC Automation Pvt. Ltd. – an ISO 9001:2015 certified company based in Kochi, Kerala, SMEClabs had received numerous accolades from world renowned bodies such as Microsoft, Schneider Electric, Certiport, etc. and accreditations from national bodies such as National Skill Development Centre (NSDC), India International Skill Centre (IISC), etc. SMEClabs continues to be among the leaders and the top preferred choice for students seeking to create a name for themselves in their respective domain through its skill development training. SMEClabs provides industry-oriented programs and trainings to enhance the skillset of students and prepare them to be industry-ready."
             }
         ],
         "technologies": [
-            "PHP", "Zend Framework", "Cake Framework", "HTML", "CSS", "CSS3", "Javascript", "jQuery", "AJAX", "SOAP", "Joomla", "Wordpress", "SVN", "SQL", "MySQL", "PostgreSQL", "Windows"
+            "PHP", "Node JS", "Linux", "HTML", "CSS", "CSS3", "Javascript", "jQuery", "React.Js", "FasrAPI", "Django", "Wordpress", "MongoDB", "SQL", "MySQL", "PostgreSQL", "Windows"
         ],
         "medias": [
             {
-                "icon": "facebook",
-                "title": "Facebook Editora Nosso Trânsito",
-                "http": "https://www.facebook.com/editoranossotransito/"
+                "icon": "twitter",
+                "title": "Twitter",
+                "http": "https://twitter.com/aswin_stevin"
             }
         ],
         "backgroundUrl": "assets/template/experience/uberaba.jpg"
-    },
-    {
-        "id": 2,
-        "position": 2,
-        "startAt": "01-03-2011",
-        "endAt": "06-16-2014",
-        "companyName": "E-tática",
-        "website": "https://www.e-tatica.com/",
-        "logo": "assets/template/experience/logo/etatica-logo.png",
-        "internationalizations": [
-            {
-                "language": "pt",
-                "city": "Rio de Janeiro",
-                "country": "Brasil",
-                "role": "Desenvolvedor Full-stack",
-                "description": "A <b>E-tática</b> é uma agência especializada em soluções para <i>comércio eletrônico</i>, marketing digital e identidade visual desde 2008, trabalhando com grandes, pequenos e médios negócios, oferecendo para seus clientes, o know-how na integração de seus negócios com <i>Sistemas integrados de gestão empresarial (ERP)</i> e <i>APIs de terceiros</i>, tais como <i>provedores de pagamento personalizados</i>, fazendo a integração do gerenciamento interno da plataforma on-line e da loja física, sendo certificada pelas principais plataformas do mercado.<br><br>Na <i>E-tática </i>, trabalhei para desenvolver soluções personalizadas para clientes do atacado e varejo, valorizando a qualidade e a continuidade dos projetos a médio e longo prazo."
-            },
-            {
-                "language": "en",
-                "city": "Rio de Janeiro",
-                "country": "Brazil",
-                "role": "Full-stack Developer",
-                "description": "<b>E-tática</b> is an agency specialized in solutions for <i>e-commerce</i>, digital marketing, and visual identity since 2008, working with large, small, and medium-sized businesses, offering to their clients the know-how in the integration of <i>enterprise resource planning (ERP)</i> and <i>third-party APIs</i>, such as custom <i>payment providers</i>. It does the integration of the internal management of the online platform and physical store, being certified by the main platforms in the market.<br><br>At <i>E-tática</i> I have worked to develop custom solutions for clients wholesale and retail, valuing the quality and continuity of projects in the medium and long term."
-            }
-        ],
-        "technologies": [
-            "Magento 1.X", "PHP", "Zend Framework", "HTML", "CSS", "CSS3", "Javascript", "jQuery", "SOAP", "Wordpress", "SVN", "Payment Services", "SSH", "SSL", "Linux"
-        ],
-        "medias": [
-            {
-                "icon": "linkedin",
-                "title": "LinkedIn E-tática",
-                "http": "https://www.linkedin.com/company/etatica/"
-            },
-            {
-                "icon": "facebook",
-                "title": "Facebook E-tática",
-                "http": "https://www.facebook.com/etatica/"
-            },
-            {
-                "icon": "instagram",
-                "title": "Instagram E-tática",
-                "http": "https://www.instagram.com/somos_etatica/"
-            }
-        ],
-        "backgroundUrl": "assets/template/experience/rio.jpg"
-    },
-    {
-        "id": 3,
-        "position": 3,
-        "startAt": "07-01-2014",
-        "endAt": "12-23-2016",
-        "companyName": "Deevo Studio",
-        "website": "http://deevo.com.br/",
-        "logo": "assets/template/experience/logo/deevo-logo.png",
-        "internationalizations": [
-            {
-                "language": "pt",
-                "city": "São Paulo",
-                "country": "Brasil",
-                "role": "Desenvolvedor Mobile",
-                "description": "A <b>Deevo Studio</b> é uma agência especializada em <i>web design</i> e <i>desenvolvimento</i> com um extenso portfólio de casos de sucesso, resultado de mais de <i>20 anos</i> de experiência com diversas agências e no mercado corporativo. Suas criações envolvem tudo, desde o desenvolvimento da marca e identidade visual, até a criação de aplicativos e sites, com um amplo conhecimento do Wordpress e das tecnologias da web. <br><br>Na <i>Deevo Studio</i>, tive a chance de usar o conhecimento anterior de <i>back-end</i> combinado com a experiência prática no desenvolvimento JAVA para aceitar o desafio de iniciar um <i>Departamento de Desenvolvimento Android</i> na empresa, fornecendo complexos <i>Aplicativos Android</i> para empresas no Brasil."
-            },
-            {
-                "language": "en",
-                "city": "São Paulo",
-                "country": "Brazil",
-                "role": "Mobile Developer",
-                "description": "At <b>Deevo Studio</b> is a company specializing in <i>web design</i> and <i>development</i> with an extensive portfolio of cases, the result of <i>20 years</i> of experience with other agencies and the corporate market. Their creations involve everything from brand development and visual identity to the creation of applications and websites, with a wide knowledge of Wordpress and Web Technologies.<br><br>At <i>Deevo Studio</i>, I had the chance to use the previously back-end knowledge combined with practical experience in JAVA development to accept the challenge to start an <i>Android Development Department</i> in the company, delivering complex <i>Android Applications</i> to companies in Brazil."
-            }
-        ],
-        "technologies": [
-            "Java (Android)", "Wordpress", "HTML", "HTML5", "CSS", "CSS3", "Javascript", "jQuery", "Google APIs", "SQL", "MySQL", "PHP", "Slim Framework", "Laravel", "SMTP", "Versioning Control", "BitBucket", "Jira", "Git", "Kanban framework"
-        ],
-        "medias": [
-            {
-                "icon": "linkedin",
-                "title": "LinkedIn Deevo Studio",
-                "http": "https://www.linkedin.com/company/deevo/about/"
-            }
-        ],
-        "backgroundUrl": "assets/template/experience/sao-paulo.jpg"
-    },
-    {
-        "id": 4,
-        "position": 4,
-        "startAt": "01-02-2017",
-        "endAt": "11-30-2017",
-        "companyName": "Skydreamer",
-        "logo": "assets/template/experience/logo/skydreamer-logo.png",
-        "internationalizations": [
-            {
-                "language": "pt",
-                "city": "Utrecht",
-                "country": "Países Baixos",
-                "role": "Desenvolvedor Full-stack",
-                "description": "Na <b>Skydreamer Startup</b>, fui convidado para fazer parte da equipe de desenvolvimento do primeiro aplicativo móvel europeu que transformaria o planejamento de viagens entre amigos em um <i>Jogo de Swipe & Match</i>, oferecendo milhares de destinos em todo o mundo. Sempre com as melhores ofertas de voos, hotéis e apartamentos.<br><br>Na <i>Skydreamer</i>, tive a incrível experiência de vivenciar um <i> ambiente de startup</i>, os prós e os contras , expandindo minha mente de como liderar com o gerenciamento remoto, com prazos curtos e recursos muito limitados. Em setembro de 2017, com a versão <i>Beta</i> em execução e com vários usuários reais, fomos até a <i>TechCrunch Disrupt<i> em São Francisco, onde recebemos uma oferta de uma agência internacional de esportes e entretenimento."
-            },
-            {
-                "language": "en",
-                "city": "Utrecht",
-                "country": "Netherlands",
-                "role": "Full-stack Developer",
-                "description": "At <b>Skydreamer</b>, I was invited to be part of the development team of the first European mobile application that turns traveling with friends into a <i>Swipe and Match Game</i>, offering thousands of destinations all around the world. Always with the best offers for Flights, Hotels, apartments.<br><br>At <i>Skydreamer</i>, I had the amazing experience of a <i>startup environment</i>, the pros, and cons, expanding my mind of how to lead with the remote management, with short deadlines periods and very limited resources. In September 2017, with the 'Beta' version running and with several real users, we went to <i>TechCrunch Disrupt<i> - San Francisco where we received an offer from an international sports and entertainment agency."
-            }
-        ],
-        "technologies": [
-            "HTML5", "CSS3", "Javascript", "jQuery", "PHP", "Laravel", "Slim Framework", "React", "React Native", "MySQL", "Elastic Search", "AWS", "Firebase", "Java", "Android", "Swift", "iOS", "Python (data scrapers)", "Scrum", "Unit Tests", "TDD"
-        ],
-        "medias": [
-            {
-                "icon": "youtube",
-                "title": "YouTube Skydreamer",
-                "http": "https://www.youtube.com/channel/UCZ6_SqHB-Sdl7EHIXbvYoSw"
-            },
-            {
-                "icon": "facebook",
-                "title": "Facebook SkyDreamer App",
-                "http": "https://www.facebook.com/skydreamer.io/"
-            }
-        ],
-        "backgroundUrl": "assets/template/experience/utrecht.jpg"
-    },
-    {
-        "id": 5,
-        "position": 5,
-        "startAt": "12-18-2017",
-        "endAt": "04-15-2020",
-        "companyName": "QAT Global",
-        "website": "https://www.qat.com/",
-        "logo": "assets/template/experience/logo/qat-global-logo.png",
-        "internationalizations": [
-            {
-                "language": "pt",
-                "city": "Uberaba",
-                "country": "Brasil",
-                "role": "Engenheiro de Software",
-                "description": "Na <b>QAT Global</b>, eu estava encarregado de ser o <i>Pod Leader</i> de back-end, trabalhando com <i>Big Data Analysis</i> para o maior fornecedor americano de tecnologia de água, que tem negócios em mais de <i>150 países</i>, permitindo que clientes em todo o mundo transportem, tratem, testem e usem água de maneira eficiente em instalações de utilidade pública, residencial, comercial, agrícola e industrial.<br><br>Na <i>QAT Global</i>, assegurei de que todos os desenvolvedores aplicassem as melhores práticas e padrões necessários para um aplicativo corporativo de <i>alta disponibilidade</i>, melhorando não apenas minhas habilidades técnicas, mas também as habilidades interpessoais."
-            },
-            {
-                "language": "en",
-                "city": "Uberaba",
-                "country": "Brazil",
-                "role": "Software Engeneer",
-                "description": "At <b>QAT Global</b>, I was in charge of being the <i>Pod Leader</i> in the back-end side, working with <i>Big Data Analysis</i> for the largest <i>American Water Technology</i> provider which has business in more than <i>150 countries</i>, enabling customers worldwide to transport, treat, test, and efficiently use water in public utility, residential, commercial, agricultural and industrial settings.<br><br>At <i>QAT Global</i>, I made sure that all the developers were applying the best patterns, practices, and standards needed for an enterprise application of <i>high availability</i> needs, improving not only my technical skills but also the soft skills."
-            }
-        ],
-        "technologies": [
-            "Java", "Spring Boot", "Play Framework", "Javascript", "jQuery", "AngularJS", "NoSQL", "MongoDB", "SQL", "PostgreSQL", "Unit Tests", "Integration Tests", "Versioning Control", "BitBucket", "Git", "Maven", "Scrum", "Linux"
-        ],
-        "medias": [
-            {
-                "icon": "linkedin",
-                "title": "LinkedIn QAT Global",
-                "http": "https://www.linkedin.com/company/qat/"
-            },
-            {
-                "icon": "facebook",
-                "title": "Facebook QAT Global",
-                "http": "https://www.facebook.com/QATGlobal/"
-            },
-            {
-                "icon": "youtube",
-                "title": "QAT Gobal Youtube",
-                "http": "https://www.youtube.com/c/QatGlobal-USA"
-            }
-        ],
-        "backgroundUrl": "assets/template/experience/uberaba.jpg"
-    },
-    {
-        "id": 6,
-        "position": 6,
-        "startAt": "05-01-2020",
-        "companyName": "Swisscom AG",
-        "website": "https://www.swisscom.ch/",
-        "logo": "assets/template/experience/logo/swisscom-logo.png",
-        "internationalizations": [
-            {
-                "language": "pt",
-                "city": "Rotterdão",
-                "country": "Países Baixos",
-                "role": "Engenheiro Full-stack",
-                "description": "<b>Swisscom</b> é a empresa <b>#1</b> de telecomunicações e uma das principais empresas de TI da Suíça. Seus produtos e serviços variam de soluções B2C, como a Swisscom TV, a soluções de TI B2B em vários setores, como Bancos, Saúde, Energia, Entretenimento e Publicidade.<br><br>Na <i>Swisscom DevOps Center</i>, inovação e experimentação estão profundamente enraizadas no DNA da empresa. O ambiente multicultural com 15 nacionalidades, somado à cultura de <i>Tribos/Esquadrões</i>, contribui para colocar nós, funcionários, como parte de uma equipe virtual internacional, especializada em DevOps, entre várias outras tecnologias de ponta."
-            },
-            {
-                "language": "en",
-                "city": "Rotterdam",
-                "country": "Netherlands",
-                "role": "Full-stack Engineer",
-                "description": "<b>Swisscom</b> is the <b>#1</b> telecommunications company and one of the leading IT companies in Switzerland. Its products and services range from B2C products, such as <i>Swisscom TV</i>, to B2B IT solutions in multiple industries, such as <i>Banking, Health, Energy, Entertainment, and Advertising</i>.<br><br>In the <i>Swisscom DevOps Center</i> innovation and experimenting are deeply rooted in the DNA of the company. The multicultural environment with 15 nationalities, and a <i>Tribe/Squad</i> culture, contribute to putting us, the employees, as part of an international virtual team, specialized in DevOps among various other top technologies."
-            }
-        ],
-        "technologies": [
-            "Java", "Spring Boot", "Angular", "Typescript", "Javascript", "SDX", "Versioning Control", "DevOps", "CI/CD", "JUnit", "Karma", "Jasmine", "Selenium", "Jenkins", "Docker", "NPM", "Gradle", "Jira"
-        ],
-        "medias": [
-            {
-                "icon": "linkedin",
-                "title": "LinkedIn Swisscom",
-                "http": "https://www.linkedin.com/company/swisscom/"
-            },
-            {
-                "icon": "facebook",
-                "title": "Facebook Swisscom",
-                "http": "https://www.facebook.com/Swisscom"
-            },
-            {
-                "icon": "youtube",
-                "title": "Youtube Swisscom",
-                "http": "https://www.youtube.com/swisscom"
-            }
-        ],
-        "backgroundUrl": "assets/template/experience/rotterdam.jpg"
     }
+    
 ]
