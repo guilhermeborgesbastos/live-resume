@@ -64,10 +64,10 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     const personalData = environment.personal;
-    this.name = personalData.name;
-    this.email = personalData.email;
-    this.phone = personalData.phone;
-    this.location = personalData.location;
+    this.name = "Aswin Stevin";
+    this.email ="aswinstevin@gmail.com";
+    this.phone ="+971552989059";
+    this.location ="United Arab Emirates,Sharjah";
 
     this.faEnvelope = faEnvelope;
     this.faPhone = faPhone;

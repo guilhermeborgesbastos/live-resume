@@ -7,22 +7,20 @@ export const environment = {
   // replace the data below with your personal data
   personal: {
     caricature: "gbastos-illustration@2x.png",
-    name: "Guilherme Borges Bastos",
-    birth: "1993-06-29",
-    email: "guilhermeborgesbastos@gmail.com",
-    phone: "+31 68 733 3020",
-    location: "Gouda, South Holland, Netherlands"
+    name: "Aswin Stevin",
+    birth: "1999-06-18",
+    email: "aswinstevin@gmail.com",
+    phone: "+971552989059",
+    location: "Muwaileh, Sharjah, United Arab Emirates"
   },
   // replace the dummy data below with the real firebase configs
   firebaseConfig: {
-    apiKey: "AIzaSyC2frVRAAltsVTmdwgFnATGHoVUzNHfzsM",
-    authDomain: "live-resume-a575a.firebaseapp.com",
-    databaseURL: "https://live-resume-a575a.firebaseio.com",
-    projectId: "live-resume-a575a",
-    storageBucket: "live-resume-a575a.appspot.com",
-    messagingSenderId: "681076751855",
-    appId: "1:681076751855:web:18bae3866ebfcc4fcd8a1a",
-    measurementId: "G-00VXD77WNG"
+    apiKey: "AIzaSyCsIlrKBdGLqrJOS6Ir1WRRF8QpCtmvOKQ",
+  authDomain: "aswins-live-re.firebaseapp.com",
+  projectId: "aswins-live-re",
+  storageBucket: "aswins-live-re.appspot.com",
+  messagingSenderId: "471643663300",
+  appId: "1:471643663300:web:7117873b42a0242cc1d291"
   }
 };
 

@@ -1,35 +1,36 @@
 {
     "internationalizations": [
         {
-            "language": "pt",
-            "description": "Minha caminhada como <i>programador</i> teve início aos nove anos de idade quando me apaixonei pelo <i>Logo</i>, uma linguagem de programação educacional usada para cativar crianças nas maravilhosas terras da <i>Programação</i>. Costumava passar horas seguidas tentando criar figuras e animações, usando matemática e geometria. Naquela época, eu simplesmente não conhecia os desafios emocionantes que ainda estavam por vir.<br><br>Alguns anos depois, consegui um estágio como <i>Webmaster</i>, desde então, nunca mais parei, sendo mais de uma década, onde venho tendo a chance de trabalhar com pessoas maravilhosas, aprendendo todos os dias, viajando pelo mundo e, principalmente, sempre fazendo grandes amizades.<br><br>Tive experiência como empreendedor, quando um amigo apresentou-me <i>Magento</i>, um framework de comércio eletrônico extremamente popular. Depois de fazer vários cursos e muita prática, consegui contratos com agências de São Paulo e Rio de Janeiro, Brasil. Essa experiência de empreendedorismo me deu a chance de ver o outro lado da moeda, o que contribuiu para expandir um pouco mais minha consciência como colaborador.<br><br>Atualmente, continuo buscando novas habilidades, aprendendo e compartilhando meu humilde conhecimento, tanto quanto possível."
-        },
-        {
             "language": "en",
-            "description": "My path as a <i>programmer</i> has started at nineish years old, when I've fallen in love with <i>Logo</i>, an educational programming language used to captivate kids in the wonderful lands of <i>Programming</i>. I used to spend hours in a row trying to build figures and animations, using math and geometry. At that time, I just did not know the exciting challenges that were yet to come.<br><br>A few years later, I got an internship as a <i>Webmaster</i>, since then, I have never stopped. It has been more than a decade, where I'm having the chance to work with marvelous people, learning every day, traveling the world, and mainly, always making great friendships.<br><br>I had an entrepreneurship experience, when a friend of mine presented me <i>Magento</i>, an extremely popular e-commerce framework. After doing several courses and a lot of practice, I got contracts with agencies from São Paulo and Rio de Janeiro, Brazil. This entrepreneurship experience gave me the chance to see the other side of the coin, which contributed to sort of expand a bit more my consciousness as an employee.<br><br>Nowadays, I keep seeking new skills, learning and sharing my humble knowledge as much as possible."
+            "description": "Enthusiastic Python Full Stack Developer with a Passion for Crafting Digital Solutions.<br><br>As a budding Python Full Stack Developer, I bring a fresh perspective and a deep enthusiasm for creating comprehensive web applications. My journey into the world of programming has equipped me with a strong foundation in both front-end and back-end technologies. With a keen eye for detail and a commitment to delivering high-quality code, I am eager to contribute my skills to dynamic projects that push the boundaries of innovation.<br><br>My proficiency in Python empowers me to seamlessly navigate the complexities of back-end development, where I excel in designing and implementing robust server-side logic and databases. Additionally, my familiarity with front-end technologies like HTML, CSS, and JavaScript allows me to create user-centric interfaces that prioritize aesthetics and functionality.<br><br>As a newcomer to the field, I thrive on continuous learning and collaboration, recognizing that the tech landscape is ever-evolving. My adaptability, coupled with a strong problem-solving mindset, ensures that I can overcome challenges while maintaining a positive and proactive attitude.<br><br>With a drive to contribute to impactful projects, I am excited to learn, grow, and leverage my skills as a Python Full Stack Developer. My passion for coding, combined with my dedication to mastering the art of full stack development, positions me as a valuable asset in creating engaging and efficient digital solutions."
         }
     ],
     "medias": [        
         {
             "icon": "linkedin",
             "title": "LinkedIn",
-            "http": "https://www.linkedin.com/in/guilhermeborgesbastos/"
+            "http": "https://www.linkedin.com/in/aswin-stevin-683524224/"
         },
         {
             "icon": "github",
             "title": "GitHub",
-            "http": "https://github.com/guilhermeborgesbastos"
+            "http": "https://github.com/Aswinstev"
         },
         {
-            "icon": "facebook",
-            "title": "Facebook",
-            "http": "https://www.facebook.com/guilherme.borgesbastos"
+            "icon": "whatsapp",
+            "title": "Whatsapp",
+            "http": "https://wa.me/+971552989059"
+        },
+        {
+            "icon": "instagram",
+            "title": "Instagram",
+            "http": "https://www.instagram.com/aswin__stevin/"
         }
     ],
     "hobbies": [        
         {
-            "icon": "biking",
-            "title": "Cycling"
+            "icon": "music",
+            "title": "Music"
         },
         {
             "icon": "dumbbell",
@@ -40,8 +41,12 @@
             "title": "Travel"
         },
         {
-            "icon": "book",
-            "title": "Read"
+            "icon": "futbol",
+            "title": "Sports"
+        },
+        {
+            "icon": "laptop",
+            "title": "Tech"
         }
     ]
 }
