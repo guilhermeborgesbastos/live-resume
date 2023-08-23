@@ -1,0 +1,43 @@
+[
+    {
+        "thumbnail": "assets/posts/portfolio1.png",
+        "http": "https://netflixclone-aswin.vercel.app/",
+        "date": "2023",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Build and Deployed, a Netflix Clone Website! Using only HTML and CSS.",
+                "description": "Introducing My Personalized Streaming Haven: A Unique Netflix Clone Crafted with HTML and CSS Step into a realm of creativity and innovation with my very own Netflix clone website, meticulously designed and brought to life using the dynamic duo of HTML and CSS. My vision for a tailored streaming experience is about to become a reality, showcasing my distinctive style and taste."
+            }
+           
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-01-15-2019.png",
+        "http": "https://teslaclone-aswin.vercel.app/",
+        "date": "2023",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Build and Deployed, a Tesla Clone Website! Using only HTML and CSS and JavaScript.",
+                "description": "Indroducing My Tesla clone website. Using the dynamic trio of HTML, CSS, and JavaScript, I am about to create an immersive automotive universe that mirrors the innovation and elegance of the iconic Tesla brand With HTML, lay the foundation for your site's structure, from the sleek homepage showcasing cutting-edge electric vehicles to interactive product pages that highlight the unique features of each model. Harness the power of CSS to infuse your design with Tesla's signature minimalism, employing refined color palettes, typography, and layouts that capture the brand's essence."
+            }
+            
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-07-10-2016.jpg",
+        "http": "https://amazonclone-aswin.vercel.app/",
+        "date": "2023",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "A frontend clone of E-commerce website of Amazon. This is created using HTML,CSS and Vanilla Javascript. The page is created for big screens i.e, laptops, PCs only.",
+                "description": "For great user experience, the usage of maps together with the ordered list is used very often in mobile applications. This article presents an open-source application for Android that provides a fully functional component."
+            }
+            
+        ]
+    }
+    
+    
+]

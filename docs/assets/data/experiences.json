@@ -1,0 +1,33 @@
+[
+    {
+        "id": 1,
+        "position": 1,
+        "startAt": "06-06-2022",
+        "endAt": "01-01-2023",
+        "companyName": "SMECLABS",
+        "website": "https://www.smeclabs.com/internship/",
+        "logo": "assets/template/experience/logo/facil-logo.png",
+        "internationalizations": [
+            
+            {
+                "language": "en",
+                "city": "Kerala",
+                "country": "India",
+                "role": "Python Fullstack Development intern",
+                "description": "<b>SMECLABS</b> Established in the early 2001 as the R&D and training hub of SMEC Automation Pvt. Ltd. – an ISO 9001:2015 certified company based in Kochi, Kerala, SMEClabs had received numerous accolades from world renowned bodies such as Microsoft, Schneider Electric, Certiport, etc. and accreditations from national bodies such as National Skill Development Centre (NSDC), India International Skill Centre (IISC), etc. SMEClabs continues to be among the leaders and the top preferred choice for students seeking to create a name for themselves in their respective domain through its skill development training. SMEClabs provides industry-oriented programs and trainings to enhance the skillset of students and prepare them to be industry-ready."
+            }
+        ],
+        "technologies": [
+            "PHP", "Node JS", "Linux", "HTML", "CSS", "CSS3", "Javascript", "jQuery", "React.Js", "FasrAPI", "Django", "Wordpress", "MongoDB", "SQL", "MySQL", "PostgreSQL", "Windows"
+        ],
+        "medias": [
+            {
+                "icon": "twitter",
+                "title": "Twitter",
+                "http": "https://twitter.com/aswin_stevin"
+            }
+        ],
+        "backgroundUrl": "assets/template/experience/uberaba.jpg"
+    }
+    
+]

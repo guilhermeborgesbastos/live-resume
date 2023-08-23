@@ -1,0 +1,40 @@
+//----------------------------------*\
+// Fonts
+//----------------------------------*/
+@import 'assets/fonts/_fonts.scss';
+
+// primary background and font
+$primary_font: "Montserrat", sans-serif;
+$primary_background: #d4e7fe;
+
+// font-weight
+$thin:100;
+$light:300;
+$regular:400;
+$semi-bold:600;
+$bold:700;
+$black:900;
+
+// Font size
+$font-xs:12px;
+$font-sm: 14px;
+$primary-fs: 16px;
+$font-md: 18px;
+$font-lg: 20px;
+
+html, body {
+    height: 100%;
+    background: $primary_background;
+    font-family: $primary_font;
+    font-size: $primary-fs;
+    font-weight: $regular;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+section {
+    display: flex;
+}
+
+app-welcome, app-experience, app-about, app-posts, app-contact { display: block; }
