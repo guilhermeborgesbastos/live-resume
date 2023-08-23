@@ -30,7 +30,6 @@ export class HammerConfig  extends HammerGestureConfig {
 }
 
 registerLocaleData(localeEn, "en");
-registerLocaleData(localePt, "pt-BR", localePtExtra);
 @NgModule({
   imports: [
     BrowserModule,
