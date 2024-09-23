@@ -45,20 +45,20 @@
                                 </div>
                                 <div class="info-block">
                                     <div class="company-name"><a href="{{ exp.website }}" target="_blank">{{ exp.companyName }}</a></div>
-                                    <div class="role" appInternationalization [data]="exp.internationalizations" property='role'>Loading...</div>
+                                    <div class="role" appInternationalization [data]="exp.internationalizations" property='role' [innerHTML]="exp?.internationalizations[0]?.role || 'Loading...'"></div>
                                     <div class="period">
                                         <span>{{ exp.startAt | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
                                         <span class="devider">-</span>
                                         <span>{{ (exp.endAt | safariDateFormatter | localizedDate:'MMM yyyy') }}</span>
                                     </div>
                                     <div class="location">
-                                        <span class="city" appInternationalization [data]="exp.internationalizations" property='city'>Loading...</span>
+                                        <span class="city" appInternationalization [data]="exp.internationalizations" property='city' [innerHTML]="exp?.internationalizations[0]?.city || 'Loading...'"></span>
                                         <span class="devider">,&nbsp;</span>
-                                        <span class="country" appInternationalization [data]="exp.internationalizations" property='country'>Loading...</span>
+                                        <span class="country" appInternationalization [data]="exp.internationalizations" property='country' [innerHTML]="exp?.internationalizations[0]?.country || 'Loading...'"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="description" appInternationalization [data]="exp.internationalizations" property='description'>Loading...</div>
+                            <div class="description" appInternationalization [data]="exp.internationalizations" property='description' [innerHTML]="exp?.internationalizations[0]?.description || 'Loading...'"></div>
                             <div class="technologies">
                                 <span class="hashtag" *ngFor="let technology of exp.technologies">{{ technology }}</span>
                             </div>
