@@ -16,7 +16,7 @@
                 <span itemprop="yearsOld">{{ yearsOld }}</span>
                 &nbsp;<span i18n="about@@yearsOld">years old</span>
             </p>
-            <p class="text" appInternationalization [data]="aboutData?.internationalizations" property='description' itemprop="summary">Loading...</p>
+            <p class="text" appInternationalization [data]="aboutData?.internationalizations" property='description' itemprop="summary" [innerHTML]="aboutData?.internationalizations[0]?.description || 'Loading...'"></p>
             <div class="hobbies">
                 <h3>Hobbies</h3>
                 <fa-icon *ngFor="let hobby of aboutData?.hobbies" [icon]="['fas', hobby.icon]" class="icon" title="{{ hobby.title }}" itemprop="hobby"></fa-icon>
