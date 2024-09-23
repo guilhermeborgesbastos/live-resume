@@ -14,8 +14,13 @@
                         <meta itemprop="author" content="Guilherme Borges Bastos" />
                         <meta itemprop="creator" content="Guilherme Borges Bastos" />
                         <meta itemprop="publisher" content="Guilherme Borges Bastos" />
-                        <h2 class="title" appInternationalization [data]="post.internationalizations" property='title' itemprop="name" itemprop="headline">Loading...</h2>
-                        <p class="description" appInternationalization [data]="post.internationalizations" property='description' ellipsis='275' itemprop="description">Loading...</p>
+                        <h2 class="title" appInternationalization [data]="post.internationalizations" property='title'
+                itemprop="name" itemprop="headline" [innerHTML]="post?.internationalizations[0]?.title || 'Loading...'">
+            </h2>
+            <p class="description" appInternationalization [data]="post.internationalizations" property='description'
+               ellipsis='275' itemprop="description"
+               [innerHTML]="post?.internationalizations[0]?.description || 'Loading...'">
+            </p>
                     </div>
                     <button class="read-more" i18n="posts@@readMore">Read more</button>
                 </a>
