@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { Meta, Title } from "@angular/platform-browser";
 
 @Component({
@@ -12,7 +13,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private titleService: Title,
-    private metaTagService: Meta
+    private metaTagService: Meta,
+    screenTrackingService: ScreenTrackingService,
+    userTrackingService: UserTrackingService,
   ) { }
 
   ngOnInit(): void {
