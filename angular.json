@@ -97,27 +97,27 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "live-resume:build"
+            "buildTarget": "live-resume:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "live-resume:build:production"
+              "buildTarget": "live-resume:build:production"
             },
             "en": {
-              "browserTarget": "live-resume:build:en"
+              "buildTarget": "live-resume:build:en"
             },
             "pt": {
-              "browserTarget": "live-resume:build:pt"
+              "buildTarget": "live-resume:build:pt"
             },
             "es5": {
-              "browserTarget": "live-resume:build:es5"
+              "buildTarget": "live-resume:build:es5"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "live-resume:build"
+            "buildTarget": "live-resume:build"
           }
         },
         "test": {
