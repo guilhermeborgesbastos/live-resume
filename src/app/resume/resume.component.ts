@@ -2,9 +2,10 @@ import { Component, OnInit, HostListener } from "@angular/core";
 import { debounce } from "../core/utils";
 
 @Component({
-  selector: "app-resume",
-  templateUrl: "./resume.component.html",
-  styleUrls: ["./resume.component.css", "./resume.component.responsivity.css"]
+    selector: "app-resume",
+    templateUrl: "./resume.component.html",
+    styleUrls: ["./resume.component.css", "./resume.component.responsivity.css"],
+    standalone: false
 })
 export class ResumeComponent {
 

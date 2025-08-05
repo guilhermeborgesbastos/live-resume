@@ -11,9 +11,10 @@ import { SafariDateFormatterPipe } from "../../core/pipe/safari-date-formatter.p
 import { LocalizedDatePipe } from "../../core/pipe/localized-date.pipe";
 
 @Component({
-  selector: "app-experience-timeline",
-  templateUrl: "./experience-timeline.component.html",
-  styleUrls: [ "./experience-timeline.component.scss" , "experience-timeline.component.reponsivity.scss"]
+    selector: "app-experience-timeline",
+    templateUrl: "./experience-timeline.component.html",
+    styleUrls: ["./experience-timeline.component.scss", "experience-timeline.component.reponsivity.scss"],
+    standalone: false
 })
 export class ExperienceTimelineComponent implements OnInit, OnDestroy {
 

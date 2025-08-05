@@ -9,9 +9,10 @@ import { Contact } from "../model/contact.model";
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: "app-contact",
-  templateUrl: "./contact.component.html",
-  styleUrls: ["./contact.component.scss", "./contact.component.responsivity.scss"]
+    selector: "app-contact",
+    templateUrl: "./contact.component.html",
+    styleUrls: ["./contact.component.scss", "./contact.component.responsivity.scss"],
+    standalone: false
 })
 
 export class ContactComponent implements OnInit {

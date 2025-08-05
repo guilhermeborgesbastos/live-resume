@@ -2,7 +2,10 @@ import { Directive, ElementRef, Input, OnInit} from "@angular/core";
 import { LOCALE_ID, Inject } from "@angular/core";
 import { EllipsisPipe } from "../pipe/ellipsis.pipe";
 
-@Directive({ selector: "[appInternationalization]" })
+@Directive({
+    selector: "[appInternationalization]",
+    standalone: false
+})
 export class InternationalizationDirective {
 
     private _data: any[] = [];

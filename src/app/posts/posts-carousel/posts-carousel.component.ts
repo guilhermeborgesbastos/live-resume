@@ -19,7 +19,8 @@ import { debounce } from "../../core/utils";
             })),
             transition("void <=> *", animate(300)),
         ])
-    ]
+    ],
+    standalone: false
 })
 
 export class PostsCarouselComponent {

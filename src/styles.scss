@@ -1,7 +1,7 @@
 //----------------------------------*\
 // Fonts
 //----------------------------------*/
-@import 'assets/fonts/_fonts.scss';
+@use 'assets/fonts/fonts.scss';
 
 // primary background and font
 $primary_font: "Montserrat", sans-serif;

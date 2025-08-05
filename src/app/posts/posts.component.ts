@@ -6,9 +6,10 @@ import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons
 import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
 
 @Component({
-  selector: "app-posts",
-  templateUrl: "./posts.component.html",
-  styleUrls: ["./posts.component.scss", "./posts.component.responsivity.scss"]
+    selector: "app-posts",
+    templateUrl: "./posts.component.html",
+    styleUrls: ["./posts.component.scss", "./posts.component.responsivity.scss"],
+    standalone: false
 })
 export class PostsComponent extends AbstractSwipeSection implements OnInit {
 

@@ -3,9 +3,10 @@ import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawe
 import { NgNavigatorShareService } from "ng-navigator-share";
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss", "./header.component.responsivity.scss"]
+    selector: "app-header",
+    templateUrl: "./header.component.html",
+    styleUrls: ["./header.component.scss", "./header.component.responsivity.scss"],
+    standalone: false
 })
 
 export class HeaderComponent implements OnInit, AfterViewInit {

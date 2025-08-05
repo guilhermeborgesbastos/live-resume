@@ -24,12 +24,15 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/live-resume",
+            "outputPath": {
+              "base": "dist/live-resume"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -41,7 +44,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "hammerjs"
+            ]
           },
           "configurations": {
             "production": {
@@ -56,8 +63,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -76,7 +81,9 @@
               "localize": [
                 "en"
               ],
-              "outputPath": "dist/en/",
+              "outputPath": {
+                "base": "dist/en/"
+              },
               "baseHref": "/en/",
               "i18nMissingTranslation": "error"
             },
@@ -85,7 +92,9 @@
               "localize": [
                 "pt"
               ],
-              "outputPath": "dist/pt/",
+              "outputPath": {
+                "base": "dist/pt/"
+              },
               "baseHref": "/pt/",
               "i18nMissingTranslation": "error"
             },

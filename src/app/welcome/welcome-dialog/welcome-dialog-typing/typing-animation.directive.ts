@@ -10,7 +10,8 @@ interface IPhrase {
 }
 
 @Directive({
-    selector: "[appTypingAnimation]"
+    selector: "[appTypingAnimation]",
+    standalone: false
 })
 
 export class TypingAnimationDirective implements OnInit {

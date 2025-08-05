@@ -8,9 +8,10 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-about",
-  templateUrl: "./about.component.html",
-  styleUrls: ["./about.component.scss", "./about.component.responsivity.scss"]
+    selector: "app-about",
+    templateUrl: "./about.component.html",
+    styleUrls: ["./about.component.scss", "./about.component.responsivity.scss"],
+    standalone: false
 })
 export class AboutComponent implements OnInit, OnDestroy {
 

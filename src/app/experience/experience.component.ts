@@ -8,9 +8,10 @@ import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
 
 @Component({
-  selector: "app-experience",
-  templateUrl: "./experience.component.html",
-  styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"]
+    selector: "app-experience",
+    templateUrl: "./experience.component.html",
+    styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"],
+    standalone: false
 })
 export class ExperienceComponent extends AbstractSwipeSection implements OnInit {
   
