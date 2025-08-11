@@ -68,7 +68,7 @@
     .illustration {
         position: absolute;
         height: 105%;
-        bottom: -1em;
+        bottom: -4em;
         right: 0;
         z-index: 1;
     }
@@ -85,7 +85,7 @@
         -moz-box-sizing: border-box;
         box-sizing: border-box;
         position: absolute;
-        bottom: -1em;
+        bottom: -4em;
         right: 0;
         z-index: 0;
     }
@@ -241,6 +241,7 @@
                         font-weight: 600;
                         margin-bottom: 5px;
                         font-family: "Montserrat", sans-serif;
+                        min-height: 5em;
                     }
     
                     &.loading {
