@@ -5,9 +5,8 @@ import { WelcomeDialogComponent } from "./welcome-dialog/welcome-dialog.componen
 import { TypingAnimationModule } from "./welcome-dialog/welcome-dialog-typing/typing-animation.module";
 
 @NgModule({
-  imports: [ TypingAnimationModule ],
-  declarations: [ WelcomeComponent, WelcomeBackgroundComponent, WelcomeDialogComponent ],
-  exports: [ WelcomeComponent ]
+    imports: [TypingAnimationModule, WelcomeComponent, WelcomeBackgroundComponent, WelcomeDialogComponent],
+    exports: [WelcomeComponent]
 })
 
 export class WelcomeModule { }

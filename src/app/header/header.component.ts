@@ -1,12 +1,14 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID, AfterViewInit } from "@angular/core";
 import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { NgNavigatorShareService } from "ng-navigator-share";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import { NgClass } from "@angular/common";
 
 @Component({
     selector: "app-header",
     templateUrl: "./header.component.html",
     styleUrls: ["./header.component.scss", "./header.component.responsivity.scss"],
-    standalone: false
+    imports: [FaIconComponent, NgClass]
 })
 
 export class HeaderComponent implements OnInit, AfterViewInit {

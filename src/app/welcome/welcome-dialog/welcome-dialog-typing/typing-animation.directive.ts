@@ -9,10 +9,7 @@ interface IPhrase {
     phrases: string[];
 }
 
-@Directive({
-    selector: "[appTypingAnimation]",
-    standalone: false
-})
+@Directive({ selector: "[appTypingAnimation]" })
 
 export class TypingAnimationDirective implements OnInit {
 

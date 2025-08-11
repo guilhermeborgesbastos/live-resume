@@ -14,24 +14,22 @@ import { ContactService } from "../contact/contact.service";
 import { FooterComponent } from "../footer/footer.component";
 
 @NgModule({
-  imports: [
-    ReactiveFormsModule,
-    CommonModule, 
-    CoreModule,
-    FontAwesomeModule,
-    WelcomeModule,
-    ExperienceModule,
-    PostsModule
-  ],
-  declarations: [ 
-    ResumeComponent,
-    HeaderComponent,
-    AboutComponent,
-    ContactComponent,
-    FooterComponent
-  ],
-  exports: [ ResumeComponent ],
-  providers: [ ContactService ]
+    imports: [
+        ReactiveFormsModule,
+        CommonModule,
+        CoreModule,
+        FontAwesomeModule,
+        WelcomeModule,
+        ExperienceModule,
+        PostsModule,
+        ResumeComponent,
+        HeaderComponent,
+        AboutComponent,
+        ContactComponent,
+        FooterComponent
+    ],
+    exports: [ResumeComponent],
+    providers: [ContactService]
 })
 
 export class ResumeModule { }

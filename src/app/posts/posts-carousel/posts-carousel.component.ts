@@ -7,6 +7,10 @@ import {
 import { IPost } from "../posts-interfaces";
 import { trigger, state, style, animate, transition } from "@angular/animations";
 import { debounce } from "../../core/utils";
+import { NgClass, NgFor } from "@angular/common";
+import { InternationalizationDirective } from "../../core/directive/internationalization.directive";
+import { SafariDateFormatterPipe } from "../../core/pipe/safari-date-formatter.pipe";
+import { LocalizedDatePipe } from "../../core/pipe/localized-date.pipe";
 
 @Component({
     selector: "app-posts-carousel",
@@ -20,7 +24,7 @@ import { debounce } from "../../core/utils";
             transition("void <=> *", animate(300)),
         ])
     ],
-    standalone: false
+    imports: [NgClass, NgFor, InternationalizationDirective, SafariDateFormatterPipe, LocalizedDatePipe]
 })
 
 export class PostsCarouselComponent {

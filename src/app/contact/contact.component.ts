@@ -3,16 +3,18 @@ import {
   faEnvelope, faPhone, faTimes,
   faMapMarkerAlt, IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
-import { UntypedFormGroup, UntypedFormControl, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormControl, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ContactService } from "./contact.service";
 import { Contact } from "../model/contact.model";
 import { environment } from '../../environments/environment';
+import { NgClass, NgIf } from "@angular/common";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
     selector: "app-contact",
     templateUrl: "./contact.component.html",
     styleUrls: ["./contact.component.scss", "./contact.component.responsivity.scss"],
-    standalone: false
+    imports: [NgClass, FaIconComponent, NgIf, ReactiveFormsModule]
 })
 
 export class ContactComponent implements OnInit {

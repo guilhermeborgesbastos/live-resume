@@ -5,10 +5,7 @@ import {
     OnChanges
 } from "@angular/core";
 
-@Directive({
-    selector: "[appInViewport]",
-    standalone: false
-})
+@Directive({ selector: "[appInViewport]" })
 
 export class InViewportDirective implements OnChanges {
 

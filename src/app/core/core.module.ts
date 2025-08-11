@@ -9,7 +9,10 @@ import { InternationalizationDirective } from "./directive/internationalization.
 import { InViewportDirective } from "./directive/on-viewport.directive";
 import { EllipsisPipe } from "./pipe/ellipsis.pipe";
 
-@NgModule({ declarations: [SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective],
-    exports: [SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective], imports: [], providers: [DataService, SorterService, provideHttpClient(withInterceptorsFromDi())] })
+@NgModule({
+    exports: [SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective],
+    imports: [SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective],
+    providers: [DataService, SorterService, provideHttpClient(withInterceptorsFromDi())]
+})
 
 export class CoreModule { }

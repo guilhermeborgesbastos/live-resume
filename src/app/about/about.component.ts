@@ -2,16 +2,18 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { environment } from '../../environments/environment';
 import { DataService } from "../core/data.service";
 import { IAbout } from "./about-interfaces";
-import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { FaIconLibrary, FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { Subscription } from "rxjs";
+import { InternationalizationDirective } from "../core/directive/internationalization.directive";
+import { NgFor } from "@angular/common";
 
 @Component({
     selector: "app-about",
     templateUrl: "./about.component.html",
     styleUrls: ["./about.component.scss", "./about.component.responsivity.scss"],
-    standalone: false
+    imports: [InternationalizationDirective, NgFor, FaIconComponent]
 })
 export class AboutComponent implements OnInit, OnDestroy {
 

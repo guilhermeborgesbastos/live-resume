@@ -4,14 +4,19 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { IExperience } from "./experience-interfaces";
 import { DataService } from "../core/data.service";
 import { SorterService } from "../core/sorter.service";
-import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { FaIconLibrary, FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
+import { NgClass, NgFor } from "@angular/common";
+import { InternationalizationDirective } from "../core/directive/internationalization.directive";
+import { ExperienceTimelineComponent } from "./experience-timeline/experience-timeline.component";
+import { SafariDateFormatterPipe } from "../core/pipe/safari-date-formatter.pipe";
+import { LocalizedDatePipe } from "../core/pipe/localized-date.pipe";
 
 @Component({
     selector: "app-experience",
     templateUrl: "./experience.component.html",
     styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"],
-    standalone: false
+    imports: [NgClass, FaIconComponent, NgFor, InternationalizationDirective, ExperienceTimelineComponent, SafariDateFormatterPipe, LocalizedDatePipe]
 })
 export class ExperienceComponent extends AbstractSwipeSection implements OnInit {
   

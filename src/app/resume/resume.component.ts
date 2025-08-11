@@ -1,11 +1,20 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { debounce } from "../core/utils";
+import { HeaderComponent } from "../header/header.component";
+import { NgClass } from "@angular/common";
+import { WelcomeComponent } from "../welcome/welcome.component";
+import { InViewportDirective } from "../core/directive/on-viewport.directive";
+import { AboutComponent } from "../about/about.component";
+import { ExperienceComponent } from "../experience/experience.component";
+import { PostsComponent } from "../posts/posts.component";
+import { ContactComponent } from "../contact/contact.component";
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
     selector: "app-resume",
     templateUrl: "./resume.component.html",
     styleUrls: ["./resume.component.css", "./resume.component.responsivity.css"],
-    standalone: false
+    imports: [HeaderComponent, NgClass, WelcomeComponent, InViewportDirective, AboutComponent, ExperienceComponent, PostsComponent, ContactComponent, FooterComponent]
 })
 export class ResumeComponent {
 

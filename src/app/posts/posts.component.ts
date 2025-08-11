@@ -4,12 +4,15 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { IPost } from "./posts-interfaces";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
+import { NgClass } from "@angular/common";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import { PostsCarouselComponent } from "./posts-carousel/posts-carousel.component";
 
 @Component({
     selector: "app-posts",
     templateUrl: "./posts.component.html",
     styleUrls: ["./posts.component.scss", "./posts.component.responsivity.scss"],
-    standalone: false
+    imports: [NgClass, FaIconComponent, PostsCarouselComponent]
 })
 export class PostsComponent extends AbstractSwipeSection implements OnInit {
 

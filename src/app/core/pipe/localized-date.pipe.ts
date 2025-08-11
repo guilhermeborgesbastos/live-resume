@@ -4,8 +4,7 @@ import { LOCALE_ID, Inject } from "@angular/core";
 
 @Pipe({
     name: "localizedDate",
-    pure: false,
-    standalone: false
+    pure: false
 })
 export class LocalizedDatePipe implements PipeTransform {
 

@@ -7,9 +7,8 @@ import { CommonModule } from "@angular/common";
 import { CoreModule } from "../core/core.module";
 
 @NgModule({
-    imports: [ CommonModule, FontAwesomeModule, CoreModule, BrowserAnimationsModule ],
-    declarations: [ PostsComponent, PostsCarouselComponent ],
-    exports: [ PostsComponent ]
+    imports: [CommonModule, FontAwesomeModule, CoreModule, BrowserAnimationsModule, PostsComponent, PostsCarouselComponent],
+    exports: [PostsComponent]
 })
 
 export class PostsModule { }

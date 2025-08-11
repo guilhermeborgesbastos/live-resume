@@ -6,9 +6,8 @@ import { CommonModule } from "@angular/common";
 import { CoreModule } from "../core/core.module";
 
 @NgModule({
-    imports: [ CommonModule, FontAwesomeModule, CoreModule ],
-    declarations: [ ExperienceComponent, ExperienceTimelineComponent ],
-    exports: [ ExperienceComponent ]
+    imports: [CommonModule, FontAwesomeModule, CoreModule, ExperienceComponent, ExperienceTimelineComponent],
+    exports: [ExperienceComponent]
 })
 
 export class ExperienceModule { }
