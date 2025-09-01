@@ -69,7 +69,7 @@ export class ContactComponent implements OnInit {
     const personalData = environment.personal;
     this.name = personalData.name;
     this.email = personalData.email;
-    this.phone = personalData.phone;
+    this.phone = personalData['phone'];
     this.location = personalData.location;
 
     this.faEnvelope = faEnvelope;

@@ -8,9 +8,8 @@ export const environment = {
   personal: {
     caricature: "gbastos-illustration@2x.png",
     name: "Guilherme Borges Bastos",
-    birth: "1993-06-29",
+    birth: "1993-06-19",
     email: "guilhermeborgesbastos@gmail.com",
-    phone: "+31 68 733 3020",
     location: "Gouda, South Holland, Netherlands"
   },
   // replace the dummy data below with the real firebase configs
