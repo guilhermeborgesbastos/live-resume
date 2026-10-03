@@ -19,10 +19,14 @@ npm test -- --watch=false --browsers=ChromeHeadless   # Karma + Jasmine unit spe
 npx ng test --include src/app/path/to/file.spec.ts    # run a single spec
 npm run test:e2e                    # build both locales, then run the Playwright browser suite (e2e/)
 npm run test:e2e:run                # rerun the browser suite against the existing dist/ output
+npm run test:e2e:docker             # build the Docker image, run it on :8080 and run the browser suite against it
+docker build -t live-resume . && docker run --rm -p 8080:80 live-resume   # serve http://localhost:8080/en/ and /pt/
 npm run int:extract                 # regenerate src/locales/messages.xlf (ng extract-i18n)
 ```
 
 **Browser suite (required gate before every commit).** `e2e/resume.spec.ts` runs Chromium at desktop and mobile (Pixel 7) viewports against the localized production builds served by `e2e/serve.mjs` on `http://127.0.0.1:4300/{en,pt}/` (`E2E_PORT` overrides the port). `e2e/fixtures.ts` stubs Firebase/gtag bootstrap calls, aborts Firestore writes and blocks all other third-party traffic, and fails a test on console errors, page errors or failed first-party requests. Output goes to `test-results/` (HTML report, landing screenshots per locale/viewport in `test-results/screenshots/`, traces/screenshots on failure). First run needs `npx playwright install chromium`. CI (`.github/workflows/ci.yml`) runs `npm ci`, lint, unit tests, the production build and `npm run test:e2e`.
+
+**Docker.** `Dockerfile` builds both locales (node:24-slim) and serves them from nginx:1.30-alpine; `docker/nginx.conf` redirects `/en` and `/pt` to `/en/` and `/pt/`, serves each locale's `index.html` for extension-less paths under it, returns 404 for missing files and for anything outside the locale prefixes. `e2e/serve.mjs` follows the same contract, and `E2E_BASE_URL` points the browser suite at any running server (the container via `npm run test:e2e:docker`).
 
 `deploy.sh` builds both locales, stages `dist/<locale>/browser/<locale>/` as `dist/site/<locale>/`, then empties the S3 bucket `www.guilhermeborgesbastos.com` and uploads each locale to its `en/` / `pt/` prefix (served as https://guilhermeborgesbastos.com/en/ and /pt/). It is destructive and must not be run during development; `./deploy.sh --stage-only` builds and stages without touching S3. The script stops before touching S3 if the build fails or a locale's `index.html` is missing.
 
