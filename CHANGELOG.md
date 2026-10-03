@@ -1,3 +1,12 @@
+#Unreleased
+###📃 release notes
+- Upgrade to Angular 21.2.25 (LTS) and Typescript 5.9.3, via Angular 20;
+- Node.js 20.19+, 22.12+ or 24 is required (Node 24 pinned in `.nvmrc`); `npm ci` no longer needs `--force`;
+- Use the modular Firebase SDK directly instead of AngularFire, loading Firestore and Analytics on demand (smaller initial bundle);
+- Replace `ng-navigator-share` with the native Web Share API and `@angular/animations` with `animate.enter`/`animate.leave`;
+- Replace Protractor with a Playwright browser test suite (`npm run test:e2e`) and add unit specs and a CI workflow;
+- Upgrade angular-eslint to 21 with an ESLint 9 flat config; enable strict template type checking.
+
 #[1.8.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.8) (2023-03-22)
 ###📃 release notes
 - Upgrade to Angular 15.2.3;

@@ -30,7 +30,7 @@
 
 ## 包括哪些内容❓
 
-* 一个带有可自定义模板和内容的完全功能性的 _Angular 15_ 应用程序
+* 一个带有可自定义模板和内容的完全功能性的 _Angular 21_（LTS） 应用程序
 * 完全响应移动设备和桌面设备（也支持移动手势...）
 * 英语和葡萄牙语的国际化支持（可以方便地添加/删除新语言） - in18库
 * 移动导航分享（将简历分享到WhatsApp、LinkedIn、Facebook等原生应用）
@@ -56,21 +56,19 @@
 
 > 还有一个视频教程可供参考[观看](https://youtu.be/SmSCux_qx_Q) _[[视频已过时，如有需要仅供参考]_。
 
-1. 需要安装版本为 _14.18.1_ 或更高版本的Node.js。要查看您的计算机上安装的Node.js版本，请在终端中键入以下命令：
+1. 需要 Node.js `^20.19.0`、`^22.12.0` 或 `^24.0.0`（Angular 21 支持的版本）。项目在 `.nvmrc` 中固定为 Node 24，使用 [nvm](https://github.com/nvm-sh/nvm) 时可直接运行 `nvm use`。要查看您的计算机上安装的Node.js版本，请在终端中键入以下命令：
 ```
 node -v
 ```
 
-2. 如果您的机器上没有安装Node.js，则可以前往 [此链接](https://nodejs.org/en/download/) 以安装 Node.js。要安装特定版本，请前往 [此链接](https://nodejs.org/en/download/)。
+2. 如果您的机器上没有安装Node.js，则可以前往 [此链接](https://nodejs.org/en/download/) 以安装 Node.js。
 
-3. 需要具备版本为 _6.14.15_ 或更高版本的 NPM。在终端命令行工具中输入以下命令可以查看您的计算机上安装的 NPM 版本：
+3. 需要 npm `10` 或更高版本（随上述 Node.js 版本一起安装）。可以通过以下命令查看：
 ```
 npm -v
 ```
 
-4. 如果您的计算机上尚未安装NPM，则需要前往 [此链接](https://www.npmjs.com/get-npm) 安装NPM。
-
-5. TypeScript 版本需要 _4.8.4_ 或更高版本。 
+4. TypeScript（5.9）和 Angular CLI（21）作为项目依赖在本地安装，无需全局安装。
 
 ## 📥 本地安装和运行
 
@@ -90,13 +88,10 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 
 5. 在克隆的项目文件夹内，启动应用：
 ```
-ng serve -o --host 0.0.0.0 --configuration en
+npx ng serve -o --host 0.0.0.0 --configuration en
 ```
 
-**P.S:** 如果出现 `ng` 命令未找到的情况，请执行以下命令：
-```
-npm install -g @angular/cli
-```
+**P.S:** 也可以使用 `npm run start:en`（或 `npm run start:pt`）启动同样的开发服务器。如果希望使用全局的 `ng` 命令，请执行 `npm install -g @angular/cli@21`。
 
 **注意：** 可选参数:
 * `-o` 这是用于启动应用程序后自动打开默认浏览器的别名。
@@ -106,6 +101,15 @@ npm install -g @angular/cli
 6. 接下来，该命令将启动一个服务器实例，并侦听端口`4200`。在您的浏览器中打开(http://localhost:4200/)，即可打开**Live Resume**。
 
 > 请随意进行改进或任何类型的更改，并通过**pull request**发送回来。欢迎您的贡献！
+
+## ✅ 测试与质量检查
+
+* `npm run lint`：ESLint 代码检查（`eslint.config.js`）。
+* `npm test -- --watch=false --browsers=ChromeHeadless`：单元测试（Jasmine + Karma）。
+* `npm run build-locale`：构建英语和葡萄牙语版本（缺少翻译时构建失败）。
+* `npm run test:e2e`：构建两种语言版本并运行 Playwright 浏览器测试（首次运行前执行 `npx playwright install chromium`）。测试不会向 Firebase 或 Google Analytics 发送真实数据，截图和报告保存在 `test-results/` 中。
+
+详细说明请参见英文版 README 的 “Testing and quality checks” 部分。
 
 ## 🔨 如何自定义？
 
@@ -121,8 +125,10 @@ npm install -g @angular/cli
 
 - [Angular](https://github.com/angular)
 - [Angular CLI](https://cli.angular.io)
-- [Navigator Share](https://www.npmjs.com/package/ng-navigator-share)
 - [Font Awesome](https://fontawesome.com)
+- [Firebase](https://firebase.google.com)
+- [HammerJS](https://hammerjs.github.io)
+- [Playwright](https://playwright.dev)
 
 ---
 
