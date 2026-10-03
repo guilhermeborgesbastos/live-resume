@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { Component, OnInit, ElementRef, Renderer2, ViewChild, inject } from "@angular/core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { IExperience } from "./experience-interfaces";
@@ -19,6 +19,11 @@ import { LocalizedDatePipe } from "../core/pipe/localized-date.pipe";
     imports: [NgClass, FaIconComponent, NgFor, InternationalizationDirective, ExperienceTimelineComponent, SafariDateFormatterPipe, LocalizedDatePipe]
 })
 export class ExperienceComponent extends AbstractSwipeSection implements OnInit {
+  private dataService = inject(DataService);
+  private sortService = inject(SorterService);
+  private renderer = inject(Renderer2);
+  private library = inject(FaIconLibrary);
+
   
   SELECTED_CLASS: string = "selected";
   LEAVE_RIGHT_CLASS: string = "leave-right";
@@ -38,14 +43,9 @@ export class ExperienceComponent extends AbstractSwipeSection implements OnInit 
 
   @ViewChild("orderedList") orderedList: ElementRef;
 
-  constructor(
-    private dataService: DataService,
-    private sortService: SorterService,
-    private renderer: Renderer2,
-    private library: FaIconLibrary
-  ) {
+  constructor() {
     super();
-    library.addIconPacks(fas, fab);
+    this.library.addIconPacks(fas, fab);
   }
 
   ngOnInit(): void {

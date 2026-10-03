@@ -1,9 +1,4 @@
-import {
-    Component, OnInit,
-    Input, HostListener,
-    EventEmitter, ElementRef,
-    Output
-} from "@angular/core";
+import { Component, OnInit, Input, HostListener, EventEmitter, ElementRef, Output, inject } from "@angular/core";
 import { IPost } from "../posts-interfaces";
 import { trigger, state, style, animate, transition } from "@angular/animations";
 import { debounce } from "../../core/utils";
@@ -28,6 +23,8 @@ import { LocalizedDatePipe } from "../../core/pipe/localized-date.pipe";
 })
 
 export class PostsCarouselComponent {
+    private elRef = inject(ElementRef);
+
 
     public _posts: IPost[] = [];
     public _originalPosts: IPost[] = [];
@@ -39,8 +36,6 @@ export class PostsCarouselComponent {
     elWidth: number;
     start: number;
     end: number;
-
-    constructor(private elRef: ElementRef) { }
 
     @Input() get currentPage(): number {
         return this._currentPage;

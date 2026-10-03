@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { DataService } from "../core/data.service";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { IPost } from "./posts-interfaces";
@@ -15,6 +15,8 @@ import { PostsCarouselComponent } from "./posts-carousel/posts-carousel.componen
     imports: [NgClass, FaIconComponent, PostsCarouselComponent]
 })
 export class PostsComponent extends AbstractSwipeSection implements OnInit {
+  private dataService = inject(DataService);
+
 
   currentPage: number = 1;
   resultsPerPage: number;
@@ -23,9 +25,9 @@ export class PostsComponent extends AbstractSwipeSection implements OnInit {
   faChevronLeft: IconDefinition;
   faChevronRight: IconDefinition;
 
-  constructor(private dataService: DataService) {
+  constructor() {
     super();
-   }
+  }
 
   ngOnInit(): void {
     this.faChevronLeft = faChevronLeft;

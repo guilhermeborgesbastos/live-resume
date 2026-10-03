@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import {
   faEnvelope, faPhone, faTimes,
   faMapMarkerAlt, IconDefinition
@@ -18,6 +18,8 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 })
 
 export class ContactComponent implements OnInit {
+  private contactService = inject(ContactService);
+
 
   name: string;
   email: string;
@@ -32,8 +34,6 @@ export class ContactComponent implements OnInit {
   isLoading: boolean = false;
   hasBeenSubmited: boolean = false;
   feedbackStatus: string;
-
-  constructor(private contactService: ContactService) { }
 
   contactForm: UntypedFormGroup = new UntypedFormGroup({
     name: new UntypedFormControl("",[

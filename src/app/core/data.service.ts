@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { Observable, throwError } from "rxjs";
@@ -10,10 +10,10 @@ import { IPost } from "../posts/posts-interfaces";
 
 @Injectable()
 export class DataService {
+    private http = inject(HttpClient);
+
 
     baseUrl: string = "assets/data/";
-    
-    constructor(private http: HttpClient) { }
 
     getExperiences() : Observable<IExperience[]> {
         return this.http.get<IExperience[]>(this.baseUrl + "experiences.json")

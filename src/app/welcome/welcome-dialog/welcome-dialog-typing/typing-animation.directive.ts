@@ -1,7 +1,4 @@
-import {
-    Directive, OnInit,
-    ElementRef, Input, Inject, LOCALE_ID
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Input, LOCALE_ID, inject } from "@angular/core";
 import { Typed } from "./typed";
 
 interface IPhrase {
@@ -12,6 +9,9 @@ interface IPhrase {
 @Directive({ selector: "[appTypingAnimation]" })
 
 export class TypingAnimationDirective implements OnInit {
+    private elRef = inject(ElementRef);
+    locale = inject(LOCALE_ID);
+
 
     @Input() phrasePeriod: number;
     @Input() typeSpeed: number;
@@ -20,11 +20,6 @@ export class TypingAnimationDirective implements OnInit {
 
     typed: Typed;
     phrases: string[] = [];
-
-    constructor (
-        private elRef: ElementRef,
-        @Inject(LOCALE_ID) public locale: string
-    ) {}
 
     _flatMap = (f, xs) => xs.reduce((acc,x) => acc.concat(f(x)), []);
 

@@ -1,18 +1,15 @@
-import {
-    Directive, OnInit,
-    ElementRef, Output,
-    EventEmitter, Input,
-    OnChanges
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output, EventEmitter, Input, OnChanges, inject } from "@angular/core";
 
 @Directive({ selector: "[appInViewport]" })
 
 export class InViewportDirective implements OnChanges {
+    private _el = inject(ElementRef);
+
 
     @Input() pageYOffset: number;
     @Output() inViewport:EventEmitter<Object>;
 
-    constructor(private _el:ElementRef) {
+    constructor() {
         this.inViewport = new EventEmitter();
     }
 

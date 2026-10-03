@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, inject } from "@angular/core";
 import { environment } from '../../environments/environment';
 import { DataService } from "../core/data.service";
 import { IAbout } from "./about-interfaces";
@@ -16,6 +16,9 @@ import { NgFor } from "@angular/common";
     imports: [InternationalizationDirective, NgFor, FaIconComponent]
 })
 export class AboutComponent implements OnInit, OnDestroy {
+  private dataService = inject(DataService);
+  private library = inject(FaIconLibrary);
+
 
   name: string;
   yearsOld: number;
@@ -23,11 +26,8 @@ export class AboutComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   aboutData: IAbout;
 
-  constructor(
-    private dataService: DataService,
-    private library: FaIconLibrary
-  ) {
-    library.addIconPacks(fas, fab);
+  constructor() {
+    this.library.addIconPacks(fas, fab);
   }
 
   ngOnInit(): void {

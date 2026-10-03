@@ -89,6 +89,14 @@ for (const locale of LOCALES) {
       await expect(page.locator("app-posts-carousel button.read-more").first()).toHaveText(text.readMore);
       await expect(page.locator("app-header .language-container a.active")).toHaveText(locale.toUpperCase());
 
+      // Timeline milestones use locale-formatted month abbreviations (built in code via LocalizedDatePipe).
+      const months = locale === "en"
+        ? /^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)$/
+        : /^(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\.$/;
+      const monthLabels = await page.locator("app-experience-timeline .popupSpan .month").allTextContents();
+      expect(monthLabels.length).toBeGreaterThan(1);
+      monthLabels.forEach(label => expect(label).toMatch(months));
+
       // Translated dynamic (JSON) content was injected and is not left on the placeholder.
       await expect(page.locator("#experience li .role").first()).not.toHaveText("Loading...");
       await expect(page.locator("app-posts-carousel h2.title").first()).not.toHaveText("Loading...");

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID, AfterViewInit } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, LOCALE_ID, AfterViewInit, inject } from "@angular/core";
 import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { NgClass } from "@angular/common";
@@ -11,6 +11,9 @@ import { NgClass } from "@angular/common";
 })
 
 export class HeaderComponent implements OnInit, AfterViewInit {
+  locale = inject(LOCALE_ID);
+  private renderer = inject(Renderer2);
+
     
   private _activeSection: any;
   private _pageXOffset: any;
@@ -22,11 +25,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   @ViewChild("nav") nav: ElementRef;
   @ViewChild("shareBtn") shareBtn: ElementRef;
-
-  constructor(
-    @Inject(LOCALE_ID) public locale: string,
-    private renderer: Renderer2
-  ) { }
 
   // use getter setter to define the properties
   get activeSection(): any { 
