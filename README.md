@@ -8,7 +8,7 @@
 
 <div align="center">
   
-[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://GitHub.com/guilhermeborgesbastos/live-resume/stargazers/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6f04e1e3103a4af58e5398e23106bb93)](https://www.codacy.com/manual/guilhermeborgesbastos/live-resume?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=guilhermeborgesbastos/live-resume&amp;utm_campaign=Badge_Grade)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_shield) [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/guilhermeborgesbastos/live-resume/wiki) [![GitHub tag](https://img.shields.io/github/tag/guilhermeborgesbastos/live-resume.svg)](https://github.com/guilhermeborgesbastos/live-resume/tags/)
+[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://GitHub.com/guilhermeborgesbastos/live-resume/stargazers/) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fguilhermeborgesbastos%2Flive-resume?ref=badge_shield) [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://github.com/guilhermeborgesbastos/live-resume/wiki) [![GitHub tag](https://img.shields.io/github/tag/guilhermeborgesbastos/live-resume.svg)](https://github.com/guilhermeborgesbastos/live-resume/tags/)
 
  [![Gitter](https://badges.gitter.im/live-resume/community.svg)](https://gitter.im/live-resume/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://opensource.org/licenses/MIT) [![GitHub forks](https://img.shields.io/github/forks/guilhermeborgesbastos/live-resume.svg?style=social&label=Fork&maxAge=259100)](https://GitHub.com/guilhermeborgesbastos/live-resume/network/) [![GitHub stars](https://img.shields.io/github/stars/guilhermeborgesbastos/live-resume.svg?style=social&label=Star&maxAge=259100)](https://GitHub.com/guilhermeborgesbastos/live-resume/stargazers/)
 
@@ -30,7 +30,7 @@ Get rid of your old and deprecated text resume by using the first **Open-source 
 
 ## What is included❓
 
-* A fully functional _Angular 15_ application with a customizable template and content;
+* A fully functional _Angular 21_ (LTS) application with a customizable template and content;
 * Totally responsive for the mobile and desktop devices _(allow mobile gestures too... ;))_;
 * Internationalization for English and Portuguese _(easy for adding/removing new languages - in18 lib)_;
 * Mobile navigation sharing _(Share the resume with native apps like Whatsapp, LinkedIn, Facebook, etc...)_;
@@ -57,21 +57,19 @@ To get more help on the setup, customization or any other aspect, accessing the 
 
 > A video tutorial is also available [watch it](https://youtu.be/SmSCux_qx_Q) _[Video is outdated, use as guideline, if needed]_.
 
-1. It is required to have Node.js with version _14.18.1_ or higher. To see what version of Node.js is installed on your machine type the following command in the terminal:
+1. Node.js `^20.19.0`, `^22.12.0` or `^24.0.0` (the versions supported by Angular 21). The project pins Node 24 in `.nvmrc`, so with [nvm](https://github.com/nvm-sh/nvm) you can just run `nvm use`. To see what version of Node.js is installed on your machine type the following command in the terminal:
 ```
 node -v
 ```
 
 2. If you haven't installed Node.js in your machine then go to [this link](https://nodejs.org/en/download/) in order to install node.
 
-3. It is required to have NPM with version _6.14.15_ or higher. To see what version of NPM is installed on your machine type the following command in the terminal:
+3. npm `10` or later (bundled with the Node.js versions above). To check it, run:
 ```
 npm -v
 ```
 
-4. If you haven't installed NPM in your machine then go to [this link](https://www.npmjs.com/get-npm) in order to install NPM;
-
-5. TypeScript version _4.8.4_ or later. 
+4. TypeScript and the Angular CLI are installed locally as project dependencies (TypeScript 5.9, Angular CLI 21); no global installation is required.
 
 ## 📥 Installing and Executing locally
 
@@ -87,17 +85,14 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 
 3. Go to the cloned directory (e.g. `cd live-resume`).
 
-4. Run `npm install --force`.
+4. Run `npm ci` (or `npm install`). No `--force` or `--legacy-peer-deps` flag is needed.
 
 5. Inner the folder of the cloned project, start the application:
 ```
-ng serve -o --host 0.0.0.0 --configuration en
+npx ng serve -o --host 0.0.0.0 --configuration en
 ```
 
-**P.S:** In case of `ng` command is not found,  run the follow command:
-```
-npm install -g @angular/cli
-```
+**P.S:** `npm run start:en` (or `npm run start:pt`) starts the same dev server without the extra flags. If you prefer a global `ng` command, run `npm install -g @angular/cli@21`.
 
 **Note:** the optional parameters:
 * `-o` aliases for opening the default browser as soon the application is served.
@@ -107,6 +102,23 @@ npm install -g @angular/cli
 6. After that, the command will start a server instance and listen on port `4200`. Open (http://localhost:4200/) in your browser. The **Live Resume** will be displayed.
 
 > Please, feel free to make improvements, or any sort of changes and send it back via **pull request**. Your contribution is always welcome!
+
+## ✅ Testing and quality checks
+
+| Command | What it does |
+| --- | --- |
+| `npm run lint` | ESLint (flat config in `eslint.config.js`) with the angular-eslint rules for TypeScript and templates. |
+| `npm test -- --watch=false --browsers=ChromeHeadless` | Unit tests (Jasmine + Karma). |
+| `npm run build -- --configuration production` | Production build; must finish without warnings. |
+| `npm run build-locale` | Localized builds for both languages (`dist/en`, `dist/pt`). Missing translations fail the build. |
+| `npm run test:e2e` | Builds both locales and runs the Playwright browser suite. |
+| `npm run test:e2e:run` | Runs the browser suite against the existing `dist/` output (no rebuild). |
+
+The browser suite (`e2e/`) runs Chromium at desktop (1440×900) and mobile (Pixel 7) sizes against the production builds, served by `e2e/serve.mjs` at `http://127.0.0.1:4300/en/` and `/pt/` (change the port with `E2E_PORT`). It checks rendering and layout, translations, fragment navigation, the carousels (buttons and swipe), mobile navigation, the 404 page and contact-form validation. Firebase and Google Analytics requests are stubbed or blocked, so tests never send real data, and any console error, page error or failed request fails the run.
+
+Install the browser once with `npx playwright install chromium`. Results go to `test-results/`: an HTML report (`npx playwright show-report test-results/report`), landing-page screenshots for every locale and viewport in `test-results/screenshots/`, and screenshots plus traces of any failing test in `test-results/artifacts/`.
+
+The GitHub Actions workflow (`.github/workflows/ci.yml`) runs all of these checks on every push and pull request.
 
 ## 🔨 How to customize?
 
@@ -122,8 +134,10 @@ This project uses several open source packages:
 
 - [Angular](https://github.com/angular)
 - [Angular CLI](https://cli.angular.io)
-- [Navigator Share](https://www.npmjs.com/package/ng-navigator-share)
 - [Font Awesome](https://fontawesome.com)
+- [Firebase](https://firebase.google.com)
+- [HammerJS](https://hammerjs.github.io)
+- [Playwright](https://playwright.dev)
 
 ---
 

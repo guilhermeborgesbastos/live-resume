@@ -1,18 +1,29 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { Component, OnInit, ElementRef, Renderer2, ViewChild, inject } from "@angular/core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { IExperience } from "./experience-interfaces";
 import { DataService } from "../core/data.service";
 import { SorterService } from "../core/sorter.service";
-import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { FaIconLibrary, FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
+import { NgClass } from "@angular/common";
+import { InternationalizationDirective } from "../core/directive/internationalization.directive";
+import { ExperienceTimelineComponent } from "./experience-timeline/experience-timeline.component";
+import { SafariDateFormatterPipe } from "../core/pipe/safari-date-formatter.pipe";
+import { LocalizedDatePipe } from "../core/pipe/localized-date.pipe";
 
 @Component({
-  selector: "app-experience",
-  templateUrl: "./experience.component.html",
-  styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"]
+    selector: "app-experience",
+    templateUrl: "./experience.component.html",
+    styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"],
+    imports: [NgClass, FaIconComponent, InternationalizationDirective, ExperienceTimelineComponent, SafariDateFormatterPipe, LocalizedDatePipe]
 })
 export class ExperienceComponent extends AbstractSwipeSection implements OnInit {
+  private dataService = inject(DataService);
+  private sortService = inject(SorterService);
+  private renderer = inject(Renderer2);
+  private library = inject(FaIconLibrary);
+
   
   SELECTED_CLASS: string = "selected";
   LEAVE_RIGHT_CLASS: string = "leave-right";
@@ -32,14 +43,9 @@ export class ExperienceComponent extends AbstractSwipeSection implements OnInit 
 
   @ViewChild("orderedList") orderedList: ElementRef;
 
-  constructor(
-    private dataService: DataService,
-    private sortService: SorterService,
-    private renderer: Renderer2,
-    private library: FaIconLibrary
-  ) {
+  constructor() {
     super();
-    library.addIconPacks(fas, fab);
+    this.library.addIconPacks(fas, fab);
   }
 
   ngOnInit(): void {

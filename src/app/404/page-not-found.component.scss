@@ -1,3 +1,7 @@
+// Keyframes must be emitted in the same stylesheet as the rules that use them: Angular's
+// emulated encapsulation renames @keyframes per stylesheet and only rewrites references there.
+@use "./page-not-found.keyframes.component";
+
 $color-black: #2a3c52;
 $color-white: #fff;
 $color-blue-1: #3a5f8e;

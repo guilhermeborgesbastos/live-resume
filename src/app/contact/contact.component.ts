@@ -1,20 +1,25 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import {
   faEnvelope, faPhone, faTimes,
   faMapMarkerAlt, IconDefinition
 } from "@fortawesome/free-solid-svg-icons";
-import { UntypedFormGroup, UntypedFormControl, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormControl, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ContactService } from "./contact.service";
 import { Contact } from "../model/contact.model";
 import { environment } from '../../environments/environment';
+import { NgClass } from "@angular/common";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: "app-contact",
-  templateUrl: "./contact.component.html",
-  styleUrls: ["./contact.component.scss", "./contact.component.responsivity.scss"]
+    selector: "app-contact",
+    templateUrl: "./contact.component.html",
+    styleUrls: ["./contact.component.scss", "./contact.component.responsivity.scss"],
+    imports: [NgClass, FaIconComponent, ReactiveFormsModule]
 })
 
 export class ContactComponent implements OnInit {
+  private contactService = inject(ContactService);
+
 
   name: string;
   email: string;
@@ -29,8 +34,6 @@ export class ContactComponent implements OnInit {
   isLoading: boolean = false;
   hasBeenSubmited: boolean = false;
   feedbackStatus: string;
-
-  constructor(private contactService: ContactService) { }
 
   contactForm: UntypedFormGroup = new UntypedFormGroup({
     name: new UntypedFormControl("",[
@@ -66,7 +69,7 @@ export class ContactComponent implements OnInit {
     const personalData = environment.personal;
     this.name = personalData.name;
     this.email = personalData.email;
-    this.phone = personalData.phone;
+    this.phone = personalData['phone'];
     this.location = personalData.location;
 
     this.faEnvelope = faEnvelope;

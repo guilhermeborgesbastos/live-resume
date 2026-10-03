@@ -1,20 +1,20 @@
-import {
-    Directive, OnInit,
-    ElementRef, Output,
-    EventEmitter, Input,
-    OnChanges
-} from "@angular/core";
+import { Directive, OnInit, ElementRef, Output, EventEmitter, Input, OnChanges, inject } from "@angular/core";
 
-@Directive({
-  selector: "[appInViewport]"
-})
+export interface InViewportEvent {
+    target: HTMLElement;
+    value: boolean;
+}
+
+@Directive({ selector: "[appInViewport]" })
 
 export class InViewportDirective implements OnChanges {
+    private _el = inject(ElementRef);
+
 
     @Input() pageYOffset: number;
-    @Output() inViewport:EventEmitter<Object>;
+    @Output() inViewport:EventEmitter<InViewportEvent>;
 
-    constructor(private _el:ElementRef) {
+    constructor() {
         this.inViewport = new EventEmitter();
     }
 
@@ -40,14 +40,12 @@ export class InViewportDirective implements OnChanges {
 
         const vVisible = partial ? tViz || bViz : tViz && bViz;
 
-        let event = {
+        const event: InViewportEvent = {
             target: el,
-            value: false
+            value: !!(elSize && vVisible)
         };
 
-        event["value"] = (elSize && vVisible);
-
-        if(event["value"]) {
+        if(event.value) {
             this.inViewport.emit(event);
         }
     }

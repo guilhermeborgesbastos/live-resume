@@ -6,6 +6,16 @@
 	
 	img.background {
 		width: 535px;
+
+		// Define the animations for the background circle
+		animation-name: scaling-background;
+		-webkit-animation-name: scaling-background;
+		animation-iteration-count: infinite;
+		-webkit-animation-iteration-count: infinite;
+		animation-timing-function: ease-in-out;
+		-webkit-animation-timing-function: ease-in-out;
+		animation-duration: 4s;
+
 	}
 
 	.skill-icon {
@@ -80,4 +90,10 @@
 	50% { transform: translate(10%, 5%); }	
 	75% { transform: translate(0%, 15%); }	
 	100% { transform: translate(0%, 0%); }			
+}
+
+@keyframes scaling-background {
+	0% { transform: scale(1.0); }
+	50% { transform: scale(1.02); }
+	100% { transform: scale(1); }
 }

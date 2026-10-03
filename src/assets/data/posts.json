@@ -7,12 +7,12 @@
             {
                 "language": "en",
                 "title": "The anti-traversing 2D Array formula.",
-                "description": "Have you ever thought about the <b>mathematical relation</b> between the <i>columns</i> and <i>rows</i> of a bidimensional array <i>(2d matrix)</i>? This data structure hides a <b>data location formula</b> that helped me to avoid the <i>time complexity of O(n²)</i>, which is a terrible scenario, turning it into a <i>constant time complexity - O(1)</i>. A full explanation, with real test cases and Unit Tests are waiting for you."
+                "description": "Have you ever considered the <b>mathematical relationship</b> between the <i>rows</i> and <i>columns</i> of a two-dimensional array <i>(2D matrix)</i>? This data structure holds a powerful <b>data location formula</b> that allowed me to bypass an otherwise costly <b>O(n²) time complexity</b>, reducing it to a blazing-fast <b>O(1) constant time</b> access."
             },
             {
                 "language": "pt",
                 "title": "A fórmula de matriz 2D anti-deslocamento.",
-                "description": "Você já pensou na <b>relação matemática</b> entre as<i> colunas</i> e as <i>linhas</i> de uma matriz bidimensional <i>(matriz 2d)</i>? Essa estrutura de dados oculta uma <b>fórmula de localização de dados</b> que me ajudou a evitar a <i>complexidade de tempo de O(n²)</i>, que é um cenário péssimo, transformando-a em uma <i>complexidade do tempo constante - O(1)</i>. Uma explicação completa, com casos de teste reais e testes de unidade, está esperando por você."
+                "description": "Você já pensou na <b>relação matemática</b> entre <i>linhas</i> e <i>colunas</i> de uma array bidimensional <i>(matriz 2D)</i>? Essa estrutura de dados esconde uma <b>fórmula de localização</b> que me permitiu evitar a <i>complexidade de tempo de O(n²)</i>, transformando-o em um acesso extremamente rápido, com <i>complexidade constante - O(1)</i>."
             }
         ]
     },
@@ -23,13 +23,13 @@
         "internationalizations": [
             {
                 "language": "en",
-                "title": "In 2019, get out of unemployment! Be a Web Developer.",
-                "description": "There were numerous vacancies for <i>web developers</i> on the wall, at the same time, <b>12.7 million people were unemployed</b> in Brazil, such a sad situation persisted in my mind. Back at my house, I've recalled a free course, offered by the renowned <i>Bob Tabor (Senior Program Manager at Microsoft)</i>, present at Microsoft Virtual Academy."
+                "title": "In 2019, get out of unemployment! Become a Web Developer.",
+                "description": "I noticed countless openings for <i>Web developers</i> posted on the wall, while at the same time, <b>12.7 million people were unemployed</b> in Brazil — a harsh reality that stuck with me. Once I got home, I remembered a free course by the renowned <i>Bob Tabor (Senior Program Manager at Microsoft)</i>, available on the Microsoft Virtual Academy."
             },
             {
                 "language": "pt",
                 "title": "Em 2019, saia do desemprego! Seja você um Web Developer.",
-                "description": "Lá estavam no mural, inúmeras vagas para desenvolvedor web. E ao mesmo tempo, haviam <b>12,7 Milhões de compatriotas desempregados</b> e tais vagas em aberto ficaram matutando em minha cabeça. De volta à minha casa, me recordo de um curso gratuito, disponibilizado pelo renomado <i>Bob Tabor (Senior Program Manager na Microsoft)</i>, presente na Microsoft Virtual Academy."
+                "description": "Vi inúmeras vagas para <i>desenvolvedores web</i> no mural, enquanto, ao mesmo tempo, <b>12,7 milhões de pessoas estavam desempregadas</b> no Brasil — uma realidade dura que ficou marcada na minha mente. Quando cheguei em casa, lembrei de um curso gratuito do renomado <i>Bob Tabor (Senior Program Manager na Microsoft)</i>, disponível na Microsoft Virtual Academy."
             }
         ]
     },
@@ -40,8 +40,8 @@
         "internationalizations": [
             {
                 "language": "en",
-                "title": "Map Item Navigation for Android - <i>Open-source component</i>.",
-                "description": "For great user experience, the usage of maps together with the ordered list is used very often in mobile applications. This article presents an open-source application for Android that provides a fully functional component."
+                "title": "Map Item Navigation for Android - <i>an open-source component</i>.",
+                "description": "For a great user experience, combining maps with ordered lists is a common pattern in mobile applications. This article introduces an open-source Android application that delivers a fully functional and ready-to-use component."
             },
             {
                 "language": "pt",
@@ -58,7 +58,7 @@
             {
                 "language": "en",
                 "title": "Geo Distance search with MySQL & PHP.",
-                "description": "Nowadays, <b>geolocation</b> is essential for most of the basic daily activities. Who never have asked Google where is the closest market?  In this article, I show a practical example of how to create a <i>SQL Query</i> that does a geolocational search based on a radius range and a fixed geolocational point."
+                "description": "Today, <b>geolocation</b> plays a key role in many of our everyday activities. Who hasn’t asked Google where the nearest market is? In this article, I present a practical example of how to build a <i>SQL query</i> that performs a geolocation-based search using a fixed point and a specified radius."
             },
             {
                 "language": "pt",
@@ -74,12 +74,12 @@
         "internationalizations": [
             {
                 "language": "en",
-                "title": "Sending authenticated email in PHP.",
-                "description": "With the appliance of the email security policy on the <i>Web 2.0</i> came the need to take measures that would hinder the practice of <i>spamming</i>, among the measures taken,  it is the use of authenticated e-mail, which means that for each e-mail sent, we would have the <i>signature</i> of the host who sent it, thus, there would be greater control over who, eventually, practice the spamming. In this article, I show you how to send the authenticate e-mail, increasing the chances of your email get read by the target user."
+                "title": "Sending authenticated e-mail using PHP.",
+                "description": "With the implementation of email security policies in the era of <i>Web 2.0</i>, it became necessary to adopt measures to combat <i>spamming</i>. One such measure is the use of authenticated emails — meaning that every email sent carries the <i>signature</i> of the host that sent it, enabling better control over those who engage in spamming. In this article, I’ll show you how to send authenticated emails, increasing the chances of your message being successfully delivered and read by the intended recipient."
             },
             {
                 "language": "pt",
-                "title": "Envio de e-mail autenticado em PHP.",
+                "title": "Envio de e-mail autenticado usando PHP.",
                 "description": "Com a aplicação da política de segurança de email na <i>Web 2.0</i>, surgiu a necessidade de tomar medidas que dificultassem a prática do <i>spamming</i>, entre as medidas adotadas, está o uso de e-mail autenticado, o que significa que, para cada e-mail enviado, teríamos a <i>assinatura</i> do host que o enviou, assim, haveria maior controle sobre quem, eventualmente, praticasse o spam. Neste artigo, mostrarei como enviar o email de autenticação, aumentando as chances de seu email ser lido pelo usuário de destino."
             }
         ]
@@ -91,12 +91,12 @@
         "internationalizations": [
             {
                 "language": "en",
-                "title": "Sharing Intent for Android - <i>Open-source component</i>.",
-                "description": "Applications like <i>Whatsapp, Facebook, Twitter, Snapchat, etc...</i> have the ability to receive content to be shared. This gives us a wide range of possibilities, being possible to share videos, texts, URLs and even the application's page in the PlayStore for users to install your application."
+                "title": "Sharing Intent for Android - <i>an open-source component</i>.",
+                "description": "Applications like <i>WhatsApp, Facebook, Twitter, Snapchat, etc.</i> support receiving content to be shared — opening up a wide range of possibilities. You can share videos, text, URLs, and even your app’s Play Store page, making it easier for users to discover and install your application."
             },
             {
                 "language": "pt",
-                "title": "Compartilhamento para Android - <i> Componente de código aberto </i>.",
+                "title": "Compartilhamento para Android - <i>Componente de código aberto</i>.",
                 "description": "Aplicativos como o <i>Whatsapp, Facebook, Twitter, Snapchat, etc ...</i> têm a capacidade de receber conteúdo para ser compartilhado. Isso nos dá uma ampla gama de possibilidades, sendo possível compartilhar vídeos, textos, URLs e até a página de aplicativos da PlayStore para que outros usuários instalem seu aplicativo."
             }
         ]
@@ -108,8 +108,8 @@
         "internationalizations": [
             {
                 "language": "en",
-                "title": "Contact List for Android - <i>Open-source component</i>.",
-                "description": "When developing a mobile application, you will be facing the need to facilitate the life of your user when sharing your application among its friends. For this, I have created the ContactPickerList, a simple and practical way to access the phonebook contact list."
+                "title": "Contact List for Android - <i>an open-source component</i>.",
+                "description": "When developing a mobile application, you'll likely encounter the need to make it easier for users to share your app with their friends. To address this, I created ContactPickerList — a simple and practical component that provides quick access to the device’s contact list."
             },
             {
                 "language": "pt",
@@ -125,13 +125,13 @@
         "internationalizations": [
             {
                 "language": "en",
-                "title": "Tinder Slide Card for Android - <i>Open-source component</i>.",
-                "description": "Who has never encountered a push notification before? All of us smartphone users see them every day. In this article, I will teach you how to send notifications almost in real-time to any android device such as smartphone, smartwatch, etc."
+                "title": "Tinder Slide Card for Android - <i>an open-source component</i>.",
+                "description": "A complete component for those who need a dynamic card deck with interactive charts on Android — similar to what we see in <i>Tinder</i>. Fully open-source and ready for customization and enhancements."
             },
             {
                 "language": "pt",
                 "title": "Tinder Slide Card para Android - <i>Componente de código aberto</i>.",
-                "description": "Quem nunca encontrou uma notificação de usuário antes? Todos nós, usuários de smartphones, os vemos todos os dias. Neste artigo, ensinarei como enviar notificações quase em tempo real para qualquer dispositivo Android, como smartphone, smartwatch, etc."
+                "description": "Um componente completo para quem precisa de um baralho de cartas dinâmicas com gráficos interativos para Android. Muito parecido com o que encontramos em <i> Tinder </i>. Código-fonte totalmente aberto para alterações e melhorias."
             }
         ]
     },
@@ -142,13 +142,13 @@
         "internationalizations": [
             {
                 "language": "en",
-                "title": "Push Notification for Android - <i>Open-source component</i>.",
-                "description": "A complete component for those who need a deck of dynamic cards woth interactive charts for Android. Much like what we found in <i>Tinder</i>. Fully open-source for changes and improvements."
+                "title": "Push Notification for Android - <i>an open-source component</i>.",
+                "description": "Who hasn’t come across a push notification? As smartphone users, we see them daily. In this article, I’ll show you how to send near real-time notifications to any Android device — whether it’s a smartphone, smartwatch, or beyond."
             },
             {
                 "language": "pt",
                 "title": "Notificação de usuário no Android - <i>Componente de código aberto</i>.",
-                "description": "Um componente completo para quem precisa de um baralho de cartas dinâmicas com gráficos interativos para Android. Muito parecido com o que encontramos em <i> Tinder </i>. Código-fonte totalmente aberto para alterações e melhorias."
+                "description": "Quem nunca encontrou uma notificação de usuário antes? Todos nós, usuários de smartphones, os vemos todos os dias. Neste artigo, ensinarei como enviar notificações quase em tempo real para qualquer dispositivo Android, como smartphone, smartwatch, etc."
             }
         ]
     }

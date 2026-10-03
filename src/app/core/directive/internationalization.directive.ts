@@ -1,9 +1,12 @@
-import { Directive, ElementRef, Input, OnInit} from "@angular/core";
-import { LOCALE_ID, Inject } from "@angular/core";
+import { Directive, ElementRef, Input, OnInit, inject } from "@angular/core";
+import { LOCALE_ID } from "@angular/core";
 import { EllipsisPipe } from "../pipe/ellipsis.pipe";
 
 @Directive({ selector: "[appInternationalization]" })
 export class InternationalizationDirective {
+    private el = inject(ElementRef);
+    locale = inject(LOCALE_ID);
+
 
     private _data: any[] = [];
 
@@ -14,11 +17,6 @@ export class InternationalizationDirective {
     }
 
     @Input() ellipsis :number;
-
-    constructor(
-        private el: ElementRef,
-        @Inject(LOCALE_ID) public locale: string
-    ) {}
 
     set data(value: any[]) {
         if(value) {

@@ -2,9 +2,7 @@ import { NgModule } from "@angular/core";
 import { TypingAnimationDirective } from "./typing-animation.directive";
 
 @NgModule({
-    declarations: [
-        TypingAnimationDirective
-    ],
+    imports: [TypingAnimationDirective],
     exports: [
         TypingAnimationDirective
     ]

@@ -1,21 +1,25 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { Meta, Title } from "@angular/platform-browser";
+import { RouterOutlet } from "@angular/router";
+import { AnalyticsService } from "./core/analytics.service";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"],
+    imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
+  private titleService = inject(Title);
+  private metaTagService = inject(Meta);
+  private analyticsService = inject(AnalyticsService);
+
 
   title: string = "Live Resume - Guilherme Borges Bastos";
 
-  constructor(
-    private titleService: Title,
-    private metaTagService: Meta
-  ) { }
-
   ngOnInit(): void {
+
+    this.analyticsService.start();
 
     this.titleService.setTitle(this.title);
 

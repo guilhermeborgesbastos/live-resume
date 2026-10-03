@@ -3,7 +3,10 @@ import { RouterModule, Routes } from "@angular/router";
 import { PageNotFoundComponent } from "./page-not-found.component";
 
 const routes: Routes = [
-    { path: "page-not-found", component: PageNotFoundComponent }
+  {
+    path: "page-not-found",
+    loadComponent: () => import("./page-not-found.component").then(m => m.PageNotFoundComponent)
+  }
 ];
 
 @NgModule({

@@ -1,21 +1,20 @@
-import {
-  Component, OnInit,
-  Input, ElementRef,
-  ViewChild, EventEmitter,
-  Renderer2, OnDestroy,
-  Output, LOCALE_ID,
-  Inject
-} from "@angular/core";
+import { Component, OnInit, Input, ElementRef, ViewChild, EventEmitter, Renderer2, OnDestroy, Output, LOCALE_ID, inject } from "@angular/core";
 import { IExperience } from "../experience-interfaces";
 import { SafariDateFormatterPipe } from "../../core/pipe/safari-date-formatter.pipe";
 import { LocalizedDatePipe } from "../../core/pipe/localized-date.pipe";
 
 @Component({
-  selector: "app-experience-timeline",
-  templateUrl: "./experience-timeline.component.html",
-  styleUrls: [ "./experience-timeline.component.scss" , "experience-timeline.component.reponsivity.scss"]
+    selector: "app-experience-timeline",
+    templateUrl: "./experience-timeline.component.html",
+    styleUrls: ["./experience-timeline.component.scss", "experience-timeline.component.reponsivity.scss"]
 })
 export class ExperienceTimelineComponent implements OnInit, OnDestroy {
+  private elRef = inject(ElementRef);
+  private renderer = inject(Renderer2);
+  locale = inject(LOCALE_ID);
+  // Created here (an injection context) because the pipe resolves LOCALE_ID itself.
+  private localizedDatePipe = new LocalizedDatePipe();
+
 
   private _experiences: IExperience[] = [];
   private _currentPosition: number;
@@ -26,12 +25,6 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
   public removeEventListener: () => void;
 
   @ViewChild("line") line: ElementRef;
-
-  constructor(
-    private elRef: ElementRef,
-    private renderer: Renderer2,
-    @Inject(LOCALE_ID) public locale: string
-  ) {}
 
   @Input() get currentPosition(): number {
     return this._currentPosition;
@@ -165,9 +158,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
     const safariDateFormatterPipe = new SafariDateFormatterPipe();
     const safariDateFormatterPipeValue = safariDateFormatterPipe.transform(date);
 
-    const localizedDatePipe = new LocalizedDatePipe(this.locale);
-
-    let month: any = localizedDatePipe.transform(safariDateFormatterPipeValue, "MMM");
+    let month: any = this.localizedDatePipe.transform(safariDateFormatterPipeValue, "MMM");
     const labelElement = this.renderer.createElement("div");
     this.renderer.addClass(labelElement, "popupSpan");
 
@@ -175,7 +166,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
     this.renderer.addClass(monthSpan, "month");
     this.renderer.appendChild(monthSpan, this.renderer.createText(month));
 
-    const year = localizedDatePipe.transform(safariDateFormatterPipeValue, "yyyy");
+    const year = this.localizedDatePipe.transform(safariDateFormatterPipeValue, "yyyy");
     const yearSpan = this.renderer.createElement("span");
     this.renderer.addClass(yearSpan, "year");
     this.renderer.appendChild(yearSpan, this.renderer.createText(year));

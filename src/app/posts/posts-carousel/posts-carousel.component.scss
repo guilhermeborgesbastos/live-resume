@@ -127,3 +127,17 @@
         }
     }
 }
+
+// Cards fade in/out while paginating (applied through animate.enter / animate.leave).
+li.fade-in {
+    animation: posts-card-fade 300ms ease;
+}
+
+li.fade-out {
+    animation: posts-card-fade 300ms ease reverse forwards;
+}
+
+@keyframes posts-card-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

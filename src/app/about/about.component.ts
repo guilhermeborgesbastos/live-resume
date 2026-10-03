@@ -1,18 +1,24 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, inject } from "@angular/core";
 import { environment } from '../../environments/environment';
 import { DataService } from "../core/data.service";
 import { IAbout } from "./about-interfaces";
-import { FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { FaIconLibrary, FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { Subscription } from "rxjs";
+import { InternationalizationDirective } from "../core/directive/internationalization.directive";
+
 
 @Component({
-  selector: "app-about",
-  templateUrl: "./about.component.html",
-  styleUrls: ["./about.component.scss", "./about.component.responsivity.scss"]
+    selector: "app-about",
+    templateUrl: "./about.component.html",
+    styleUrls: ["./about.component.scss", "./about.component.responsivity.scss"],
+    imports: [InternationalizationDirective, FaIconComponent]
 })
 export class AboutComponent implements OnInit, OnDestroy {
+  private dataService = inject(DataService);
+  private library = inject(FaIconLibrary);
+
 
   name: string;
   yearsOld: number;
@@ -20,11 +26,8 @@ export class AboutComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   aboutData: IAbout;
 
-  constructor(
-    private dataService: DataService,
-    private library: FaIconLibrary
-  ) {
-    library.addIconPacks(fas, fab);
+  constructor() {
+    this.library.addIconPacks(fas, fab);
   }
 
   ngOnInit(): void {

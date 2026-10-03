@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 import { DataService } from "./data.service";
 import { SorterService } from "./sorter.service";
@@ -10,10 +10,9 @@ import { InViewportDirective } from "./directive/on-viewport.directive";
 import { EllipsisPipe } from "./pipe/ellipsis.pipe";
 
 @NgModule({
-    imports: [ HttpClientModule ],
-    declarations: [ SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective],
-    providers: [ DataService, SorterService ],
-    exports: [ SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective ]
+    exports: [SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective],
+    imports: [SafariDateFormatterPipe, LocalizedDatePipe, EllipsisPipe, InternationalizationDirective, InViewportDirective],
+    providers: [DataService, SorterService, provideHttpClient(withInterceptorsFromDi())]
 })
 
 export class CoreModule { }

@@ -24,12 +24,16 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/live-resume",
+            "outputPath": {
+              "base": "dist/live-resume"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -41,7 +45,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "hammerjs"
+            ]
           },
           "configurations": {
             "production": {
@@ -56,8 +64,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -76,7 +82,9 @@
               "localize": [
                 "en"
               ],
-              "outputPath": "dist/en/",
+              "outputPath": {
+                "base": "dist/en/"
+              },
               "baseHref": "/en/",
               "i18nMissingTranslation": "error"
             },
@@ -85,46 +93,45 @@
               "localize": [
                 "pt"
               ],
-              "outputPath": "dist/pt/",
+              "outputPath": {
+                "base": "dist/pt/"
+              },
               "baseHref": "/pt/",
               "i18nMissingTranslation": "error"
-            },
-            "es5": {
-              "tsConfig": "./tsconfig.es5.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "live-resume:build"
+            "buildTarget": "live-resume:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "live-resume:build:production"
+              "buildTarget": "live-resume:build:production"
             },
             "en": {
-              "browserTarget": "live-resume:build:en"
+              "buildTarget": "live-resume:build:en"
             },
             "pt": {
-              "browserTarget": "live-resume:build:pt"
-            },
-            "es5": {
-              "browserTarget": "live-resume:build:es5"
+              "buildTarget": "live-resume:build:pt"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "live-resume:build"
+            "buildTarget": "live-resume:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing",
+              "@angular/localize/init"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
@@ -135,18 +142,6 @@
               "src/styles.scss"
             ],
             "scripts": []
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "live-resume:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "live-resume:serve:production"
-            }
           }
         },
         "lint": {
@@ -163,8 +158,34 @@
   },
   "cli": {
     "schematicCollections": [
-      "@angular-eslint/schematics"
+      "angular-eslint"
     ],
     "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
   }
 }
