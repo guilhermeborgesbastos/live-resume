@@ -9,7 +9,7 @@ COPY . .
 RUN npm run build-locale
 
 # Serve the static output with Nginx at /en/ and /pt/.
-FROM nginx:1.30-alpine
+FROM nginx:1.30-alpine-slim
 RUN rm -rf /usr/share/nginx/html/*
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/en/browser/en/ /usr/share/nginx/html/en/
