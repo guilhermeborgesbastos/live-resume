@@ -54,7 +54,7 @@
         <source>Your name:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -62,7 +62,7 @@
         <source>Mark</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">31,32</context>
+          <context context-type="linenumber">39,40</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -70,7 +70,7 @@
         <source>The name is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">34,35</context>
+          <context context-type="linenumber">44,47</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -78,7 +78,7 @@
         <source>Please, provide a valid name.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">35,38</context>
+          <context context-type="linenumber">47,52</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -86,7 +86,7 @@
         <source>Email:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">39,40</context>
+          <context context-type="linenumber">53,54</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -94,7 +94,7 @@
         <source>mark@gmail.com</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">41,42</context>
+          <context context-type="linenumber">55,56</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -102,7 +102,7 @@
         <source>The email is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">44,45</context>
+          <context context-type="linenumber">60,63</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -110,7 +110,7 @@
         <source>Please, provide a valid email address.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">45,48</context>
+          <context context-type="linenumber">63,68</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -118,7 +118,7 @@
         <source>Your message:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">49,50</context>
+          <context context-type="linenumber">69,70</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -126,7 +126,7 @@
         <source>Write here your message... I will reply to you soon.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">51,52</context>
+          <context context-type="linenumber">71,72</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -134,7 +134,7 @@
         <source>The message is required.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">54,57</context>
+          <context context-type="linenumber">76,81</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -142,7 +142,7 @@
         <source>Send</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/contact/contact.component.html</context>
-          <context context-type="linenumber">57,61</context>
+          <context context-type="linenumber">82,87</context>
         </context-group>
         <note priority="1" from="description">contact</note>
       </trans-unit>
@@ -162,7 +162,7 @@
         <source>Previous</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/experience/experience.component.html</context>
-          <context context-type="linenumber">10,12</context>
+          <context context-type="linenumber">10,13</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/experience/experience.component.html</context>
@@ -230,7 +230,7 @@
         <source>Read more</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/posts/posts-carousel/posts-carousel.component.html</context>
-          <context context-type="linenumber">20,25</context>
+          <context context-type="linenumber">21,27</context>
         </context-group>
         <note priority="1" from="description">posts</note>
       </trans-unit>
@@ -238,7 +238,7 @@
         <source>of</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/posts/posts-carousel/posts-carousel.component.html</context>
-          <context context-type="linenumber">31,33</context>
+          <context context-type="linenumber">33,35</context>
         </context-group>
         <note priority="1" from="description">posts</note>
       </trans-unit>
@@ -246,7 +246,7 @@
         <source>posts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/posts/posts-carousel/posts-carousel.component.html</context>
-          <context context-type="linenumber">33,36</context>
+          <context context-type="linenumber">35,38</context>
         </context-group>
         <note priority="1" from="description">posts</note>
       </trans-unit>

@@ -7,14 +7,14 @@ import { UntypedFormGroup, UntypedFormControl, Validators, ReactiveFormsModule }
 import { ContactService } from "./contact.service";
 import { Contact } from "../model/contact.model";
 import { environment } from '../../environments/environment';
-import { NgClass, NgIf } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
     selector: "app-contact",
     templateUrl: "./contact.component.html",
     styleUrls: ["./contact.component.scss", "./contact.component.responsivity.scss"],
-    imports: [NgClass, FaIconComponent, NgIf, ReactiveFormsModule]
+    imports: [NgClass, FaIconComponent, ReactiveFormsModule]
 })
 
 export class ContactComponent implements OnInit {

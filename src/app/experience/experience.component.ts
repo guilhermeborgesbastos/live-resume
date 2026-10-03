@@ -6,7 +6,7 @@ import { DataService } from "../core/data.service";
 import { SorterService } from "../core/sorter.service";
 import { FaIconLibrary, FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { AbstractSwipeSection } from "../core/shared/abstract.swipe.section";
-import { NgClass, NgFor } from "@angular/common";
+import { NgClass } from "@angular/common";
 import { InternationalizationDirective } from "../core/directive/internationalization.directive";
 import { ExperienceTimelineComponent } from "./experience-timeline/experience-timeline.component";
 import { SafariDateFormatterPipe } from "../core/pipe/safari-date-formatter.pipe";
@@ -16,7 +16,7 @@ import { LocalizedDatePipe } from "../core/pipe/localized-date.pipe";
     selector: "app-experience",
     templateUrl: "./experience.component.html",
     styleUrls: ["./experience.component.scss", "experience-component.reponsivity.scss"],
-    imports: [NgClass, FaIconComponent, NgFor, InternationalizationDirective, ExperienceTimelineComponent, SafariDateFormatterPipe, LocalizedDatePipe]
+    imports: [NgClass, FaIconComponent, InternationalizationDirective, ExperienceTimelineComponent, SafariDateFormatterPipe, LocalizedDatePipe]
 })
 export class ExperienceComponent extends AbstractSwipeSection implements OnInit {
   private dataService = inject(DataService);

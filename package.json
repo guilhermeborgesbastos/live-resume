@@ -23,16 +23,16 @@
     "node": "^20.19.0 || ^22.12.0 || ^24.0.0"
   },
   "dependencies": {
-    "@angular/animations": "20.3.33",
-    "@angular/common": "20.3.33",
-    "@angular/compiler": "20.3.33",
-    "@angular/core": "20.3.33",
-    "@angular/forms": "20.3.33",
-    "@angular/localize": "20.3.33",
-    "@angular/platform-browser": "20.3.33",
-    "@angular/platform-browser-dynamic": "20.3.33",
-    "@angular/router": "20.3.33",
-    "@fortawesome/angular-fontawesome": "2.0.1",
+    "@angular/animations": "21.2.25",
+    "@angular/common": "21.2.25",
+    "@angular/compiler": "21.2.25",
+    "@angular/core": "21.2.25",
+    "@angular/forms": "21.2.25",
+    "@angular/localize": "21.2.25",
+    "@angular/platform-browser": "21.2.25",
+    "@angular/platform-browser-dynamic": "21.2.25",
+    "@angular/router": "21.2.25",
+    "@fortawesome/angular-fontawesome": "4.0.0",
     "@fortawesome/free-brands-svg-icons": "5.15.4",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
     "firebase": "11.10.0",
@@ -42,11 +42,11 @@
     "zone.js": "0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "20.3.37",
+    "@angular-devkit/build-angular": "21.2.24",
     "@angular-eslint/builder": "20.7.0",
-    "@angular/cli": "20.3.37",
-    "@angular/compiler-cli": "20.3.33",
-    "@angular/language-service": "20.3.33",
+    "@angular/cli": "21.2.24",
+    "@angular/compiler-cli": "21.2.25",
+    "@angular/language-service": "21.2.25",
     "@playwright/test": "1.63.0",
     "@types/jasmine": "4.3.6",
     "@types/node": "24.19.1",
@@ -58,7 +58,7 @@
     "karma-coverage-istanbul-reporter": "2.1.1",
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
-    "typescript": "5.8.3",
+    "typescript": "5.9.3",
     "typescript-eslint": "8.71.0"
   }
 }
