@@ -47,3 +47,8 @@ testem.log
 Thumbs.db
 src/environments/environment.ts
 live-resume.code-workspace
+
+# Playwright
+/test-results
+/playwright-report
+/blob-report
