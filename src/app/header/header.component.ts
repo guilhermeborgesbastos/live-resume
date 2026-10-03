@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, LOCALE_ID, AfterViewInit } from "@angular/core";
 import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { NgNavigatorShareService } from "ng-navigator-share";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { NgClass } from "@angular/common";
 
@@ -15,7 +14,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     
   private _activeSection: any;
   private _pageXOffset: any;
-  private ngNavigatorShareService: NgNavigatorShareService;
   
   hasMenuToggled: boolean;
   faBars: IconDefinition;
@@ -27,11 +25,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   constructor(
     @Inject(LOCALE_ID) public locale: string,
-    private renderer: Renderer2,
-    ngNavigatorShareService: NgNavigatorShareService
-  ) {
-    this.ngNavigatorShareService = ngNavigatorShareService;
-  }
+    private renderer: Renderer2
+  ) { }
 
   // use getter setter to define the properties
   get activeSection(): any { 
@@ -56,7 +51,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {    
       // Share button available only for browsers that do support it.
-      if (this.ngNavigatorShareService.canShare()) {
+      if (typeof navigator.share === "function") {
         this.shareBtn.nativeElement.style.display = "block";
       }
   }
@@ -103,7 +98,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   async share() {
     try{
-      await this.ngNavigatorShareService.share({
+      await navigator.share({
         title: "Live Resume - Guilherme Borges Bastos",
         text: "Hello, I'm a Full-stack Java Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!",
         url: "https://guilhermeborgesbastos.com"

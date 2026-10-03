@@ -39,7 +39,6 @@
     "hammerjs": "^2.0.8",
     "http-proxy": "^1.18.1",
     "ini": "^1.3.8",
-    "ng-navigator-share": "^1.0.3",
     "node-forge": "^1.0.0",
     "rxjs": "^7.8.2",
     "serialize-javascript": "^4.0.0",

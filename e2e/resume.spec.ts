@@ -293,3 +293,25 @@ for (const locale of LOCALES as readonly Locale[]) {
     await expect(page.locator("app-resume")).toHaveCount(0);
   });
 }
+
+test("share button uses the Web Share API when the browser supports it", async ({ page }) => {
+  await openResume(page, "en");
+  const shareButton = page.locator("app-header .share-container");
+  if (!(await page.evaluate(() => typeof navigator.share === "function"))) {
+    await expect(shareButton).toBeHidden();
+  }
+
+  await page.addInitScript(() => {
+    (window as any).sharedPayloads = [];
+    Object.defineProperty(navigator, "share", {
+      configurable: true,
+      value: async (data: ShareData) => { (window as any).sharedPayloads.push(data); }
+    });
+  });
+  await openResume(page, "en");
+  await expect(shareButton).toBeVisible();
+  await shareButton.locator("fa-icon").click();
+  await expect.poll(() => page.evaluate(() => (window as any).sharedPayloads)).toEqual([
+    expect.objectContaining({ title: "Live Resume - Guilherme Borges Bastos", url: "https://guilhermeborgesbastos.com" })
+  ]);
+});
