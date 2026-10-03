@@ -191,6 +191,11 @@
         </context-group>
         <note priority="1" from="description">nav</note>
       </trans-unit>
+      <trans-unit id="postsCountLabel" datatype="html">
+        <source>posts</source>
+        <target>artigos</target>
+        <note priority="1" from="description">posts</note>
+      </trans-unit>
       <trans-unit id="projects" datatype="html">
         <source>Projects</source>
         <target>Projectos</target>
