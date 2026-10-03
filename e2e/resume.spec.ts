@@ -316,6 +316,8 @@ for (const locale of LOCALES as readonly Locale[]) {
     await page.goto(`/${locale}/this/route/does-not-exist`);
     await expect(page).toHaveURL(new RegExp(`/${locale}/page-not-found$`));
     await expect(page.locator("app-page-not-found .page-not-found-text")).toHaveText("404");
+    // The caveman CSS animations run (their @keyframes must resolve under Angular's style scoping).
+    await expect.poll(() => page.evaluate(() => document.getAnimations().length)).toBeGreaterThan(0);
     await expect(page.getByRole("link", { name: "Go back to Home Page." })).toBeVisible();
     await expect(page.locator("app-resume")).toHaveCount(0);
   });
