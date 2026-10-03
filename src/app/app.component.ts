@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 import { Meta, Title } from "@angular/platform-browser";
+import { AnalyticsService } from "./core/analytics.service";
 
 @Component({
     selector: "app-root",
@@ -15,11 +15,12 @@ export class AppComponent implements OnInit {
   constructor(
     private titleService: Title,
     private metaTagService: Meta,
-    screenTrackingService: ScreenTrackingService,
-    userTrackingService: UserTrackingService,
+    private analyticsService: AnalyticsService
   ) { }
 
   ngOnInit(): void {
+
+    this.analyticsService.start();
 
     this.titleService.setTitle(this.title);
 

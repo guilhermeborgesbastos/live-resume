@@ -58,8 +58,13 @@ for (const locale of LOCALES) {
 
   test.describe(`${locale} resume`, () => {
 
-    test("boots and renders every section without layout overflow", async ({ page }, testInfo) => {
+    test("boots and renders every section without layout overflow", async ({ page, diagnostics }, testInfo) => {
       await openResume(page, locale);
+
+      // Firebase Analytics initialized (against the fixture's stubs) and recorded the screen view.
+      await expect.poll(() => diagnostics.externalRequests.some(r => r.includes("googletagmanager.com/gtag/js"))).toBe(true);
+      await expect.poll(() => page.evaluate(() => ((window as any).dataLayer ?? [])
+        .some((entry: IArguments) => entry[0] === "event" && entry[1] === "screen_view"))).toBe(true);
 
       await expect(page).toHaveTitle("Live Resume - Guilherme Borges Bastos");
       await expect(page.locator("html")).toHaveAttribute("lang", locale);

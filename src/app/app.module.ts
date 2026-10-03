@@ -13,15 +13,8 @@ import localeEn from "@angular/common/locales/en";
 import localePt from "@angular/common/locales/pt";
 import localePtExtra from "@angular/common/locales/extra/pt";
 
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { provideAnalytics, getAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { environment } from "../environments/environment";
-
 import { HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
 import { DIRECTION_ALL } from "hammerjs";
-import { provideFirestore, getFirestore } from "@angular/fire/firestore";
 
 @Injectable()
 export class HammerConfig  extends HammerGestureConfig {
@@ -40,18 +33,11 @@ registerLocaleData(localePt, "pt-BR", localePtExtra);
     CoreModule,
     ResumeModule,
     PageNotFoundRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore()),
-    provideAnalytics(() => getAnalytics()),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
     HammerModule
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ],
   providers: [
-    ScreenTrackingService,
-    UserTrackingService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: HammerConfig,
