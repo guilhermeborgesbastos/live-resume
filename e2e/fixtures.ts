@@ -1,4 +1,5 @@
 import { test as base, expect, Page, Request, Route } from "@playwright/test";
+import { APP_ORIGIN } from "./target";
 
 export const LOCALES = ["en", "pt"] as const;
 export type Locale = typeof LOCALES[number];
@@ -45,8 +46,6 @@ const FIREBASE_PROJECT = "live-resume-a575a";
 const FIREBASE_APP_ID = "1:681076751855:web:18bae3866ebfcc4fcd8a1a";
 const MEASUREMENT_ID = "G-00VXD77WNG";
 
-/** Origin of e2e/serve.mjs; must match `baseURL` in playwright.config.ts. */
-const APP_ORIGIN = `http://127.0.0.1:${process.env.E2E_PORT || 4300}`;
 
 function isFirstParty(url: string): boolean {
   return url.startsWith(`${APP_ORIGIN}/`) || url.startsWith("data:") || url.startsWith("blob:");

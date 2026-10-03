@@ -6,6 +6,7 @@
 - Replace `ng-navigator-share` with the native Web Share API and `@angular/animations` with `animate.enter`/`animate.leave`;
 - Replace Protractor with a Playwright browser test suite (`npm run test:e2e`) and add unit specs and a CI workflow;
 - Upgrade angular-eslint to 21 with an ESLint 9 flat config; enable strict template type checking.
+- Add a Docker image (Nginx) serving both locales at `/en/` and `/pt/`, and `npm run test:e2e:docker` to run the browser suite against it.
 
 #[1.8.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.8) (2023-03-22)
 ###📃 release notes

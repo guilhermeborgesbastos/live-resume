@@ -113,12 +113,24 @@ npx ng serve -o --host 0.0.0.0 --configuration en
 | `npm run build-locale` | Localized builds for both languages (`dist/en`, `dist/pt`). Missing translations fail the build. |
 | `npm run test:e2e` | Builds both locales and runs the Playwright browser suite. |
 | `npm run test:e2e:run` | Runs the browser suite against the existing `dist/` output (no rebuild). |
+| `npm run test:e2e:docker` | Builds the Docker image, runs it on port 8080 and runs the browser suite against the container. |
 
 The browser suite (`e2e/`) runs Chromium at desktop (1440×900) and mobile (Pixel 7) sizes against the production builds, served by `e2e/serve.mjs` at `http://127.0.0.1:4300/en/` and `/pt/` (change the port with `E2E_PORT`). It checks rendering and layout, translations, fragment navigation, the carousels (buttons and swipe), mobile navigation, the 404 page and contact-form validation. Firebase and Google Analytics requests are stubbed or blocked, so tests never send real data, and any console error, page error or failed request fails the run.
 
 Install the browser once with `npx playwright install chromium`. Results go to `test-results/`: an HTML report (`npx playwright show-report test-results/report`), landing-page screenshots for every locale and viewport in `test-results/screenshots/`, and screenshots plus traces of any failing test in `test-results/artifacts/`.
 
 The GitHub Actions workflow (`.github/workflows/ci.yml`) runs all of these checks on every push and pull request.
+
+## 🐳 Running with Docker
+
+The `Dockerfile` builds both languages from the lockfile and serves them with Nginx, at the same `/en/` and `/pt/` paths as production:
+
+```
+docker build -t live-resume .
+docker run --rm -p 8080:80 live-resume
+```
+
+Then open http://localhost:8080/en/ or http://localhost:8080/pt/. `/en` and `/pt` redirect to their trailing-slash form, other paths under a language return that language's app (so its 404 page is shown), and anything outside `/en/` and `/pt/` returns 404. Run `npm run test:e2e:docker` to build the image and run the browser suite against a container.
 
 ## 🔨 How to customize?
 

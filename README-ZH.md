@@ -111,6 +111,17 @@ npx ng serve -o --host 0.0.0.0 --configuration en
 
 详细说明请参见英文版 README 的 “Testing and quality checks” 部分。
 
+## 🐳 使用 Docker 运行
+
+`Dockerfile` 会根据锁文件构建两种语言版本，并通过 Nginx 在与生产环境相同的 `/en/` 和 `/pt/` 路径下提供服务：
+
+```
+docker build -t live-resume .
+docker run --rm -p 8080:80 live-resume
+```
+
+然后打开 http://localhost:8080/en/ 或 http://localhost:8080/pt/。运行 `npm run test:e2e:docker` 可以构建镜像并针对容器运行浏览器测试。
+
 ## 🔨 如何自定义？
 
 在[Wiki文档](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)中，有一个特定的页面指导您如何对布局和其他内容应用自定义设置...[查看页面](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)

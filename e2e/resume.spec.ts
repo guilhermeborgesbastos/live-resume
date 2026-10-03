@@ -159,6 +159,10 @@ for (const locale of LOCALES) {
     test("deep links open on their section", async ({ page }) => {
       await openResume(page, locale, "#posts");
       await expectScrolledToSection(page, "posts");
+      await openResume(page, locale, "#experience");
+      await expectScrolledToSection(page, "experience");
+      await openResume(page, locale, "#contact");
+      await expectScrolledToSection(page, "contact");
       await page.goto(`/${locale}/contact`);
       await expect(page).toHaveURL(new RegExp(`/${locale}/#contact$`));
       await expectScrolledToSection(page, "contact");
@@ -343,4 +347,33 @@ test("share button uses the Web Share API when the browser supports it", async (
   await expect.poll(() => page.evaluate(() => (window as any).sharedPayloads)).toEqual([
     expect.objectContaining({ title: "Live Resume - Guilherme Borges Bastos", url: "https://guilhermeborgesbastos.com" })
   ]);
+});
+
+// Server contract shared by e2e/serve.mjs and the Docker image (docker/nginx.conf). Uses the
+// HTTP request API rather than a page, so deliberate 404s don't count as failed page requests.
+test.describe("static server", () => {
+  for (const locale of LOCALES) {
+    test(`/${locale} redirects to /${locale}/ and app routes get the ${locale} shell`, async ({ request }) => {
+      const redirect = await request.get(`/${locale}`, { maxRedirects: 0 });
+      expect(redirect.status()).toBe(301);
+      expect(new URL(redirect.headers()["location"], "http://placeholder").pathname).toBe(`/${locale}/`);
+
+      const shell = await request.get(`/${locale}/some/client/route`);
+      expect(shell.status()).toBe(200);
+      const html = await shell.text();
+      expect(html).toContain(`<base href="/${locale}/">`);
+      expect(html).toContain(`lang="${locale}"`);
+    });
+
+    test(`missing ${locale} files are 404s, not the app shell`, async ({ request }) => {
+      expect((await request.get(`/${locale}/missing-file.js`)).status()).toBe(404);
+      expect((await request.get(`/${locale}/assets/missing.png`)).status()).toBe(404);
+    });
+  }
+
+  test("nothing is served outside the locale prefixes", async ({ request }) => {
+    for (const path of ["/", "/index.html", "/fr/", "/enx/"]) {
+      expect((await request.get(path, { maxRedirects: 0 })).status(), path).toBe(404);
+    }
+  });
 });

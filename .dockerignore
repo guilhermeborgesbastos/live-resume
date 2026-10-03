@@ -1,0 +1,25 @@
+# Keep the Docker build context to what `npm ci` and `npm run build-locale` need.
+
+# VCS and dependencies (installed inside the image from the lockfile)
+.git
+node_modules
+
+# Build, cache and test output
+dist
+out-tsc
+.angular
+coverage
+test-results
+playwright-report
+blob-report
+
+# Editor, tooling and local-only files
+.claude
+.idea
+.vscode
+*.iml
+.mcp.json
+*_PLAN.md
+markdown
+Dockerfile
+.dockerignore
