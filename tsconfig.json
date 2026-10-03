@@ -19,7 +19,6 @@
   },
   "angularCompilerOptions": {
     "strictTemplates": true,
-    "strictInjectionParameters": true,
-    "enableControlFlow": true
+    "strictInjectionParameters": true
   }
 }
