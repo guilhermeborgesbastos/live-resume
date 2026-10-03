@@ -3,8 +3,8 @@
   <meta itemprop="author" content="Guilherme Borges Bastos" />
   <ol [ngClass]="{'partial': _posts.length < 3 && currentPage >= (_originalPosts.length / resultsPerPage)}">
     @for (post of _posts; track post) {
-      <li itemprop="techArticle" itemscope itemtype="https://schema.org/TechArticle">
-        <div class="card" [@fadeInOut] itemprop="item">
+      <li animate.enter="fade-in" animate.leave="fade-out" itemprop="techArticle" itemscope itemtype="https://schema.org/TechArticle">
+        <div class="card" itemprop="item">
           <a href="{{ post.http }}" rel="nofollow" target="_blank" itemprop="url">
             <div class="thumbnail" [style.backgroundImage]="'url('+post.thumbnail+')'">
               <meta itemprop="thumbnailUrl" content="{{ post.thumbnail }}" />

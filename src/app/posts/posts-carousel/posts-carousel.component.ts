@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, HostListener, EventEmitter, ElementRef, Output, inject } from "@angular/core";
 import { IPost } from "../posts-interfaces";
-import { trigger, state, style, animate, transition } from "@angular/animations";
 import { debounce } from "../../core/utils";
 import { NgClass } from "@angular/common";
 import { InternationalizationDirective } from "../../core/directive/internationalization.directive";
@@ -11,14 +10,6 @@ import { LocalizedDatePipe } from "../../core/pipe/localized-date.pipe";
     selector: "app-posts-carousel",
     templateUrl: "./posts-carousel.component.html",
     styleUrls: ["./posts-carousel.component.scss", "./posts-carousel.component.responsivity.scss"],
-    animations: [
-        trigger("fadeInOut", [
-            state("void", style({
-                opacity: 0
-            })),
-            transition("void <=> *", animate(300)),
-        ])
-    ],
     imports: [NgClass, InternationalizationDirective, SafariDateFormatterPipe, LocalizedDatePipe]
 })
 

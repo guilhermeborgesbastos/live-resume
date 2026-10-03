@@ -210,11 +210,30 @@ for (const locale of LOCALES) {
       await expect(next).not.toHaveClass(/disabled/);
       await expect(start).toHaveText("1");
       const firstTitle = await posts.locator("h2.title").first().innerText();
+      const cards = posts.locator("app-posts-carousel li");
+      const cardsPerPage = await cards.count();
+      const totalPosts = Number(await posts.locator(".paginator > span").nth(2).innerText());
+
+      // Record the enter/leave animation classes Angular applies to the cards.
+      await page.evaluate(() => {
+        const seen = new Set<string>();
+        (window as any).postAnimationClasses = seen;
+        const record = (node: Node) => ["fade-in", "fade-out"]
+          .forEach(name => (node as HTMLElement).classList?.contains(name) && seen.add(name));
+        new MutationObserver(mutations => mutations.forEach(mutation => {
+          record(mutation.target);
+          mutation.addedNodes.forEach(record);
+        })).observe(document.querySelector("app-posts-carousel")!, { subtree: true, attributes: true, attributeFilter: ["class"], childList: true });
+      });
 
       await next.click();
       await expect(start).not.toHaveText("1");
       await expect(previous).not.toHaveClass(/disabled/);
       await expect(posts.locator("h2.title").first()).not.toHaveText(firstTitle);
+      // Leaving cards are removed once their fade-out finishes.
+      await expect(cards).toHaveCount(Math.min(cardsPerPage, totalPosts - cardsPerPage));
+      await expect(posts.locator("li.fade-out")).toHaveCount(0);
+      expect(await page.evaluate(() => [...(window as any).postAnimationClasses].sort())).toEqual(["fade-in", "fade-out"]);
 
       await previous.click();
       await expect(start).toHaveText("1");
