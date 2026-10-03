@@ -13,6 +13,7 @@
     "lint": "ng lint",
     "test:e2e": "npm run build-locale && playwright test",
     "test:e2e:run": "playwright test",
+    "test:e2e:docker": "bash e2e/docker.sh",
     "int:extract": "ng extract-i18n --output-path src/locales",
     "build-locale:en": "ng build --configuration en",
     "build-locale:pt": "ng build --configuration pt",

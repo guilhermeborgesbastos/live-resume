@@ -1,7 +1,9 @@
 // Minimal static server for the localized production builds used by the Playwright suite.
-// It mirrors the deployed layout: `/en/` and `/pt/` each serve their own build, unknown
+// It follows the same contract as the Docker image's Nginx config (docker/nginx.conf):
+// `/en` and `/pt` redirect to `/en/` and `/pt/`, each locale serves its own build, unknown
 // non-file paths fall back to the locale's index.html (so the Angular router can render
-// the 404 page), and missing files return a real 404 so broken assets fail the suite.
+// the 404 page), missing files return a real 404 so broken assets fail the suite, and
+// nothing is served outside the locale prefixes.
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize, resolve } from "node:path";
@@ -52,7 +54,12 @@ const server = createServer(async (req, res) => {
     const [, locale] = pathname.split("/");
 
     if (!locales.includes(locale)) {
-      res.writeHead(302, { Location: "/en/" });
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end("Not found");
+      return;
+    }
+    if (pathname === `/${locale}`) {
+      res.writeHead(301, { Location: `/${locale}/` });
       res.end();
       return;
     }

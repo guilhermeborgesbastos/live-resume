@@ -1,11 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
-
-const port = Number(process.env.E2E_PORT || 4300);
+import { BASE_URL, EXTERNAL_BASE_URL, LOCAL_PORT } from "./e2e/target";
 
 /**
  * Real-browser regression gate. The suite runs against the localized production builds
  * (`npm run build-locale` -> dist/en, dist/pt) served by e2e/serve.mjs, so it exercises
- * exactly what gets deployed. Use `npm run test:e2e` to build and run everything.
+ * exactly what gets deployed. Use `npm run test:e2e` to build and run everything, or
+ * `npm run test:e2e:docker` to run the same suite against the Docker image (E2E_BASE_URL).
  */
 export default defineConfig({
   testDir: "./e2e",
@@ -18,7 +18,7 @@ export default defineConfig({
     ["html", { outputFolder: "test-results/report", open: "never" }]
   ],
   use: {
-    baseURL: `http://127.0.0.1:${port}`,
+    baseURL: BASE_URL,
     screenshot: "only-on-failure",
     trace: "retain-on-failure"
   },
@@ -32,10 +32,11 @@ export default defineConfig({
       use: { ...devices["Pixel 7"] }
     }
   ],
-  webServer: {
+  // With E2E_BASE_URL set (e.g. the Docker container) the suite targets that server instead.
+  webServer: EXTERNAL_BASE_URL ? undefined : {
     command: "node e2e/serve.mjs",
-    url: `http://127.0.0.1:${port}/en/`,
+    url: `${BASE_URL}/en/`,
     reuseExistingServer: !process.env.CI,
-    env: { E2E_PORT: String(port) }
+    env: { E2E_PORT: String(LOCAL_PORT) }
   }
 });
