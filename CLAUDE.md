@@ -9,7 +9,7 @@ Live Resume: a single-page personal resume/portfolio built with Angular 19 (READ
 ## Commands
 
 ```bash
-npm install --force                 # --force is required (peer-dep conflicts, e.g. @angular-eslint versions)
+npm ci                              # clean install from the lockfile; no --force / --legacy-peer-deps needed
 npm run start:en                    # dev server on :4200 in English (start:pt for Portuguese)
 ng serve -o --host 0.0.0.0 --configuration en   # README's way to serve, reachable from other devices
 npm run build                       # default build -> dist/live-resume

@@ -87,7 +87,7 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 
 3. Go to the cloned directory (e.g. `cd live-resume`).
 
-4. Run `npm install --force`.
+4. Run `npm ci` (or `npm install`). No `--force` or `--legacy-peer-deps` flag is needed.
 
 5. Inner the folder of the cloned project, start the application:
 ```

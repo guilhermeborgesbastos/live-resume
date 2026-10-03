@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Meta, Title } from "@angular/platform-browser";
+import { RouterOutlet } from "@angular/router";
 import { AnalyticsService } from "./core/analytics.service";
 
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html",
     styleUrls: ["./app.component.css"],
-    standalone: false
+    imports: [RouterOutlet]
 })
 export class AppComponent implements OnInit {
 

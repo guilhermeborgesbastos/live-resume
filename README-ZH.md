@@ -86,7 +86,7 @@ git clone https://github.com/[replace-with-your-github-username]/live-resume.git
 
 3. 进入克隆的目录 (例如 `cd live-resume`)。
 
-4. 运行 `npm install --force`。
+4. 运行 `npm ci`（或 `npm install`），无需 `--force` 或 `--legacy-peer-deps`。
 
 5. 在克隆的项目文件夹内，启动应用：
 ```

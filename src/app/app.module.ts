@@ -33,9 +33,9 @@ registerLocaleData(localePt, "pt-BR", localePtExtra);
     CoreModule,
     ResumeModule,
     PageNotFoundRoutingModule,
-    HammerModule
+    HammerModule,
+    AppComponent
   ],
-  declarations: [ AppComponent ],
   bootstrap: [ AppComponent ],
   providers: [
     {
