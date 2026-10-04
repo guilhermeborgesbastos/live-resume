@@ -132,6 +132,17 @@ docker run --rm -p 8080:80 live-resume
 
 Then open http://localhost:8080/en/ or http://localhost:8080/pt/. `/en` and `/pt` redirect to their trailing-slash form, other paths under a language return that language's app (so its 404 page is shown), and anything outside `/en/` and `/pt/` returns 404. Run `npm run test:e2e:docker` to build the image and run the browser suite against a container.
 
+Published images: [`guilhermeborgesbastos/live-resume`](https://hub.docker.com/r/guilhermeborgesbastos/live-resume) on Docker Hub (`linux/amd64` and `linux/arm64`).
+
+**Publishing a release.** The `Docker publish` workflow (`.github/workflows/docker-publish.yml`) runs when a version tag is pushed. Set the version, merge, then tag the merged commit:
+
+```
+npm version 2.1.0 --no-git-tag-version   # updates package.json and package-lock.json; commit it in a PR
+git tag v2.1.0 && git push origin v2.1.0
+```
+
+The workflow fails unless the tag equals `package.json`'s version. It runs the browser suite against the container, then pushes `2.1.0`, `2.1`, `2`, `latest` and `sha-<commit>`; pre-release tags such as `v2.1.0-rc.1` only publish their exact version. It needs a `DOCKERHUB_TOKEN` repository secret (a Docker Hub access token with read & write access), and optionally a `DOCKERHUB_USERNAME` variable (defaults to the repository owner). Pull requests that change the image run the same build and tests without publishing.
+
 ## 🔨 How to customize?
 
 In the [Wiki Doc.](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations) there is a specific page supporting you on how to apply customizations to the layout and more... [See page](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)
