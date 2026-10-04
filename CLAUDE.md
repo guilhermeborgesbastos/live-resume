@@ -28,6 +28,8 @@ npm run int:extract                 # regenerate src/locales/messages.xlf (ng ex
 
 **Docker.** `Dockerfile` builds both locales in a `node:24-slim` stage that is discarded, and the runtime image is `nginx:1.30-alpine-slim` with only the static files (no Node); `docker/nginx.conf` redirects `/en` and `/pt` to `/en/` and `/pt/`, serves each locale's `index.html` for extension-less paths under it, returns 404 for missing files and for anything outside the locale prefixes. `e2e/serve.mjs` follows the same contract, and `E2E_BASE_URL` points the browser suite at any running server (the container via `npm run test:e2e:docker`).
 
+**Releases.** Pushing a tag `vX.Y.Z` runs `.github/workflows/docker-publish.yml`: it fails unless the tag equals `package.json`'s version, runs `npm run test:e2e:docker`, then pushes `docker.io/guilhermeborgesbastos/live-resume` for linux/amd64 + arm64 as `X.Y.Z`, `X.Y`, `X`, `latest` and `sha-<commit>` (pre-releases only `X.Y.Z-…`). Bump the version with `npm version X.Y.Z --no-git-tag-version` in a PR and update CHANGELOG.md before tagging. Needs the `DOCKERHUB_TOKEN` secret (`DOCKERHUB_USERNAME` variable optional). PRs touching the image run the workflow without pushing.
+
 `deploy.sh` builds both locales, stages `dist/<locale>/browser/<locale>/` as `dist/site/<locale>/`, then empties the S3 bucket `www.guilhermeborgesbastos.com` and uploads each locale to its `en/` / `pt/` prefix (served as https://guilhermeborgesbastos.com/en/ and /pt/). It is destructive and must not be run during development; `./deploy.sh --stage-only` builds and stages without touching S3. The script stops before touching S3 if the build fails or a locale's `index.html` is missing.
 
 ## Architecture

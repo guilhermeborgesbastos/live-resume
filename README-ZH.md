@@ -122,6 +122,8 @@ docker run --rm -p 8080:80 live-resume
 
 然后打开 http://localhost:8080/en/ 或 http://localhost:8080/pt/。运行 `npm run test:e2e:docker` 可以构建镜像并针对容器运行浏览器测试。
 
+镜像发布在 Docker Hub：[`guilhermeborgesbastos/live-resume`](https://hub.docker.com/r/guilhermeborgesbastos/live-resume)（`linux/amd64` 和 `linux/arm64`）。推送与 `package.json` 版本一致的标签（例如 `v2.1.0`）时，`Docker publish` 工作流会先运行浏览器测试，再发布镜像；需要仓库密钥 `DOCKERHUB_TOKEN`。详见英文版 README。
+
 ## 🔨 如何自定义？
 
 在[Wiki文档](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)中，有一个特定的页面指导您如何对布局和其他内容应用自定义设置...[查看页面](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)

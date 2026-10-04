@@ -1,4 +1,4 @@
-#Unreleased
+#[2.0.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v2.0.0) (2026-10-04)
 ###📃 release notes
 - Upgrade to Angular 21.2.25 (LTS) and Typescript 5.9.3, via Angular 20;
 - Node.js 20.19+, 22.12+ or 24 is required (Node 24 pinned in `.nvmrc`); `npm ci` no longer needs `--force`;
@@ -7,6 +7,7 @@
 - Replace Protractor with a Playwright browser test suite (`npm run test:e2e`) and add unit specs and a CI workflow;
 - Upgrade angular-eslint to 21 with an ESLint 9 flat config; enable strict template type checking.
 - Add a Docker image (Nginx) serving both locales at `/en/` and `/pt/`, and `npm run test:e2e:docker` to run the browser suite against it.
+- Publish the Docker image to Docker Hub (`guilhermeborgesbastos/live-resume`, amd64 + arm64) from a GitHub Actions workflow on version tags.
 
 #[1.8.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v1.8) (2023-03-22)
 ###📃 release notes
