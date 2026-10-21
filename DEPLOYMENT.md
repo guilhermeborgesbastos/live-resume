@@ -58,8 +58,9 @@ do what the script needs:
 
 The script doesn't set ACLs, so `s3:PutObjectAcl` isn't needed.
 
-Save the policy as `live-resume-deploy-policy.json` and replace `<ACCOUNT_ID>` with the
-12-digit AWS account ID (`aws sts get-caller-identity --query Account --output text`):
+Save the policy as `live-resume-deploy-policy.json`. The CloudFront ARN has `*` where the account
+ID would go. Distribution IDs are unique across all AWS accounts, so the statement still covers
+only `E2FO2ELLS8J6VG`, and the policy can be pasted as it is:
 
 ```json
 {
@@ -85,7 +86,7 @@ Save the policy as `live-resume-deploy-policy.json` and replace `<ACCOUNT_ID>` w
         "cloudfront:GetInvalidation",
         "cloudfront:ListInvalidations"
       ],
-      "Resource": "arn:aws:cloudfront::<ACCOUNT_ID>:distribution/E2FO2ELLS8J6VG"
+      "Resource": "arn:aws:cloudfront::*:distribution/E2FO2ELLS8J6VG"
     }
   ]
 }
@@ -228,7 +229,7 @@ git restore deploy.sh && git switch master
 | `Unable to locate credentials` | No profile selected or configured | `aws configure --profile live-resume`, run with `AWS_PROFILE=live-resume` |
 | `AccessDenied` on `ListObjectsV2` | `s3:ListBucket` missing or set on `…/*` instead of the bucket ARN | Fix the `ListSiteBucket` statement |
 | `AccessDenied` on `DeleteObject` / `PutObject` | Object permissions missing, or the bucket policy denies the user | Fix `WriteSiteObjects`, check the bucket policy |
-| `AccessDenied` on `CreateInvalidation` | Wrong account ID or distribution ID in the policy ARN | Compare with `aws sts get-caller-identity` and the console |
+| `AccessDenied` on `CreateInvalidation` | Wrong distribution ID in the policy ARN | Compare `E2FO2ELLS8J6VG` with the ID in the CloudFront console |
 | `NoSuchDistribution` | `CLOUDFRONT_LIVERESUME_DISTRIBUTION_ID` holds the wrong ID | Copy the ID from the CloudFront console |
 | Blank page right after a deploy | Old cached `index.html` or bundles at the edge | Wait for the invalidation to complete, then reload |
 | Failure after `aws s3 rm` | The site is empty or partly uploaded | Fix the cause and run `./deploy.sh` again; it starts over |
