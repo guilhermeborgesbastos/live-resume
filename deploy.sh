@@ -20,17 +20,18 @@
 # reference files the new build no longer has.
 #
 # Usage:
-#   CLOUDFRONT_DISTRIBUTION_ID=<id> ./deploy.sh  build, stage into dist/site/, publish
-#                                                (empties the bucket first!) and invalidate
-#   ./deploy.sh --stage-only                     build and stage into dist/site/ without
-#                                                touching S3 or CloudFront
+#   ./deploy.sh               build, stage into dist/site/, publish (empties the bucket
+#                             first!) and invalidate; needs the CloudFront distribution ID
+#                             in CLOUDFRONT_LIVERESUME_DISTRIBUTION_ID
+#   ./deploy.sh --stage-only  build and stage into dist/site/ without touching S3 or
+#                             CloudFront
 set -euo pipefail
 
 STAGE_ONLY=false
 [ "${1:-}" = "--stage-only" ] && STAGE_ONLY=true
 
-if [ "$STAGE_ONLY" = false ] && [ -z "${CLOUDFRONT_DISTRIBUTION_ID:-}" ]; then
-  echo "Set CLOUDFRONT_DISTRIBUTION_ID to the distribution serving the site; nothing was built or published." >&2
+if [ "$STAGE_ONLY" = false ] && [ -z "${CLOUDFRONT_LIVERESUME_DISTRIBUTION_ID:-}" ]; then
+  echo "Set CLOUDFRONT_LIVERESUME_DISTRIBUTION_ID to the distribution serving the site; nothing was built or published." >&2
   exit 1
 fi
 
@@ -71,7 +72,7 @@ done
 aws s3 cp "$SITE_DIR/index.html" "$BUCKET/index.html"
 
 aws cloudfront create-invalidation \
-  --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+  --distribution-id "$CLOUDFRONT_LIVERESUME_DISTRIBUTION_ID" \
   --paths '/*' \
   --query 'Invalidation.[Id,Status]' \
   --output text
