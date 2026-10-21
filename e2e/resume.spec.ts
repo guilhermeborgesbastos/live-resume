@@ -322,6 +322,54 @@ test("desktop navigation is always expanded", async ({ page }) => {
   await expect(page.locator("app-header .navbar-toggle")).toBeHidden();
 });
 
+test("posts carousel keeps showing posts when a resize changes the cards per page", async ({ page }) => {
+  test.skip(isMobile(page), "resizes a desktop window across the 2/3-cards breakpoint");
+  // 1094px fits two post cards per page, 1095px fits three.
+  await page.setViewportSize({ width: 1094, height: 900 });
+  await openResume(page, "en");
+  const posts = page.locator("section#posts");
+  const cards = posts.locator("app-posts-carousel li");
+  const titles = posts.locator("app-posts-carousel h2.title");
+  const next = posts.locator(".navigation a.next");
+  const start = posts.locator(".paginator .start");
+  const end = posts.locator(".paginator .end");
+  const total = Number(await posts.locator(".paginator > span").nth(2).innerText());
+  const resize = async (width: number) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.waitForTimeout(200); // the carousel's resize handler is debounced
+  };
+  await posts.scrollIntoViewIfNeeded();
+  await expect(cards).toHaveCount(2);
+
+  // From the last page, widening must not page past the last post (it used to leave the
+  // section empty with "13 - 9 of 9 posts" and both buttons enabled).
+  while (!(await next.getAttribute("class"))?.includes("disabled")) {
+    await next.click();
+  }
+  const lastTitle = await titles.last().innerText();
+  await resize(1095);
+  await expect(cards).not.toHaveCount(0);
+  await expect(end).toHaveText(String(total));
+  expect(Number(await start.innerText())).toBeLessThanOrEqual(total);
+  await expect(next).toHaveClass(/disabled/);
+  await expect(titles.filter({ hasText: lastTitle })).toHaveCount(1);
+
+  // From a middle page, the first post on screen stays on screen after the resize.
+  await resize(1094);
+  await openResume(page, "en");
+  await posts.scrollIntoViewIfNeeded();
+  await next.click();
+  await next.click();
+  await expect(start).toHaveText("5");
+  const firstTitle = await titles.first().innerText();
+  await resize(1095);
+  await expect(cards).toHaveCount(3);
+  await expect(titles.filter({ hasText: firstTitle })).toHaveCount(1);
+  await resize(1094);
+  await expect(cards).toHaveCount(2);
+  await expect(titles.filter({ hasText: firstTitle })).toHaveCount(1);
+});
+
 for (const locale of LOCALES as readonly Locale[]) {
   test(`${locale} unknown routes render the lazy 404 page`, async ({ page }) => {
     await page.goto(`/${locale}/this/route/does-not-exist`);
