@@ -46,6 +46,9 @@
             a {
                 text-decoration: none;
                 color: #222f5c;
+                // On phones the rounded .molding box sits inside a rectangular link; the default
+                // tap highlight flashed that rectangle around the button on every tap.
+                -webkit-tap-highlight-color: transparent;
             }
 
             .previous {
