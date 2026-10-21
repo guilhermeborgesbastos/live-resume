@@ -16,7 +16,9 @@ IAM permissions, credentials) and then each deploy.
 ## What the script does
 
 1. Stops right away if `CLOUDFRONT_LIVERESUME_DISTRIBUTION_ID` is not set (skipped with `--stage-only`).
-2. Deletes `./dist` and builds both locales (`npm run build-locale`).
+2. Deletes `./dist` and builds both locales (`npm run build-locale`, which uses the `production`
+   configuration, so scripts, styles and `media/` files get content hashes in their names, e.g.
+   `main-FNCGJIU4.js`).
 3. Stages the bucket's layout in `dist/site/`:
 
    | Staged file | Bucket key | Served at |
@@ -25,11 +27,16 @@ IAM permissions, credentials) and then each deploy.
    | `dist/site/pt/` (from `dist/pt/browser/pt/`) | `pt/…` | `/pt/index.html` |
    | `dist/site/index.html` (copy of `en/index.html`, absolute `og:image`) | `index.html` | `/` |
 
-   It stops before touching AWS if a locale's `index.html` is missing or the root page
-   cannot be generated.
+   It stops before touching AWS if a locale's `index.html` is missing, a script, style or
+   `media/` file has no content hash in its name, or the root page cannot be generated.
 4. With `--stage-only`, it exits here.
 5. Empties the bucket (`aws s3 rm --recursive`), uploads `en/`, `pt/` and the root
-   `index.html` (`aws s3 cp`).
+   `index.html` (`aws s3 cp`) with a `Cache-Control` header:
+
+   | Files | `Cache-Control` | Why |
+   | --- | --- | --- |
+   | `*.js`, `*.css`, `media/*` (all hashed) | `public, max-age=31536000, immutable` | a new build has new names, so a cached copy is never stale |
+   | `*.html`, `assets/*`, `robots.txt`, `sitemap.xml` | `no-cache` | browsers revalidate on every visit, so they always get the current bundle names and content |
 6. Invalidates `/*` on each CloudFront distribution and prints `<distribution> <invalidation ID> <status>`
    per distribution. If one fails, it still tries the others, then exits with an error naming the
    ones that failed. The upload has already happened by then.
@@ -244,19 +251,18 @@ git restore deploy.sh && git switch master
 | `NoSuchDistribution` | `CLOUDFRONT_LIVERESUME_DISTRIBUTION_ID` holds a wrong ID | Copy the IDs from the CloudFront console |
 | `… invalidating <id> failed` after the upload | The site is published, but that distribution still serves the old version | Fix the cause, then `aws cloudfront create-invalidation --distribution-id <id> --paths '/*'` |
 | Blank page right after a deploy, on one domain or both | Old cached `index.html` or bundles at the edge | Wait for the invalidations to complete, then reload |
+| Blank page with `NG0908` in the console | The browser ran a cached script from an older build next to the new `main` bundle (happened on 2026-10-21, when bundles had fixed names like `polyfills.js` and no `Cache-Control`) | Hashed names prevent it. If a build ever ships unhashed bundles again, the deploy refuses to publish them |
 | Failure after `aws s3 rm` | The site is empty or partly uploaded | Fix the cause and run `./deploy.sh` again; it starts over |
 
 ## Known limitations
 
 - **The site is down for the length of the upload.** The bucket is emptied first, and
   `aws s3 sync --delete` per locale would avoid that.
-- **No `Cache-Control` headers** are set on uploads, so CloudFront and browsers use their
-  defaults. The invalidation clears CloudFront, but a browser can keep an old file until it
-  revalidates.
 - **`/pt/` shows the English site.** CloudFront serves `/en/index.html` for any missing key,
   including the `pt/` "folder", so only `/pt/index.html` shows Portuguese. The header's
   language links use `/pt/index.html`. Fixing it takes a CloudFront Function that rewrites
   `/<locale>/` to `/<locale>/index.html`.
-- **Locale builds don't use the `production` configuration** (`ng build --configuration
-  en`/`pt`), so file names aren't hashed and `enableProdMode()` isn't called. The bundle is
-  still minified.
+- **Browsers that cached the 2022 page can still show it.** Before 2026-10-21, files were
+  served without `Cache-Control`, so a browser may hold the old `index.html` for weeks based
+  on its age. That page loads `runtime.js`, which no longer exists. Pages uploaded since then
+  are `no-cache`, so this only affects copies cached before the fix.
