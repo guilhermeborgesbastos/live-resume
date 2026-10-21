@@ -1,0 +1,17 @@
+{
+    "thumbnail": "assets/posts/post-MM-DD-YYYY.jpg",
+    "http": "https://",
+    "date": "MM-DD-YYYY",
+    "internationalizations": [
+        {
+            "language": "en",
+            "title": "",
+            "description": ""
+        },
+        {
+            "language": "pt",
+            "title": "",
+            "description": ""
+        }
+    ]
+}

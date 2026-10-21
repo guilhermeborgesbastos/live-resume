@@ -23,6 +23,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Validate posts data
+        run: npm run validate:posts
+
       - name: Unit tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
 
