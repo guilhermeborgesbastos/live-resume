@@ -15,10 +15,24 @@
 # so copying dist/<locale> as a whole would publish browser/<locale>/... instead of
 # the /en/ and /pt/ paths the builds' base hrefs expect.
 #
+# After the upload, the CloudFront distribution in front of the bucket is invalidated
+# (/*): its edges otherwise keep serving the previous index.html and bundles, which
+# reference files the new build no longer has.
+#
 # Usage:
-#   ./deploy.sh               build, stage into dist/site/ and publish (empties the bucket first!)
-#   ./deploy.sh --stage-only  build and stage into dist/site/ without touching S3
+#   CLOUDFRONT_DISTRIBUTION_ID=<id> ./deploy.sh  build, stage into dist/site/, publish
+#                                                (empties the bucket first!) and invalidate
+#   ./deploy.sh --stage-only                     build and stage into dist/site/ without
+#                                                touching S3 or CloudFront
 set -euo pipefail
+
+STAGE_ONLY=false
+[ "${1:-}" = "--stage-only" ] && STAGE_ONLY=true
+
+if [ "$STAGE_ONLY" = false ] && [ -z "${CLOUDFRONT_DISTRIBUTION_ID:-}" ]; then
+  echo "Set CLOUDFRONT_DISTRIBUTION_ID to the distribution serving the site; nothing was built or published." >&2
+  exit 1
+fi
 
 BUCKET="s3://www.guilhermeborgesbastos.com"
 SITE_URL="https://www.guilhermeborgesbastos.com"
@@ -45,7 +59,7 @@ if ! grep -q "content=\"$SITE_URL/en/assets/og-image.png\"" "$SITE_DIR/index.htm
   exit 1
 fi
 
-if [ "${1:-}" = "--stage-only" ]; then
+if [ "$STAGE_ONLY" = true ]; then
   echo "Staged ${LOCALES[*]} and the root index.html in $SITE_DIR (not published)."
   exit 0
 fi
@@ -55,3 +69,9 @@ for locale in "${LOCALES[@]}"; do
   aws s3 cp "$SITE_DIR/$locale" "$BUCKET/$locale" --recursive
 done
 aws s3 cp "$SITE_DIR/index.html" "$BUCKET/index.html"
+
+aws cloudfront create-invalidation \
+  --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+  --paths '/*' \
+  --query 'Invalidation.[Id,Status]' \
+  --output text
