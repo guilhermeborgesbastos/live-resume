@@ -218,26 +218,33 @@ for (const locale of LOCALES) {
       const cardsPerPage = await cards.count();
       const totalPosts = Number(await posts.locator(".paginator > span").nth(2).innerText());
 
-      // Record the enter/leave animation classes Angular applies to the cards.
+      // Record the animation classes Angular applies to the cards, and the most cards the list
+      // ever holds at once: leaving cards must not linger next to the new page's cards.
       await page.evaluate(() => {
         const seen = new Set<string>();
+        const list = document.querySelector("app-posts-carousel ol")!;
         (window as any).postAnimationClasses = seen;
+        (window as any).maxPostCards = list.children.length;
         const record = (node: Node) => ["fade-in", "fade-out"]
           .forEach(name => (node as HTMLElement).classList?.contains(name) && seen.add(name));
-        new MutationObserver(mutations => mutations.forEach(mutation => {
-          record(mutation.target);
-          mutation.addedNodes.forEach(record);
-        })).observe(document.querySelector("app-posts-carousel")!, { subtree: true, attributes: true, attributeFilter: ["class"], childList: true });
+        new MutationObserver(mutations => {
+          mutations.forEach(mutation => {
+            record(mutation.target);
+            mutation.addedNodes.forEach(record);
+          });
+          (window as any).maxPostCards = Math.max((window as any).maxPostCards, list.children.length);
+        }).observe(list, { subtree: true, attributes: true, attributeFilter: ["class"], childList: true });
       });
 
       await next.click();
       await expect(start).not.toHaveText("1");
       await expect(previous).not.toHaveClass(/disabled/);
       await expect(posts.locator("h2.title").first()).not.toHaveText(firstTitle);
-      // Leaving cards are removed once their fade-out finishes.
+      // New cards fade in; the previous page's cards are removed at once, so the row never
+      // holds both pages (which squeezed the cards and made the section jump on mobile).
       await expect(cards).toHaveCount(Math.min(cardsPerPage, totalPosts - cardsPerPage));
-      await expect(posts.locator("li.fade-out")).toHaveCount(0);
-      expect(await page.evaluate(() => [...(window as any).postAnimationClasses].sort())).toEqual(["fade-in", "fade-out"]);
+      expect(await page.evaluate(() => [...(window as any).postAnimationClasses].sort())).toEqual(["fade-in"]);
+      expect(await page.evaluate(() => (window as any).maxPostCards)).toBeLessThanOrEqual(cardsPerPage);
 
       await previous.click();
       await expect(start).toHaveText("1");
