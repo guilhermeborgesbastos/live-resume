@@ -10,7 +10,6 @@
         top: -6px;
         
         .popupSpan {
-            left: -40px;
             font-size: 15px;
         }
         &.current {
@@ -24,7 +23,6 @@
         }
         &.active.current .popupSpan {
             top: -45px;
-            left: -40px;
         }
     }
 }
@@ -36,15 +34,8 @@
     }
     
     .milestone {        
-        .popupSpan {
-            left: -20px;
-
-            .month {
-                display: none;
-            }
-        }
-        &.active.current .popupSpan {
-            left: -25px;
+        .popupSpan .month {
+            display: none;
         }
     }
 }
