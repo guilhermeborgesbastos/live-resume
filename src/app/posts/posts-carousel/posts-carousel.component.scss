@@ -128,13 +128,11 @@
     }
 }
 
-// Cards fade in/out while paginating (applied through animate.enter / animate.leave).
+// New cards fade in while paginating (applied through animate.enter). Leaving cards are
+// removed at once: a fade-out would keep them in the flex row next to the new ones, squeezing
+// both pages into one row and making the section jump in height (very visible on mobile).
 li.fade-in {
     animation: posts-card-fade 300ms ease;
-}
-
-li.fade-out {
-    animation: posts-card-fade 300ms ease reverse forwards;
 }
 
 @keyframes posts-card-fade {
