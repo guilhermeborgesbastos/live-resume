@@ -2,7 +2,7 @@
     "internationalizations": [
         {
             "language": "pt",
-            "description": "Sou Engenheiro <i>Full-Stack & DevOps</i> com mais de 10 anos de experiência entregando soluções escaláveis e seguras para empresas de todos os portes, de startups a líderes globais como <a href=\"https://swisscom.com\" target=\"_blank\">Swisscom</a>. Minha paixão é transformar ideias complexas em produtos digitais, com foco em performance, automação e experiência do usuário.<br><br>Trabalho entre o desenvolvimento de software e as operações, do planejamento técnico à entrega, manutenção e monitoramento em produção."
+            "description": "Sou Engenheiro <i>Full-Stack & DevOps</i> com mais de 10 anos de experiência entregando software escalável, seguro e de alta performance para empresas de todos os portes, de startups a líderes globais como <a href=\"https://swisscom.com\" target=\"_blank\">Swisscom</a>. Minha paixão é transformar ideias complexas em produtos digitais que equilibram performance, automação e experiência do usuário.<br><br>Atuo entre a engenharia de software e as operações, levando projetos do design técnico ao deploy e monitoramento em produção. Tenho ampla experiência com AWS, Docker, Kubernetes, CI/CD, Node.js, Angular e bancos de dados SQL e NoSQL, e sou especialista em Infraestrutura como Código e monitoramento proativo com Prometheus, ELK e Grafana."
         },
         {
             "language": "en",
