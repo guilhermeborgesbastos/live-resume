@@ -25,7 +25,7 @@ export const environment = {
   },
   // reCAPTCHA v3 site key used by Firebase App Check to protect the contact form (see DEPLOYMENT.md).
   // Leave it empty to send messages without App Check.
-  recaptchaSiteKey: "6LdEHf0tAAAAACoSVsnW0TRdYS4mxXEJERo7aQK3"
+  recaptchaSiteKey: "6LdzJf0tAAAAAIvk27D_cJ7sMVTw7XWO0-cf-unG"
 };
 
 /*
