@@ -239,6 +239,36 @@ npm ci && AWS_PROFILE=live-resume ./deploy.sh
 git restore deploy.sh && git switch master
 ```
 
+## Contact form captcha (Firebase App Check)
+
+The contact form writes straight to Firestore from the browser, so the protection has to be
+enforced by Firebase: App Check with reCAPTCHA Enterprise makes Firestore reject writes that
+don't come from a visitor on the site, including bots that skip the form. Visitors see no
+challenge, only the reCAPTCHA notice under the Send button. While `recaptchaSiteKey` is empty,
+App Check is off and the form works as before.
+
+Google now sells reCAPTCHA Enterprise as **Google Cloud Fraud Defense**. App Check no longer
+registers classic reCAPTCHA v3 keys ("reCAPTCHA Classic is deprecated"), and a v3 key from
+https://www.google.com/recaptcha/admin fails the token exchange with `App not registered`.
+
+Do the steps in this order. Enforcing before the site key is deployed rejects every message.
+
+1. In the Google Cloud console for project `live-resume-a575a`, open **Fraud Defense**
+   (reCAPTCHA), enable the API if asked, and create a **Web** key: add the domain
+   `guilhermeborgesbastos.com` (and `localhost` to test with `npm run start:en`; Google advises
+   a separate key for that), and leave the **checkbox challenge off** (App Check needs a
+   score-based key).
+2. In the Firebase console, **App Check → Apps**, register the web app
+   (`1:681076751855:web:18bae3866ebfcc4fcd8a1a`) with the **reCAPTCHA Enterprise** provider and
+   that key's ID.
+3. Put the key ID in `recaptchaSiteKey` in `src/environments/environment.ts` and
+   `environment.prod.ts`, then deploy.
+4. Send a message from the live site. In **App Check → APIs → Cloud Firestore**, the requests
+   should show as verified. Until the deploy, the site in production sends no tokens, so its
+   requests count as unverified.
+5. Click **Enforce** for Cloud Firestore. From then on, writes without a valid App Check token
+   fail, and the form shows its error message. **Unenforce** turns it off again at once.
+
 ## Troubleshooting
 
 | Symptom | Cause | Fix |

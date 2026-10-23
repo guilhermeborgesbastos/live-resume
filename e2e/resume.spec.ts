@@ -1,6 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { join } from "path";
-import { expect, isMobile, Locale, LOCALES, openResume, test, TEXT } from "./fixtures";
+import { environment } from "../src/environments/environment.prod";
+import { APP_CHECK_TOKEN, expect, isMobile, Locale, LOCALES, openResume, RECAPTCHA_TOKEN, test, TEXT } from "./fixtures";
 
 const SECTIONS = ["about", "experience", "posts", "contact"] as const;
 
@@ -292,6 +293,19 @@ for (const locale of LOCALES) {
       await form.locator("input[type='submit']").click();
       await expect(form).toHaveClass(/loading/);
       await expect.poll(() => diagnostics.blockedFirestoreRequests.length).toBeGreaterThan(0);
+
+      // With a reCAPTCHA site key, the write goes through App Check: reCAPTCHA (stubbed by the
+      // fixture) issues a token that is exchanged for the App Check token Firestore sends along.
+      const notice = form.locator(".recaptcha-notice");
+      if (environment.recaptchaSiteKey) {
+        await expect(notice).toBeVisible();
+        await expect(notice.locator("a")).toHaveCount(2);
+        expect(diagnostics.appCheckExchanges).toContain(RECAPTCHA_TOKEN);
+        expect(diagnostics.firestoreAppCheckTokens).toContain(APP_CHECK_TOKEN);
+      } else {
+        await expect(notice).toHaveCount(0);
+        expect(diagnostics.externalRequests.filter(r => r.includes("recaptcha"))).toEqual([]);
+      }
     });
   });
 }

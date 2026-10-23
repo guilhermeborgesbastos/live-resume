@@ -231,6 +231,17 @@
                         }
                     }
     
+                    .recaptcha-notice {
+                        font-size: 12px;
+                        color: #848484;
+                        margin: 10px 0 0;
+
+                        a {
+                            color: inherit;
+                            text-decoration: underline;
+                        }
+                    }
+
                     textarea {
                         font-size: 16px;
                         padding: 10px 0 10px 15px;
