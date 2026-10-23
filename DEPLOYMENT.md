@@ -239,6 +239,28 @@ npm ci && AWS_PROFILE=live-resume ./deploy.sh
 git restore deploy.sh && git switch master
 ```
 
+## Contact form captcha (Firebase App Check)
+
+The contact form writes straight to Firestore from the browser, so the protection has to be
+enforced by Firebase: App Check with reCAPTCHA v3 makes Firestore reject writes that don't
+come from a visitor on the site, including bots that skip the form. Visitors see no challenge,
+only the reCAPTCHA notice under the Send button. While `recaptchaSiteKey` is empty, App Check
+is off and the form works as before.
+
+Do the steps in this order. Enforcing before the site key is deployed rejects every message.
+
+1. Create a key at https://www.google.com/recaptcha/admin/create: type **Score based (v3)**,
+   domains `guilhermeborgesbastos.com` (subdomains such as `www.` are included) and
+   `localhost` (for `npm run start:en`).
+2. In the Firebase console, **App Check → Apps**, register the web app with the
+   **reCAPTCHA** provider and paste the key's **secret** key.
+3. Put the **site** key in `recaptchaSiteKey` in `src/environments/environment.ts` and
+   `environment.prod.ts`, then deploy.
+4. Send a message from the live site. In **App Check → APIs → Cloud Firestore**, the requests
+   should show as verified.
+5. Click **Enforce** for Cloud Firestore. From then on, writes without a valid App Check token
+   fail, and the form shows its error message. **Unenforce** turns it off again at once.
+
 ## Troubleshooting
 
 | Symptom | Cause | Fix |

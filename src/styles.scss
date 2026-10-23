@@ -38,3 +38,7 @@ section {
 }
 
 app-welcome, app-experience, app-about, app-posts, app-contact { display: block; }
+
+// reCAPTCHA's floating badge (App Check on the contact form) is replaced by the notice under the
+// form's Send button, which reCAPTCHA's terms allow. It is hidden, not removed, so it keeps working.
+.grecaptcha-badge { visibility: hidden; }

@@ -40,11 +40,34 @@ export interface BrowserDiagnostics {
   failedFirstPartyRequests: string[];
   externalRequests: string[];
   blockedFirestoreRequests: string[];
+  /** reCAPTCHA tokens the app exchanged for App Check tokens. */
+  appCheckExchanges: string[];
+  /** The App Check token each Firestore request carried ("" when it had none). */
+  firestoreAppCheckTokens: string[];
 }
 
 const FIREBASE_PROJECT = "live-resume-a575a";
 const FIREBASE_APP_ID = "1:681076751855:web:18bae3866ebfcc4fcd8a1a";
 const MEASUREMENT_ID = "G-00VXD77WNG";
+export const RECAPTCHA_TOKEN = "e2e-stub-recaptcha-token";
+export const APP_CHECK_TOKEN = "e2e-stub-app-check-token";
+
+/**
+ * Stands in for reCAPTCHA v3 (www.google.com/recaptcha/api.js), as used by App Check's provider:
+ * like the real widget, execute() reports success through the callback given to render(), which
+ * App Check requires before it exchanges the token.
+ */
+const RECAPTCHA_STUB = `(() => {
+  let widget;
+  window.grecaptcha = {
+    ready: callback => callback(),
+    render: (container, options) => { widget = options; return 0; },
+    execute: () => {
+      widget.callback(${JSON.stringify(RECAPTCHA_TOKEN)});
+      return Promise.resolve(${JSON.stringify(RECAPTCHA_TOKEN)});
+    }
+  };
+})();`;
 
 
 function isFirstParty(url: string): boolean {
@@ -78,8 +101,18 @@ async function stubThirdParty(route: Route, request: Request, diagnostics: Brows
   if (url.host === "www.googletagmanager.com" && url.pathname === "/gtag/js") {
     return route.fulfill({ contentType: "text/javascript", body: "/* gtag stub */" });
   }
+  if (url.host === "www.google.com" && url.pathname === "/recaptcha/api.js") {
+    return route.fulfill({ contentType: "text/javascript", body: RECAPTCHA_STUB });
+  }
+  if (url.host === "content-firebaseappcheck.googleapis.com" && url.pathname.endsWith(":exchangeRecaptchaV3Token")) {
+    diagnostics.appCheckExchanges.push(request.postDataJSON()?.recaptcha_v3_token ?? "");
+    return route.fulfill({ json: { token: APP_CHECK_TOKEN, ttl: "3600s" } });
+  }
   if (url.host === "firestore.googleapis.com") {
     diagnostics.blockedFirestoreRequests.push(`${request.method()} ${url.pathname} ${request.postData() ?? ""}`);
+    // Firestore's WebChannel sends its own headers in the form-encoded body's "headers" field.
+    const channelHeaders = new URLSearchParams(request.postData() ?? "").get("headers") ?? "";
+    diagnostics.firestoreAppCheckTokens.push(/^x-firebase-appcheck:(.*)$/im.exec(channelHeaders)?.[1].trim() ?? "");
   }
   return route.abort("blockedbyclient");
 }
@@ -91,7 +124,9 @@ export const test = base.extend<{ diagnostics: BrowserDiagnostics }>({
       pageErrors: [],
       failedFirstPartyRequests: [],
       externalRequests: [],
-      blockedFirestoreRequests: []
+      blockedFirestoreRequests: [],
+      appCheckExchanges: [],
+      firestoreAppCheckTokens: []
     };
 
     page.on("console", message => {
