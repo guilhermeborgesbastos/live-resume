@@ -15,8 +15,9 @@ export class ContactService {
   readonly isProtected = !!environment.recaptchaSiteKey;
 
   /**
-   * Starts Firebase App Check with reCAPTCHA v3, so Firestore can reject writes that do not come
-   * from a real visitor on this site (once enforcement is enabled in the Firebase console).
+   * Starts Firebase App Check with reCAPTCHA Enterprise (Google Cloud Fraud Defense), so Firestore
+   * can reject writes that do not come from a real visitor on this site (once enforcement is enabled
+   * in the Firebase console).
    * Called when the visitor starts filling in the form: reCAPTCHA stays out of the initial page
    * load but still sees how the visitor interacts with the form before it scores them.
    */
@@ -26,9 +27,9 @@ export class ContactService {
     }
     // reCAPTCHA schedules its own timers; keep them from triggering change detection.
     this.appCheck ??= this.zone.runOutsideAngular(async () => {
-      const { initializeAppCheck, ReCaptchaV3Provider } = await import('firebase/app-check');
+      const { initializeAppCheck, ReCaptchaEnterpriseProvider } = await import('firebase/app-check');
       initializeAppCheck(this.app, {
-        provider: new ReCaptchaV3Provider(environment.recaptchaSiteKey),
+        provider: new ReCaptchaEnterpriseProvider(environment.recaptchaSiteKey),
         // Tokens are only needed when a message is sent, so they are not refreshed in the background.
         isTokenAutoRefreshEnabled: false
       });

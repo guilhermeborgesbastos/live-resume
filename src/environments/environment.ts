@@ -23,9 +23,10 @@ export const environment = {
     appId: "1:681076751855:web:18bae3866ebfcc4fcd8a1a",
     measurementId: "G-00VXD77WNG"
   },
-  // reCAPTCHA v3 site key used by Firebase App Check to protect the contact form (see DEPLOYMENT.md).
+  // reCAPTCHA Enterprise (Google Cloud Fraud Defense) score-based key used by Firebase App Check to
+  // protect the contact form (see DEPLOYMENT.md).
   // Leave it empty to send messages without App Check.
-  recaptchaSiteKey: "6LdzJf0tAAAAAIvk27D_cJ7sMVTw7XWO0-cf-unG"
+  recaptchaSiteKey: "6Le1N_0tAAAAACfacFRB183pWUFi2kjjYM9pA2hY"
 };
 
 /*

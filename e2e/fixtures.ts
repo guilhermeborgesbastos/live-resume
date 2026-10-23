@@ -53,13 +53,14 @@ export const RECAPTCHA_TOKEN = "e2e-stub-recaptcha-token";
 export const APP_CHECK_TOKEN = "e2e-stub-app-check-token";
 
 /**
- * Stands in for reCAPTCHA v3 (www.google.com/recaptcha/api.js), as used by App Check's provider:
- * like the real widget, execute() reports success through the callback given to render(), which
- * App Check requires before it exchanges the token.
+ * Stands in for reCAPTCHA Enterprise (www.google.com/recaptcha/enterprise.js), as used by App Check's
+ * provider: like the real widget, execute() reports success through the callback given to render(),
+ * which App Check requires before it exchanges the token.
  */
 const RECAPTCHA_STUB = `(() => {
   let widget;
-  window.grecaptcha = {
+  window.grecaptcha = window.grecaptcha || {};
+  window.grecaptcha.enterprise = {
     ready: callback => callback(),
     render: (container, options) => { widget = options; return 0; },
     execute: () => {
@@ -101,11 +102,11 @@ async function stubThirdParty(route: Route, request: Request, diagnostics: Brows
   if (url.host === "www.googletagmanager.com" && url.pathname === "/gtag/js") {
     return route.fulfill({ contentType: "text/javascript", body: "/* gtag stub */" });
   }
-  if (url.host === "www.google.com" && url.pathname === "/recaptcha/api.js") {
+  if (url.host === "www.google.com" && url.pathname === "/recaptcha/enterprise.js") {
     return route.fulfill({ contentType: "text/javascript", body: RECAPTCHA_STUB });
   }
-  if (url.host === "content-firebaseappcheck.googleapis.com" && url.pathname.endsWith(":exchangeRecaptchaV3Token")) {
-    diagnostics.appCheckExchanges.push(request.postDataJSON()?.recaptcha_v3_token ?? "");
+  if (url.host === "content-firebaseappcheck.googleapis.com" && url.pathname.endsWith(":exchangeRecaptchaEnterpriseToken")) {
+    diagnostics.appCheckExchanges.push(request.postDataJSON()?.recaptcha_enterprise_token ?? "");
     return route.fulfill({ json: { token: APP_CHECK_TOKEN, ttl: "3600s" } });
   }
   if (url.host === "firestore.googleapis.com") {
