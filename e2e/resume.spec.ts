@@ -1,6 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { join } from "path";
-import { expect, isMobile, Locale, LOCALES, openResume, test, TEXT } from "./fixtures";
+import { environment } from "../src/environments/environment.prod";
+import { APP_CHECK_TOKEN, expect, isMobile, Locale, LOCALES, openResume, RECAPTCHA_TOKEN, test, TEXT } from "./fixtures";
 
 const SECTIONS = ["about", "experience", "posts", "contact"] as const;
 
@@ -218,26 +219,33 @@ for (const locale of LOCALES) {
       const cardsPerPage = await cards.count();
       const totalPosts = Number(await posts.locator(".paginator > span").nth(2).innerText());
 
-      // Record the enter/leave animation classes Angular applies to the cards.
+      // Record the animation classes Angular applies to the cards, and the most cards the list
+      // ever holds at once: leaving cards must not linger next to the new page's cards.
       await page.evaluate(() => {
         const seen = new Set<string>();
+        const list = document.querySelector("app-posts-carousel ol")!;
         (window as any).postAnimationClasses = seen;
+        (window as any).maxPostCards = list.children.length;
         const record = (node: Node) => ["fade-in", "fade-out"]
           .forEach(name => (node as HTMLElement).classList?.contains(name) && seen.add(name));
-        new MutationObserver(mutations => mutations.forEach(mutation => {
-          record(mutation.target);
-          mutation.addedNodes.forEach(record);
-        })).observe(document.querySelector("app-posts-carousel")!, { subtree: true, attributes: true, attributeFilter: ["class"], childList: true });
+        new MutationObserver(mutations => {
+          mutations.forEach(mutation => {
+            record(mutation.target);
+            mutation.addedNodes.forEach(record);
+          });
+          (window as any).maxPostCards = Math.max((window as any).maxPostCards, list.children.length);
+        }).observe(list, { subtree: true, attributes: true, attributeFilter: ["class"], childList: true });
       });
 
       await next.click();
       await expect(start).not.toHaveText("1");
       await expect(previous).not.toHaveClass(/disabled/);
       await expect(posts.locator("h2.title").first()).not.toHaveText(firstTitle);
-      // Leaving cards are removed once their fade-out finishes.
+      // New cards fade in; the previous page's cards are removed at once, so the row never
+      // holds both pages (which squeezed the cards and made the section jump on mobile).
       await expect(cards).toHaveCount(Math.min(cardsPerPage, totalPosts - cardsPerPage));
-      await expect(posts.locator("li.fade-out")).toHaveCount(0);
-      expect(await page.evaluate(() => [...(window as any).postAnimationClasses].sort())).toEqual(["fade-in", "fade-out"]);
+      expect(await page.evaluate(() => [...(window as any).postAnimationClasses].sort())).toEqual(["fade-in"]);
+      expect(await page.evaluate(() => (window as any).maxPostCards)).toBeLessThanOrEqual(cardsPerPage);
 
       await previous.click();
       await expect(start).toHaveText("1");
@@ -285,6 +293,19 @@ for (const locale of LOCALES) {
       await form.locator("input[type='submit']").click();
       await expect(form).toHaveClass(/loading/);
       await expect.poll(() => diagnostics.blockedFirestoreRequests.length).toBeGreaterThan(0);
+
+      // With a reCAPTCHA site key, the write goes through App Check: reCAPTCHA (stubbed by the
+      // fixture) issues a token that is exchanged for the App Check token Firestore sends along.
+      const notice = form.locator(".recaptcha-notice");
+      if (environment.recaptchaSiteKey) {
+        await expect(notice).toBeVisible();
+        await expect(notice.locator("a")).toHaveCount(2);
+        expect(diagnostics.appCheckExchanges).toContain(RECAPTCHA_TOKEN);
+        expect(diagnostics.firestoreAppCheckTokens).toContain(APP_CHECK_TOKEN);
+      } else {
+        await expect(notice).toHaveCount(0);
+        expect(diagnostics.externalRequests.filter(r => r.includes("recaptcha"))).toEqual([]);
+      }
     });
   });
 }
@@ -313,6 +334,54 @@ test("desktop navigation is always expanded", async ({ page }) => {
   await openResume(page, "en");
   await expect(page.locator("app-header .nav-container")).toBeVisible();
   await expect(page.locator("app-header .navbar-toggle")).toBeHidden();
+});
+
+test("posts carousel keeps showing posts when a resize changes the cards per page", async ({ page }) => {
+  test.skip(isMobile(page), "resizes a desktop window across the 2/3-cards breakpoint");
+  // 1094px fits two post cards per page, 1095px fits three.
+  await page.setViewportSize({ width: 1094, height: 900 });
+  await openResume(page, "en");
+  const posts = page.locator("section#posts");
+  const cards = posts.locator("app-posts-carousel li");
+  const titles = posts.locator("app-posts-carousel h2.title");
+  const next = posts.locator(".navigation a.next");
+  const start = posts.locator(".paginator .start");
+  const end = posts.locator(".paginator .end");
+  const total = Number(await posts.locator(".paginator > span").nth(2).innerText());
+  const resize = async (width: number) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.waitForTimeout(200); // the carousel's resize handler is debounced
+  };
+  await posts.scrollIntoViewIfNeeded();
+  await expect(cards).toHaveCount(2);
+
+  // From the last page, widening must not page past the last post (it used to leave the
+  // section empty with "13 - 9 of 9 posts" and both buttons enabled).
+  while (!(await next.getAttribute("class"))?.includes("disabled")) {
+    await next.click();
+  }
+  const lastTitle = await titles.last().innerText();
+  await resize(1095);
+  await expect(cards).not.toHaveCount(0);
+  await expect(end).toHaveText(String(total));
+  expect(Number(await start.innerText())).toBeLessThanOrEqual(total);
+  await expect(next).toHaveClass(/disabled/);
+  await expect(titles.filter({ hasText: lastTitle })).toHaveCount(1);
+
+  // From a middle page, the first post on screen stays on screen after the resize.
+  await resize(1094);
+  await openResume(page, "en");
+  await posts.scrollIntoViewIfNeeded();
+  await next.click();
+  await next.click();
+  await expect(start).toHaveText("5");
+  const firstTitle = await titles.first().innerText();
+  await resize(1095);
+  await expect(cards).toHaveCount(3);
+  await expect(titles.filter({ hasText: firstTitle })).toHaveCount(1);
+  await resize(1094);
+  await expect(cards).toHaveCount(2);
+  await expect(titles.filter({ hasText: firstTitle })).toHaveCount(1);
 });
 
 for (const locale of LOCALES as readonly Locale[]) {

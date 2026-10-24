@@ -16,8 +16,8 @@
     "test:e2e:run": "playwright test",
     "test:e2e:docker": "bash e2e/docker.sh",
     "int:extract": "ng extract-i18n --output-path src/locales",
-    "build-locale:en": "ng build --configuration en",
-    "build-locale:pt": "ng build --configuration pt",
+    "build-locale:en": "ng build --configuration production,en",
+    "build-locale:pt": "ng build --configuration production,pt",
     "build-locale": "npm run build-locale:en && npm run build-locale:pt"
   },
   "private": true,

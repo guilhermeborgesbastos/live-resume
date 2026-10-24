@@ -19,6 +19,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 export class ContactComponent implements OnInit {
   private contactService = inject(ContactService);
+  readonly isProtected = this.contactService.isProtected;
 
 
   name: string;
@@ -92,6 +93,10 @@ export class ContactComponent implements OnInit {
     this.hasBeenSubmited = true;
     this.feedbackStatus = hasBeenSuccessfuly? "success" : "error";
     this.contactForm.reset();
+  }
+
+  startProtection() {
+    this.contactService.protect();
   }
 
   closeFeedbackMessage() {

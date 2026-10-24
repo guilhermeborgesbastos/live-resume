@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="bottom-container">
-        <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactNgForm)" #contactNgForm="ngForm" [ngClass]="{'loading': isLoading}">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactNgForm)" #contactNgForm="ngForm" [ngClass]="{'loading': isLoading}" (focusin)="startProtection()">
           <div class="form-group">
             <label for="name" i18n="contact@@name">Your name:</label>
             <input [class.is-invalid]="senderName.invalid && senderName.touched"
@@ -79,6 +79,10 @@
             }
           </div>
           <input type="submit" i18n-value="contact@@send" value="Send">
+          @if (isProtected) {
+            <!-- Required by reCAPTCHA in place of its floating badge, which styles.scss hides. -->
+            <p class="recaptcha-notice" i18n="contact@@recaptchaNotice">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
+          }
         </form>
       </div>
     </div>

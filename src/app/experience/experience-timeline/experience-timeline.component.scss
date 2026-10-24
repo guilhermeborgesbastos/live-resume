@@ -48,7 +48,8 @@
     color: white;
     position: absolute;
     top: 20px;
-    left: -35px;
+    left: 50%;
+    transform: translateX(-50%);
     transition: all 0.1s ease-out;
     pointer-events: none; /* Only the Circles in the timeline are listened by events. */
 
@@ -81,7 +82,6 @@
     pointer-events: none;
   }
   &.active.current .popupSpan {
-    left: -50px;
     top: -50px;
   }
 }
@@ -92,9 +92,9 @@
     -moz-transform: scale(0.98);
     -o-transform: scale(0.98);
     -ms-transform: scale(0.98);
-    transform: scale(0.98);    
+    transform: scale(0.98);
   }
-   
+
   50% {
    -webkit-transform: scale(0.99);
    -moz-transform: scale(0.99);
@@ -102,7 +102,7 @@
    -ms-transform: scale(0.99);
    transform: scale(0.99);
   }
-   
+
   100% {
      -webkit-transform: scale(0.98);
      -moz-transform: scale(0.98);

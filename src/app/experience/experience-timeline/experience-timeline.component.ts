@@ -23,6 +23,10 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
   @Output() timelineChanged = new EventEmitter<number>();
 
   public removeEventListener: () => void;
+  private removeResizeListener: () => void;
+  private spacingFrame: number;
+  // Date milestones with their position on the line (in %) proportional to their date.
+  private milestones: { element: HTMLElement, datePosition: number }[] = [];
 
   @ViewChild("line") line: ElementRef;
 
@@ -57,11 +61,18 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
         this.timelineChanged.emit(targetId);
       }
     });
+
+    // Milestones are placed in percentages but labels have a fixed width, so the spacing depends on the line width.
+    this.removeResizeListener = this.renderer.listen("window", "resize", () => this.scheduleMilestoneSpacing());
+    // Label widths change once the web font replaces the fallback one.
+    document.fonts?.ready.then(() => this.scheduleMilestoneSpacing());
   }
 
   // Cleanup by removing the event listener on destroy
   public ngOnDestroy() {
     this.removeEventListener();
+    this.removeResizeListener();
+    cancelAnimationFrame(this.spacingFrame);
   }
 
   updateTimelineNavigation() {
@@ -70,6 +81,40 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
 
     const targetElem = this.line.nativeElement.querySelector(`div[id-position="${this.currentPosition}"]`);
     this.renderer.addClass(targetElem, "current");
+  }
+
+  private scheduleMilestoneSpacing(): void {
+    cancelAnimationFrame(this.spacingFrame);
+    this.spacingFrame = requestAnimationFrame(() => this.spaceMilestones());
+  }
+
+  // Keeps milestones whose dates are close (e.g. Jan 2017 and Dec 2017) at least one label
+  // width apart so their date labels do not overlap. The widest label (the current one, with
+  // its bigger font) sets the spacing, so the layout holds whichever milestone is selected.
+  // Milestones far enough apart stay at their date position.
+  private spaceMilestones(): void {
+    const lineWidth: number = this.line.nativeElement.offsetWidth;
+    if (!lineWidth || !this.milestones.length) {
+      return; // Hidden (e.g. on narrow screens): spaced again on the next resize.
+    }
+    const labelWidths = this.milestones.map(({ element }) => element.querySelector(".popupSpan")!.getBoundingClientRect().width);
+    const minSpacing = Math.max(...labelWidths);
+    // Uses at most 95% instead of 100% in order to avoid collision to the arrow icon on the right side of the timeline.
+    const maxLeft = lineWidth * 0.95;
+
+    // Push milestones right of their date when they are too close to the previous one...
+    const lefts = this.milestones.map(({ datePosition }) => Math.min(maxLeft, datePosition * lineWidth / 100));
+    for (let i = 1; i < lefts.length; i++) {
+      lefts[i] = Math.max(lefts[i], lefts[i - 1] + minSpacing);
+    }
+    // ...and back left when that pushed them past the end of the line.
+    lefts[lefts.length - 1] = Math.min(lefts[lefts.length - 1], maxLeft);
+    for (let i = lefts.length - 2; i >= 0; i--) {
+      lefts[i] = Math.max(0, Math.min(lefts[i], lefts[i + 1] - minSpacing));
+    }
+
+    this.milestones.forEach(({ element }, i) =>
+      this.renderer.setStyle(element, "left", `${this.calculatePosition(lefts[i], lineWidth)}%`));
   }
 
   private daysBetween(startDate: string, endDate: string): number {
@@ -120,6 +165,8 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
       // Draw last date milestone ( the current frame )
       const lastDataMilestone = this.createCurrentTriangle(i + 1);
       this.renderer.appendChild(this.line.nativeElement, lastDataMilestone);
+
+      this.spaceMilestones();
     }
   }
 
@@ -132,6 +179,7 @@ export class ExperienceTimelineComponent implements OnInit, OnDestroy {
     this.renderer.addClass(milestoneElement, "milestone");
     this.renderer.addClass(milestoneElement, "active");
     const leftPos = this.calculatePosition(left, this.offsetWidth);
+    this.milestones.push({ element: milestoneElement, datePosition: leftPos });
     // Uses at most 95% instead of 100% in order to avoid collision to the arrow icon on the right side of the timeline.
     this.renderer.setStyle(milestoneElement, "left", `${Math.min(95, leftPos)}%`);
     this.renderer.setAttribute(milestoneElement, "id-position", index.toString());
