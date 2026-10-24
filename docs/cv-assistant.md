@@ -2,6 +2,8 @@
 
 A rule-based assistant that answers a documented set of questions about the CV, in English and Portuguese. It runs entirely in the browser: answers are built from `src/assets/data/about.json`, `experiences.json` and `posts.json` with fixed templates or verbatim excerpts. There is no language model, inference endpoint, embedding, search service or new runtime dependency, so there is no per-question model or API cost and no AWS resource; the assistant only adds static bytes to the existing hosting.
 
+For the internal design (architecture, pipeline, a worked example and open review questions), see [cv-assistant-design.md](cv-assistant-design.md).
+
 It recognizes the question forms listed below and their close variants. It does not understand arbitrary language, and anything outside those forms gets the [fallback](#fallback-policy) instead of a guess.
 
 - [Where it appears](#where-it-appears)
