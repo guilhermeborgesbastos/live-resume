@@ -356,17 +356,24 @@ test("posts carousel keeps showing posts when a resize changes the cards per pag
   await expect(cards).toHaveCount(2);
 
   // From the last page, widening must not page past the last post (it used to leave the
-  // section empty with "13 - 9 of 9 posts" and both buttons enabled).
+  // section empty with "13 - 9 of 9 posts" and both buttons enabled). The first post on screen
+  // stays on screen; whether the new page is also the last one depends on the post count.
   while (!(await next.getAttribute("class"))?.includes("disabled")) {
     await next.click();
   }
-  const lastTitle = await titles.last().innerText();
+  const lastPageFirstPost = Number(await start.innerText());
   await resize(1095);
   await expect(cards).not.toHaveCount(0);
-  await expect(end).toHaveText(String(total));
-  expect(Number(await start.innerText())).toBeLessThanOrEqual(total);
-  await expect(next).toHaveClass(/disabled/);
-  await expect(titles.filter({ hasText: lastTitle })).toHaveCount(1);
+  const newStart = Number(await start.innerText());
+  const newEnd = Number(await end.innerText());
+  expect(newStart).toBeLessThanOrEqual(lastPageFirstPost);
+  expect(newEnd).toBeGreaterThanOrEqual(lastPageFirstPost);
+  expect(newEnd).toBeLessThanOrEqual(total);
+  if (newEnd === total) {
+    await expect(next).toHaveClass(/disabled/);
+  } else {
+    await expect(next).not.toHaveClass(/disabled/);
+  }
 
   // From a middle page, the first post on screen stays on screen after the resize.
   await resize(1094);
