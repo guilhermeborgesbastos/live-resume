@@ -1,5 +1,9 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, DestroyRef, ElementRef, OnInit, inject } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { filter } from "rxjs/operators";
 import { DataService } from "../core/data.service";
+import { POST_QUERY_PARAM } from "../assistant/ui/citations";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { IPost } from "./posts-interfaces";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +20,13 @@ import { PostsCarouselComponent } from "./posts-carousel/posts-carousel.componen
 })
 export class PostsComponent extends AbstractSwipeSection implements OnInit {
   private dataService = inject(DataService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private elRef = inject(ElementRef);
+  private destroyRef = inject(DestroyRef);
 
+  // Unique URL of a post a CV assistant citation asked to show (?post=<url>#posts).
+  private requestedPost: string | null = null;
 
   currentPage: number = 1;
   resultsPerPage: number;
@@ -40,7 +50,44 @@ export class PostsComponent extends AbstractSwipeSection implements OnInit {
     this.dataService.getPosts()
       .subscribe((posts: IPost[]) => {
         this.posts = posts;
+        this.revealRequestedPost();
       });
+
+    this.requestedPost = this.route.snapshot.queryParamMap.get(POST_QUERY_PARAM);
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd), takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.requestedPost = this.route.snapshot.queryParamMap.get(POST_QUERY_PARAM);
+        this.revealRequestedPost();
+      });
+  }
+
+  /*
+   * Shows the page holding the requested post once both the posts and the cards per page are
+   * known, then focuses its card. An unknown URL leaves the carousel as it is.
+  */
+  private revealRequestedPost(): void {
+    const requested = this.requestedPost;
+    if (requested === null || this.posts.length === 0 || !(this.resultsPerPage > 0)) {
+      return;
+    }
+    this.requestedPost = null;
+    const index = this.posts.findIndex(post => post.http === requested);
+    if (index === -1) {
+      return;
+    }
+    setTimeout(() => {
+      this.goToPage(Math.floor(index / this.resultsPerPage) + 1);
+      // Keep this post on screen when a resize changes the cards per page.
+      this.firstPostIndex = index;
+      setTimeout(() => {
+        const section = this.elRef.nativeElement.querySelector("section#posts") as HTMLElement | null;
+        section?.scrollIntoView({ block: "start" });
+        const card = [...section?.querySelectorAll<HTMLAnchorElement>("app-posts-carousel li a") ?? []]
+          .find(link => link.getAttribute("href") === requested);
+        card?.focus({ preventScroll: true });
+      });
+    });
   }
 
   public onClickPrevious(): void {
@@ -62,6 +109,7 @@ export class PostsComponent extends AbstractSwipeSection implements OnInit {
     if (this.lastPage() > 0) {
       this.currentPage = Math.min(this.currentPage, this.lastPage());
     }
+    this.revealRequestedPost();
   }
 
   public disablePreviousNavigation(): boolean {

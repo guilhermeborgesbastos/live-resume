@@ -1,0 +1,85 @@
+.composer {
+    margin: 0;
+
+    .field {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        background-color: #fff;
+        border: 2px solid #c9d6ea;
+        border-radius: 15px;
+        padding: 6px 6px 6px 12px;
+        transition: border-color 0.2s;
+
+        &:focus-within { border-color: #222f5c; }
+    }
+
+    textarea {
+        flex: 1;
+        min-width: 0;
+        min-height: 24px;
+        max-height: 9em;
+        field-sizing: content;
+        resize: none;
+        border: none;
+        outline: none;
+        background: transparent;
+        padding: 6px 0;
+        font-family: inherit;
+        // 16px keeps iOS from zooming into the field.
+        font-size: 16px;
+        line-height: 1.4;
+        color: #222f5c;
+
+        &::placeholder { color: #6b7391; }
+    }
+
+    .send {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        background-color: #222f5c;
+        border: none;
+        border-radius: 11px;
+        padding: 9px 14px;
+        cursor: pointer;
+
+        &:hover:not(:disabled) { background-color: #34457f; }
+
+        &:focus-visible {
+            outline: 3px solid #222f5c;
+            outline-offset: 2px;
+        }
+
+        &:disabled {
+            cursor: default;
+            opacity: 0.55;
+        }
+    }
+
+    .hint {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin: 6px 4px 0;
+        font-size: 12px;
+        color: #576183;
+
+        .count.over {
+            color: #b00020;
+            font-weight: 600;
+        }
+    }
+
+    .error {
+        margin: 6px 4px 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: #b00020;
+    }
+}

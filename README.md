@@ -144,6 +144,10 @@ git tag v2.1.0 && git push origin v2.1.0
 
 The workflow fails unless the tag equals `package.json`'s version. It runs the browser suite against the container, then pushes `2.1.0`, `2.1`, `2`, `latest` and `sha-<commit>`; pre-release tags such as `v2.1.0-rc.1` only publish their exact version. It needs a `DOCKERHUB_TOKEN` repository secret (a Docker Hub access token with read & write access), and optionally a `DOCKERHUB_USERNAME` variable (defaults to the repository owner). Pull requests that change the image run the same build and tests without publishing.
 
+## 💬 CV Assistant
+
+Visitors can ask questions about the CV from the welcome bubble, the floating **Ask about my CV** button or the `/assistant` page (`/en/assistant`, `/pt/assistant`). It is a rule-based assistant that runs in the browser: answers are assembled only from `src/assets/data/{about,experiences,posts}.json`, cite their source, and anything outside the supported questions gets a fallback pointing to the Contact section. There is no language model or external service, and the conversation is kept in memory for the current tab only. Supported questions, limitations and how to extend it: [docs/cv-assistant.md](docs/cv-assistant.md).
+
 ## ✍️ Adding posts with Claude Code
 
 The repository includes a [Claude Code](https://claude.com/claude-code) skill that adds a new card to the **Posts** section. Run `/add-post <article URL>` and it writes the English and Portuguese title and description, passes all of that text through the [Humanizer](https://github.com/blader/humanizer) skill, saves the thumbnail and inserts the record into `src/assets/data/posts.json`. Full guide: [docs/add-post-skill.md](docs/add-post-skill.md).

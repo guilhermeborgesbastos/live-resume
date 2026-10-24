@@ -1,0 +1,12 @@
+// Phones: a bottom sheet bounded by the visible viewport (above the keyboard), with safe areas.
+@media screen and (max-width: 600px) {
+
+    .assistant-panel {
+        inset: auto 0 0 0;
+        width: 100%;
+        height: min(90dvh, calc(var(--assistant-viewport-height, 100dvh) - env(safe-area-inset-top) - 8px));
+        border-radius: 15px 15px 0 0;
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+}

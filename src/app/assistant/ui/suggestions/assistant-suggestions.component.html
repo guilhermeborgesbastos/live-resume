@@ -1,0 +1,14 @@
+@if (questions().length > 0) {
+  <div class="suggestions">
+    @if (heading()) {
+      <p class="heading">{{ heading() }}</p>
+    }
+    <ul>
+      @for (question of questions(); track question) {
+        <li>
+          <button type="button" class="suggestion" [disabled]="disabled()" (click)="picked.emit(question)">{{ question }}</button>
+        </li>
+      }
+    </ul>
+  </div>
+}

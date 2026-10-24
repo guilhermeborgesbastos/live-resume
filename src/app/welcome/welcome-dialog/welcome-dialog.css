@@ -50,3 +50,85 @@
 		transform: translatey(0px);
 	}
 }
+/* The bubble's text is positioned against the container (not only while it is transformed by the float animation). */
+.dialog-container {
+	position: relative;
+}
+
+/* CV assistant call to action, under the bubble */
+.dialog-container .assistant-cta {
+	position: relative;
+	z-index: 3;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	width: 380px;
+	margin: -30px 0 0 -5px;
+	text-align: center;
+}
+
+.dialog-container .assistant-cta .announcement {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+	color: #222f5c;
+}
+
+.dialog-container .assistant-cta .ask {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #fff;
+	background-color: #222f5c;
+	border-radius: 15px;
+	padding: 12px 22px;
+	text-decoration: none;
+	box-shadow: 0 6px 20px rgba(34, 47, 92, 0.3);
+	transition: background-color 0.2s;
+}
+
+.dialog-container .assistant-cta .ask:hover {
+	background-color: #34457f;
+}
+
+.dialog-container .assistant-cta .ask:focus-visible,
+.dialog-container .assistant-cta .shortcuts button:focus-visible {
+	outline: 3px solid #222f5c;
+	outline-offset: 3px;
+}
+
+.dialog-container .assistant-cta .shortcuts {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 8px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.dialog-container .assistant-cta .shortcuts button {
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: 600;
+	color: #222f5c;
+	background-color: #fff;
+	border: 1px solid #c9d6ea;
+	border-radius: 15px;
+	padding: 7px 12px;
+	cursor: pointer;
+}
+
+.dialog-container .assistant-cta .shortcuts button:hover:not(:disabled) {
+	background-color: #eaf2fe;
+	border-color: #222f5c;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.dialog-container {
+		animation: none;
+	}
+}

@@ -1,0 +1,18 @@
+@media screen and (max-width: 1024px) {
+
+    app-header {
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .assistant-page { padding-top: 1em; }
+
+    .intro {
+        h1 { font-size: 28px; }
+        .scope { font-size: 16px; }
+    }
+}

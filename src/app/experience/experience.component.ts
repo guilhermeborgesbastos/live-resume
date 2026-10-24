@@ -1,4 +1,8 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, inject } from "@angular/core";
+import { Component, OnInit, ElementRef, Renderer2, ViewChild, inject, DestroyRef } from "@angular/core";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { filter } from "rxjs/operators";
+import { EXPERIENCE_QUERY_PARAM } from "../assistant/ui/citations";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { IExperience } from "./experience-interfaces";
@@ -23,8 +27,13 @@ export class ExperienceComponent extends AbstractSwipeSection implements OnInit 
   private sortService = inject(SorterService);
   private renderer = inject(Renderer2);
   private library = inject(FaIconLibrary);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private elRef = inject(ElementRef);
+  private destroyRef = inject(DestroyRef);
 
-  
+  private requestedExperienceId: string | null = null;
+
   SELECTED_CLASS: string = "selected";
   LEAVE_RIGHT_CLASS: string = "leave-right";
   ENTER_RIGHT_CLASS: string = "enter-right";
@@ -61,7 +70,43 @@ export class ExperienceComponent extends AbstractSwipeSection implements OnInit 
           this.backgroundUrl = this.retrieveBackgroundUrl();
           this.updateMobileNavigationView();
           this.preloadBounderyImages(experiences.map(xp => xp.backgroundUrl));
+          this.revealRequestedExperience();
         });
+
+    // A CV assistant citation links here with ?experienceId=<id>#experience. Every navigation
+    // (including following the same citation again, and back/forward) re-reads it.
+    this.requestedExperienceId = this.route.snapshot.queryParamMap.get(EXPERIENCE_QUERY_PARAM);
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd), takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.requestedExperienceId = this.route.snapshot.queryParamMap.get(EXPERIENCE_QUERY_PARAM);
+        this.revealRequestedExperience();
+      });
+  }
+
+  /*
+   * Selects the requested experience once the data is loaded. The ID is looked up in the data
+   * (it is neither an array index nor a position); an unknown ID leaves the carousel as it is.
+  */
+  private revealRequestedExperience(): void {
+    const requested = this.requestedExperienceId;
+    if (!this.experiences || requested === null || !/^\d+$/.test(requested)) {
+      return;
+    }
+    this.requestedExperienceId = null;
+    const experience = this.experiences.find(exp => exp.id === Number(requested));
+    if (!experience) {
+      return;
+    }
+    // Wait for the carousel items to render.
+    setTimeout(() => {
+      this.updateNavigation(experience.position);
+      const section = this.elRef.nativeElement.querySelector("section#experience") as HTMLElement | null;
+      section?.scrollIntoView({ block: "start" });
+      const companyName = this.orderedList.nativeElement
+        .querySelector(`${this.createListSelector(experience.position)} .company-name`) as HTMLElement | null;
+      companyName?.focus({ preventScroll: true });
+    });
   }
 
   public disablePreviousNavigation(): boolean {
@@ -82,8 +127,8 @@ export class ExperienceComponent extends AbstractSwipeSection implements OnInit 
   }
 
   private createListSelector(position: number): string {
-    return `li[id="${position}"]`;
-  } 
+    return `li[data-position="${position}"]`;
+  }
 
   onClickPrevious(targetPos?: number): void {
     const currElem = this.orderedList.nativeElement.querySelector(this.createListSelector(this.currentPosition));

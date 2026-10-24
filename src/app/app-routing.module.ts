@@ -2,9 +2,15 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ResumeComponent } from "./resume/resume.component";
 
-// Any URL apart from the root domain is going to be rendered as "page-not-found".
+// The resume is the root; section paths redirect to its fragments. "/assistant" is the lazy CV
+// assistant page; any other URL is rendered as "page-not-found".
 const routes: Routes = [
-  { path: "", component: ResumeComponent},
+  { path: "", component: ResumeComponent, title: "Live Resume - Guilherme Borges Bastos" },
+  {
+    path: "assistant",
+    loadComponent: () => import("./assistant/pages/assistant-page/assistant-page.component").then(m => m.AssistantPageComponent),
+    title: $localize`:assistant@@assistant.page.title:CV Assistant - Guilherme Borges Bastos`
+  },
   { path: "about", redirectTo: "/#about"},
   { path: "experience", redirectTo: "/#experience"},
   { path: "experiences", redirectTo: "/#experience"},

@@ -275,6 +275,345 @@
         </context-group>
         <note priority="1" from="description">dialog</note>
       </trans-unit>
+      <trans-unit id="assistant.page.title" datatype="html">
+        <source>CV Assistant - Guilherme Borges Bastos</source>
+        <target>Assistente do CV - Guilherme Borges Bastos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app-routing.module.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.page.back" datatype="html">
+        <source>Back to the resume</source>
+        <target>Voltar ao currículo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/pages/assistant-page/assistant-page.component.html</context>
+          <context context-type="linenumber">6,9</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.title" datatype="html">
+        <source>CV Assistant</source>
+        <target>Assistente do CV</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/pages/assistant-page/assistant-page.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/panel/assistant-panel.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.page.scope" datatype="html">
+        <source>Ask about the experience, skills, and posts listed in this CV.</source>
+        <target>Pergunte sobre a experiência, as habilidades e os artigos listados neste currículo.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/pages/assistant-page/assistant-page.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.disclosure" datatype="html">
+        <source>Answers use the information published in this CV.</source>
+        <target>As respostas usam as informações publicadas neste currículo.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/pages/assistant-page/assistant-page.component.html</context>
+          <context context-type="linenumber">11,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/panel/assistant-panel.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.page.description" datatype="html">
+        <source>Ask questions about the experience, skills and posts listed in Guilherme Borges Bastos&apos;s CV.</source>
+        <target>Faça perguntas sobre a experiência, as habilidades e os artigos listados no currículo de Guilherme Borges Bastos.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/pages/assistant-page/assistant-page.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.fallback" datatype="html">
+        <source>I can’t answer this question using the information available in my CV. Please contact me directly so I can help.</source>
+        <target>Não consigo responder a esta pergunta com as informações disponíveis no meu currículo. Entre em contato comigo diretamente para que eu possa ajudar.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">51,54</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.unavailable" datatype="html">
+        <source>The CV information could not be loaded. Please try again or contact me directly.</source>
+        <target>Não foi possível carregar as informações do currículo. Tente novamente ou entre em contato comigo diretamente.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">5,7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">63,69</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.launcher.label" datatype="html">
+        <source>Ask about my CV</source>
+        <target>Pergunte sobre meu currículo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.panel.close" datatype="html">
+        <source>Close the CV assistant</source>
+        <target>Fechar o assistente do CV</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.panel.expand" datatype="html">
+        <source>Open the CV assistant in a full page</source>
+        <target>Abrir o assistente do CV em uma página inteira</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.retry" datatype="html">
+        <source>Retry</source>
+        <target>Tentar novamente</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">9,12</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.contact" datatype="html">
+        <source>Contact Guilherme</source>
+        <target>Entrar em contato com Guilherme</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">15,21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">56,58</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.loading" datatype="html">
+        <source>Loading the CV information…</source>
+        <target>Carregando as informações do currículo…</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">21,27</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.suggestions" datatype="html">
+        <source>Try one of these questions</source>
+        <target>Experimente uma destas perguntas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">28,31</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.historyLimit" datatype="html">
+        <source>Only the 50 most recent questions are kept in this conversation.</source>
+        <target>Apenas as 50 perguntas mais recentes são mantidas nesta conversa.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">33,37</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.sessionNote" datatype="html">
+        <source>This conversation is kept only in this tab and this language. Refreshing the page, closing the tab or switching language starts a new one.</source>
+        <target>Esta conversa fica guardada apenas nesta aba e neste idioma. Atualizar a página, fechar a aba ou trocar de idioma inicia uma nova conversa.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">52,55</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.clear" datatype="html">
+        <source>Clear conversation</source>
+        <target>Limpar conversa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">56,62</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.composer.label" datatype="html">
+        <source>Your question about the CV</source>
+        <target>Sua pergunta sobre o currículo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/composer/assistant-composer.component.html</context>
+          <context context-type="linenumber">2,7</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.composer.placeholder" datatype="html">
+        <source>Ask about my experience, skills or posts</source>
+        <target>Pergunte sobre minha experiência, habilidades ou artigos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/composer/assistant-composer.component.html</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.composer.send" datatype="html">
+        <source>Send</source>
+        <target>Enviar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/composer/assistant-composer.component.html</context>
+          <context context-type="linenumber">16,20</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.composer.hint" datatype="html">
+        <source>Enter to send, Shift+Enter for a new line.</source>
+        <target>Enter para enviar, Shift+Enter para uma nova linha.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/composer/assistant-composer.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.composer.empty" datatype="html">
+        <source>Please type a question first.</source>
+        <target>Digite uma pergunta primeiro.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/composer/assistant-composer.component.html</context>
+          <context context-type="linenumber">24,26</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.composer.tooLong" datatype="html">
+        <source>Please shorten your question to <x id="INTERPOLATION" equiv-text="{{ maxLength }}"/> characters or fewer.</source>
+        <target>Reduza a sua pergunta para no máximo <x id="INTERPOLATION" equiv-text="{{ maxLength }}"/> caracteres.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/composer/assistant-composer.component.html</context>
+          <context context-type="linenumber">26,29</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.conversation.label" datatype="html">
+        <source>Conversation</source>
+        <target>Conversa</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">1,3</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.conversation.you" datatype="html">
+        <source>You asked:</source>
+        <target>Você perguntou:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.conversation.assistant" datatype="html">
+        <source>The assistant answered:</source>
+        <target>O assistente respondeu:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">8,11</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.followUps" datatype="html">
+        <source>Related questions</source>
+        <target>Perguntas relacionadas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.fallback.suggestions" datatype="html">
+        <source>Questions I can answer</source>
+        <target>Perguntas que sei responder</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">59,60</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.sources" datatype="html">
+        <source>Sources in this CV</source>
+        <target>Fontes neste currículo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/source-links/assistant-source-links.component.html</context>
+          <context context-type="linenumber">2,7</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.sources.external" datatype="html">
+        <source>Open link</source>
+        <target>Abrir link</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/source-links/assistant-source-links.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.sources.newTab" datatype="html">
+        <source>(opens in a new tab)</source>
+        <target>(abre em uma nova aba)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/source-links/assistant-source-links.component.html</context>
+          <context context-type="linenumber">15,22</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant" datatype="html">
+        <source>CV Assistant</source>
+        <target>Assistente</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+        <note priority="1" from="description">nav</note>
+      </trans-unit>
+      <trans-unit id="assistant.announcement" datatype="html">
+        <source>Explore my CV with the assistant</source>
+        <target>Explore meu currículo com o assistente</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/welcome/welcome-dialog/welcome-dialog.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+        <note priority="1" from="description">dialog</note>
+      </trans-unit>
+      <trans-unit id="assistant.cta" datatype="html">
+        <source>Ask about my CV</source>
+        <target>Pergunte sobre meu currículo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/welcome/welcome-dialog/welcome-dialog.component.html</context>
+          <context context-type="linenumber">20,24</context>
+        </context-group>
+        <note priority="1" from="description">dialog</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

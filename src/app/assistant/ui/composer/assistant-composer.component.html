@@ -1,0 +1,28 @@
+<form class="composer" (submit)="$event.preventDefault(); submit()">
+  <label class="visually-hidden" [for]="id" i18n="assistant@@assistant.composer.label">Your question about the CV</label>
+  <div class="field">
+    <textarea #field
+      [id]="id"
+      rows="1"
+      [value]="draft()"
+      [attr.aria-invalid]="error() ? 'true' : null"
+      [attr.aria-describedby]="id + '-hint' + (error() ? ' ' + id + '-error' : '')"
+      i18n-placeholder="assistant@@assistant.composer.placeholder"
+      placeholder="Ask about my experience, skills or posts"
+      (input)="draftChange.emit(field.value)"
+      (keydown)="onKeydown($event)"></textarea>
+    <button type="submit" class="send" [disabled]="disabled()">
+      <fa-icon [icon]="faPaperPlane" aria-hidden="true"></fa-icon>
+      <span i18n="assistant@@assistant.composer.send">Send</span>
+    </button>
+  </div>
+  <p class="hint" [id]="id + '-hint'">
+    <span i18n="assistant@@assistant.composer.hint">Enter to send, Shift+Enter for a new line.</span>
+    <span class="count" [class.over]="length() > maxLength">{{ length() }}/{{ maxLength }}</span>
+  </p>
+  @if (error() === "empty") {
+    <p class="error" [id]="id + '-error'" role="alert" i18n="assistant@@assistant.composer.empty">Please type a question first.</p>
+  } @else if (error() === "too-long") {
+    <p class="error" [id]="id + '-error'" role="alert" i18n="assistant@@assistant.composer.tooLong">Please shorten your question to {{ maxLength }} characters or fewer.</p>
+  }
+</form>

@@ -1,7 +1,7 @@
 
 @media screen and (max-width: 1024px) {
     #welcome {
-        height: 585px;
+        min-height: 585px;
     }
     
     .layer_one .avatar-container .illustration {
@@ -11,7 +11,7 @@
 
 @media screen and (max-width: 880px) {
     #welcome {
-        height: 465px;
+        min-height: 465px;
     }
     
     .layer_one .avatar-container .illustration {
@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 720px) {
     #welcome {
-        height: 385px;
+        min-height: 385px;
     }
     
     .layer_one .avatar-container .illustration {
@@ -31,7 +31,7 @@
 
 @media screen and (max-width: 600px) {
     #welcome {
-        height: 290px;
+        min-height: 290px;
     }
     
     .layer_one .avatar-container .illustration {
@@ -41,7 +41,7 @@
 
 @media screen and (max-width: 500px) {
     #welcome {
-        height: 250px;
+        min-height: 250px;
     }
     
     .layer_one .avatar-container .illustration {
@@ -51,7 +51,7 @@
 
 @media screen and (max-width: 320px) {
     #welcome {
-        height: 220px;
+        min-height: 220px;
     }
     
     .layer_one .avatar-container .illustration {

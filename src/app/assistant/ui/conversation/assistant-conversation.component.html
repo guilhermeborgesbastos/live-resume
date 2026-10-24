@@ -1,0 +1,68 @@
+<ol class="conversation" i18n-aria-label="assistant@@assistant.conversation.label" aria-label="Conversation">
+  @for (pair of views(); track pair.id; let last = $last) {
+    <li class="message visitor" [attr.data-pair]="pair.id">
+      <span class="visually-hidden" i18n="assistant@@assistant.conversation.you">You asked:</span>
+      <p class="bubble">{{ pair.question }}</p>
+    </li>
+    <li class="message assistant" [class.latest]="last" [attr.data-answer]="pair.kind">
+      <span class="visually-hidden" i18n="assistant@@assistant.conversation.assistant">The assistant answered:</span>
+      <div class="bubble">
+        @if (pair.kind === "answered") {
+          @for (block of pair.blocks; track $index) {
+            @switch (block.kind) {
+              @case ("text") {
+                <p class="line">{{ block.text }}</p>
+              }
+              @case ("list") {
+                <p class="line">{{ block.text }}</p>
+                <ul class="items">
+                  @for (item of block.items; track $index) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              }
+              @case ("values") {
+                <p class="line">{{ block.text }}</p>
+                <ul class="values">
+                  @for (value of block.values; track $index) {
+                    <li>{{ value }}</li>
+                  }
+                </ul>
+              }
+              @case ("excerpt") {
+                <figure class="excerpt">
+                  <figcaption>{{ block.label }}</figcaption>
+                  <blockquote>
+                    @for (paragraph of block.paragraphs; track $index) {
+                      <p>{{ paragraph }}</p>
+                    }
+                  </blockquote>
+                </figure>
+              }
+            }
+          }
+          <app-assistant-source-links [sources]="pair.sources" (followed)="navigated.emit()"></app-assistant-source-links>
+          @if (pair.followUps.length > 0) {
+            <app-assistant-suggestions class="follow-ups"
+              i18n-heading="assistant@@assistant.followUps" heading="Related questions"
+              [questions]="pair.followUps" [disabled]="disabled()" (picked)="asked.emit($event)"></app-assistant-suggestions>
+          }
+        } @else if (pair.kind === "fallback") {
+          <p class="line fallback" i18n="assistant@@assistant.fallback">I can’t answer this question using the information available in my CV. Please contact me directly so I can help.</p>
+          <a class="contact"
+             [routerLink]="contactLink.commands"
+             [fragment]="contactLink.fragment"
+             (click)="navigated.emit()"
+             i18n="assistant@@assistant.contact">Contact Guilherme</a>
+          @if (last && fallbackSuggestions().length > 0) {
+            <app-assistant-suggestions class="follow-ups"
+              i18n-heading="assistant@@assistant.fallback.suggestions" heading="Questions I can answer"
+              [questions]="fallbackSuggestions()" [disabled]="disabled()" (picked)="asked.emit($event)"></app-assistant-suggestions>
+          }
+        } @else {
+          <p class="line" i18n="assistant@@assistant.unavailable">The CV information could not be loaded. Please try again or contact me directly.</p>
+        }
+      </div>
+    </li>
+  }
+</ol>

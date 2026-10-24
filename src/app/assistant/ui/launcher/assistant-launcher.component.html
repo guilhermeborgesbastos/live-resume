@@ -1,0 +1,6 @@
+<button #button type="button" class="launcher" aria-haspopup="dialog" [class.hidden]="!available()"
+        [attr.aria-expanded]="session.panelOpen()" [title]="label" (click)="open()">
+  <fa-icon [icon]="faComments" aria-hidden="true"></fa-icon>
+  <span class="label">{{ label }}</span>
+</button>
+<app-assistant-panel (closed)="restoreFocus()"></app-assistant-panel>
