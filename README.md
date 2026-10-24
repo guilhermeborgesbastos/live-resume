@@ -108,6 +108,7 @@ npx ng serve -o --host 0.0.0.0 --configuration en
 | Command | What it does |
 | --- | --- |
 | `npm run lint` | ESLint (flat config in `eslint.config.js`) with the angular-eslint rules for TypeScript and templates. |
+| `npm run validate:posts` | Checks `src/assets/data/posts.json` (see [Validating posts.json](docs/add-post-skill.md#validating-postsjson)). |
 | `npm test -- --watch=false --browsers=ChromeHeadless` | Unit tests (Jasmine + Karma). |
 | `npm run build -- --configuration production` | Production build; must finish without warnings. |
 | `npm run build-locale` | Localized builds for both languages (`dist/en`, `dist/pt`). Missing translations fail the build. |
@@ -142,6 +143,18 @@ git tag v2.1.0 && git push origin v2.1.0
 ```
 
 The workflow fails unless the tag equals `package.json`'s version. It runs the browser suite against the container, then pushes `2.1.0`, `2.1`, `2`, `latest` and `sha-<commit>`; pre-release tags such as `v2.1.0-rc.1` only publish their exact version. It needs a `DOCKERHUB_TOKEN` repository secret (a Docker Hub access token with read & write access), and optionally a `DOCKERHUB_USERNAME` variable (defaults to the repository owner). Pull requests that change the image run the same build and tests without publishing.
+
+## ✍️ Adding posts with Claude Code
+
+The repository includes a [Claude Code](https://claude.com/claude-code) skill that adds a new card to the **Posts** section. Run `/add-post <article URL>` and it writes the English and Portuguese title and description, passes all of that text through the [Humanizer](https://github.com/blader/humanizer) skill, saves the thumbnail and inserts the record into `src/assets/data/posts.json`. Full guide: [docs/add-post-skill.md](docs/add-post-skill.md).
+
+* [Requirements](docs/add-post-skill.md#requirements): Claude Code plus the Humanizer plugin
+* [Usage](docs/add-post-skill.md#usage)
+* [What the skill does](docs/add-post-skill.md#what-the-skill-does)
+* [Writing rules](docs/add-post-skill.md#writing-rules): 275-character limit, allowed HTML, both languages
+* [Validating posts.json](docs/add-post-skill.md#validating-postsjson) with `npm run validate:posts`
+* [Adding a post by hand](docs/add-post-skill.md#adding-a-post-by-hand)
+* [Troubleshooting](docs/add-post-skill.md#troubleshooting)
 
 ## 🔨 How to customize?
 

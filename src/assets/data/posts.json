@@ -1,5 +1,22 @@
 [
     {
+        "thumbnail": "assets/posts/post-05-04-2026.jpg",
+        "http": "https://www.linkedin.com/pulse/ai-agents-dutch-learning-future-building-small-useful-borges-bastos-fepse/",
+        "date": "05-04-2026",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "AI Agents, Dutch Learning, and the Future of Building Small Useful Tools.",
+                "description": "I built an open-source <b>flash card game</b> for the <i>Dutch A2 Inburgering exam</i>. <b>AI agents</b> helped me scrape and sort its vocabulary in a few hours instead of days. As code becomes a commodity, the value moves to the problem and the user experience."
+            },
+            {
+                "language": "pt",
+                "title": "Agentes de IA, aprendizado de holandês e o futuro de criar pequenas ferramentas úteis.",
+                "description": "Criei um <b>jogo de flashcards</b> open source para o <i>exame de holandês A2 do Inburgering</i>. Com <b>agentes de IA</b>, coletei e organizei o vocabulário em horas, e não em dias. O código virou commodity e o valor está no problema e na experiência do usuário."
+            }
+        ]
+    },
+    {
         "thumbnail": "assets/posts/post-11-03-2019.jpg",
         "http": "https://www.linkedin.com/pulse/anti-traversing-2d-array-formula-guilherme-borges-bastos/",
         "date": "11-03-2019",

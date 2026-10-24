@@ -11,6 +11,7 @@
     "build:pt": "ng build --configuration pt",
     "test": "ng test",
     "lint": "ng lint",
+    "validate:posts": "node .claude/skills/add-post/scripts/posts.mjs validate",
     "test:e2e": "npm run build-locale && playwright test",
     "test:e2e:run": "playwright test",
     "test:e2e:docker": "bash e2e/docker.sh",

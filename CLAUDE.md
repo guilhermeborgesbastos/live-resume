@@ -15,6 +15,7 @@ npx ng serve -o --host 0.0.0.0 --configuration en   # README's way to serve, rea
 npm run build                       # default build -> dist/live-resume (add -- --configuration production for budgets)
 npm run build-locale                # production-style build of both locales -> dist/en, dist/pt
 npm run lint                        # ng lint (angular-eslint, flat config in eslint.config.js)
+npm run validate:posts              # check src/assets/data/posts.json (schema, en+pt, ≤275-char descriptions)
 npm test -- --watch=false --browsers=ChromeHeadless   # Karma + Jasmine unit specs (core pipes/services)
 npx ng test --include src/app/path/to/file.spec.ts    # run a single spec
 npm run test:e2e                    # build both locales, then run the Playwright browser suite (e2e/)
@@ -36,7 +37,7 @@ npm run int:extract                 # regenerate src/locales/messages.xlf (ng ex
 
 **One page, many sections.** `AppRoutingModule` routes only `""` to `ResumeComponent`; `/about`, `/experience`, `/posts`, `/contact` redirect to fragments (`/#about`, etc.) and everything else goes to the standalone 404 component. `ResumeComponent` stacks the section components (welcome, about, experience, posts, contact, footer) and tracks scroll/visibility through `appInViewport` (`core/directive/on-viewport.directive.ts`) to set the header's `activeSection`.
 
-**Content lives in JSON, not in templates.** `core/data.service.ts` loads `src/assets/data/{about,experiences,posts}.json`. Each record has an `internationalizations` array of per-language objects (`language: "en" | "pt"`). Templates render those fields with the `appInternationalization` directive (`[data]="item.internationalizations" property="description"`), which picks the entry matching `LOCALE_ID` and writes it via `innerHTML` — so JSON strings can contain HTML. When editing resume content, update both the `en` and `pt` entries.
+**Content lives in JSON, not in templates.** `core/data.service.ts` loads `src/assets/data/{about,experiences,posts}.json`. Each record has an `internationalizations` array of per-language objects (`language: "en" | "pt"`). Templates render those fields with the `appInternationalization` directive (`[data]="item.internationalizations" property="description"`), which picks the entry matching `LOCALE_ID` and writes it via `innerHTML` — so JSON strings can contain HTML. When editing resume content, update both the `en` and `pt` entries. New posts are added with the `add-post` project skill (`.claude/skills/add-post/`, documented in `docs/add-post-skill.md`): every title/description goes through `humanizer:humanizer`, and `scripts/posts.mjs add` inserts the record newest-first; don't hand-edit `posts.json` for new posts.
 
 **Two i18n mechanisms coexist:**
 - Static UI strings use Angular `@angular/localize` (`i18n="meaning@@id"` attributes) with translations in `src/locales/messages.{en,pt}.xlf`. The `en`/`pt` build configs set `i18nMissingTranslation: "error"`, so a new `i18n` attribute without entries in **both** xlf files breaks the localized build. Source locale is `en-US`.
