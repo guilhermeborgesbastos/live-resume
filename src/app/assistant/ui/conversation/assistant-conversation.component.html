@@ -47,6 +47,19 @@
               i18n-heading="assistant@@assistant.followUps" heading="Related questions"
               [questions]="pair.followUps" [disabled]="disabled()" (picked)="asked.emit($event)"></app-assistant-suggestions>
           }
+        } @else if (pair.kind === "clarify") {
+          @if (pair.clarifyReason === "typo") {
+            <p class="line" i18n="assistant@@assistant.clarify.typo">I couldn’t find that name in my CV exactly. Did you mean one of these questions?</p>
+          } @else {
+            <p class="line" i18n="assistant@@assistant.clarify.ambiguous">That could refer to more than one thing in my CV. Which question did you mean?</p>
+          }
+          <app-assistant-suggestions class="follow-ups clarify-options"
+            [questions]="pair.options" [disabled]="disabled() || !last" (picked)="asked.emit($event)"></app-assistant-suggestions>
+          <a class="contact"
+             [routerLink]="contactLink.commands"
+             [fragment]="contactLink.fragment"
+             (click)="navigated.emit()"
+             i18n="assistant@@assistant.contact">Contact Guilherme</a>
         } @else if (pair.kind === "fallback") {
           <p class="line fallback" i18n="assistant@@assistant.fallback">I can’t answer this question using the information available in my CV. Please contact me directly so I can help.</p>
           <a class="contact"

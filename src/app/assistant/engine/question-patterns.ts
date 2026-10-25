@@ -264,3 +264,55 @@ function compile(language: Locale, registry: Readonly<Record<IntentId, readonly 
 }
 
 export const QUESTION_PATTERNS: readonly QuestionPattern[] = Object.freeze([...compile("en", EN), ...compile("pt", PT)]);
+
+/*
+ * Follow-ups that refer to the experience the previous answer was about ("there", "that role").
+ * They only resolve when the conversation has such a referent; "previous"/"next" move to the role
+ * that started right before/after it. Tenure questions ("How long were you there?") stay unsupported.
+ */
+export type ContextRelation = "same" | "previous" | "next";
+
+export interface ContextPattern {
+  readonly intent: IntentId;
+  readonly relation: ContextRelation;
+  readonly language: Locale;
+  readonly regex: RegExp;
+}
+
+type ContextRegistry = readonly (readonly [IntentId, ContextRelation, string])[];
+
+const EN_CONTEXT: ContextRegistry = [
+  ["companyOverview", "previous", "(?:and |what about |how about )?(?:before that|the (?:role|job) before(?: that)?)"],
+  ["companyOverview", "next", "(?:and |what about |how about )?(?:after that|the (?:role|job) after(?: that)?)"],
+  ["companyOverview", "same", "tell me more(?: about (?:it|that|that role|that job))?"],
+  ["companyTechnologies", "same", "(?:and )?(?:which|what) (?:technologies|tools|tech) did you use there"],
+  ["companyTechnologies", "same", "(?:and )?what (?:was|is) (?:your|the) (?:tech|technology) stack there"],
+  ["companyRole", "same", "(?:and )?what (?:was|is) your (?:role|position|job title|title) there"],
+  ["companyDates", "same", "(?:and )?when (?:was that|did you work there)"],
+  ["companyLocation", "same", "(?:and )?where was that(?: role| job)?"]
+];
+
+const PT_CONTEXT: ContextRegistry = [
+  ["companyOverview", "previous", "(?:e |e o |e o que veio )?antes(?: disso)?"],
+  ["companyOverview", "next", "(?:e |e o |e o que veio )?depois(?: disso)?"],
+  ["companyOverview", "same", "(?:me )?(?:fale|conte)(?:-me)? mais(?: sobre (?:isso|esse cargo|esse trabalho))?"],
+  ["companyTechnologies", "same", `(?:e )?(?:quais|que) tecnologias ${YOU} (?:usou|utilizou) (?:la|ali)`],
+  ["companyRole", "same", "(?:e )?qual (?:era|e|foi) (?:o )?seu cargo (?:la|ali)"],
+  ["companyDates", "same", `(?:e )?quando (?:foi isso|${YOU} trabalhou (?:la|ali))`],
+  ["companyLocation", "same", "(?:e )?onde (?:foi|era) isso"]
+];
+
+function compileContext(language: Locale, registry: ContextRegistry): ContextPattern[] {
+  const [prefix, suffix] = language === "en" ? [EN_PREFIX, EN_SUFFIX] : [PT_PREFIX, PT_SUFFIX];
+  return registry.map(([intent, relation, body]) => ({
+    intent,
+    relation,
+    language,
+    regex: new RegExp(`^${prefix}${body}${suffix}$`, "u")
+  }));
+}
+
+export const CONTEXT_PATTERNS: readonly ContextPattern[] = Object.freeze([
+  ...compileContext("en", EN_CONTEXT),
+  ...compileContext("pt", PT_CONTEXT)
+]);

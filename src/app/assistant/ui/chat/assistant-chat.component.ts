@@ -43,6 +43,7 @@ export class AssistantChatComponent implements OnInit {
     const answer = pairs[pairs.length - 1]?.answer;
     switch (answer?.kind) {
       case "answered": return answerPlainText(answer.blocks);
+      case "clarify": return [ASSISTANT_COPY.clarify[answer.reason], ...answer.options].join("\n");
       case "fallback": return ASSISTANT_COPY.fallback;
       case "unavailable": return ASSISTANT_COPY.unavailable;
       default: return "";

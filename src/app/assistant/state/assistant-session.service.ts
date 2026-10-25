@@ -1,5 +1,5 @@
 import { Injectable, LOCALE_ID, computed, effect, inject, signal } from "@angular/core";
-import { AnswerResult, Locale, QuestionError } from "../models/assistant.models";
+import { AnswerResult, ConversationContext, Locale, QuestionError } from "../models/assistant.models";
 import { AssistantKnowledgeService } from "../knowledge/assistant-knowledge.service";
 import { answerQuestion, suggestedQuestions, SuggestedQuestion, validateQuestion } from "../engine/assistant-engine";
 
@@ -120,7 +120,7 @@ export class AssistantSessionService {
     }
     this.submitting = true;
     try {
-      const answer = answerQuestion(validation.question, this.locale, knowledge.snapshot);
+      const answer = answerQuestion(validation.question, this.locale, knowledge.snapshot, this.context());
       const pairs = [...this.state().pairs, { id: this.nextId++, question: validation.question, answer }];
       const overflow = Math.max(0, pairs.length - MAX_CONVERSATION_PAIRS);
       this.update({
@@ -146,6 +146,16 @@ export class AssistantSessionService {
     if (this.state().panelOpen) {
       this.update({ panelOpen: false });
     }
+  }
+
+  /**
+   * The referent for follow-ups: the experience the latest answer was about. Any other latest
+   * result (a fallback, a clarification) clears it, so "And before that?" never guesses.
+   */
+  private context(): ConversationContext {
+    const pairs = this.state().pairs;
+    const latest = pairs[pairs.length - 1]?.answer;
+    return latest?.kind === "answered" && latest.subject ? latest.subject : {};
   }
 
   private update(changes: Partial<ConversationState>): void {

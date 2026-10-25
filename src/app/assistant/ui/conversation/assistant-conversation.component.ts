@@ -1,6 +1,6 @@
 import { Component, computed, input, output } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { AnswerBlock, SourceRef } from "../../models/assistant.models";
+import { AnswerBlock, AnswerResult, ClarifyReason, SourceRef } from "../../models/assistant.models";
 import { ConversationPair } from "../../state/assistant-session.service";
 import { AssistantSourceLinksComponent } from "../source-links/assistant-source-links.component";
 import { AssistantSuggestionsComponent } from "../suggestions/assistant-suggestions.component";
@@ -18,7 +18,10 @@ interface BlockView {
 interface PairView {
   readonly id: number;
   readonly question: string;
-  readonly kind: "answered" | "fallback" | "unavailable";
+  readonly kind: AnswerResult["kind"];
+  readonly clarifyReason: ClarifyReason | null;
+  /** "Did you mean" questions (clarify only). */
+  readonly options: readonly string[];
   readonly blocks: readonly BlockView[];
   readonly sources: readonly SourceRef[];
   readonly followUps: readonly string[];
@@ -58,7 +61,9 @@ export class AssistantConversationComponent {
       kind: answer.kind,
       blocks: answer.kind === "answered" ? answer.blocks.map(toBlockView) : [],
       sources: answer.kind === "answered" ? answer.sources : [],
-      followUps: answer.kind === "answered" ? answer.followUps : []
+      followUps: answer.kind === "answered" ? answer.followUps : [],
+      clarifyReason: answer.kind === "clarify" ? answer.reason : null,
+      options: answer.kind === "clarify" ? answer.options : []
     };
   }));
 }

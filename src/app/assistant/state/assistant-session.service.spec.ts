@@ -119,6 +119,28 @@ describe("CV assistant knowledge and session", () => {
       expect(session.trimmed()).toBeTrue();
     });
 
+    it("uses the latest answer's experience as follow-up context, and only that", () => {
+      const qat = realCv().experiences.find((e: any) => e.companyName === "QAT Global");
+      const recordsOf = (index: number) => {
+        const answer = session.pairs()[index].answer;
+        return answer.kind === "answered" ? answer.sources.map(s => s.recordKey) : answer.kind;
+      };
+      session.ask("What is your current role?");
+      session.ask("And before that?");
+      expect(recordsOf(1)).toEqual([String(qat.id)]);
+      session.ask("Which technologies did you use there?");
+      expect(recordsOf(2)).toEqual([String(qat.id)]);
+      // A fallback clears the context instead of letting a later follow-up guess.
+      session.ask("What salary are you looking for?");
+      session.ask("And before that?");
+      expect(recordsOf(4)).toBe("fallback");
+      // Clearing the conversation clears the context too.
+      session.ask("What is your current role?");
+      session.clear();
+      session.ask("And before that?");
+      expect(recordsOf(0)).toBe("fallback");
+    });
+
     it("clears messages and draft but keeps the loaded data", () => {
       session.ask("What are your hobbies?");
       session.setDraft("unsent");

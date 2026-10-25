@@ -146,6 +146,21 @@ export type FallbackReason =
   /** A recognized search returned nothing. */
   | "no-results";
 
+/** Why the assistant asks the visitor to pick a question instead of answering. */
+export type ClarifyReason =
+  /** A name was close to, but not exactly, a name in the CV ("Swiscom"). */
+  | "typo"
+  /** The question fits more than one record or reading. */
+  | "ambiguous";
+
+/**
+ * The record a previous answer was about, so explicit follow-ups such as "And before that?" can
+ * refer to it. It only identifies a record; facts are still read from the snapshot.
+ */
+export interface ConversationContext {
+  readonly experienceId?: number;
+}
+
 export type AnswerResult =
   | {
       readonly kind: "answered";
@@ -154,6 +169,14 @@ export type AnswerResult =
       readonly sources: readonly SourceRef[];
       /** Supported questions offered as explicit follow-ups (each one answers on this snapshot). */
       readonly followUps: readonly string[];
+      /** The single experience this answer was about, if any (becomes the next question's context). */
+      readonly subject?: ConversationContext;
+    }
+  | {
+      readonly kind: "clarify";
+      readonly reason: ClarifyReason;
+      /** Supported questions the visitor may have meant; each one answers on this snapshot. */
+      readonly options: readonly string[];
     }
   | { readonly kind: "fallback"; readonly reason: FallbackReason }
   | { readonly kind: "unavailable" };

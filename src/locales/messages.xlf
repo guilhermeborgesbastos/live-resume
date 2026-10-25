@@ -86,7 +86,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
-          <context context-type="linenumber">51,54</context>
+          <context context-type="linenumber">64,67</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -102,7 +102,31 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
-          <context context-type="linenumber">63,69</context>
+          <context context-type="linenumber">76,82</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.clarify.typo" datatype="html">
+        <source>I couldn’t find that name in my CV exactly. Did you mean one of these questions?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">52,54</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.clarify.ambiguous" datatype="html">
+        <source>That could refer to more than one thing in my CV. Which question did you mean?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">54,57</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -110,7 +134,7 @@
         <source>Ask about my CV</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
-          <context context-type="linenumber">8</context>
+          <context context-type="linenumber">12</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -118,7 +142,7 @@
         <source>Close the CV assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">13</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -126,7 +150,7 @@
         <source>Open the CV assistant in a full page</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -146,7 +170,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
-          <context context-type="linenumber">56,58</context>
+          <context context-type="linenumber">62,64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">69,71</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -274,7 +302,7 @@
         <source>Questions I can answer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
-          <context context-type="linenumber">59,60</context>
+          <context context-type="linenumber">72,73</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>

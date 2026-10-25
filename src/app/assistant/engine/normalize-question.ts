@@ -61,3 +61,43 @@ const TOKEN = /[\p{L}\p{N}][\p{L}\p{N}+#]*(?:[.\-/][\p{L}\p{N}+#]+)*/gu;
 export function tokenize(text: string): string[] {
   return foldText(text).match(TOKEN) ?? [];
 }
+
+/**
+ * Edits (insert, delete, substitute, swap two neighbours) tolerated between a visitor's name and a
+ * CV name of this length. Short names get none, so "js", "ts", "c#" or "java" never drift to
+ * another technology.
+ */
+export function typoTolerance(length: number): number {
+  return length < 4 ? 0 : length < 8 ? 1 : 2;
+}
+
+/**
+ * Optimal-string-alignment distance between a and b, or Infinity once it exceeds max (the
+ * computation stops early, so comparing against every CV name stays cheap).
+ */
+export function editDistance(a: string, b: string, max: number): number {
+  if (Math.abs(a.length - b.length) > max) {
+    return Infinity;
+  }
+  let previousRow: number[] = [];
+  let row = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const next = [i];
+    let rowMin = i;
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      let value = Math.min(row[j] + 1, next[j - 1] + 1, row[j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+        value = Math.min(value, previousRow[j - 2] + 1);
+      }
+      next.push(value);
+      rowMin = Math.min(rowMin, value);
+    }
+    if (rowMin > max) {
+      return Infinity;
+    }
+    previousRow = row;
+    row = next;
+  }
+  return row[b.length] <= max ? row[b.length] : Infinity;
+}

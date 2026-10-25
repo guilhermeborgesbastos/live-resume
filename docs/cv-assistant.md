@@ -61,7 +61,22 @@ Patterns match the whole question after folding case, accents and typographic qu
 
 An alias only applies when its target exists in the data. A name that matches two records is ambiguous and gets the fallback.
 
-**Follow-ups.** Each answer can offer follow-up questions that name the company or technology explicitly ("Which technologies did you use at Swisscom AG?"). The engine is stateless: "And before that?" or "How long there?" fall back.
+**Follow-up chips.** Each answer can offer follow-up questions that name the company or technology explicitly ("Which technologies did you use at Swisscom AG?").
+
+**Follow-ups about the same role.** When the latest answer was about exactly one experience, these reviewed follow-ups refer to it:
+
+| EN | PT | Answers |
+| --- | --- | --- |
+| And before that? / What about after that? | E antes disso? / E depois disso? | Overview of the role that started right before / after it |
+| Which technologies did you use there? | Quais tecnologias você usou lá? | That role's technologies |
+| What was your role there? | Qual era o seu cargo lá? | That role's title |
+| When was that? / When did you work there? | Quando foi isso? / Quando você trabalhou lá? | Its dates |
+| Where was that? | Onde foi isso? | Its work location |
+| Tell me more | Fale mais sobre isso | Its overview |
+
+The answer always names the company, so the visitor can see which role "that" meant. There is no referent after an answer about several records (employers, a technology across roles), a fallback, a clarification, or a cleared conversation; then these follow-ups fall back. "How long were you there?" stays unsupported (no tenure calculation).
+
+**Near misses.** A name within a small spelling distance of a CV name ("Swiscom", "Javscript", "gitub") is never answered directly. The assistant replies "I couldn’t find that name in my CV exactly. Did you mean one of these questions?" with up to three corrected questions as buttons; nothing is answered until the visitor picks one. The same happens when a name fits several records ("That could refer to more than one thing in my CV…"). Tolerance depends on the name's length: none under 4 characters (so `js`, `ts`, `c#`, `jav` never drift), one edit for 4–7 characters, two from 8. The closest name wins, and exact names always win over aliases and near matches, so "Java" never suggests JavaScript.
 
 ## What it will not answer
 
@@ -83,7 +98,7 @@ Every request the engine cannot answer gets this exact text, with a **Contact Gu
 - EN: "I can’t answer this question using the information available in my CV. Please contact me directly so I can help."
 - PT: "Não consigo responder a esta pergunta com as informações disponíveis no meu currículo. Entre em contato comigo diretamente para que eu possa ajudar."
 
-Up to three supported questions are suggested under the latest fallback, never instead of it. The contact link only navigates; it does not prefill or submit the form.
+Up to three supported questions are suggested under the latest fallback, never instead of it. A near-miss or ambiguous name gets the "Did you mean…" options described in [Supported questions](#supported-questions) instead, still with the Contact link. The contact link only navigates; it does not prefill or submit the form.
 
 Other states:
 
@@ -168,7 +183,8 @@ npm run build-locale && npm run test:e2e:run           # e2e/assistant.spec.ts p
 
 ## Limitations
 
-- Only the forms in `question-patterns.ts` are understood; synonyms and word orders outside them fall back. Questions with typos fall back.
+- Only the forms in `question-patterns.ts` are understood; synonyms and word orders outside them fall back. Spelling tolerance applies to names (companies, technologies, profiles, post titles), not to the rest of the question: "Wher have you usd Java?" still falls back.
+- Follow-up context covers one experience at a time and only the forms listed above.
 - Post search matches whole words only (no stemming): "flashcards" does not match "flash card".
 - Answers about technologies reflect the `technologies` lists only. A tool mentioned only in a description (e.g. Kubernetes) is not found by "Where have you used …?", though it appears in that company's overview excerpt.
 - One conversation per tab and language; no persistence across reloads or locale switches.

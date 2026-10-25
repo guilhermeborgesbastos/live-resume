@@ -1,5 +1,6 @@
 import { answerQuestion, suggestedQuestions } from "./assistant-engine";
-import { normalizeUtterance, validateQuestion } from "./normalize-question";
+import { ANSWER_TEMPLATES } from "./answer-templates";
+import { editDistance, normalizeUtterance, typoTolerance, validateQuestion } from "./normalize-question";
 import { AnswerResult, IntentId, Locale } from "../models/assistant.models";
 import { answerText, CvJson, expectGrounded, realCv, snapshotOf } from "../testing/assistant-fixtures";
 
@@ -198,11 +199,26 @@ describe("CV assistant engine", () => {
     expect(result.kind === "answered" && result.sources.map(s => s.recordKey)).toEqual([String(swisscom.id), String(qat.id)]);
   });
 
-  it("falls back for an ambiguous company alias", () => {
+  it("asks which company is meant when an alias names two companies", () => {
+    const fixture: CvJson = realCv();
+    fixture.experiences[0].companyName = "Swisscom Labs AG";
+    fixture.experiences[1].companyName = "Swisscom Labs GmbH";
+    const data = snapshotOf(fixture);
+    expect(ask("When did you work at Swisscom Labs?", "en", data)).toEqual({
+      kind: "clarify",
+      reason: "ambiguous",
+      options: ["When did you work at Swisscom Labs AG?", "When did you work at Swisscom Labs GmbH?"]
+    });
+    // The full names are exact, so they answer directly.
+    expect(ask("When did you work at Swisscom Labs AG?", "en", data).kind).toBe("answered");
+  });
+
+  it("lets an exact company name win over another company's short alias", () => {
     const fixture: CvJson = realCv();
     fixture.experiences[0].companyName = "Swisscom Labs AG";
     fixture.experiences[1].companyName = "Swisscom Labs";
-    expectFallback(ask("When did you work at Swisscom Labs?", "en", snapshotOf(fixture)));
+    const result = ask("When did you work at Swisscom Labs?", "en", snapshotOf(fixture));
+    expect(result.kind === "answered" && result.sources.map(s => s.recordKey)).toEqual([String(fixture.experiences[1].id)]);
   });
 
   it("falls back when a localized hobby label has no reviewed translation", () => {
@@ -289,5 +305,141 @@ describe("CV assistant question validation", () => {
     expect(normalizeUtterance("  Onde você já usou Node.js?! ")).toBe("onde voce ja usou node.js");
     expect(normalizeUtterance("Where have you used C++?")).toBe("where have you used c++");
     expect(normalizeUtterance("What’s your CI/CD stack?")).toBe("what's your ci/cd stack");
+  });
+
+  it("measures edit distance with transpositions and stops past the limit", () => {
+    expect(editDistance("swiscom", "swisscom", 1)).toBe(1);
+    expect(editDistance("javsacript", "javascript", 1)).toBe(1);
+    expect(editDistance("java", "javascript", 2)).toBe(Infinity);
+    expect(editDistance("angular", "angularjs", 1)).toBe(Infinity);
+    expect([3, 4, 7, 8].map(typoTolerance)).toEqual([0, 1, 1, 2]);
+  });
+});
+
+describe("CV assistant near misses", () => {
+
+  const clarify = (question: string, locale: Locale) => {
+    const result = ask(question, locale);
+    expect(result.kind).withContext(`${question}: ${JSON.stringify(result)}`).toBe("clarify");
+    return result.kind === "clarify" ? result : null;
+  };
+
+  it("offers the corrected question for a misspelled name, without answering it", () => {
+    expect(clarify("Where have you used Javscript?", "en")).toEqual({ kind: "clarify", reason: "typo", options: ["Where have you used Javascript?"] });
+    expect(clarify("When did you work at Swiscom?", "en")!.options).toEqual(["When did you work at Swisscom AG?"]);
+    expect(clarify("Tell me about your work at Deveo Studio", "en")!.options).toEqual(["Tell me about your work at Deevo Studio."]);
+    expect(clarify("What is your gitub?", "en")!.options).toEqual(["Where can I find your GitHub profile?"]);
+    expect(clarify("Did you use Javascipt at Swiscom?", "en")!.options).toEqual(["Did you use Javascript at Swisscom AG?"]);
+    expect(clarify("Quais tecnologias você usou na Swiscom?", "pt")!.options).toEqual(["Quais tecnologias você usou na Swisscom AG?"]);
+    expect(clarify("Onde você já usou Javscript?", "pt")!.options).toEqual(["Onde você já usou Javascript?"]);
+  });
+
+  it("offers every equally close name", () => {
+    expect(clarify("Where have you used Angularj?", "en")!.options).toEqual(["Where have you used AngularJS?", "Where have you used Angular?"]);
+  });
+
+  it("never drifts between short or related technology names", () => {
+    expect(clarify("Where have you used Jave?", "en")!.options).toEqual(["Where have you used Java?"]);
+    ["Where have you used Jav?", "Where have you used Rust?", "Where have you used C#?", "Where have you used TS2?"]
+      .forEach(question => expectFallback(ask(question, "en")));
+  });
+
+  it("only offers options that answer", () => {
+    const cases: [string, Locale][] = [
+      ["Where have you used Javscript?", "en"], ["When did you work at Swiscom?", "en"], ["Onde você já usou Javscript?", "pt"]
+    ];
+    for (const [question, locale] of cases) {
+      const result = ask(question, locale);
+      (result.kind === "clarify" ? result.options : []).forEach(option =>
+        expect(ask(option, locale).kind).withContext(option).toBe("answered"));
+    }
+  });
+
+  it("prefers an exact reading over a near one", () => {
+    expect(ask("Where have you used Angular?", "en").kind).toBe("answered");
+    expect(ask("Tell me about yourself", "en").kind).toBe("answered");
+  });
+});
+
+describe("CV assistant follow-up context", () => {
+
+  const swisscomContext = { experienceId: swisscom.id };
+  const qatContext = { experienceId: qat.id };
+  const sortable = (date: string) => date.slice(6) + date.slice(0, 5);
+  const oldest = [...cv.experiences].sort((a, b) => sortable(a.startAt) < sortable(b.startAt) ? -1 : 1)[0];
+
+  it("needs a referent: without one, follow-ups fall back", () => {
+    ["And before that?", "Which technologies did you use there?", "When was that?", "E antes disso?"]
+      .forEach(question => expectFallback(answerQuestion(question, "en", snapshot)));
+    expectFallback(answerQuestion("And before that?", "en", snapshot, { experienceId: 99999 }));
+  });
+
+  it("moves to the role before or after the referent", () => {
+    const before = answerQuestion("And before that?", "en", snapshot, swisscomContext);
+    expect(before.kind === "answered" && before.sources.map(s => s.recordKey)).toEqual([String(qat.id)]);
+    expect(before.kind === "answered" && before.subject).toEqual(qatContext);
+    expect(expectGrounded(before, cv, "en")).toBeGreaterThan(0);
+    const after = answerQuestion("And after that?", "en", snapshot, qatContext);
+    expect(after.kind === "answered" && after.sources.map(s => s.recordKey)).toEqual([String(swisscom.id)]);
+    expectFallback(answerQuestion("And before that?", "en", snapshot, { experienceId: oldest.id }));
+    expectFallback(answerQuestion("And after that?", "en", snapshot, swisscomContext));
+  });
+
+  it("answers about the same role", () => {
+    const cases: [string, Locale, IntentId][] = [
+      ["Which technologies did you use there?", "en", "companyTechnologies"],
+      ["What was your role there?", "en", "companyRole"],
+      ["When was that?", "en", "companyDates"],
+      ["Where was that?", "en", "companyLocation"],
+      ["Tell me more", "en", "companyOverview"],
+      ["Quais tecnologias você usou lá?", "pt", "companyTechnologies"],
+      ["Qual era o seu cargo lá?", "pt", "companyRole"],
+      ["Quando foi isso?", "pt", "companyDates"],
+      ["Fale mais sobre isso", "pt", "companyOverview"]
+    ];
+    for (const [question, locale, intent] of cases) {
+      const result = answerQuestion(question, locale, snapshot, qatContext);
+      expect(result.kind === "answered" && result.intent).withContext(question).toBe(intent);
+      expect(result.kind === "answered" && result.sources.map(s => s.recordKey)).toEqual([String(qat.id)]);
+      expectGrounded(result, cv, locale);
+    }
+  });
+
+  it("keeps tenure follow-ups unsupported", () => {
+    expectFallback(answerQuestion("How long were you there?", "en", snapshot, qatContext));
+    expectFallback(answerQuestion("How long there?", "en", snapshot, qatContext));
+  });
+
+  it("sets a subject only when an answer was about one experience", () => {
+    const subject = (question: string) => {
+      const result = ask(question, "en");
+      return result.kind === "answered" ? result.subject : "not answered";
+    };
+    expect(subject("What is your current role?")).toEqual(swisscomContext);
+    expect(subject("When did you work at QAT Global?")).toEqual(qatContext);
+    expect(subject("Which companies have you worked for?")).toBeUndefined();
+    expect(subject("Where have you used Java?")).toBeUndefined();
+  });
+
+  it("does not let context change unrelated answers", () => {
+    expect(JSON.stringify(answerQuestion("What are your hobbies?", "en", snapshot, qatContext)))
+      .toBe(JSON.stringify(ask("What are your hobbies?", "en")));
+  });
+});
+
+describe("CV assistant canonical questions", () => {
+
+  it("recognizes every question form used for suggestions and options", () => {
+    for (const locale of ["en", "pt"] as const) {
+      const q = ANSWER_TEMPLATES[locale].questions;
+      const title = localized(cv.posts[0], locale).title.replace(/<[^>]+>/g, "");
+      const questions = [
+        q.profile, q.currentRole, q.employers, q.technologies, q.posts, q.hobbies, q.socialLinks,
+        q.companyOverview("Swisscom AG"), q.companyRole("Swisscom AG"), q.companyDates("Swisscom AG"),
+        q.companyLocation("Swisscom AG"), q.companyTechnologies("Swisscom AG"), q.technologyExperience("Java"),
+        q.technologyAtCompany("Java", "Swisscom AG"), q.postSearch("Android"), q.postSummary(title), q.socialLink("GitHub")
+      ];
+      questions.forEach(question => expect(ask(question, locale).kind).withContext(`${locale}: ${question}`).toBe("answered"));
+    }
   });
 });

@@ -49,18 +49,28 @@ export interface AnswerTemplates {
   socialLinksIntro: string;
   socialLinkItem(network: string, url: string): string;
 
-  /** Supported question forms used for suggestions and follow-up chips. */
+  /**
+   * One supported question per intent, used for suggestions, follow-up chips and "did you mean"
+   * options. Each must be recognized by question-patterns.ts (the specs check it).
+   */
   readonly questions: {
     readonly profile: string;
     readonly currentRole: string;
     readonly employers: string;
+    readonly technologies: string;
     readonly posts: string;
     readonly hobbies: string;
+    readonly socialLinks: string;
     companyOverview(company: string): string;
+    companyRole(company: string): string;
     companyDates(company: string): string;
+    companyLocation(company: string): string;
     companyTechnologies(company: string): string;
     technologyExperience(technology: string): string;
+    technologyAtCompany(technology: string, company: string): string;
     postSearch(topic: string): string;
+    postSummary(title: string): string;
+    socialLink(network: string): string;
   };
 }
 
@@ -107,13 +117,20 @@ const EN: AnswerTemplates = {
     profile: "Tell me about your professional background.",
     currentRole: "What is your current role?",
     employers: "Which companies have you worked for?",
+    technologies: "Which technologies are listed in your CV?",
     posts: "Which posts have you published?",
     hobbies: "What are your hobbies?",
+    socialLinks: "What are your social media profiles?",
     companyOverview: company => `Tell me about your work at ${company}.`,
+    companyRole: company => `What was your role at ${company}?`,
     companyDates: company => `When did you work at ${company}?`,
+    companyLocation: company => `In which city did you work at ${company}?`,
     companyTechnologies: company => `Which technologies did you use at ${company}?`,
     technologyExperience: technology => `Where have you used ${technology}?`,
-    postSearch: topic => `Do you have posts about ${topic}?`
+    technologyAtCompany: (technology, company) => `Did you use ${technology} at ${company}?`,
+    postSearch: topic => `Do you have posts about ${topic}?`,
+    postSummary: title => `What is your post "${title}" about?`,
+    socialLink: network => `Where can I find your ${network} profile?`
   }
 };
 
@@ -160,13 +177,20 @@ const PT: AnswerTemplates = {
     profile: "Fale sobre sua trajetória profissional.",
     currentRole: "Qual é o seu cargo atual?",
     employers: "Em quais empresas você trabalhou?",
+    technologies: "Quais tecnologias estão listadas no seu currículo?",
     posts: "Quais artigos você publicou?",
     hobbies: "Quais são os seus hobbies?",
+    socialLinks: "Quais são suas redes sociais?",
     companyOverview: company => `Fale sobre o seu trabalho na ${company}.`,
+    companyRole: company => `Qual era o seu cargo na ${company}?`,
     companyDates: company => `Quando você trabalhou na ${company}?`,
+    companyLocation: company => `Em qual cidade você trabalhou na ${company}?`,
     companyTechnologies: company => `Quais tecnologias você usou na ${company}?`,
     technologyExperience: technology => `Onde você já usou ${technology}?`,
-    postSearch: topic => `Você tem artigos sobre ${topic}?`
+    technologyAtCompany: (technology, company) => `Você usou ${technology} na ${company}?`,
+    postSearch: topic => `Você tem artigos sobre ${topic}?`,
+    postSummary: title => `Sobre o que é o artigo "${title}"?`,
+    socialLink: network => `Qual é o seu ${network}?`
   }
 };
 

@@ -144,7 +144,8 @@ flowchart TD
   NZ --> M[Try every reviewed pattern<br/>anchored ^…$ regex]
   M --> SL[Resolve each captured slot<br/>against snapshot indexes]
   SL --> K{Exactly one distinct<br/>resolved interpretation?}
-  K -- 0 or ≥2 --> FB[Fallback<br/>unrecognized / unknown-entity / ambiguous]
+  K -- "≥2, or only near readings" --> CL[Clarify<br/>verified 'did you mean' questions]
+  K -- 0 --> FB[Fallback<br/>unrecognized / unknown-entity / ambiguous]
   K -- 1 --> CO[composeAnswer for the intent]
   CO --> F{Required facts present<br/>in the active locale?}
   F -- no --> FB2[Fallback<br/>missing-fact / no-results]
@@ -191,7 +192,7 @@ Rules:
 Every pattern is tried. Each one whose slots all resolve yields an *interpretation* (intent + resolved records), deduplicated by a key. Exactly one interpretation is required:
 
 - 0 interpretations → fallback, using the strongest reason seen (`ambiguous` > `unknown-entity` > `unrecognized`).
-- 2 or more distinct interpretations → fallback `ambiguous`. The engine never picks the first match.
+- 2 or more distinct interpretations → `clarify` (see 4.7). The engine never picks the first match.
 
 ### 4.5 Composition (`compose-answer.ts`, `answer-templates.ts`)
 
@@ -224,7 +225,30 @@ Month names come from fixed tables (`May 2020`, `mai. 2020`), not `Intl` or the 
   - the CV technology that appears as a word in the most post texts (currently Android).
 - Every follow-up and suggestion is **run through the engine** first and kept only if it answers. A suggestion can never lead to the fallback.
 
-The engine is stateless with respect to the conversation. "And before that?" has no antecedent and falls back; the follow-up chips are the substitute for conversational context.
+### 4.7 Near misses and clarification (`resolve-question.ts`)
+
+Each slot resolution has three outcomes, not two:
+
+| Outcome | When | Result |
+| --- | --- | --- |
+| value | exactly one record matches the key; an exact company name wins over another company's alias | the pattern can answer |
+| alternatives (`typo`) | no exact key, but keys within the edit-distance tolerance exist (optimal string alignment: insert, delete, substitute, swap neighbours; only the closest distance) | the pattern becomes a *near reading* per alternative |
+| alternatives (`ambiguous`) | the key names several records | the pattern becomes one reading per record |
+
+Tolerance by name length: 0 edits under 4 characters, 1 for 4–7, 2 from 8, and the CV-side name must also be 4+ characters. Exact readings always win: near readings are only used when no pattern resolved exactly. With several exact readings, or only near readings, the result is `clarify`.
+
+The engine (`assistant-engine.ts`) turns each reading into its **canonical question**, a supported form from `answer-templates.ts` such as "When did you work at Swisscom AG?". It keeps only those that answer (checked without computing their own options, so an ambiguous option cannot recurse), caps them at three, and returns `{ kind: "clarify", reason, options }`. If none survives, the result is the fallback. The UI shows the options as buttons plus the Contact link. Picking one simply asks that question, so nothing is answered on a guess.
+
+### 4.8 Follow-up context
+
+The engine takes an optional, explicit `context: { experienceId }`. Each answer about exactly one experience carries `subject: { experienceId }`: a company intent, the current role when only one is ongoing, or a follow-up. The session passes the **latest** pair's subject as the next question's context; any fallback, clarification or clear removes it.
+
+Context is used only by `CONTEXT_PATTERNS` (`question-patterns.ts`), a separate, anchored list ("and before that", "which technologies did you use there", "e antes disso", ...). Each one maps to an intent and a relation:
+
+- `same`: the referent itself.
+- `previous` / `next`: the role that started immediately before or after it, by start date then ID.
+
+Without a referent, or with no earlier or later role, it falls back. Context identifies a record only; facts still come from the snapshot. Every other question ignores the context, so the same question with the same context always gives the same answer.
 
 ## 5. A question, step by step
 
@@ -370,7 +394,8 @@ Facts are never translated or mixed across languages. An EN question about somet
 | Safe links | External links only for parsed `http(s)` URLs, `[href]` binding, `rel="noopener noreferrer"`; internal links built by the router from validated IDs |
 | Nothing leaves the browser | Answering makes no network request; nothing is sent to Firebase or Analytics, logged or put in URLs; the URL only ever carries record identifiers |
 | Fails closed | A failed or invalid file → `error` state, Retry + Contact, composer disabled |
-| Deterministic | No clock, randomness, history or locale-dependent collation in the engine |
+| Deterministic | No clock, randomness or locale-dependent collation in the engine; the only conversation input is the explicit context (one experience ID), so the same question and context always give the same answer |
+| No answer on a guess | Near-miss and ambiguous names produce "did you mean" options, never an answer |
 | No auto-contact | The contact link only navigates; the form is not prefilled or submitted |
 
 ## 10. Testing strategy
@@ -397,7 +422,8 @@ Unit specs run against the **real** JSON (imported in specs only), so a content 
 | Answer templates in TypeScript | XLF via `$localize` | The pure engine must compose for an explicit locale and be unit-tested in both locales in one run; XLF strings are fixed per build |
 | Native `<dialog>` | custom focus trap | Inertness, Escape and backdrop are native and robust; less code |
 | Signals for the session | RxJS subjects (the codebase's older idiom) | Simple synchronous state; signals are the current Angular idiom and work with Zone.js |
-| Stateless interpretation + follow-up chips | conversational context | Context resolution is guessing; explicit chips keep every question self-contained |
+| Explicit, single-record follow-up context | free conversational context (pronoun resolution over the whole history) | Only the latest answer's one experience can be "that"; a reviewed list of follow-up forms uses it, and the answer names the company, so nothing is guessed |
+| "Did you mean" options for near misses | silently correcting the name | A wrong correction would answer a different question; the visitor confirms by asking the corrected question |
 | `X (qualifier)` as a variant of `X` | per-value aliases | One documented rule covers "Java (Android)" and "Python (data scrapers)" without new lists |
 
 ## 12. Open questions for review

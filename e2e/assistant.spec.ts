@@ -38,6 +38,10 @@ const ASSISTANT = {
     java: "Where have you used Java?",
     posts: "Which posts have you published?",
     salary: "What salary are you looking for?",
+    typo: "When did you work at Swiscom?",
+    typoOption: "When did you work at Swisscom AG?",
+    clarifyTypo: "I couldn’t find that name in my CV exactly. Did you mean one of these questions?",
+    before: "And before that?",
     experience: (company: string) => `Experience · ${company}`
   },
   pt: {
@@ -65,6 +69,10 @@ const ASSISTANT = {
     java: "Onde você já usou Java?",
     posts: "Quais artigos você publicou?",
     salary: "Qual é o seu salário?",
+    typo: "Quando você trabalhou na Swiscom?",
+    typoOption: "Quando você trabalhou na Swisscom AG?",
+    clarifyTypo: "Não encontrei exatamente esse nome no meu currículo. Você quis dizer uma destas perguntas?",
+    before: "E antes disso?",
     experience: (company: string) => `Experiência · ${company}`
   }
 } as const;
@@ -182,6 +190,29 @@ for (const locale of LOCALES) {
       // Nothing is prefilled or submitted.
       await expect(page.locator("#contact textarea[name='message']")).toHaveValue("");
       expect(diagnostics.blockedFirestoreRequests).toEqual([]);
+    });
+
+    test("offers a correction for a misspelled name and follows up on the role in context", async ({ page }) => {
+      await openAssistantPage(page, locale);
+      await askIn(page, "app-assistant-chat", locale, text.typo);
+      const clarify = page.locator(".message.assistant").last();
+      await expect(clarify).toHaveAttribute("data-answer", "clarify");
+      await expect(clarify).toContainText(text.clarifyTypo);
+      await expect(clarify.getByRole("link", { name: text.contact })).toBeVisible();
+
+      // Nothing is answered until the visitor picks the corrected question.
+      await clarify.getByRole("button", { name: text.typoOption }).click();
+      await expect(page.locator(".message.visitor .bubble").last()).toHaveText(text.typoOption);
+      await expect(page.locator(".message.assistant").last()).toHaveAttribute("data-answer", "answered");
+      await expect(page.locator(".message.assistant").last()).toContainText(ongoing.companyName);
+
+      // "Before that" refers to the role the previous answer was about.
+      const previous = [...experiences].filter(e => e.id !== ongoing.id)
+        .sort((a, b) => (b.startAt.slice(6) + b.startAt).localeCompare(a.startAt.slice(6) + a.startAt))[0];
+      await askIn(page, "app-assistant-chat", locale, text.before);
+      const answer = page.locator(".message.assistant").last();
+      await expect(answer).toHaveAttribute("data-answer", "answered");
+      await expect(answer.getByRole("link", { name: text.experience(previous.companyName) })).toBeVisible();
     });
 
     test("validates input, sends on Enter and keeps Shift+Enter for new lines", async ({ page }) => {
