@@ -18,7 +18,7 @@ export class WelcomeDialogComponent {
         },
         {
             "language": "en",
-            "phrases": [ "Welcome! I'm Guilherme.", "Scroll down to explore my resume...", "...or just ask my AI Assistant :)" ]
+            "phrases": [ "Welcome! I'm Guilherme.", "Scroll down to explore my resume...", "or just ask my AI Assistant :)" ]
         }
     ];
 
