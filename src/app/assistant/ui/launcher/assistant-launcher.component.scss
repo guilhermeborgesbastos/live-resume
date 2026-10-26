@@ -11,9 +11,10 @@
     font-weight: 600;
     color: #fff;
     background-color: #222f5c;
-    border: none;
+    // A light-blue ring keeps the button distinct over the dark Experience section too.
+    border: 3px solid #d4e7fe;
     border-radius: 30px;
-    padding: 14px 20px;
+    padding: 11px 17px;
     box-shadow: 0 6px 20px rgba(34, 47, 92, 0.35);
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s, opacity 0.2s, visibility 0.2s;
