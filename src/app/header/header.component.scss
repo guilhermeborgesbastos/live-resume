@@ -67,7 +67,7 @@ header {
                     position: relative;
                 }
 
-                // Shown until the visitor opens the assistant once (see HeaderComponent).
+                // Always shown; deep orange so white text stays readable at this size.
                 .new-badge {
                     position: absolute;
                     top: -6px;
@@ -79,8 +79,8 @@ header {
                     letter-spacing: 0.04em;
                     text-transform: uppercase;
                     color: #fff;
-                    background-color: #222f5c;
-                    border: 2px solid #d4e7fe;
+                    background-color: #c2410c;
+                    border: 2px solid #ffd8b5;
                     border-radius: 10px;
                     pointer-events: none;
                 }

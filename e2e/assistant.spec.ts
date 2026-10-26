@@ -391,7 +391,7 @@ test("the AI Assistant nav link is highlighted once, on the first visit only", a
   await expect(link).not.toHaveClass(/assistant-intro/);
 });
 
-test("the AI Assistant nav link shows a New badge until the assistant is opened", async ({ page }) => {
+test("the AI Assistant nav link always shows a New badge", async ({ page }) => {
   await openResume(page, "en");
   if (isMobile(page)) {
     await page.locator("app-header .navbar-toggle fa-icon").click();
@@ -402,12 +402,10 @@ test("the AI Assistant nav link shows a New badge until the assistant is opened"
   // The badge is decorative: the link keeps its plain accessible name.
   await expect(page.locator('app-header a[data-section="assistant"]')).toHaveAccessibleName("AI Assistant");
 
+  // It stays after the visitor has used the assistant.
   await page.goto("/en/assistant");
   await expect(page.locator("app-assistant-page h1")).toBeVisible();
-  await expect(badge).toHaveCount(0);
-  await openResume(page, "en");
-  await expect(page.locator("app-header")).toBeVisible();
-  await expect(badge).toHaveCount(0);
+  await expect(badge).toHaveCount(1);
 });
 
 test("the 404 page has no assistant launcher", async ({ page }) => {
