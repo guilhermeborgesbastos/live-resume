@@ -7,7 +7,8 @@
  * options that the visitor confirms by asking the corrected question.
  */
 import {
-  ClarifyReason, ConversationContext, ExperienceRecord, FallbackReason, IntentId, KnowledgeSnapshot, MediaRecord, PostRecord
+  ClarifyReason, ConversationContext, ExperienceRecord, FallbackReason, IntentId, KnowledgeSnapshot, LanguageRecord,
+  MediaRecord, PostRecord, TopicRecord
 } from "../models/assistant.models";
 import { compareDates } from "../knowledge/knowledge-adapter";
 import { htmlToLine } from "../knowledge/plain-text";
@@ -22,6 +23,10 @@ export interface Interpretation {
   readonly topicTokens?: readonly string[];
   readonly post?: PostRecord;
   readonly media?: MediaRecord;
+  /** entityKey of a certification issuer exactly as the CV lists it. */
+  readonly issuer?: string;
+  readonly language?: LanguageRecord;
+  readonly topic?: TopicRecord;
 }
 
 export type Resolution =
@@ -94,6 +99,17 @@ export function titleKey(text: string): string {
   return foldText(text).replace(QUOTES, "").replace(/[.!?…]+$/, "").replace(/\s+/g, " ").trim();
 }
 
+/** Key for topic names and aliases: folded, hyphens read as spaces ("full-stack" = "full stack"). */
+export function areaKey(text: string): string {
+  return foldText(text).replace(QUOTES, "").replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/** Keys an issuer is known by: its full name, and "Name (ABBR)" also as "Name" and "ABBR". */
+function issuerKeys(issuer: string): string[] {
+  const match = /^(.+?)\s*\(([^()]+)\)$/.exec(issuer.trim());
+  return match ? [entityKey(issuer), entityKey(match[1]), entityKey(match[2])] : [entityKey(issuer)];
+}
+
 interface SnapshotIndex {
   /** Exact company names; they win over aliases, so a full name is never ambiguous with a short one. */
   readonly companyNames: ReadonlyMap<string, readonly ExperienceRecord[]>;
@@ -102,6 +118,12 @@ interface SnapshotIndex {
   readonly technologies: ReadonlySet<string>;
   readonly networks: ReadonlyMap<string, readonly MediaRecord[]>;
   readonly titles: ReadonlyMap<string, readonly PostRecord[]>;
+  /** Issuer keys -> entityKey of each full issuer name they name. */
+  readonly issuers: ReadonlyMap<string, readonly string[]>;
+  /** Language names in every site language. */
+  readonly languages: ReadonlyMap<string, readonly LanguageRecord[]>;
+  /** Topic IDs, localized names and aliases. */
+  readonly topics: ReadonlyMap<string, readonly TopicRecord[]>;
 }
 
 const INDEXES = new WeakMap<KnowledgeSnapshot, SnapshotIndex>();
@@ -147,7 +169,22 @@ function buildIndex(snapshot: KnowledgeSnapshot): SnapshotIndex {
   snapshot.posts.forEach(post => Object.values(post.locales)
     .forEach(fields => fields && addTo(titles, titleKey(fields.title.value), post)));
 
-  return { companyNames, companies, technologies, networks, titles };
+  const issuers = new Map<string, string[]>();
+  snapshot.about.certifications.forEach(certification =>
+    issuerKeys(certification.issuer.value).forEach(key => addTo(issuers, key, entityKey(certification.issuer.value))));
+
+  const languages = new Map<string, LanguageRecord[]>();
+  snapshot.about.languages.forEach(language => Object.values(language.locales)
+    .forEach(fields => fields && addTo(languages, entityKey(fields.name.value), language)));
+
+  const topics = new Map<string, TopicRecord[]>();
+  snapshot.about.topics.forEach(topic => {
+    addTo(topics, areaKey(topic.id.value), topic);
+    topic.aliases.forEach(alias => addTo(topics, areaKey(alias.value), topic));
+    Object.values(topic.locales).forEach(fields => fields && addTo(topics, areaKey(fields.name.value), topic));
+  });
+
+  return { companyNames, companies, technologies, networks, titles, issuers, languages, topics };
 }
 
 function indexFor(snapshot: KnowledgeSnapshot): SnapshotIndex {
@@ -229,6 +266,21 @@ function resolvePostTitle(raw: string, index: SnapshotIndex): SlotResult<PostRec
   return single(index.titles.get(key), () => nearest(key, index.titles.keys(), k => index.titles.get(k)!));
 }
 
+function resolveIssuer(raw: string, index: SnapshotIndex): SlotResult<string> {
+  const key = entityKey(raw.replace(QUOTES, "").replace(SLOT_LEADING_WORDS, ""));
+  return single(index.issuers.get(key), () => nearest(key, index.issuers.keys(), k => index.issuers.get(k)!));
+}
+
+function resolveLanguage(raw: string, index: SnapshotIndex): SlotResult<LanguageRecord> {
+  const key = entityKey(raw.replace(SLOT_LEADING_WORDS, ""));
+  return single(index.languages.get(key), () => nearest(key, index.languages.keys(), k => index.languages.get(k)!));
+}
+
+function resolveArea(raw: string, index: SnapshotIndex): SlotResult<TopicRecord> {
+  const key = areaKey(raw.replace(SLOT_LEADING_WORDS, ""));
+  return single(index.topics.get(key), () => nearest(key, index.topics.keys(), k => index.topics.get(k)!));
+}
+
 function resolveTopic(raw: string): SlotResult<string[]> {
   const tokens = tokenize(raw.replace(QUOTES, "").replace(SLOT_LEADING_WORDS, ""));
   return tokens.length > 0 && tokens.length <= 6 ? { value: tokens } : { reason: "unknown-entity" };
@@ -241,7 +293,10 @@ function interpretationKey(interpretation: Interpretation): string {
     interpretation.technology ?? "",
     interpretation.topicTokens?.join(" ") ?? "",
     interpretation.post?.key ?? "",
-    interpretation.media ? `${interpretation.media.title.pointer}` : ""
+    interpretation.media ? `${interpretation.media.title.pointer}` : "",
+    interpretation.issuer ?? "",
+    interpretation.language?.code.value ?? "",
+    interpretation.topic?.id.value ?? ""
   ].join("|");
 }
 
@@ -323,6 +378,9 @@ export function resolveQuestion(question: string, snapshot: KnowledgeSnapshot, c
     apply(slots["network"], raw => resolveNetwork(raw, index), (r, media) => ({ ...r, media }));
     apply(slots["title"], raw => resolvePostTitle(raw, index), (r, post) => ({ ...r, post }));
     apply(slots["topic"], resolveTopic, (r, topicTokens) => ({ ...r, topicTokens }));
+    apply(slots["issuer"], raw => resolveIssuer(raw, index), (r, issuer) => ({ ...r, issuer }));
+    apply(slots["language"], raw => resolveLanguage(raw, index), (r, language) => ({ ...r, language }));
+    apply(slots["area"], raw => resolveArea(raw, index), (r, topic) => ({ ...r, topic }));
     if (!rejected) {
       readings.forEach(reading => (approximate ? near : candidates).set(interpretationKey(reading), reading));
     }

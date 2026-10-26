@@ -4,12 +4,12 @@
  * turns into the default fallback (absence never means "no").
  */
 import {
-  AnswerBlock, ExperienceRecord, KnowledgeSnapshot, Locale, MediaRecord, PostRecord, SourceRef,
-  SourcedDate, SourcedText, TemplateLine
+  AnswerBlock, CertificationRecord, ExperienceRecord, KnowledgeSnapshot, LanguageRecord, Locale, MediaRecord, PostRecord,
+  SourceRef, SourcedDate, SourcedPartialDate, SourcedText, TemplateLine, TopicRecord
 } from "../models/assistant.models";
-import { compareDates } from "../knowledge/knowledge-adapter";
-import { ANSWER_TEMPLATES, AnswerTemplates, formatMonthYear } from "./answer-templates";
-import { technologyKey, tokenize } from "./normalize-question";
+import { compareDates, comparePartialDates } from "../knowledge/knowledge-adapter";
+import { ANSWER_TEMPLATES, AnswerTemplates, formatMonthYear, formatPartialDate } from "./answer-templates";
+import { entityKey, technologyKey, tokenize } from "./normalize-question";
 import { Interpretation, technologyMatches } from "./resolve-question";
 
 export interface ComposedAnswer {
@@ -32,7 +32,12 @@ export function byDateDescending(a: PostRecord, b: PostRecord): number {
   return compareDates(b.date, a.date) || compareKeys(a.key, b.key);
 }
 
-const dateFact = (date: SourcedDate): SourcedText => ({ value: date.raw, pointer: date.pointer });
+/** Newest issue date first, ties by name, then by position in the file. */
+export function byIssuedDescending(a: CertificationRecord, b: CertificationRecord): number {
+  return comparePartialDates(b.issued, a.issued) || compareKeys(a.name.value, b.name.value) || compareKeys(a.pointer, b.pointer);
+}
+
+const dateFact = (date: SourcedDate | SourcedPartialDate): SourcedText => ({ value: date.raw, pointer: date.pointer });
 const line = (text: string, ...facts: SourcedText[]): TemplateLine => ({ text, facts });
 
 class Composer {
@@ -71,6 +76,18 @@ class Composer {
       label: this.t.labels.about,
       target: { section: "about" },
       ...(externalUrl ? { externalUrl } : {})
+    });
+  }
+
+  /** Each certification is its own source, linking to its credential page when the CV gives one. */
+  citeCertification(certification: CertificationRecord, pointers: string[]): void {
+    this.cite({
+      file: "about.json",
+      recordKey: certification.pointer,
+      pointers,
+      label: certification.name.value,
+      target: { section: "about" },
+      ...(certification.url ? { externalUrl: certification.url.value } : {})
     });
   }
 
@@ -352,6 +369,103 @@ class Composer {
     }]);
   }
 
+  education(): ComposedAnswer | null {
+    const records = this.snapshot.about.education;
+    if (records.length === 0 || records.some(r => !r.locales[this.locale])) {
+      return null;
+    }
+    const items = records.map(record => {
+      const fields = record.locales[this.locale]!;
+      const dates = [record.start, record.end].filter((d): d is SourcedPartialDate => d !== undefined);
+      const period = dates.length === 0 ? null : dates.map(d => formatPartialDate(d, this.locale)).join(" – ");
+      const facts = [fields.degree, ...(fields.field ? [fields.field] : []), record.school, ...dates.map(dateFact)];
+      this.citeAbout(facts.map(f => f.pointer));
+      return line(this.t.educationItem(fields.degree.value, fields.field?.value ?? null, record.school.value, period), ...facts);
+    });
+    return this.done([{ kind: "list", intro: line(this.t.educationIntro), items }]);
+  }
+
+  certifications(issuer?: string): ComposedAnswer | null {
+    const records = this.snapshot.about.certifications
+      .filter(c => issuer === undefined || entityKey(c.issuer.value) === issuer)
+      .sort(byIssuedDescending);
+    if (records.length === 0) {
+      return null;
+    }
+    const items = records.map(record => {
+      const dates = [record.issued, ...(record.expires ? [record.expires] : [])];
+      const facts = [record.name, record.type, record.issuer, ...dates.map(dateFact)];
+      this.citeCertification(record, [...facts.map(f => f.pointer), ...(record.url ? [record.url.pointer] : [])]);
+      const text = this.t.certificationItem(record.name.value, this.t.certificationTypes[record.type.value], record.issuer.value,
+        formatPartialDate(record.issued, this.locale), record.expires ? formatPartialDate(record.expires, this.locale) : null);
+      return line(text, ...facts);
+    });
+    const intro = issuer === undefined
+      ? line(this.t.certificationsIntro)
+      : line(this.t.issuerCertificationsIntro(records[0].issuer.value), records[0].issuer);
+    return this.done([{ kind: "list", intro, items }]);
+  }
+
+  languages(): ComposedAnswer | null {
+    const records = this.snapshot.about.languages;
+    if (records.length === 0 || records.some(r => !r.locales[this.locale])) {
+      return null;
+    }
+    const items = records.map(record => {
+      const { name, proficiency } = record.locales[this.locale]!;
+      this.citeAbout([name.pointer, proficiency.pointer]);
+      return line(this.t.languageItem(name.value, proficiency.value), name, proficiency);
+    });
+    return this.done([{ kind: "list", intro: line(this.t.languagesIntro), items }]);
+  }
+
+  languageProficiency(language: LanguageRecord): ComposedAnswer | null {
+    const fields = language.locales[this.locale];
+    if (!fields) {
+      return null;
+    }
+    this.citeAbout([fields.name.pointer, fields.proficiency.pointer]);
+    return this.done([{
+      kind: "text",
+      line: line(this.t.languageProficiency(fields.name.value, fields.proficiency.value), fields.name, fields.proficiency)
+    }]);
+  }
+
+  topicSummary(topic: TopicRecord): ComposedAnswer | null {
+    const fields = topic.locales[this.locale];
+    const experiences = topic.experienceIds
+      .map(id => this.snapshot.experiences.find(e => e.id === id))
+      .filter((e): e is ExperienceRecord => e !== undefined)
+      .sort(byStartDescending);
+    if (!fields || experiences.length === 0 || experiences.some(e => !e.locales[this.locale])) {
+      return null;
+    }
+    this.citeAbout([fields.name.pointer, fields.summary.pointer]);
+    const items = experiences.map(experience => {
+      const role = experience.locales[this.locale]!.role;
+      this.citeExperience(experience, [role.pointer, ...this.rangeFacts(experience).map(f => f.pointer)]);
+      return line(this.t.topicRoleItem(experience.companyName.value, role.value, this.range(experience)),
+        experience.companyName, role, ...this.rangeFacts(experience));
+    });
+    return this.done([
+      { kind: "excerpt", label: this.t.excerpts.topic(fields.name.value), excerpt: fields.summary },
+      { kind: "list", intro: line(this.t.topicRolesIntro), items }
+    ]);
+  }
+
+  companyHighlights(experience: ExperienceRecord): ComposedAnswer | null {
+    const highlights = experience.locales[this.locale]?.highlights ?? [];
+    if (highlights.length === 0) {
+      return null;
+    }
+    this.citeExperience(experience, highlights.map(h => h.pointer));
+    return this.done([{
+      kind: "list",
+      intro: line(this.t.companyHighlightsIntro(experience.companyName.value), experience.companyName),
+      items: highlights.map(h => line(h.value, h))
+    }]);
+  }
+
   private place(city?: SourcedText, country?: SourcedText): { text: string; facts: SourcedText[] } | null {
     if (!city) {
       return null;
@@ -364,7 +478,7 @@ class Composer {
 
 export function composeAnswer(interpretation: Interpretation, snapshot: KnowledgeSnapshot, locale: Locale): ComposedAnswer | null {
   const c = new Composer(snapshot, locale);
-  const { experience, technology, topicTokens, post, media } = interpretation;
+  const { experience, technology, topicTokens, post, media, issuer, language, topic } = interpretation;
   switch (interpretation.intent) {
     case "profile": return c.profile();
     case "employers": return c.employers();
@@ -383,5 +497,12 @@ export function composeAnswer(interpretation: Interpretation, snapshot: Knowledg
     case "hobbies": return c.hobbies();
     case "socialLink": return c.socialLink(media!);
     case "socialLinks": return c.socialLinks();
+    case "education": return c.education();
+    case "certifications": return c.certifications();
+    case "issuerCertifications": return c.certifications(issuer!);
+    case "languages": return c.languages();
+    case "languageProficiency": return c.languageProficiency(language!);
+    case "topicSummary": return c.topicSummary(topic!);
+    case "companyHighlights": return c.companyHighlights(experience!);
   }
 }

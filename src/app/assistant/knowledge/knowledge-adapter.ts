@@ -5,8 +5,10 @@
  * partial dataset). Optional fields that are absent stay absent; unsafe link schemes are dropped.
  */
 import {
-  AboutRecord, ASSISTANT_LOCALES, Excerpt, ExperienceLocaleFields, ExperienceRecord, KnowledgeSnapshot, Locale,
-  MediaRecord, PostLocaleFields, PostRecord, SourcedDate, SourcedText
+  AboutRecord, ASSISTANT_LOCALES, CERTIFICATION_TYPES, CertificationRecord, CertificationType, EducationLocaleFields,
+  EducationRecord, Excerpt, ExperienceLocaleFields, ExperienceRecord, KnowledgeSnapshot, LanguageLocaleFields,
+  LanguageRecord, Locale, MediaRecord, PostLocaleFields, PostRecord, SourcedDate, SourcedPartialDate, SourcedText,
+  TopicLocaleFields, TopicRecord
 } from "../models/assistant.models";
 import { htmlToLine, htmlToParagraphs } from "./plain-text";
 
@@ -26,6 +28,7 @@ export interface RawKnowledge {
 type JsonObject = Record<string, unknown>;
 
 const DATE_FORMAT = /^(\d{2})-(\d{2})-(\d{4})$/;
+const PARTIAL_DATE_FORMAT = /^(?:(\d{2})-)?(\d{4})$/;
 
 function isObject(value: unknown): value is JsonObject {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -58,6 +61,25 @@ export function parseCvDate(raw: unknown, pointer: string): SourcedDate | undefi
 
 export function compareDates(a: SourcedDate, b: SourcedDate): number {
   return (a.year - b.year) || (a.month - b.month) || (a.day - b.day);
+}
+
+/** Parses YYYY or MM-YYYY; returns undefined for anything else. */
+export function parsePartialDate(raw: unknown, pointer: string): SourcedPartialDate | undefined {
+  const match = typeof raw === "string" ? PARTIAL_DATE_FORMAT.exec(raw) : null;
+  if (!match) {
+    return undefined;
+  }
+  const year = Number(match[2]);
+  if (match[1] === undefined) {
+    return { year, raw: raw as string, pointer };
+  }
+  const month = Number(match[1]);
+  return month >= 1 && month <= 12 ? { year, month, raw: raw as string, pointer } : undefined;
+}
+
+/** Orders partial dates; a year-only value sorts before any month of that year. */
+export function comparePartialDates(a: SourcedPartialDate, b: SourcedPartialDate): number {
+  return (a.year - b.year) || ((a.month ?? 0) - (b.month ?? 0));
 }
 
 /** Accepts only absolute http(s) URLs. */
@@ -136,6 +158,53 @@ class Validator {
       this.fail(fieldPointer, "must be a valid MM-DD-YYYY date");
     }
     return date;
+  }
+
+  partialDate(owner: JsonObject, key: string, pointer: string, required: boolean): SourcedPartialDate | undefined {
+    const fieldPointer = `${pointer}/${key}`;
+    if (owner[key] === undefined || owner[key] === null) {
+      if (required) {
+        this.fail(fieldPointer, "is required");
+      }
+      return undefined;
+    }
+    const date = parsePartialDate(owner[key], fieldPointer);
+    if (!date) {
+      this.fail(fieldPointer, "must be a valid YYYY or MM-YYYY date");
+    }
+    return date;
+  }
+
+  /** An optional array of non-empty strings, each converted from inert HTML to one plain line. */
+  lines(owner: JsonObject, key: string, pointer: string): SourcedText[] {
+    const lines: SourcedText[] = [];
+    this.array(owner, key, pointer, false).forEach((raw, index) => {
+      const itemPointer = `${pointer}/${key}/${index}`;
+      const value = typeof raw === "string" ? htmlToLine(raw) : "";
+      if (!value) {
+        this.fail(itemPointer, "must be a non-empty string");
+        return;
+      }
+      lines.push({ value, pointer: itemPointer });
+    });
+    return lines;
+  }
+
+  /** Reads the optional `key` array of objects, calling `read` for each valid object. */
+  records<T>(owner: JsonObject, key: string, read: (item: JsonObject, pointer: string) => T | undefined): T[] {
+    const records: T[] = [];
+    this.array(owner, key, "", false).forEach((item, index) => {
+      const pointer = `/${key}/${index}`;
+      if (!isObject(item)) {
+        this.fail(pointer, "must be an object");
+        return;
+      }
+      const record = read(item, pointer);
+      if (record !== undefined) {
+        records.push(record);
+      }
+    });
+    return records;
   }
 
   array(owner: JsonObject, key: string, pointer: string, required: boolean): unknown[] {
@@ -223,7 +292,98 @@ function adaptAbout(raw: unknown, v: Validator): AboutRecord | undefined {
     }
   });
 
-  return { descriptions, medias, hobbies };
+  const education = v.records<EducationRecord>(raw, "education", (item, pointer) => {
+    const school = v.text(item, "school", pointer, true, true);
+    const start = v.partialDate(item, "startAt", pointer, false);
+    const end = v.partialDate(item, "endAt", pointer, false);
+    if (start && end && comparePartialDates(end, start) < 0) {
+      v.fail(`${pointer}/endAt`, "is before startAt");
+    }
+    const locales = v.locales<EducationLocaleFields>(item, pointer, (entry, entryPointer) => {
+      const degree = v.text(entry, "degree", entryPointer, true, true);
+      const field = v.text(entry, "fieldOfStudy", entryPointer, false, true);
+      return degree ? { degree, ...(field ? { field } : {}) } : undefined;
+    });
+    return school ? { school, ...(start ? { start } : {}), ...(end ? { end } : {}), locales } : undefined;
+  });
+
+  const certifications = v.records<CertificationRecord>(raw, "certifications", (item, pointer) => {
+    const name = v.text(item, "name", pointer, true, true);
+    const issuer = v.text(item, "issuer", pointer, true, true);
+    const type = v.text(item, "type", pointer, true);
+    if (type && !CERTIFICATION_TYPES.includes(type.value as CertificationType)) {
+      v.fail(type.pointer, `must be one of ${CERTIFICATION_TYPES.join(", ")}`);
+    }
+    const issued = v.partialDate(item, "issuedAt", pointer, true);
+    const expires = v.partialDate(item, "expiresAt", pointer, false);
+    if (issued && expires && comparePartialDates(expires, issued) < 0) {
+      v.fail(`${pointer}/expiresAt`, "is before issuedAt");
+    }
+    const http = v.text(item, "url", pointer, false);
+    const url = safeExternalUrl(http?.value);
+    if (!name || !issuer || !type || !CERTIFICATION_TYPES.includes(type.value as CertificationType) || !issued) {
+      return undefined;
+    }
+    return {
+      pointer, name, issuer, type: type as CertificationRecord["type"], issued,
+      ...(expires ? { expires } : {}),
+      ...(url && http ? { url: { value: url, pointer: http.pointer } } : {})
+    };
+  });
+
+  const languageCodes = new Set<string>();
+  const languages = v.records<LanguageRecord>(raw, "languages", (item, pointer) => {
+    const code = v.text(item, "code", pointer, true);
+    if (code && languageCodes.has(code.value)) {
+      v.fail(code.pointer, `duplicates language "${code.value}"`);
+    } else if (code) {
+      languageCodes.add(code.value);
+    }
+    const locales = v.locales<LanguageLocaleFields>(item, pointer, (entry, entryPointer) => {
+      const name = v.text(entry, "name", entryPointer, true, true);
+      const proficiency = v.text(entry, "proficiency", entryPointer, true, true);
+      return name && proficiency ? { name, proficiency } : undefined;
+    });
+    return code ? { code, locales } : undefined;
+  });
+
+  const topicIds = new Set<string>();
+  const topics = v.records<TopicRecord>(raw, "topics", (item, pointer) => {
+    const id = v.text(item, "id", pointer, true);
+    if (id && topicIds.has(id.value)) {
+      v.fail(id.pointer, `duplicates topic "${id.value}"`);
+    } else if (id) {
+      topicIds.add(id.value);
+    }
+    const aliases = v.lines(item, "aliases", pointer);
+    const experienceIds: number[] = [];
+    v.array(item, "experienceIds", pointer, true).forEach((experienceId, index) => {
+      if (typeof experienceId !== "number" || !Number.isInteger(experienceId)) {
+        v.fail(`${pointer}/experienceIds/${index}`, "must be an integer");
+      } else if (!experienceIds.includes(experienceId)) {
+        experienceIds.push(experienceId);
+      }
+    });
+    if (experienceIds.length === 0) {
+      v.fail(`${pointer}/experienceIds`, "must list at least one experience");
+    }
+    const locales = v.locales<TopicLocaleFields>(item, pointer, (entry, entryPointer) => {
+      const name = v.text(entry, "name", entryPointer, true, true);
+      const summary = v.excerpt(entry, "summary", entryPointer);
+      return name && summary ? { name, summary } : undefined;
+    });
+    return id ? { id, aliases, experienceIds, locales } : undefined;
+  });
+
+  return { descriptions, medias, hobbies, education, certifications, languages, topics };
+}
+
+/** Topics may only point at experiences that exist. */
+function checkTopicLinks(about: AboutRecord, experiences: readonly ExperienceRecord[], v: Validator): void {
+  const ids = new Set(experiences.map(e => e.id));
+  about.topics.forEach((topic, index) => topic.experienceIds
+    .filter(id => !ids.has(id))
+    .forEach(id => v.fail(`/topics/${index}/experienceIds`, `names unknown experience ID ${id}`)));
 }
 
 function adaptExperiences(raw: unknown, v: Validator): ExperienceRecord[] {
@@ -271,10 +431,11 @@ function adaptExperiences(raw: unknown, v: Validator): ExperienceRecord[] {
       const description = v.excerpt(entry, "description", entryPointer);
       const city = v.text(entry, "city", entryPointer, false, true);
       const country = v.text(entry, "country", entryPointer, false, true);
+      const highlights = v.lines(entry, "highlights", entryPointer);
       if (!role || !description) {
         return undefined;
       }
-      return { role, description, ...(city ? { city } : {}), ...(country ? { country } : {}) };
+      return { role, description, ...(city ? { city } : {}), ...(country ? { country } : {}), highlights };
     });
     if (typeof id === "number" && typeof position === "number" && companyName && start) {
       records.push({ id, position, companyName, start, ...(end ? { end } : {}), technologies, locales });
@@ -328,6 +489,9 @@ export function adaptKnowledge(raw: RawKnowledge): KnowledgeSnapshot {
     experiences: adaptExperiences(raw.experiences, experiences),
     posts: adaptPosts(raw.posts, posts)
   };
+  if (snapshot.about) {
+    checkTopicLinks(snapshot.about, snapshot.experiences, about);
+  }
   const prefix = (file: string) => (issue: string) => issue.startsWith(file) ? issue : `${file} ${issue}`;
   const issues = [
     ...about.issues.map(prefix("about.json")),

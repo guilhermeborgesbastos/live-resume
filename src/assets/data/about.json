@@ -43,5 +43,304 @@
             "icon": "book",
             "title": "Read"
         }
+    ],
+    "education": [
+        {
+            "school": "UniFACTHUS - Centro Universitário",
+            "startAt": "2013",
+            "endAt": "2017",
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "degree": "Higher Education Degree",
+                    "fieldOfStudy": "Computer Systems Analysis"
+                },
+                {
+                    "language": "pt",
+                    "degree": "Ensino superior",
+                    "fieldOfStudy": "Análise de Sistemas de Computação"
+                }
+            ]
+        }
+    ],
+    "certifications": [
+        {
+            "name": "Swisscom Security Champion 2026/27",
+            "issuer": "Swisscom",
+            "type": "badge",
+            "issuedAt": "07-2026",
+            "expiresAt": "07-2027",
+            "url": "https://www.credly.com/badges/44e395a6-de2b-417a-bf54-4a0f8f139399/linked_in_profile"
+        },
+        {
+            "name": "Certificate: Introduction to agent skills",
+            "issuer": "Anthropic",
+            "type": "course",
+            "issuedAt": "05-2026",
+            "url": "https://verify.skilljar.com/c/6p5g52dhz7jv"
+        },
+        {
+            "name": "Certificate: Introduction to Claude Cowork",
+            "issuer": "Anthropic",
+            "type": "course",
+            "issuedAt": "05-2026",
+            "url": "https://verify.skilljar.com/c/wd8y9ubneu5x"
+        },
+        {
+            "name": "Certificate: Introduction to subagents",
+            "issuer": "Anthropic",
+            "type": "course",
+            "issuedAt": "05-2026",
+            "url": "https://verify.skilljar.com/c/t3pbf67odbfw"
+        },
+        {
+            "name": "Certificate: Claude code 101",
+            "issuer": "Anthropic",
+            "type": "course",
+            "issuedAt": "05-2026",
+            "url": "https://verify.skilljar.com/c/hbj956t72s6u"
+        },
+        {
+            "name": "Certificate: AI Capabilities and Limitations",
+            "issuer": "Anthropic",
+            "type": "course",
+            "issuedAt": "05-2026",
+            "url": "https://verify.skilljar.com/c/npt9kfitjzyb"
+        },
+        {
+            "name": "AWS Certified Cloud Practitioner",
+            "issuer": "Amazon Web Services (AWS)",
+            "type": "certification",
+            "issuedAt": "06-2022",
+            "url": "https://www.credly.com/badges/e8bfc40c-cc61-4307-8c29-84b57f5c931b?source=linked_in_profile"
+        },
+        {
+            "name": "Software Architecture: Patterns for Developers",
+            "issuer": "LinkedIn Learning",
+            "type": "course",
+            "issuedAt": "12-2021",
+            "url": "https://www.linkedin.com/learning/certificates/31406ebb0ff906ae15e3219c69f25dab0ff3bec99d1b58e093f39c3e5c4d1130/"
+        },
+        {
+            "name": "M312: MongoDB Diagnostics and Debugging",
+            "issuer": "MongoDB",
+            "type": "course",
+            "issuedAt": "03-2019",
+            "url": "http://university.mongodb.com/course_completion/1c9a3d63-52aa-47bb-ae47-eff1a3d2"
+        },
+        {
+            "name": "M201: MongoDB Performance",
+            "issuer": "MongoDB",
+            "type": "course",
+            "issuedAt": "01-2019",
+            "url": "https://university.mongodb.com/course_completion/5e3475e6-1d7a-4112-8df1-82632697"
+        },
+        {
+            "name": "English Proficiency Exchange, San Diego, CA",
+            "issuer": "Embassy English",
+            "type": "course",
+            "issuedAt": "06-2015"
+        }
+    ],
+    "languages": [
+        {
+            "code": "en",
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "name": "English",
+                    "proficiency": "Native or bilingual proficiency"
+                },
+                {
+                    "language": "pt",
+                    "name": "inglês",
+                    "proficiency": "nível nativo ou bilíngue"
+                }
+            ]
+        },
+        {
+            "code": "pt",
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "name": "Portuguese",
+                    "proficiency": "Native or bilingual proficiency"
+                },
+                {
+                    "language": "pt",
+                    "name": "português",
+                    "proficiency": "nível nativo ou bilíngue"
+                }
+            ]
+        }
+    ],
+    "topics": [
+        {
+            "id": "devops",
+            "experienceIds": [
+                6
+            ],
+            "aliases": [
+                "devops",
+                "ci/cd",
+                "infrastructure as code",
+                "infraestrutura como código",
+                "observability",
+                "observabilidade",
+                "monitoring",
+                "monitoramento"
+            ],
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "name": "DevOps",
+                    "summary": "At Swisscom I build automated CI/CD pipelines and container deployments with Docker and Kubernetes. I also work on AWS infrastructure managed with Infrastructure as Code, and I built observability stacks with Prometheus, Grafana and ELK that cut incident response times. Teams across the organization have adopted the reusable DevOps patterns I created."
+                },
+                {
+                    "language": "pt",
+                    "name": "DevOps",
+                    "summary": "Na Swisscom, crio pipelines de CI/CD automatizados e deploys em containers com Docker e Kubernetes. Também cuido da infraestrutura na AWS com Infrastructure as Code e montei stacks de observabilidade com Prometheus, Grafana e ELK, que reduziram o tempo de resposta a incidentes. Os padrões DevOps reutilizáveis que criei foram adotados por times de toda a organização."
+                }
+            ]
+        },
+        {
+            "id": "leadership",
+            "experienceIds": [
+                4,
+                5
+            ],
+            "aliases": [
+                "leadership",
+                "liderança",
+                "mentoring",
+                "mentoria",
+                "team lead",
+                "team leadership",
+                "pod leader",
+                "liderança técnica"
+            ],
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "name": "leadership and mentoring",
+                    "summary": "At Skydreamer I led a small remote team, prioritized the roadmap and tracked delivery KPIs. At QAT Global I was Pod-Leader: I mentored junior developers and helped set the coding practices the teams shared."
+                },
+                {
+                    "language": "pt",
+                    "name": "liderança e mentoria",
+                    "summary": "Na Skydreamer, liderei um pequeno time remoto, priorizei o roadmap e acompanhei os KPIs de entrega. Na QAT Global, fui Pod-Leader: orientei desenvolvedores juniores e ajudei a definir as práticas de código compartilhadas pelos times."
+                }
+            ]
+        },
+        {
+            "id": "full-stack",
+            "experienceIds": [
+                2,
+                3,
+                4,
+                5,
+                6
+            ],
+            "aliases": [
+                "full stack",
+                "fullstack",
+                "web development",
+                "desenvolvimento web",
+                "backend",
+                "frontend"
+            ],
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "name": "full-stack development",
+                    "summary": "I have built full-stack software for e-commerce stores, custom web and mobile apps, a group travel app, smart-utility analytics and enterprise connectivity. The work covers APIs, databases, user interfaces and the infrastructure that delivers them."
+                },
+                {
+                    "language": "pt",
+                    "name": "desenvolvimento full-stack",
+                    "summary": "Desenvolvi software full-stack para lojas de e-commerce, aplicações web e mobile sob medida, um app de viagem em grupo, análise de dados de utilities e conectividade empresarial. O trabalho inclui APIs, bancos de dados, interfaces e a infraestrutura de entrega."
+                }
+            ]
+        },
+        {
+            "id": "data-performance",
+            "experienceIds": [
+                5
+            ],
+            "aliases": [
+                "data",
+                "dados",
+                "big data",
+                "performance",
+                "data performance"
+            ],
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "name": "data and performance",
+                    "summary": "At QAT Global I built data ingestion and visualization components for a smart-meter analytics dashboard, and optimized MongoDB queries and batch processing scripts so they scaled."
+                },
+                {
+                    "language": "pt",
+                    "name": "dados e performance",
+                    "summary": "Na QAT Global, desenvolvi componentes de ingestão e visualização de dados para um dashboard de análise de medidores inteligentes e otimizei consultas no MongoDB e scripts de batch para que escalassem."
+                }
+            ]
+        },
+        {
+            "id": "knowledge-sharing",
+            "experienceIds": [
+                6
+            ],
+            "aliases": [
+                "tech talk",
+                "tech talks",
+                "talks",
+                "public speaking",
+                "palestras",
+                "build metrics"
+            ],
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "name": "knowledge sharing",
+                    "summary": "At Swisscom I gave a tech talk on build metrics and trends to more than 265 people, on site and online, with audiences in Rotterdam, Riga and Switzerland."
+                },
+                {
+                    "language": "pt",
+                    "name": "compartilhamento de conhecimento",
+                    "summary": "Na Swisscom, apresentei uma tech talk sobre métricas e tendências de build para mais de 265 pessoas, presencialmente e online, com públicos em Rotterdão, Riga e na Suíça."
+                }
+            ]
+        },
+        {
+            "id": "ai-automation",
+            "experienceIds": [
+                6
+            ],
+            "aliases": [
+                "ai",
+                "ia",
+                "artificial intelligence",
+                "inteligência artificial",
+                "automation",
+                "automação",
+                "llm",
+                "agent skills",
+                "hackathon"
+            ],
+            "internationalizations": [
+                {
+                    "language": "en",
+                    "name": "AI and automation",
+                    "summary": "At the Swisscom ETS Hackathon, my team built custom AI skills that automate repetitive code changes."
+                },
+                {
+                    "language": "pt",
+                    "name": "IA e automação",
+                    "summary": "No ETS Hackathon da Swisscom, meu time criou skills de IA personalizadas que automatizam mudanças repetitivas de código."
+                }
+            ]
+        }
     ]
 }

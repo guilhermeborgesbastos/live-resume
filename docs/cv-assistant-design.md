@@ -164,7 +164,7 @@ flowchart TD
 
 ### 4.3 Patterns (`question-patterns.ts`)
 
-- 139 reviewed body patterns, grouped by 17 intents and by language (EN/PT).
+- 191 reviewed body patterns, grouped by 24 intents and by language (EN/PT).
 - Each is compiled to `^PREFIX BODY SUFFIX$`. PREFIX allows only polite openings ("please", "can you tell me", "por favor", "você pode me dizer"...), and SUFFIX only ", please" / ", por favor".
 - **Slots** are the only free parts: `{company}`, `{technology}`, `{topic}`, `{title}`, `{network}`, compiled to lazy named groups `(?<company>.+?)`.
 - A question may use either language's patterns. The **answer language is always the site locale**.
@@ -428,7 +428,7 @@ Unit specs run against the **real** JSON (imported in specs only), so a content 
 
 ## 12. Open questions for review
 
-1. **Coverage vs. strictness.** 139 patterns cover the documented intents. Should more phrasings be added, e.g. "tell me about your hobbies", "what did you study"? Anything new must stay grounded, and education is not in the JSON today.
+1. **Coverage vs. strictness.** 191 patterns cover the documented intents. Should more phrasings be added, e.g. "tell me about your hobbies", "did you graduate"? Anything new must stay grounded; the education record has years of study but no completion status.
 2. **Broad patterns.** `tell me about {company}` and `what is your {network}` are deliberately broad, kept safe only by slot resolution. Are they acceptable, or should they be narrowed?
 3. **Hard-coded aliases.** `COMPANY_ALIASES` names current companies (`swisscom`, `qat`, `deevo`, `facil`). They point to data and create no facts, but they need upkeep when companies are renamed. Keep, or rely only on the legal-form rule?
 4. **Duplicate requests.** The welcome dialog loads the knowledge on every resume visit, to check its shortcuts. That is three JSON requests on top of the sections' own fetches, since `DataService` doesn't cache. Options: share a cached `DataService`, or load only on first interaction and show the shortcuts afterwards.

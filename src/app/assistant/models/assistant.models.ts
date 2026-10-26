@@ -25,6 +25,15 @@ export interface SourcedDate {
   readonly pointer: string;
 }
 
+/** A YYYY or MM-YYYY value (education years, certificate dates), kept at the precision the CV gives. */
+export interface SourcedPartialDate {
+  readonly year: number;
+  /** 1-12; absent when the CV gives only a year. */
+  readonly month?: number;
+  readonly raw: string;
+  readonly pointer: string;
+}
+
 /** Plain-text paragraphs converted from an HTML field (lines inside a paragraph are joined by "\n"). */
 export interface Excerpt {
   readonly paragraphs: readonly string[];
@@ -38,10 +47,68 @@ export interface MediaRecord {
   readonly url?: SourcedText;
 }
 
+export interface EducationLocaleFields {
+  readonly degree: SourcedText;
+  readonly field?: SourcedText;
+}
+
+export interface EducationRecord {
+  readonly school: SourcedText;
+  readonly start?: SourcedPartialDate;
+  readonly end?: SourcedPartialDate;
+  readonly locales: Readonly<Partial<Record<Locale, EducationLocaleFields>>>;
+}
+
+/** A professional certification exam, a course-completion certificate, or a program badge. */
+export type CertificationType = "certification" | "course" | "badge";
+export const CERTIFICATION_TYPES: readonly CertificationType[] = ["certification", "course", "badge"];
+
+export interface CertificationRecord {
+  /** JSON pointer of the record ("/certifications/3"), used as its identity in citations. */
+  readonly pointer: string;
+  readonly name: SourcedText;
+  readonly issuer: SourcedText;
+  readonly type: SourcedText & { readonly value: CertificationType };
+  readonly issued: SourcedPartialDate;
+  /** Absent when the CV lists no expiry date (which does not confirm current validity). */
+  readonly expires?: SourcedPartialDate;
+  /** Only present when the source URL parsed as http(s). */
+  readonly url?: SourcedText;
+}
+
+export interface LanguageLocaleFields {
+  readonly name: SourcedText;
+  /** The self-reported level, exactly as the CV words it. */
+  readonly proficiency: SourcedText;
+}
+
+export interface LanguageRecord {
+  readonly code: SourcedText;
+  readonly locales: Readonly<Partial<Record<Locale, LanguageLocaleFields>>>;
+}
+
+export interface TopicLocaleFields {
+  readonly name: SourcedText;
+  readonly summary: Excerpt;
+}
+
+/** A summary written for the CV about one area of work, linked to the experiences it covers. */
+export interface TopicRecord {
+  readonly id: SourcedText;
+  /** Extra wordings (either language) that name this topic in a question. */
+  readonly aliases: readonly SourcedText[];
+  readonly experienceIds: readonly number[];
+  readonly locales: Readonly<Partial<Record<Locale, TopicLocaleFields>>>;
+}
+
 export interface AboutRecord {
   readonly descriptions: Readonly<Partial<Record<Locale, Excerpt>>>;
   readonly medias: readonly MediaRecord[];
   readonly hobbies: readonly SourcedText[];
+  readonly education: readonly EducationRecord[];
+  readonly certifications: readonly CertificationRecord[];
+  readonly languages: readonly LanguageRecord[];
+  readonly topics: readonly TopicRecord[];
 }
 
 export interface ExperienceLocaleFields {
@@ -49,6 +116,8 @@ export interface ExperienceLocaleFields {
   readonly description: Excerpt;
   readonly city?: SourcedText;
   readonly country?: SourcedText;
+  /** Short result bullets for the role; empty when the CV lists none. */
+  readonly highlights: readonly SourcedText[];
 }
 
 export interface ExperienceRecord {
@@ -92,7 +161,7 @@ export type CitationTarget =
 
 export interface SourceRef {
   readonly file: SourceFile;
-  /** "about", the experience ID, or the post's unique URL. */
+  /** "about", a certification's JSON pointer, the experience ID, or the post's unique URL. */
   readonly recordKey: string;
   /** Exact JSON pointers (into `file`) of every field the answer used from this record. */
   readonly pointers: readonly string[];
@@ -132,7 +201,14 @@ export type IntentId =
   | "postSummary"
   | "hobbies"
   | "socialLink"
-  | "socialLinks";
+  | "socialLinks"
+  | "education"
+  | "certifications"
+  | "issuerCertifications"
+  | "languages"
+  | "languageProficiency"
+  | "topicSummary"
+  | "companyHighlights";
 
 export type FallbackReason =
   /** No reviewed pattern matches the whole question. */

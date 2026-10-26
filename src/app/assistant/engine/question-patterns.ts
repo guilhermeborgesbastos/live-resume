@@ -9,7 +9,7 @@
  */
 import { IntentId, Locale } from "../models/assistant.models";
 
-export type SlotName = "company" | "technology" | "topic" | "title" | "network";
+export type SlotName = "company" | "technology" | "topic" | "title" | "network" | "issuer" | "language" | "area";
 
 export interface QuestionPattern {
   readonly intent: IntentId;
@@ -22,7 +22,10 @@ const SLOTS: Readonly<Record<SlotName, string>> = {
   technology: "(?<technology>.+?)",
   topic: "(?<topic>.+?)",
   title: "(?<title>.+?)",
-  network: "(?<network>.+?)"
+  network: "(?<network>.+?)",
+  issuer: "(?<issuer>.+?)",
+  language: "(?<language>.+?)",
+  area: "(?<area>.+?)"
 };
 
 // Polite openings and closings allowed around any English/Portuguese question.
@@ -40,6 +43,8 @@ const YOU = "(?:voce|vc)";
 const PT_AT = "(?:na|no|em|pela|pelo|com a|com o)";
 const PT_CV = "(?:curriculo|cv)";
 const TELL_PT = "(?:me )?(?:fale|fala|conte|conta)(?:-me)?(?: um pouco)?";
+const CERTIFICATES = "(?:certifications?|certificates?)";
+const PT_CERTIFICATES = "(?:certificacao|certificacoes|certificado|certificados)";
 
 const EN: Readonly<Record<IntentId, readonly string[]>> = {
   profile: [
@@ -149,6 +154,50 @@ const EN: Readonly<Record<IntentId, readonly string[]>> = {
     `${WHAT_ARE} your social (?:media|networks?)(?: profiles| links| accounts)?`,
     "where can i find you online",
     "(?:list|show me) your (?:social media |social )?(?:profiles|links)"
+  ],
+  education: [
+    "(?:what|where) did you study",
+    `${WHAT_IS} your (?:educational background|education|academic background|degree)`,
+    "(?:which|what) degree do you have",
+    "tell me about your education",
+    "(?:which|what) (?:university|college) did you (?:go to|attend)"
+  ],
+  certifications: [
+    `(?:which|what) ${CERTIFICATES} do you have`,
+    `(?:which|what) ${CERTIFICATES} have you (?:earned|got|gotten|obtained|completed)`,
+    `${WHAT_ARE} your ${CERTIFICATES}`,
+    `(?:list|show me) your ${CERTIFICATES}`,
+    `do you have any ${CERTIFICATES}`
+  ],
+  issuerCertifications: [
+    `(?:which|what) {issuer} ${CERTIFICATES} do you have`,
+    `do you have (?:any |an? )?{issuer} ${CERTIFICATES}`,
+    "are you {issuer} certified",
+    `(?:list|show me) your {issuer} ${CERTIFICATES}`
+  ],
+  languages: [
+    "(?:which|what) languages do you speak",
+    "(?:which|what) languages can you speak",
+    "how many languages do you speak",
+    "(?:list|show me) the languages you speak"
+  ],
+  languageProficiency: [
+    "(?:do|can) you speak {language}(?: fluently)?",
+    "how (?:well|fluently) do you speak {language}",
+    `${WHAT_IS} your {language} (?:level|proficiency)`,
+    `${WHAT_IS} your (?:level of|proficiency in) {language}`
+  ],
+  topicSummary: [
+    "(?:summarize|describe) (?:your|his) {area} (?:work|experience|background)",
+    "(?:summarize|describe) (?:your|his) experience (?:in|with) {area}",
+    "tell me about (?:your|his) {area} (?:work|experience|background)",
+    "tell me about (?:your|his) experience (?:in|with) {area}",
+    `(?:${WHAT_IS}|what was) (?:your|his) {area} experience`,
+    "what experience do you have (?:in|with) {area}"
+  ],
+  companyHighlights: [
+    `what did you achieve ${AT} {company}`,
+    `(?:${WHAT_ARE}|what were) your (?:key |main )?(?:achievements|accomplishments|results) ${AT} {company}`
   ]
 };
 
@@ -251,6 +300,42 @@ const PT: Readonly<Record<IntentId, readonly string[]>> = {
     "quais sao (?:as )?suas redes sociais",
     "onde (?:posso|consigo) (?:te )?(?:encontrar|seguir) (?:online|na internet|nas redes sociais)",
     "(?:liste|mostre) (?:as )?suas redes sociais"
+  ],
+  education: [
+    `(?:o que|onde) ${YOU} estudou`,
+    "qual (?:e )?(?:a )?sua formacao(?: academica)?",
+    `${TELL_PT} sobre (?:a )?sua formacao(?: academica)?`,
+    `(?:em )?(?:qual|que) (?:faculdade|universidade) ${YOU} estudou`
+  ],
+  certifications: [
+    `(?:quais|que) ${PT_CERTIFICATES} ${YOU} (?:tem|possui)`,
+    "quais (?:sao )?(?:as |os )?(?:suas certificacoes|seus certificados)",
+    "(?:liste|mostre) (?:as |os )?(?:suas certificacoes|seus certificados)",
+    `${YOU} tem (?:alguma |algum |alguns |algumas )?${PT_CERTIFICATES}`
+  ],
+  issuerCertifications: [
+    `(?:quais|que) ${PT_CERTIFICATES} (?:da |do |de )?{issuer} ${YOU} (?:tem|possui)`,
+    `${YOU} tem (?:alguma |algum |alguns |algumas )?${PT_CERTIFICATES} (?:da |do |de |em )?{issuer}`,
+    `${YOU} e certificado (?:pela |pelo |em |na |no )?{issuer}`
+  ],
+  languages: [
+    `(?:quais|que) (?:idiomas|linguas) ${YOU} fala`,
+    "quais (?:sao )?(?:os )?(?:seus )?idiomas",
+    `${YOU} fala (?:quais|que) (?:idiomas|linguas)`
+  ],
+  languageProficiency: [
+    `${YOU} fala {language}(?: fluentemente| bem)?`,
+    "qual (?:e )?(?:o )?seu nivel de {language}",
+    `${YOU} e fluente em {language}`
+  ],
+  topicSummary: [
+    `(?:${TELL_PT} sobre|resuma|descreva) (?:a )?sua experiencia (?:com|em) {area}`,
+    `(?:${TELL_PT} sobre|resuma|descreva) (?:o )?seu trabalho (?:com|em) {area}`,
+    "qual (?:e )?(?:a )?sua experiencia (?:com|em) {area}"
+  ],
+  companyHighlights: [
+    `o que ${YOU} (?:conquistou|alcancou) ${PT_AT} {company}`,
+    `quais (?:foram|sao) (?:as )?suas (?:principais )?(?:conquistas|realizacoes) ${PT_AT} {company}`
   ]
 };
 
@@ -289,7 +374,8 @@ const EN_CONTEXT: ContextRegistry = [
   ["companyTechnologies", "same", "(?:and )?what (?:was|is) (?:your|the) (?:tech|technology) stack there"],
   ["companyRole", "same", "(?:and )?what (?:was|is) your (?:role|position|job title|title) there"],
   ["companyDates", "same", "(?:and )?when (?:was that|did you work there)"],
-  ["companyLocation", "same", "(?:and )?where was that(?: role| job)?"]
+  ["companyLocation", "same", "(?:and )?where was that(?: role| job)?"],
+  ["companyHighlights", "same", "(?:and )?what did you achieve there"]
 ];
 
 const PT_CONTEXT: ContextRegistry = [
@@ -299,7 +385,8 @@ const PT_CONTEXT: ContextRegistry = [
   ["companyTechnologies", "same", `(?:e )?(?:quais|que) tecnologias ${YOU} (?:usou|utilizou) (?:la|ali)`],
   ["companyRole", "same", "(?:e )?qual (?:era|e|foi) (?:o )?seu cargo (?:la|ali)"],
   ["companyDates", "same", `(?:e )?quando (?:foi isso|${YOU} trabalhou (?:la|ali))`],
-  ["companyLocation", "same", "(?:e )?onde (?:foi|era) isso"]
+  ["companyLocation", "same", "(?:e )?onde (?:foi|era) isso"],
+  ["companyHighlights", "same", `(?:e )?o que ${YOU} conquistou (?:la|ali)`]
 ];
 
 function compileContext(language: Locale, registry: ContextRegistry): ContextPattern[] {

@@ -51,6 +51,13 @@ Patterns match the whole question after folding case, accents and typographic qu
 | Hobbies | What are your hobbies? | Quais são os seus hobbies? | `about.hobbies[].title` (PT labels via a reviewed translation table) |
 | Social link | Where can I find your GitHub profile? | Qual é o seu GitHub? | The matching `about.medias` URL |
 | Social links | What are your social media profiles? | Quais são suas redes sociais? | Every `about.medias` URL |
+| Education | What did you study? | O que você estudou? | `about.education`: degree, field of study, school, years (no completion status) |
+| Certifications | Which certifications do you have? | Quais certificações você tem? | Every `about.certifications` entry, newest first, typed as certification / course certificate / badge, with a note that issue dates do not confirm current validity |
+| Issuer certifications | Are you AWS certified? | Você é certificado pela AWS? | The certifications from that issuer, with the same validity note |
+| Languages | Which languages do you speak? | Quais idiomas você fala? | `about.languages` names with the self-reported level |
+| Language proficiency | Do you speak English? | Você fala inglês? | That language's self-reported level; an unlisted language falls back |
+| Topic summary | Summarize your DevOps work. | Resuma sua experiência em DevOps. | The topic's `summary` excerpt from `about.topics`, plus the roles it lists in `experienceIds` |
+| Company highlights | What did you achieve at Swisscom? | O que você conquistou na Swisscom? | That role's `highlights` |
 
 **Entity resolution.** Company, technology, profile and post-title slots must resolve to the data:
 
@@ -58,6 +65,9 @@ Patterns match the whole question after folding case, accents and typographic qu
 - Technologies: exact values, a documented variant rule (`X (qualifier)` is a variant of `X`, so "Java" also finds "Java (Android)"), and reviewed aliases in `TECHNOLOGY_ALIASES` ("JS" → "Javascript", "Node" → "Node.js", "Postgres" → "PostgreSQL", ...). Java never matches JavaScript and Angular never matches AngularJS.
 - Profiles: `about.medias` titles and icons ("GitHub", "LinkedIn", "Facebook").
 - Post titles: an exact title in either language, quotes optional.
+- Certificate issuers: the issuer as listed, and for "Name (ABBR)" also the name or the abbreviation alone ("AWS" → "Amazon Web Services (AWS)").
+- Languages: the language name in either site language ("English", "inglês").
+- Topics: the topic `id`, its localized names and its `aliases` ("CI/CD" → DevOps), with hyphens read as spaces. Topic forms also accept "his" ("Summarize his DevOps work").
 
 An alias only applies when its target exists in the data. A name that matches two records is ambiguous and gets the fallback.
 
@@ -73,8 +83,9 @@ An alias only applies when its target exists in the data. A name that matches tw
 | When was that? / When did you work there? | Quando foi isso? / Quando você trabalhou lá? | Its dates |
 | Where was that? | Onde foi isso? | Its work location |
 | Tell me more | Fale mais sobre isso | Its overview |
+| What did you achieve there? | O que você conquistou lá? | Its highlights |
 
-The answer always names the company, so the visitor can see which role "that" meant. There is no referent after an answer about several records (employers, a technology across roles), a fallback, a clarification, or a cleared conversation; then these follow-ups fall back. "How long were you there?" stays unsupported (no tenure calculation).
+The answer always names the company, so the visitor can see which role "that" meant. A topic summary linked to exactly one role also sets that role as the referent. There is no referent after an answer about several records (employers, a technology across roles), a fallback, a clarification, or a cleared conversation; then these follow-ups fall back. "How long were you there?" stays unsupported (no tenure calculation).
 
 **Near misses.** A name within a small spelling distance of a CV name ("Swiscom", "Javscript", "gitub") is never answered directly. The assistant replies "I couldn’t find that name in my CV exactly. Did you mean one of these questions?" with up to three corrected questions as buttons; nothing is answered until the visitor picks one. The same happens when a name fits several records ("That could refer to more than one thing in my CV…"). Tolerance depends on the name's length: none under 4 characters (so `js`, `ts`, `c#`, `jav` never drift), one edit for 4–7 characters, two from 8. The closest name wins, and exact names always win over aliases and near matches, so "Java" never suggests JavaScript.
 
@@ -82,7 +93,8 @@ The answer always names the company, so the visitor can see which role "that" me
 
 These fall back by design, even when related words appear in the CV:
 
-- Salary, availability, work authorization, language fluency, qualifications, residence, preferences.
+- Salary, availability, work authorization, residence, preferences.
+- A language or certificate the CV does not list ("Do you speak Dutch?", "Which Google certifications do you have?"), whether a certificate is still valid, and whether the degree was completed ("Did you graduate?").
 - Contact details: email and phone are not in the three JSON files (the Contact section is one click away).
 - Tenure or skill calculations ("How many years of AWS experience?"), rankings, job fit.
 - Why/how questions ("Why did you leave QAT Global?") and specific metrics inside descriptions ("What percentage did you reduce incidents by?").
@@ -111,14 +123,14 @@ Each answer lists its sources ("Experience · Swisscom AG", "About me", a post t
 
 | Source | Link |
 | --- | --- |
-| About | `/#about` |
+| About (including education, certifications, languages and topic summaries) | `/#about` |
 | Experience | `/?experienceId=<id>#experience` |
 | Post | `/?post=<url>#posts` |
 | Contact (fallback) | `/#contact` |
 
 `ExperienceComponent` and `PostsComponent` read these parameters after their data loads, and again on every navigation (including back/forward and following the same citation twice). They then select the experience by ID (mapped to its carousel position) or open the posts page that holds the URL, scroll to the section and focus the record. Unknown identifiers leave the carousel as it is. The resume keeps a `#fragment` target in view while its data-driven sections render, so a citation or the contact link lands on the right place on phones too. Only generated record identifiers ever go into the URL, never question or answer text.
 
-Post and profile citations also get an **Open link** to the article or profile, but only for parsed `http(s)` URLs, opened with `rel="noopener noreferrer"`. A source with any other scheme keeps its internal citation and gets no outgoing link.
+Each certification is its own source, labelled with its name, so its credential page can be opened. Post, profile and certification citations also get an **Open link** to the article, profile or credential, but only for parsed `http(s)` URLs, opened with `rel="noopener noreferrer"`. A source with any other scheme keeps its internal citation and gets no outgoing link.
 
 ## Session lifetime and privacy
 
@@ -133,6 +145,8 @@ Post and profile citations also get an **Open link** to the article or profile, 
 Edit the JSON files as before (posts through the [`add-post` skill](add-post-skill.md)); the assistant picks the changes up on the next load. Suggestions and follow-ups are derived from the data and are only shown when they answer. Keep in mind:
 
 - Each record needs an `en` and a `pt` entry. Experiences need `id` (unique integer), `position`, `companyName` and `startAt` (`MM-DD-YYYY`), and `role`/`description` in both languages; posts need a unique `http`, a valid `date` and `title`/`description` in both languages. Invalid data makes the assistant report itself unavailable (the reason is logged with `console.warn`), so run `npm test` after editing.
+- `about.json` also holds optional `education` (`school`, `startAt`/`endAt` as `YYYY`, `degree` and `fieldOfStudy` per language), `certifications` (`name`, `issuer`, `type` of `certification`/`course`/`badge`, `issuedAt` and optional `expiresAt` as `MM-YYYY` or `YYYY`, optional `url`), `languages` (`code`, then `name` and `proficiency` per language) and `topics` (`id`, `aliases`, `experienceIds`, then `name` and `summary` per language). Each experience language entry may list `highlights`. Keep dates at the precision the source gives, record proficiency exactly as stated, and keep course certificates typed as `course`. Topic summaries and highlights are shown word for word, so write them in the first person from facts already in the CV.
+- New issuers, languages and topics work as entities automatically; a topic only answers while every ID in its `experienceIds` exists.
 - A new company name works as an entity automatically. Add a short alias to `COMPANY_ALIASES` only when visitors would use a shorter name that the legal-form rule does not cover.
 - A new hobby title needs a PT translation in `ANSWER_TEMPLATES.pt.hobbyTitles`, otherwise the PT hobbies question falls back.
 - A new file in `src/assets/data/` is not used until it gets an adapter, validation and tests (see below).
@@ -142,10 +156,10 @@ Edit the JSON files as before (posts through the [`add-post` skill](add-post-ski
 Work in this order, and keep uncertain wording unsupported rather than widening a pattern until a test passes:
 
 1. **Fields**: name the JSON fields that answer it, and check that they exist in both languages. Never put a CV fact in code.
-2. **Parser rule**: add the intent to `IntentId` (`models/assistant.models.ts`) and full-question EN and PT forms to `question-patterns.ts`, capturing only declared slots (`{company}`, `{technology}`, `{topic}`, `{title}`, `{network}`).
+2. **Parser rule**: add the intent to `IntentId` (`models/assistant.models.ts`) and full-question EN and PT forms to `question-patterns.ts`, capturing only declared slots (`{company}`, `{technology}`, `{topic}`, `{title}`, `{network}`, `{issuer}`, `{language}`, `{area}`).
 3. **Evidence condition**: slots resolve in `resolve-question.ts`. In `compose-answer.ts`, return `null` whenever the needed field is absent for the locale, which becomes the fallback.
 4. **Template**: add the fixed wording for both locales to `answer-templates.ts`. Its arguments must be values read from the snapshot.
-5. **Provenance**: cite every record through `citeAbout`/`citeExperience`/`citePost`, including the pointer of each field the answer uses, and put each interpolated value in the line's `facts`.
+5. **Provenance**: cite every record through `citeAbout`/`citeCertification`/`citeExperience`/`citePost`, including the pointer of each field the answer uses, and put each interpolated value in the line's `facts`.
 6. **Fixtures**: add EN and PT positive cases and adversarial negative cases to `engine/assistant-engine.spec.ts` (the `POSITIVE`/`NEGATIVE` tables). `expectGrounded` checks that every fact and excerpt equals the JSON at its pointer and is cited.
 
 Do not add an external answer service, fuzzy matching, a similarity threshold or a language model to improve coverage; that would be a separate project with its own cost and privacy review.

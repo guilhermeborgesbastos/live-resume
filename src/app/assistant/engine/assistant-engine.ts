@@ -9,7 +9,7 @@ import {
 } from "../models/assistant.models";
 import { ANSWER_TEMPLATES } from "./answer-templates";
 import { byStartDescending, compareKeys, composeAnswer } from "./compose-answer";
-import { normalizeUtterance, technologyKey, tokenize, validateQuestion } from "./normalize-question";
+import { entityKey, normalizeUtterance, technologyKey, tokenize, validateQuestion } from "./normalize-question";
 import { Interpretation, resolveQuestion, technologyBaseKey } from "./resolve-question";
 
 export { validateQuestion, MAX_QUESTION_LENGTH } from "./normalize-question";
@@ -84,6 +84,9 @@ function subjectOf(interpretation: Interpretation, snapshot: KnowledgeSnapshot):
   if (interpretation.experience) {
     return { experienceId: interpretation.experience.id };
   }
+  if (interpretation.topic?.experienceIds.length === 1) {
+    return { experienceId: interpretation.topic.experienceIds[0] };
+  }
   if (interpretation.intent === "currentRole") {
     const ongoing = snapshot.experiences.filter(e => !e.end);
     return ongoing.length === 1 ? { experienceId: ongoing[0].id } : null;
@@ -125,6 +128,22 @@ function canonicalQuestion(interpretation: Interpretation, snapshot: KnowledgeSn
       return fields ? q.postSummary(fields.title.value) : null;
     }
     case "socialLink": return q.socialLink(interpretation.media!.title.value);
+    case "education": return q.education;
+    case "certifications": return q.certifications;
+    case "languages": return q.languages;
+    case "issuerCertifications": {
+      const certification = snapshot.about.certifications.find(c => entityKey(c.issuer.value) === interpretation.issuer);
+      return certification ? q.issuerCertifications(certification.issuer.value) : null;
+    }
+    case "languageProficiency": {
+      const fields = interpretation.language!.locales[locale];
+      return fields ? q.languageProficiency(fields.name.value) : null;
+    }
+    case "topicSummary": {
+      const fields = interpretation.topic!.locales[locale];
+      return fields ? q.topicSummary(fields.name.value) : null;
+    }
+    case "companyHighlights": return q.companyHighlights(company);
   }
 }
 
@@ -147,12 +166,26 @@ function followUpCandidates(interpretation: Interpretation, snapshot: KnowledgeS
       return ongoing ? [q.companyOverview(ongoing.companyName.value), q.companyTechnologies(ongoing.companyName.value)] : [];
     }
     case "companyOverview":
-      return [q.companyTechnologies(company!), q.companyDates(company!)];
+      return [q.companyHighlights(company!), q.companyTechnologies(company!), q.companyDates(company!)];
     case "companyRole":
     case "companyDates":
     case "companyLocation":
     case "companyTechnologies":
+    case "companyHighlights":
       return [q.companyOverview(company!)];
+    case "education":
+      return [q.certifications];
+    case "certifications":
+    case "issuerCertifications":
+      return [q.education, q.languages];
+    case "languages":
+    case "languageProficiency":
+      return [q.education];
+    case "topicSummary": {
+      const latest = [...snapshot.experiences].sort(byStartDescending)
+        .find(e => interpretation.topic!.experienceIds.includes(e.id));
+      return latest ? [q.companyHighlights(latest.companyName.value)] : [];
+    }
     case "technologyAtCompany":
       return [q.companyTechnologies(company!)];
     case "technologyExperience": {
@@ -213,13 +246,16 @@ export function suggestedQuestions(snapshot: KnowledgeSnapshot, locale: Locale):
   const latest = latestExperience(snapshot);
   const technology = mostListedTechnology(snapshot);
   const topic = mostWrittenAboutTechnology(snapshot, locale);
+  const area = snapshot.about.topics[0]?.locales[locale]?.name.value;
   const candidates: (SuggestedQuestion | null)[] = [
     { intent: "profile", question: q.profile },
     { intent: "currentRole", question: q.currentRole },
     { intent: "employers", question: q.employers },
     latest ? { intent: "companyTechnologies", question: q.companyTechnologies(latest.companyName.value) } : null,
+    area ? { intent: "topicSummary", question: q.topicSummary(area) } : null,
     technology ? { intent: "technologyExperience", question: q.technologyExperience(technology) } : null,
     topic ? { intent: "postSearch", question: q.postSearch(topic) } : null,
+    { intent: "certifications", question: q.certifications },
     { intent: "posts", question: q.posts },
     { intent: "hobbies", question: q.hobbies }
   ];

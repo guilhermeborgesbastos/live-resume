@@ -66,7 +66,30 @@ const POSITIVE: Record<Locale, Positive[]> = {
     { question: "Where can I find your GitHub profile?", intent: "socialLink", contains: ["https://github.com/guilhermeborgesbastos"], sources: ["about"] },
     { question: "What are your social media profiles?", intent: "socialLinks", contains: ["LinkedIn", "GitHub"] },
     { question: "Can you tell me what is your current role, please?", intent: "currentRole" },
-    { question: "  WHAT IS YOUR CURRENT ROLE???  ", intent: "currentRole" }
+    { question: "  WHAT IS YOUR CURRENT ROLE???  ", intent: "currentRole" },
+    {
+      question: "What did you study?", intent: "education", sources: ["about"],
+      contains: ["Higher Education Degree in Computer Systems Analysis", "UniFACTHUS - Centro Universitário", "2013 – 2017"]
+    },
+    { question: "What is your educational background?", intent: "education" },
+    {
+      question: "Which certifications do you have?", intent: "certifications",
+      contains: ["AWS Certified Cloud Practitioner (certification), Amazon Web Services (AWS), issued Jun 2022", "course certificate", "expires Jul 2027", "still valid"]
+    },
+    {
+      question: "Are you AWS certified?", intent: "issuerCertifications", sources: ["/certifications/6"],
+      contains: ["AWS Certified Cloud Practitioner", "Jun 2022", "doesn't confirm"], excludes: ["Anthropic", "MongoDB"]
+    },
+    { question: "Do you have any MongoDB certificates?", intent: "issuerCertifications", contains: ["M312", "M201"], excludes: ["AWS"] },
+    { question: "Which languages do you speak?", intent: "languages", contains: ["English: Native or bilingual proficiency", "Portuguese"], sources: ["about"] },
+    { question: "Do you speak English?", intent: "languageProficiency", contains: ["English", "self-reported"], excludes: ["Portuguese"] },
+    {
+      question: "Summarize his DevOps work", intent: "topicSummary",
+      contains: ["Prometheus", "Swisscom AG", "Roles this summary covers"], sources: ["about", String(swisscom.id)]
+    },
+    { question: "Tell me about your leadership experience.", intent: "topicSummary", contains: ["QAT Global", "Skydreamer"], excludes: ["Swisscom AG"] },
+    { question: "What is your CI/CD experience?", intent: "topicSummary", contains: ["Kubernetes"] },
+    { question: "What did you achieve at Swisscom?", intent: "companyHighlights", contains: ["265"], sources: [String(swisscom.id)] }
   ],
   pt: [
     { question: "Fale sobre sua trajetória profissional.", intent: "profile", sources: ["about"], contains: ["mais de 10 anos"] },
@@ -86,7 +109,15 @@ const POSITIVE: Record<Locale, Positive[]> = {
     { question: "Fale sobre o seu trabalho na Swisscom.", intent: "companyOverview", contains: ["Rotterdão", "Terraform"] },
     { question: "Qual é o seu GitHub?", intent: "socialLink", contains: ["https://github.com/guilhermeborgesbastos"] },
     // Questions may use either language; the answer follows the site locale.
-    { question: "What is your current role?", intent: "currentRole", contains: [localized(swisscom, "pt").role] }
+    { question: "What is your current role?", intent: "currentRole", contains: [localized(swisscom, "pt").role] },
+    { question: "O que você estudou?", intent: "education", contains: ["Análise de Sistemas de Computação", "2013 – 2017"] },
+    { question: "Quais certificações você tem?", intent: "certifications", contains: ["certificado de curso", "jun. 2022", "continua válido"] },
+    { question: "Você é certificado pela AWS?", intent: "issuerCertifications", contains: ["AWS Certified Cloud Practitioner"], excludes: ["Anthropic"] },
+    { question: "Quais idiomas você fala?", intent: "languages", contains: ["inglês: nível nativo ou bilíngue", "português"] },
+    { question: "Você fala inglês?", intent: "languageProficiency", contains: ["inglês"] },
+    { question: "Resuma sua experiência em DevOps.", intent: "topicSummary", contains: ["Prometheus", "Swisscom AG"] },
+    { question: "Fale sobre sua experiência em liderança", intent: "topicSummary", contains: ["QAT Global"] },
+    { question: "O que você conquistou na QAT Global?", intent: "companyHighlights", contains: ["MongoDB"], sources: [String(qat.id)] }
   ]
 };
 
@@ -119,7 +150,14 @@ const NEGATIVE: Record<Locale, string[]> = {
     "Where can I find your Twitter profile?",
     "What is your phone number?",
     "<script>alert(1)</script>",
-    "What is your current role? And your salary?"
+    "What is your current role? And your salary?",
+    "Do you speak Dutch?",
+    "Which Google certifications do you have?",
+    "Are you Kubernetes certified?",
+    "Is your AWS certification still valid?",
+    "Did you graduate?",
+    "Summarize your Rust experience.",
+    "What did you achieve at Google?"
   ],
   pt: [
     "Onde você já usou Rust?",
@@ -129,7 +167,9 @@ const NEGATIVE: Record<Locale, string[]> = {
     "Fale sobre a Swisscom e preveja o tempo.",
     "E antes disso?",
     "Você tem artigos sobre computação quântica?",
-    "Você mora onde?"
+    "Você mora onde?",
+    "Você fala alemão?",
+    "Resuma sua experiência em Rust."
   ]
 };
 
@@ -249,6 +289,24 @@ describe("CV assistant engine", () => {
       expect(result.sources[0].externalUrl).toBeUndefined();
       expect(result.sources[0].target).toEqual({ section: "posts", postUrl: "javascript:alert(document.cookie)" });
     }
+  });
+
+  it("never calls a certification currently valid, and states an expiry only when the CV lists one", () => {
+    for (const locale of ["en", "pt"] as const) {
+      const text = answerText(ask(ANSWER_TEMPLATES[locale].questions.certifications, locale));
+      const listedExpiries = cv.about.certifications.filter((c: any) => c.expiresAt).length;
+      expect((text.match(locale === "en" ? /expires /g : /expira em /g) ?? []).length).toBe(listedExpiries);
+      expect(text).not.toMatch(/currently valid|atualmente válid/);
+    }
+  });
+
+  it("falls back for highlights missing in the active locale", () => {
+    const fixture: CvJson = realCv();
+    const index = fixture.experiences.findIndex(e => e.companyName === "QAT Global");
+    delete localized(fixture.experiences[index], "en").highlights;
+    const data = snapshotOf(fixture);
+    expectFallback(ask("What did you achieve at QAT Global?", "en", data));
+    expect(ask("O que você conquistou na QAT Global?", "pt", data).kind).toBe("answered");
   });
 
   it("returns unavailable without a snapshot", () => {
@@ -421,6 +479,17 @@ describe("CV assistant follow-up context", () => {
     expect(subject("Where have you used Java?")).toBeUndefined();
   });
 
+  it("uses a topic linked to one role as the follow-up referent", () => {
+    const topic = ask("Summarize your experience in DevOps.", "en");
+    expect(topic.kind === "answered" && topic.subject).toEqual(swisscomContext);
+    const before = answerQuestion("And before that?", "en", snapshot, swisscomContext);
+    expect(before.kind === "answered" && before.sources.map(s => s.recordKey)).toEqual([String(qat.id)]);
+    const several = ask("Tell me about your leadership experience.", "en");
+    expect(several.kind === "answered" && several.subject).toBeUndefined();
+    const achieved = answerQuestion("What did you achieve there?", "en", snapshot, qatContext);
+    expect(achieved.kind === "answered" && achieved.intent).toBe("companyHighlights");
+  });
+
   it("does not let context change unrelated answers", () => {
     expect(JSON.stringify(answerQuestion("What are your hobbies?", "en", snapshot, qatContext)))
       .toBe(JSON.stringify(ask("What are your hobbies?", "en")));
@@ -437,7 +506,11 @@ describe("CV assistant canonical questions", () => {
         q.profile, q.currentRole, q.employers, q.technologies, q.posts, q.hobbies, q.socialLinks,
         q.companyOverview("Swisscom AG"), q.companyRole("Swisscom AG"), q.companyDates("Swisscom AG"),
         q.companyLocation("Swisscom AG"), q.companyTechnologies("Swisscom AG"), q.technologyExperience("Java"),
-        q.technologyAtCompany("Java", "Swisscom AG"), q.postSearch("Android"), q.postSummary(title), q.socialLink("GitHub")
+        q.technologyAtCompany("Java", "Swisscom AG"), q.postSearch("Android"), q.postSummary(title), q.socialLink("GitHub"),
+        q.education, q.certifications, q.languages, q.issuerCertifications("Amazon Web Services (AWS)"),
+        q.languageProficiency(localized(cv.about.languages[0], locale).name),
+        ...cv.about.topics.map((t: any) => q.topicSummary(localized(t, locale).name)),
+        q.companyHighlights("Swisscom AG")
       ];
       questions.forEach(question => expect(ask(question, locale).kind).withContext(`${locale}: ${question}`).toBe("answered"));
     }

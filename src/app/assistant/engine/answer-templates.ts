@@ -4,7 +4,7 @@
  * pure engine composes answers for an explicit locale (and is unit-tested in both locales);
  * the UI chrome around the answers (headings, buttons, fallback copy) uses Angular i18n.
  */
-import { Locale, SourcedDate } from "../models/assistant.models";
+import { CertificationType, Locale, SourcedDate, SourcedPartialDate } from "../models/assistant.models";
 
 export interface AnswerTemplates {
   readonly months: readonly string[];
@@ -19,6 +19,7 @@ export interface AnswerTemplates {
     readonly about: string;
     readonly experience: string;
     readonly post: string;
+    topic(name: string): string;
   };
 
   ongoingRange(start: string): string;
@@ -48,6 +49,18 @@ export interface AnswerTemplates {
   socialLink(network: string, url: string): string;
   socialLinksIntro: string;
   socialLinkItem(network: string, url: string): string;
+  educationIntro: string;
+  educationItem(degree: string, field: string | null, school: string, period: string | null): string;
+  readonly certificationTypes: Readonly<Record<CertificationType, string>>;
+  certificationsIntro: string;
+  issuerCertificationsIntro(issuer: string): string;
+  certificationItem(name: string, type: string, issuer: string, issued: string, expires: string | null): string;
+  languagesIntro: string;
+  languageItem(name: string, proficiency: string): string;
+  languageProficiency(name: string, proficiency: string): string;
+  topicRolesIntro: string;
+  topicRoleItem(company: string, role: string, range: string): string;
+  companyHighlightsIntro(company: string): string;
 
   /**
    * One supported question per intent, used for suggestions, follow-up chips and "did you mean"
@@ -61,6 +74,9 @@ export interface AnswerTemplates {
     readonly posts: string;
     readonly hobbies: string;
     readonly socialLinks: string;
+    readonly education: string;
+    readonly certifications: string;
+    readonly languages: string;
     companyOverview(company: string): string;
     companyRole(company: string): string;
     companyDates(company: string): string;
@@ -71,6 +87,10 @@ export interface AnswerTemplates {
     postSearch(topic: string): string;
     postSummary(title: string): string;
     socialLink(network: string): string;
+    issuerCertifications(issuer: string): string;
+    languageProficiency(language: string): string;
+    topicSummary(topic: string): string;
+    companyHighlights(company: string): string;
   };
 }
 
@@ -84,7 +104,8 @@ const EN: AnswerTemplates = {
   excerpts: {
     about: "From the About section of my CV",
     experience: "Role description from my CV",
-    post: "Summary from my CV (the article itself is on the linked page)"
+    post: "Summary from my CV (the article itself is on the linked page)",
+    topic: name => `Summary of my ${name} experience, from my CV`
   },
   ongoingRange: start => `since ${start} (listed as ongoing in my CV)`,
   closedRange: (start, end) => `${start} – ${end}`,
@@ -113,6 +134,18 @@ const EN: AnswerTemplates = {
   socialLink: (network, url) => `My ${network} profile, as listed in my CV: ${url}`,
   socialLinksIntro: "Profiles listed in my CV:",
   socialLinkItem: (network, url) => `${network}: ${url}`,
+  educationIntro: "Education listed in my CV:",
+  educationItem: (degree, field, school, period) => `${degree}${field ? ` in ${field}` : ""}, ${school}${period ? ` (${period})` : ""}`,
+  certificationTypes: { certification: "certification", course: "course certificate", badge: "badge" },
+  certificationsIntro: "Certifications, course certificates and badges listed in my CV, newest first. The dates are issue dates, and the CV doesn't confirm that each one is still valid:",
+  issuerCertificationsIntro: issuer => `Certifications, course certificates and badges from ${issuer} listed in my CV. The dates are issue dates, and the CV doesn't confirm that each one is still valid:`,
+  certificationItem: (name, type, issuer, issued, expires) => `${name} (${type}), ${issuer}, issued ${issued}${expires ? `, expires ${expires}` : ""}`,
+  languagesIntro: "Languages listed in my CV, with my self-reported level:",
+  languageItem: (name, proficiency) => `${name}: ${proficiency}`,
+  languageProficiency: (name, proficiency) => `My CV lists ${name}, with my self-reported level: ${proficiency}.`,
+  topicRolesIntro: "Roles this summary covers:",
+  topicRoleItem: (company, role, range) => `${company}, ${role}: ${range}`,
+  companyHighlightsIntro: company => `Results listed for my role at ${company}:`,
   questions: {
     profile: "Tell me about your professional background.",
     currentRole: "What is your current role?",
@@ -121,6 +154,9 @@ const EN: AnswerTemplates = {
     posts: "Which posts have you published?",
     hobbies: "What are your hobbies?",
     socialLinks: "What are your social media profiles?",
+    education: "What did you study?",
+    certifications: "Which certifications do you have?",
+    languages: "Which languages do you speak?",
     companyOverview: company => `Tell me about your work at ${company}.`,
     companyRole: company => `What was your role at ${company}?`,
     companyDates: company => `When did you work at ${company}?`,
@@ -130,7 +166,11 @@ const EN: AnswerTemplates = {
     technologyAtCompany: (technology, company) => `Did you use ${technology} at ${company}?`,
     postSearch: topic => `Do you have posts about ${topic}?`,
     postSummary: title => `What is your post "${title}" about?`,
-    socialLink: network => `Where can I find your ${network} profile?`
+    socialLink: network => `Where can I find your ${network} profile?`,
+    issuerCertifications: issuer => `Which ${issuer} certifications do you have?`,
+    languageProficiency: language => `Do you speak ${language}?`,
+    topicSummary: topic => `Summarize your experience in ${topic}.`,
+    companyHighlights: company => `What did you achieve at ${company}?`
   }
 };
 
@@ -144,7 +184,8 @@ const PT: AnswerTemplates = {
   excerpts: {
     about: "Da seção Sobre mim do meu currículo",
     experience: "Descrição do cargo no meu currículo",
-    post: "Resumo do meu currículo (o artigo completo está na página do link)"
+    post: "Resumo do meu currículo (o artigo completo está na página do link)",
+    topic: name => `Resumo da minha experiência em ${name}, do meu currículo`
   },
   ongoingRange: start => `desde ${start} (listado como em andamento no meu currículo)`,
   closedRange: (start, end) => `${start} – ${end}`,
@@ -173,6 +214,18 @@ const PT: AnswerTemplates = {
   socialLink: (network, url) => `Meu perfil no ${network}, conforme listado no meu currículo: ${url}`,
   socialLinksIntro: "Perfis listados no meu currículo:",
   socialLinkItem: (network, url) => `${network}: ${url}`,
+  educationIntro: "Formação listada no meu currículo:",
+  educationItem: (degree, field, school, period) => `${degree}${field ? ` em ${field}` : ""}, ${school}${period ? ` (${period})` : ""}`,
+  certificationTypes: { certification: "certificação", course: "certificado de curso", badge: "badge" },
+  certificationsIntro: "Certificações, certificados de curso e badges listados no meu currículo, do mais recente para o mais antigo. As datas são de emissão, e o currículo não confirma que cada um continua válido:",
+  issuerCertificationsIntro: issuer => `Certificações, certificados de curso e badges de ${issuer} listados no meu currículo. As datas são de emissão, e o currículo não confirma que cada um continua válido:`,
+  certificationItem: (name, type, issuer, issued, expires) => `${name} (${type}), ${issuer}, emitido em ${issued}${expires ? `, expira em ${expires}` : ""}`,
+  languagesIntro: "Idiomas listados no meu currículo, com o nível que eu mesmo informei:",
+  languageItem: (name, proficiency) => `${name}: ${proficiency}`,
+  languageProficiency: (name, proficiency) => `Meu currículo lista ${name}, com o nível que eu mesmo informei: ${proficiency}.`,
+  topicRolesIntro: "Cargos que este resumo abrange:",
+  topicRoleItem: (company, role, range) => `${company}, ${role}: ${range}`,
+  companyHighlightsIntro: company => `Resultados listados para o meu cargo na empresa ${company}:`,
   questions: {
     profile: "Fale sobre sua trajetória profissional.",
     currentRole: "Qual é o seu cargo atual?",
@@ -181,6 +234,9 @@ const PT: AnswerTemplates = {
     posts: "Quais artigos você publicou?",
     hobbies: "Quais são os seus hobbies?",
     socialLinks: "Quais são suas redes sociais?",
+    education: "O que você estudou?",
+    certifications: "Quais certificações você tem?",
+    languages: "Quais idiomas você fala?",
     companyOverview: company => `Fale sobre o seu trabalho na ${company}.`,
     companyRole: company => `Qual era o seu cargo na ${company}?`,
     companyDates: company => `Quando você trabalhou na ${company}?`,
@@ -190,7 +246,11 @@ const PT: AnswerTemplates = {
     technologyAtCompany: (technology, company) => `Você usou ${technology} na ${company}?`,
     postSearch: topic => `Você tem artigos sobre ${topic}?`,
     postSummary: title => `Sobre o que é o artigo "${title}"?`,
-    socialLink: network => `Qual é o seu ${network}?`
+    socialLink: network => `Qual é o seu ${network}?`,
+    issuerCertifications: issuer => `Quais certificações de ${issuer} você tem?`,
+    languageProficiency: language => `Você fala ${language}?`,
+    topicSummary: topic => `Resuma sua experiência em ${topic}.`,
+    companyHighlights: company => `O que você conquistou na ${company}?`
   }
 };
 
@@ -199,4 +259,9 @@ export const ANSWER_TEMPLATES: Readonly<Record<Locale, AnswerTemplates>> = { en:
 /** "May 2020" / "mai. 2020", from fixed tables (no Intl or runtime locale data). */
 export function formatMonthYear(date: SourcedDate, locale: Locale): string {
   return `${ANSWER_TEMPLATES[locale].months[date.month - 1]} ${date.year}`;
+}
+
+/** "Jun 2022" for MM-YYYY, "2017" for a year alone: never more precise than the CV. */
+export function formatPartialDate(date: SourcedPartialDate, locale: Locale): string {
+  return date.month ? `${ANSWER_TEMPLATES[locale].months[date.month - 1]} ${date.year}` : String(date.year);
 }

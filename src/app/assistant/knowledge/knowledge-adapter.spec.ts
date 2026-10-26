@@ -1,4 +1,6 @@
-import { adaptKnowledge, KnowledgeValidationError, parseCvDate, RawKnowledge, safeExternalUrl } from "./knowledge-adapter";
+import {
+  adaptKnowledge, KnowledgeValidationError, parseCvDate, parsePartialDate, RawKnowledge, safeExternalUrl
+} from "./knowledge-adapter";
 import { CvJson, realCv } from "../testing/assistant-fixtures";
 
 function issuesOf(cv: CvJson): readonly string[] {
@@ -115,5 +117,63 @@ describe("CV assistant knowledge adapter", () => {
     expect(safeExternalUrl("http://example.com")).toBe("http://example.com/");
     ["javascript:alert(1)", "data:text/html,x", "ftp://x", "/relative", "", 42].forEach(raw =>
       expect(safeExternalUrl(raw)).withContext(String(raw)).toBeUndefined());
+  });
+
+  it("reads education, certifications, languages, topics and highlights with pointers", () => {
+    const cv = realCv();
+    const snapshot = adaptKnowledge(cv as RawKnowledge);
+    expect(snapshot.about.education.length).toBe(cv.about.education.length);
+    expect(snapshot.about.certifications.length).toBe(cv.about.certifications.length);
+    expect(snapshot.about.languages.length).toBe(cv.about.languages.length);
+    expect(snapshot.about.topics.length).toBe(cv.about.topics.length);
+    expect(snapshot.about.certifications[0].pointer).toBe("/certifications/0");
+    expect(snapshot.about.certifications[0].name.pointer).toBe("/certifications/0/name");
+    const entry = cv.experiences[0].internationalizations[0];
+    expect(snapshot.experiences[0].locales[entry.language as "en" | "pt"]!.highlights.map(h => h.pointer))
+      .toEqual(entry.highlights.map((_: string, i: number) => `/0/internationalizations/0/highlights/${i}`));
+  });
+
+  it("treats the new sections as optional", () => {
+    const cv = realCv();
+    ["education", "certifications", "languages", "topics"].forEach(key => delete cv.about[key]);
+    cv.experiences.forEach(e => e.internationalizations.forEach((i: any) => delete i.highlights));
+    const snapshot = adaptKnowledge(cv as RawKnowledge);
+    expect(snapshot.about.certifications).toEqual([]);
+    expect(snapshot.about.topics).toEqual([]);
+    expect(snapshot.experiences[0].locales.en!.highlights).toEqual([]);
+  });
+
+  it("parses YYYY and MM-YYYY dates at the precision given", () => {
+    expect(parsePartialDate("2017", "/x")).toEqual({ year: 2017, raw: "2017", pointer: "/x" });
+    expect(parsePartialDate("06-2022", "/x")).toEqual({ year: 2022, month: 6, raw: "06-2022", pointer: "/x" });
+    ["13-2022", "6-2022", "2022-06", "06-01-2022", "", 2022].forEach(raw =>
+      expect(parsePartialDate(raw, "/x")).withContext(String(raw)).toBeUndefined());
+  });
+
+  it("rejects invalid certifications, topics and highlights", () => {
+    const cv = realCv();
+    cv.about.certifications[0].type = "diploma";
+    cv.about.certifications[1].issuedAt = "May 2026";
+    cv.about.certifications[0].expiresAt = "01-2020";
+    cv.about.topics[0].experienceIds = [99999];
+    cv.about.topics[1].id = cv.about.topics[0].id;
+    cv.about.languages[1].code = cv.about.languages[0].code;
+    cv.experiences[0].internationalizations[0].highlights = [""];
+    const issues = issuesOf(cv);
+    expect(issues.some(i => i.startsWith("about.json /certifications/0/type must be one of"))).toBeTrue();
+    expect(issues).toContain("about.json /certifications/1/issuedAt must be a valid YYYY or MM-YYYY date");
+    expect(issues).toContain("about.json /certifications/0/expiresAt is before issuedAt");
+    expect(issues).toContain("about.json /topics/0/experienceIds names unknown experience ID 99999");
+    expect(issues.some(i => i.startsWith("about.json /topics/1/id duplicates topic"))).toBeTrue();
+    expect(issues.some(i => i.startsWith("about.json /languages/1/code duplicates language"))).toBeTrue();
+    expect(issues).toContain("experiences.json /0/internationalizations/0/highlights/0 must be a non-empty string");
+  });
+
+  it("drops unsafe credential links but keeps the certification", () => {
+    const cv = realCv();
+    cv.about.certifications[0].url = "javascript:alert(1)";
+    const snapshot = adaptKnowledge(cv as RawKnowledge);
+    expect(snapshot.about.certifications[0].url).toBeUndefined();
+    expect(snapshot.about.certifications[0].name.value).toBe(cv.about.certifications[0].name);
   });
 });
