@@ -194,12 +194,12 @@
                 {
                     "language": "en",
                     "name": "DevOps",
-                    "summary": "At Swisscom I build automated CI/CD pipelines and container deployments with Docker and Kubernetes. I also work on AWS infrastructure managed with Infrastructure as Code, and I built observability stacks with Prometheus, Grafana and ELK that cut incident response times. Teams across the organization have adopted the reusable DevOps patterns I created."
+                    "summary": "At Swisscom I build CI/CD pipelines and container deployments with Docker and Kubernetes. I also work on our AWS infrastructure, which we manage as code, and I set up monitoring with Prometheus, Grafana and ELK that cut our incident response times. Teams across Swisscom adopted the DevOps patterns I built."
                 },
                 {
                     "language": "pt",
                     "name": "DevOps",
-                    "summary": "Na Swisscom, crio pipelines de CI/CD automatizados e deploys em containers com Docker e Kubernetes. Também cuido da infraestrutura na AWS com Infrastructure as Code e montei stacks de observabilidade com Prometheus, Grafana e ELK, que reduziram o tempo de resposta a incidentes. Os padrões DevOps reutilizáveis que criei foram adotados por times de toda a organização."
+                    "summary": "Na Swisscom, construo pipelines de CI/CD e deploys em containers com Docker e Kubernetes. Também cuido da nossa infraestrutura na AWS, gerenciada como código, e montei o monitoramento com Prometheus, Grafana e ELK, que reduziu nosso tempo de resposta a incidentes. Times de toda a Swisscom adotaram os padrões DevOps que criei."
                 }
             ]
         },
@@ -223,12 +223,12 @@
                 {
                     "language": "en",
                     "name": "leadership and mentoring",
-                    "summary": "At Skydreamer I led a small remote team, prioritized the roadmap and tracked delivery KPIs. At QAT Global I was Pod-Leader: I mentored junior developers and helped set the coding practices the teams shared."
+                    "summary": "At Skydreamer I led a small remote team, set the roadmap priorities and tracked our delivery KPIs. Later, as Pod-Leader at QAT Global, I mentored junior developers and helped set the coding practices the teams shared."
                 },
                 {
                     "language": "pt",
                     "name": "liderança e mentoria",
-                    "summary": "Na Skydreamer, liderei um pequeno time remoto, priorizei o roadmap e acompanhei os KPIs de entrega. Na QAT Global, fui Pod-Leader: orientei desenvolvedores juniores e ajudei a definir as práticas de código compartilhadas pelos times."
+                    "summary": "Na Skydreamer, liderei um pequeno time remoto, defini as prioridades do roadmap e acompanhei nossos KPIs de entrega. Depois, como Pod-Leader na QAT Global, orientei desenvolvedores juniores e ajudei a definir as práticas de código que os times usavam."
                 }
             ]
         },
@@ -253,12 +253,12 @@
                 {
                     "language": "en",
                     "name": "full-stack development",
-                    "summary": "I have built full-stack software for e-commerce stores, custom web and mobile apps, a group travel app, smart-utility analytics and enterprise connectivity. The work covers APIs, databases, user interfaces and the infrastructure that delivers them."
+                    "summary": "I've built full-stack software for online stores, custom web and mobile apps, a group travel app, a smart-meter analytics dashboard and a web app for Swisscom's enterprise connectivity products. In those projects I worked on the databases, the APIs, the user interfaces and the deployments."
                 },
                 {
                     "language": "pt",
                     "name": "desenvolvimento full-stack",
-                    "summary": "Desenvolvi software full-stack para lojas de e-commerce, aplicações web e mobile sob medida, um app de viagem em grupo, análise de dados de utilities e conectividade empresarial. O trabalho inclui APIs, bancos de dados, interfaces e a infraestrutura de entrega."
+                    "summary": "Já construí software full-stack para lojas online, aplicações web e mobile sob medida, um app de viagem em grupo, um dashboard de análise de medidores inteligentes e uma aplicação web para os produtos de conectividade empresarial da Swisscom. Nesses projetos, trabalhei nos bancos de dados, nas APIs, nas interfaces e nos deploys."
                 }
             ]
         },
@@ -278,12 +278,12 @@
                 {
                     "language": "en",
                     "name": "data and performance",
-                    "summary": "At QAT Global I built data ingestion and visualization components for a smart-meter analytics dashboard, and optimized MongoDB queries and batch processing scripts so they scaled."
+                    "summary": "At QAT Global I built the parts of a smart-meter analytics dashboard that load and chart large volumes of meter data. I also tuned MongoDB queries and batch scripts so they kept up as the data grew."
                 },
                 {
                     "language": "pt",
                     "name": "dados e performance",
-                    "summary": "Na QAT Global, desenvolvi componentes de ingestão e visualização de dados para um dashboard de análise de medidores inteligentes e otimizei consultas no MongoDB e scripts de batch para que escalassem."
+                    "summary": "Na QAT Global, construí as partes de um dashboard de análise de medidores inteligentes que carregam e exibem grandes volumes de dados. Também ajustei consultas no MongoDB e scripts de batch para que acompanhassem o crescimento dos dados."
                 }
             ]
         },
@@ -304,12 +304,12 @@
                 {
                     "language": "en",
                     "name": "knowledge sharing",
-                    "summary": "At Swisscom I gave a tech talk on build metrics and trends to more than 265 people, on site and online, with audiences in Rotterdam, Riga and Switzerland."
+                    "summary": "I gave a tech talk at Swisscom on build metrics and trends. More than 265 people followed it, in the room and online, from Rotterdam, Riga and Switzerland."
                 },
                 {
                     "language": "pt",
                     "name": "compartilhamento de conhecimento",
-                    "summary": "Na Swisscom, apresentei uma tech talk sobre métricas e tendências de build para mais de 265 pessoas, presencialmente e online, com públicos em Rotterdão, Riga e na Suíça."
+                    "summary": "Apresentei uma tech talk na Swisscom sobre métricas e tendências de build. Mais de 265 pessoas acompanharam, na sala e online, de Rotterdão, Riga e da Suíça."
                 }
             ]
         },
@@ -333,12 +333,12 @@
                 {
                     "language": "en",
                     "name": "AI and automation",
-                    "summary": "At the Swisscom ETS Hackathon, my team built custom AI skills that automate repetitive code changes."
+                    "summary": "At Swisscom's ETS Hackathon my team built AI skills that take over repetitive code changes."
                 },
                 {
                     "language": "pt",
                     "name": "IA e automação",
-                    "summary": "No ETS Hackathon da Swisscom, meu time criou skills de IA personalizadas que automatizam mudanças repetitivas de código."
+                    "summary": "No ETS Hackathon da Swisscom, meu time criou skills de IA que assumem mudanças repetitivas no código."
                 }
             ]
         }
