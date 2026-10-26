@@ -224,8 +224,8 @@ for (const locale of LOCALES) {
     test("floating panel keeps the conversation and draft, and expands into the page", async ({ page }) => {
       await openResume(page, locale);
       const launcher = page.getByRole("button", { name: text.launcher });
-      // Hidden over the welcome section (which has its own call to action). On phones the About
-      // section is already the active one when the page opens.
+      // Hidden over the welcome section. On phones the About section is already the active one
+      // when the page opens.
       if (!isMobile(page)) {
         await expect(launcher).toBeHidden();
       }
@@ -274,6 +274,25 @@ for (const locale of LOCALES) {
       await expect(dialog).toBeHidden();
       await expect(page.locator("#experience li.selected")).toHaveAttribute("id", String(ongoing.id));
       await expect(page.locator("html")).not.toHaveClass(/assistant-scroll-locked/);
+    });
+
+    test("the launcher follows the section in view, also mid-section and when scrolling back up", async ({ page }) => {
+      await openResume(page, locale);
+      const launcher = page.getByRole("button", { name: text.launcher });
+      const scrollTo = (selector: string, offset: number) => page.evaluate(([s, o]) =>
+        window.scrollTo({ top: (document.querySelector(s as string) as HTMLElement).offsetTop + (o as number), behavior: "instant" }), [selector, offset]);
+
+      // One jump into the middle of Experience: neither of its edges is near the top of the viewport.
+      await scrollTo("app-experience", 300);
+      await expect(launcher).toBeVisible();
+      await scrollToSection(page, "contact");
+      await expect(launcher).toBeHidden();
+      // Back up so that Posts fills the top of the viewport and Contact starts below it.
+      await page.evaluate(() => {
+        const contact = document.querySelector("app-contact")!.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: contact - window.innerHeight * 0.7, behavior: "instant" });
+      });
+      await expect(launcher).toBeVisible();
     });
 
     test("header links move between the assistant and the resume without losing the session", async ({ page }) => {

@@ -30,8 +30,8 @@ export class ResumeComponent {
 
   isSticky: boolean = false;
   activeSection: string;
-  // The welcome section has its own assistant call to action, and the floating button must not
-  // cover the contact form, so it only shows while these sections are active.
+  // The floating button stays off the welcome section and must not cover the contact form, so it
+  // only shows while these sections are active.
   readonly launcherSections = ["about", "experience", "posts"];
 
   pageYOffset: number = 0;
