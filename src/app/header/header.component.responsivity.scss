@@ -3,7 +3,7 @@
     header {
 
         .child.language-container {
-            margin-right: 10px;
+            margin-right: 40px;
         }
 
         .child.logo-container {
@@ -21,7 +21,7 @@
     header {
         background: #fff;
         border-radius: 0 0 15px 15px;
-        -webkit-box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16); 
+        -webkit-box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
         box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
         padding: 10px;
 
@@ -47,7 +47,7 @@
                     a {
                         font-size: 20px;
                         color: #5e81abbd;
-                        padding-left: 25px;                        
+                        padding-left: 25px;
 
                         &:hover {
                             color: #222f5c;
@@ -146,7 +146,7 @@
 @media screen and (max-width: 460px) {
 
     header {
-        
+
         .child.navbar-toggle .bar-icon {
             font-size: 15px;
             border: 1px solid #b3b7c61f;
@@ -168,13 +168,13 @@
                 height: 20px;
                 margin: 8px 0 0 0;
                 border-right: 2px solid #bfbfbf3b;
-    
+
                 a {
                     font-size: 15px;
                     margin: 0 8px;
                 }
             }
-        } 
+        }
     }
 
 }
@@ -182,7 +182,7 @@
 @media screen and (max-width: 380px) {
 
     header {
-        
+
         .child.navbar-toggle .bar-icon {
             font-size: 15px;
             border: 1px solid #b3b7c61f;
@@ -204,13 +204,13 @@
                 height: 20px;
                 margin: 8px 0 0 0;
                 border-right: 2px solid #bfbfbf3b;
-    
+
                 a {
                     font-size: 15px;
                     margin: 0 8px;
                 }
             }
-        } 
+        }
 
         .child.share-container {
             padding: 0;
@@ -220,7 +220,7 @@
 
             .icon {
                 font-size: 20px;
-            }        
+            }
         }
     }
 }
