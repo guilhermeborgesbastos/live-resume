@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild, inject, DestroyRef } from "@angular/core";
+import { AfterRenderRef, ChangeDetectorRef, Component, OnInit, ElementRef, Injector, Renderer2, ViewChild, afterNextRender, inject, DestroyRef } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
@@ -31,8 +31,12 @@ export class ExperienceComponent extends AbstractSwipeSection implements OnInit 
   private router = inject(Router);
   private elRef = inject(ElementRef);
   private destroyRef = inject(DestroyRef);
+  private injector = inject(Injector);
+  private changeDetector = inject(ChangeDetectorRef);
 
   private requestedExperienceId: string | null = null;
+  // The render step of the citation being revealed; a newer citation or destruction cancels it.
+  private pendingReveal: AfterRenderRef | null = null;
 
   SELECTED_CLASS: string = "selected";
   LEAVE_RIGHT_CLASS: string = "leave-right";
@@ -55,12 +59,14 @@ export class ExperienceComponent extends AbstractSwipeSection implements OnInit 
   constructor() {
     super();
     this.library.addIconPacks(fas, fab);
+    this.destroyRef.onDestroy(() => this.pendingReveal?.destroy());
   }
 
   ngOnInit(): void {
 
     // Fetch the Experiences from the Data Service
     this.dataService.getExperiences()
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe((experiences: IExperience[]) => {
           this.currentPosition = experiences.length;
           this.experiences = experiences;
@@ -98,15 +104,20 @@ export class ExperienceComponent extends AbstractSwipeSection implements OnInit 
     if (!experience) {
       return;
     }
-    // Wait for the carousel items to render.
-    setTimeout(() => {
-      this.updateNavigation(experience.position);
-      const section = this.elRef.nativeElement.querySelector("section#experience") as HTMLElement | null;
-      section?.scrollIntoView({ block: "start" });
-      const companyName = this.orderedList.nativeElement
-        .querySelector(`${this.createListSelector(experience.position)} .company-name`) as HTMLElement | null;
-      companyName?.focus({ preventScroll: true });
-    });
+    // The carousel items it selects exist only once the loaded data has rendered.
+    this.pendingReveal?.destroy();
+    this.pendingReveal = afterNextRender({ write: () => this.showExperience(experience) }, { injector: this.injector });
+  }
+
+  /** Selects the experience in the carousel, scrolls to the section and focuses its company name. */
+  private showExperience(experience: IExperience): void {
+    this.updateNavigation(experience.position);
+    this.changeDetector.markForCheck();
+    const section = this.elRef.nativeElement.querySelector("section#experience") as HTMLElement | null;
+    section?.scrollIntoView({ block: "start" });
+    const companyName = this.orderedList.nativeElement
+      .querySelector(`${this.createListSelector(experience.position)} .company-name`) as HTMLElement | null;
+    companyName?.focus({ preventScroll: true });
   }
 
   public disablePreviousNavigation(): boolean {

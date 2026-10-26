@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, OnInit, inject } from "@angular/core";
+import { AfterRenderRef, ChangeDetectorRef, Component, DestroyRef, ElementRef, Injector, OnInit, afterNextRender, inject } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
@@ -24,9 +24,13 @@ export class PostsComponent extends AbstractSwipeSection implements OnInit {
   private router = inject(Router);
   private elRef = inject(ElementRef);
   private destroyRef = inject(DestroyRef);
+  private injector = inject(Injector);
+  private changeDetector = inject(ChangeDetectorRef);
 
   // Unique URL of a post a CV assistant citation asked to show (?post=<url>#posts).
   private requestedPost: string | null = null;
+  // The render step of the citation being revealed; a newer citation or destruction cancels it.
+  private pendingReveal: AfterRenderRef | null = null;
 
   currentPage: number = 1;
   resultsPerPage: number;
@@ -40,6 +44,7 @@ export class PostsComponent extends AbstractSwipeSection implements OnInit {
 
   constructor() {
     super();
+    this.destroyRef.onDestroy(() => this.pendingReveal?.destroy());
   }
 
   ngOnInit(): void {
@@ -48,6 +53,7 @@ export class PostsComponent extends AbstractSwipeSection implements OnInit {
     
     // Fetch the Posts from the Data Service
     this.dataService.getPosts()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((posts: IPost[]) => {
         this.posts = posts;
         this.revealRequestedPost();
@@ -65,6 +71,9 @@ export class PostsComponent extends AbstractSwipeSection implements OnInit {
   /*
    * Shows the page holding the requested post once both the posts and the cards per page are
    * known, then focuses its card. An unknown URL leaves the carousel as it is.
+   *
+   * The cards-per-page count arrives while the carousel renders, so the page changes after that
+   * render, and the card is focused after the render that shows the new page.
   */
   private revealRequestedPost(): void {
     const requested = this.requestedPost;
@@ -76,18 +85,32 @@ export class PostsComponent extends AbstractSwipeSection implements OnInit {
     if (index === -1) {
       return;
     }
-    setTimeout(() => {
-      this.goToPage(Math.floor(index / this.resultsPerPage) + 1);
-      // Keep this post on screen when a resize changes the cards per page.
-      this.firstPostIndex = index;
-      setTimeout(() => {
-        const section = this.elRef.nativeElement.querySelector("section#posts") as HTMLElement | null;
-        section?.scrollIntoView({ block: "start" });
-        const card = [...section?.querySelectorAll<HTMLAnchorElement>("app-posts-carousel li a") ?? []]
-          .find(link => link.getAttribute("href") === requested);
-        card?.focus({ preventScroll: true });
-      });
+    this.afterRender(() => {
+      this.showPost(index);
+      this.afterRender(() => this.focusPost(requested));
     });
+  }
+
+  /** Selects the page holding the post at `index` and keeps it there across resizes. */
+  private showPost(index: number): void {
+    this.goToPage(Math.floor(index / this.resultsPerPage) + 1);
+    this.firstPostIndex = index;
+    this.changeDetector.markForCheck();
+  }
+
+  /** Scrolls to the section and focuses the post's card (it is on the current page). */
+  private focusPost(url: string): void {
+    const section = this.elRef.nativeElement.querySelector("section#posts") as HTMLElement | null;
+    section?.scrollIntoView({ block: "start" });
+    const card = [...section?.querySelectorAll<HTMLAnchorElement>("app-posts-carousel li a") ?? []]
+      .find(link => link.getAttribute("href") === url);
+    card?.focus({ preventScroll: true });
+  }
+
+  /** Runs `step` after Angular's next render, replacing any step still pending. */
+  private afterRender(step: () => void): void {
+    this.pendingReveal?.destroy();
+    this.pendingReveal = afterNextRender({ write: step }, { injector: this.injector });
   }
 
   public onClickPrevious(): void {

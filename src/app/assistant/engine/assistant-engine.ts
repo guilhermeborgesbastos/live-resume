@@ -5,10 +5,11 @@
  * previous answer was about), used by follow-ups such as "And before that?".
  */
 import {
-  AnswerBlock, AnswerResult, ConversationContext, ExperienceRecord, IntentId, KnowledgeSnapshot, Locale
+  AnswerBlock, AnswerResult, ClarifyReason, ConversationContext, ExperienceRecord, FallbackReason, IntentId, KnowledgeSnapshot,
+  Locale
 } from "../models/assistant.models";
 import { ANSWER_TEMPLATES } from "./answer-templates";
-import { byStartDescending, compareKeys, composeAnswer } from "./compose-answer";
+import { byStartDescending, compareKeys, ComposedAnswer, composeAnswer } from "./compose-answer";
 import { entityKey, normalizeUtterance, technologyKey, tokenize, validateQuestion } from "./normalize-question";
 import { Interpretation, resolveQuestion, technologyBaseKey } from "./resolve-question";
 
@@ -22,19 +23,14 @@ export interface SuggestedQuestion {
 /** At most this many "did you mean" options are offered. */
 const MAX_CLARIFY_OPTIONS = 3;
 
-export function answerQuestion(question: string, locale: Locale, snapshot: KnowledgeSnapshot | null, context: ConversationContext = {}): AnswerResult {
-  return answer(question, locale, snapshot, true, context);
-}
+/** A question resolved against the snapshot and, when it resolved, composed from it. */
+type Outcome =
+  | { readonly kind: "composed"; readonly interpretation: Interpretation; readonly composed: ComposedAnswer }
+  | { readonly kind: "clarify"; readonly why: ClarifyReason; readonly options: readonly Interpretation[] }
+  | { readonly kind: "fallback"; readonly reason: FallbackReason };
 
-/**
- * `topLevel` is false when the engine checks one of its own suggestions, follow-ups or options:
- * those only need to know whether the question answers, so no follow-ups or options are computed
- * (which also keeps an ambiguous option from recursing).
- */
-function answer(question: string, locale: Locale, snapshot: KnowledgeSnapshot | null, topLevel: boolean, context: ConversationContext = {}): AnswerResult {
-  if (!snapshot) {
-    return { kind: "unavailable" };
-  }
+/** Resolves and composes a question: the evidence checks every answer and probe goes through. */
+function resolveAndCompose(question: string, locale: Locale, snapshot: KnowledgeSnapshot, context: ConversationContext): Outcome {
   const validation = validateQuestion(question);
   if ("error" in validation) {
     return { kind: "fallback", reason: "unrecognized" };
@@ -43,26 +39,58 @@ function answer(question: string, locale: Locale, snapshot: KnowledgeSnapshot | 
   if (resolution.kind === "rejected") {
     return { kind: "fallback", reason: resolution.reason };
   }
-  if (resolution.kind === "clarify" && !topLevel) {
-    return { kind: "fallback", reason: resolution.why === "typo" ? "unknown-entity" : "ambiguous" };
-  }
   if (resolution.kind === "clarify") {
-    // Offer each reading as a supported question that the visitor confirms by asking it.
-    const options = answerable(resolution.options.map(option => canonicalQuestion(option, snapshot, locale)), locale, snapshot)
-      .slice(0, MAX_CLARIFY_OPTIONS);
-    return options.length > 0
-      ? { kind: "clarify", reason: resolution.why, options }
-      : { kind: "fallback", reason: resolution.why === "typo" ? "unknown-entity" : "ambiguous" };
+    return { kind: "clarify", why: resolution.why, options: resolution.options };
   }
   const { interpretation } = resolution;
   const composed = composeAnswer(interpretation, snapshot, locale);
   if (!composed) {
     return { kind: "fallback", reason: interpretation.intent === "postSearch" ? "no-results" : "missing-fact" };
   }
-  const followUps = topLevel
-    ? answerable(followUpCandidates(interpretation, snapshot, locale), locale, snapshot)
-      .filter(q => normalizeUtterance(q) !== normalizeUtterance(validation.question))
-    : [];
+  return { kind: "composed", interpretation, composed };
+}
+
+/**
+ * Whether a question the engine offers (suggestion, follow-up, "did you mean" option) answers as
+ * it is, without context: it must resolve to one interpretation whose answer composes.
+ */
+function isAnswerable(question: string, locale: Locale, snapshot: KnowledgeSnapshot): boolean {
+  return resolveAndCompose(question, locale, snapshot, {}).kind === "composed";
+}
+
+/** The distinct questions among `questions` that answer on this snapshot, in order. */
+function answerableQuestions(questions: readonly (string | null)[], locale: Locale, snapshot: KnowledgeSnapshot): string[] {
+  return questions.filter((q, i): q is string => q !== null && questions.indexOf(q) === i && isAnswerable(q, locale, snapshot));
+}
+
+/** Answers a visitor's question, with verified follow-ups or "did you mean" options. */
+export function answerQuestion(question: string, locale: Locale, snapshot: KnowledgeSnapshot | null, context: ConversationContext = {}): AnswerResult {
+  if (!snapshot) {
+    return { kind: "unavailable" };
+  }
+  const outcome = resolveAndCompose(question, locale, snapshot, context);
+  switch (outcome.kind) {
+    case "fallback":
+      return { kind: "fallback", reason: outcome.reason };
+    case "clarify":
+      return clarification(outcome.why, outcome.options, locale, snapshot);
+    case "composed":
+      return answered(question, outcome.interpretation, outcome.composed, locale, snapshot);
+  }
+}
+
+/** Offers each reading as a supported question the visitor confirms by asking it. */
+function clarification(why: ClarifyReason, readings: readonly Interpretation[], locale: Locale, snapshot: KnowledgeSnapshot): AnswerResult {
+  const options = answerableQuestions(readings.map(reading => canonicalQuestion(reading, snapshot, locale)), locale, snapshot)
+    .slice(0, MAX_CLARIFY_OPTIONS);
+  return options.length > 0
+    ? { kind: "clarify", reason: why, options }
+    : { kind: "fallback", reason: why === "typo" ? "unknown-entity" : "ambiguous" };
+}
+
+function answered(question: string, interpretation: Interpretation, composed: ComposedAnswer, locale: Locale, snapshot: KnowledgeSnapshot): AnswerResult {
+  const followUps = answerableQuestions(followUpCandidates(interpretation, snapshot, locale), locale, snapshot)
+    .filter(q => normalizeUtterance(q) !== normalizeUtterance(question));
   const subject = subjectOf(interpretation, snapshot);
   return {
     kind: "answered",
@@ -74,17 +102,12 @@ function answer(question: string, locale: Locale, snapshot: KnowledgeSnapshot | 
   };
 }
 
-function answerable(questions: (string | null)[], locale: Locale, snapshot: KnowledgeSnapshot): string[] {
-  return questions.filter((q, i): q is string => q !== null && questions.indexOf(q) === i
-    && answer(q, locale, snapshot, false).kind === "answered");
-}
-
 /** The single experience an answer was about: the referent for the next follow-up. */
 function subjectOf(interpretation: Interpretation, snapshot: KnowledgeSnapshot): ConversationContext | null {
-  if (interpretation.experience) {
+  if ("experience" in interpretation) {
     return { experienceId: interpretation.experience.id };
   }
-  if (interpretation.topic?.experienceIds.length === 1) {
+  if (interpretation.intent === "topicSummary" && interpretation.topic.experienceIds.length === 1) {
     return { experienceId: interpretation.topic.experienceIds[0] };
   }
   if (interpretation.intent === "currentRole") {
@@ -105,8 +128,6 @@ function technologyDisplay(key: string, snapshot: KnowledgeSnapshot): string | n
 /** A supported question that asks exactly this interpretation, in the site's language. */
 function canonicalQuestion(interpretation: Interpretation, snapshot: KnowledgeSnapshot, locale: Locale): string | null {
   const q = ANSWER_TEMPLATES[locale].questions;
-  const company = interpretation.experience?.companyName.value ?? "";
-  const technology = interpretation.technology ? technologyDisplay(interpretation.technology, snapshot) : null;
   switch (interpretation.intent) {
     case "profile": return q.profile;
     case "employers": return q.employers;
@@ -115,35 +136,42 @@ function canonicalQuestion(interpretation: Interpretation, snapshot: KnowledgeSn
     case "posts": return q.posts;
     case "hobbies": return q.hobbies;
     case "socialLinks": return q.socialLinks;
-    case "companyOverview": return q.companyOverview(company);
-    case "companyRole": return q.companyRole(company);
-    case "companyDates": return q.companyDates(company);
-    case "companyLocation": return q.companyLocation(company);
-    case "companyTechnologies": return q.companyTechnologies(company);
-    case "technologyExperience": return technology && q.technologyExperience(technology);
-    case "technologyAtCompany": return technology && q.technologyAtCompany(technology, company);
-    case "postSearch": return q.postSearch(interpretation.topicTokens!.join(" "));
-    case "postSummary": {
-      const fields = interpretation.post!.locales[locale];
-      return fields ? q.postSummary(fields.title.value) : null;
-    }
-    case "socialLink": return q.socialLink(interpretation.media!.title.value);
     case "education": return q.education;
     case "certifications": return q.certifications;
     case "languages": return q.languages;
+    case "companyOverview": return q.companyOverview(interpretation.experience.companyName.value);
+    case "companyRole": return q.companyRole(interpretation.experience.companyName.value);
+    case "companyDates": return q.companyDates(interpretation.experience.companyName.value);
+    case "companyLocation": return q.companyLocation(interpretation.experience.companyName.value);
+    case "companyTechnologies": return q.companyTechnologies(interpretation.experience.companyName.value);
+    case "companyHighlights": return q.companyHighlights(interpretation.experience.companyName.value);
+    case "technologyExperience": {
+      const technology = technologyDisplay(interpretation.technology, snapshot);
+      return technology && q.technologyExperience(technology);
+    }
+    case "technologyAtCompany": {
+      const technology = technologyDisplay(interpretation.technology, snapshot);
+      return technology && q.technologyAtCompany(technology, interpretation.experience.companyName.value);
+    }
+    case "postSearch": return q.postSearch(interpretation.topicTokens.join(" "));
+    case "postSummary": {
+      const fields = interpretation.post.locales[locale];
+      return fields ? q.postSummary(fields.title.value) : null;
+    }
+    case "socialLink": return q.socialLink(interpretation.media.title.value);
     case "issuerCertifications": {
-      const certification = snapshot.about.certifications.find(c => entityKey(c.issuer.value) === interpretation.issuer);
+      const issuer = interpretation.issuer;
+      const certification = snapshot.about.certifications.find(c => entityKey(c.issuer.value) === issuer);
       return certification ? q.issuerCertifications(certification.issuer.value) : null;
     }
     case "languageProficiency": {
-      const fields = interpretation.language!.locales[locale];
+      const fields = interpretation.language.locales[locale];
       return fields ? q.languageProficiency(fields.name.value) : null;
     }
     case "topicSummary": {
-      const fields = interpretation.topic!.locales[locale];
+      const fields = interpretation.topic.locales[locale];
       return fields ? q.topicSummary(fields.name.value) : null;
     }
-    case "companyHighlights": return q.companyHighlights(company);
   }
 }
 
@@ -153,7 +181,6 @@ function latestExperience(snapshot: KnowledgeSnapshot): ExperienceRecord | undef
 
 function followUpCandidates(interpretation: Interpretation, snapshot: KnowledgeSnapshot, locale: Locale): string[] {
   const q = ANSWER_TEMPLATES[locale].questions;
-  const company = interpretation.experience?.companyName.value;
   switch (interpretation.intent) {
     case "profile":
       return [q.employers, q.currentRole];
@@ -165,14 +192,16 @@ function followUpCandidates(interpretation: Interpretation, snapshot: KnowledgeS
       const ongoing = snapshot.experiences.filter(e => !e.end).sort(byStartDescending)[0];
       return ongoing ? [q.companyOverview(ongoing.companyName.value), q.companyTechnologies(ongoing.companyName.value)] : [];
     }
-    case "companyOverview":
-      return [q.companyHighlights(company!), q.companyTechnologies(company!), q.companyDates(company!)];
+    case "companyOverview": {
+      const company = interpretation.experience.companyName.value;
+      return [q.companyHighlights(company), q.companyTechnologies(company), q.companyDates(company)];
+    }
     case "companyRole":
     case "companyDates":
     case "companyLocation":
     case "companyTechnologies":
     case "companyHighlights":
-      return [q.companyOverview(company!)];
+      return [q.companyOverview(interpretation.experience.companyName.value)];
     case "education":
       return [q.certifications];
     case "certifications":
@@ -182,15 +211,16 @@ function followUpCandidates(interpretation: Interpretation, snapshot: KnowledgeS
     case "languageProficiency":
       return [q.education];
     case "topicSummary": {
-      const latest = [...snapshot.experiences].sort(byStartDescending)
-        .find(e => interpretation.topic!.experienceIds.includes(e.id));
+      const { experienceIds } = interpretation.topic;
+      const latest = [...snapshot.experiences].sort(byStartDescending).find(e => experienceIds.includes(e.id));
       return latest ? [q.companyHighlights(latest.companyName.value)] : [];
     }
     case "technologyAtCompany":
-      return [q.companyTechnologies(company!)];
+      return [q.companyTechnologies(interpretation.experience.companyName.value)];
     case "technologyExperience": {
+      const key = interpretation.technology;
       const first = [...snapshot.experiences].sort(byStartDescending)
-        .find(e => e.technologies.some(t => technologyKey(t.value) === interpretation.technology));
+        .find(e => e.technologies.some(t => technologyKey(t.value) === key));
       return first ? [q.companyTechnologies(first.companyName.value)] : [];
     }
     case "technologies": {
@@ -259,8 +289,7 @@ export function suggestedQuestions(snapshot: KnowledgeSnapshot, locale: Locale):
     { intent: "posts", question: q.posts },
     { intent: "hobbies", question: q.hobbies }
   ];
-  return candidates.filter((c): c is SuggestedQuestion => c !== null
-    && answer(c.question, locale, snapshot, false).kind === "answered");
+  return candidates.filter((c): c is SuggestedQuestion => c !== null && isAnswerable(c.question, locale, snapshot));
 }
 
 /** The answer's text content in reading order (used for the screen-reader announcement). */

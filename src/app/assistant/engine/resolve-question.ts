@@ -13,20 +13,92 @@ import {
 import { compareDates } from "../knowledge/knowledge-adapter";
 import { htmlToLine } from "../knowledge/plain-text";
 import { editDistance, entityKey, foldText, normalizeUtterance, technologyKey, toSecondPerson, tokenize, typoTolerance } from "./normalize-question";
-import { CONTEXT_PATTERNS, ContextRelation, QUESTION_PATTERNS } from "./question-patterns";
+import { CONTEXT_PATTERNS, ContextRelation, QUESTION_PATTERNS, SlotName } from "./question-patterns";
 
-export interface Interpretation {
-  readonly intent: IntentId;
+/** Intents about one experience record. */
+export type ExperienceIntent =
+  | "companyOverview" | "companyRole" | "companyDates" | "companyLocation" | "companyTechnologies" | "companyHighlights";
+
+/** Intents that need no slot. */
+export type GeneralIntent =
+  | "profile" | "employers" | "currentRole" | "technologies" | "posts" | "hobbies" | "socialLinks"
+  | "education" | "certifications" | "languages";
+
+/**
+ * A validated interpretation: each intent carries exactly the records its answer needs, so an
+ * interpretation without them cannot be built (see toInterpretation).
+ */
+export type Interpretation =
+  | { readonly intent: GeneralIntent }
+  | { readonly intent: ExperienceIntent; readonly experience: ExperienceRecord }
+  /** `technology` is a canonical technology key (see technologyKey) present in the CV's lists. */
+  | { readonly intent: "technologyExperience"; readonly technology: string }
+  | { readonly intent: "technologyAtCompany"; readonly technology: string; readonly experience: ExperienceRecord }
+  | { readonly intent: "postSearch"; readonly topicTokens: readonly string[] }
+  | { readonly intent: "postSummary"; readonly post: PostRecord }
+  | { readonly intent: "socialLink"; readonly media: MediaRecord }
+  /** `issuer` is the entityKey of a certification issuer exactly as the CV lists it. */
+  | { readonly intent: "issuerCertifications"; readonly issuer: string }
+  | { readonly intent: "languageProficiency"; readonly language: LanguageRecord }
+  | { readonly intent: "topicSummary"; readonly topic: TopicRecord };
+
+/** Records resolved for a pattern's slots, before they are checked against its intent. */
+interface SlotValues {
   readonly experience?: ExperienceRecord;
-  /** Canonical technology key (see technologyKey) that exists in the CV's technology lists. */
   readonly technology?: string;
   readonly topicTokens?: readonly string[];
   readonly post?: PostRecord;
   readonly media?: MediaRecord;
-  /** entityKey of a certification issuer exactly as the CV lists it. */
   readonly issuer?: string;
   readonly language?: LanguageRecord;
   readonly topic?: TopicRecord;
+}
+
+/** One way to read a matched pattern: its intent and the records its slots resolved to. */
+interface Reading {
+  readonly intent: IntentId;
+  readonly slots: SlotValues;
+}
+
+/** The interpretation a reading stands for, or null when it lacks a record its intent needs. */
+function toInterpretation({ intent, slots }: Reading): Interpretation | null {
+  const { experience, technology, topicTokens, post, media, issuer, language, topic } = slots;
+  switch (intent) {
+    case "profile":
+    case "employers":
+    case "currentRole":
+    case "technologies":
+    case "posts":
+    case "hobbies":
+    case "socialLinks":
+    case "education":
+    case "certifications":
+    case "languages":
+      return { intent };
+    case "companyOverview":
+    case "companyRole":
+    case "companyDates":
+    case "companyLocation":
+    case "companyTechnologies":
+    case "companyHighlights":
+      return experience ? { intent, experience } : null;
+    case "technologyExperience":
+      return technology ? { intent, technology } : null;
+    case "technologyAtCompany":
+      return technology && experience ? { intent, technology, experience } : null;
+    case "postSearch":
+      return topicTokens ? { intent, topicTokens } : null;
+    case "postSummary":
+      return post ? { intent, post } : null;
+    case "socialLink":
+      return media ? { intent, media } : null;
+    case "issuerCertifications":
+      return issuer ? { intent, issuer } : null;
+    case "languageProficiency":
+      return language ? { intent, language } : null;
+    case "topicSummary":
+      return topic ? { intent, topic } : null;
+  }
 }
 
 export type Resolution =
@@ -286,18 +358,76 @@ function resolveTopic(raw: string): SlotResult<string[]> {
   return tokens.length > 0 && tokens.length <= 6 ? { value: tokens } : { reason: "unknown-entity" };
 }
 
-function interpretationKey(interpretation: Interpretation): string {
+function readingKey({ intent, slots }: Reading): string {
   return [
-    interpretation.intent,
-    interpretation.experience?.id ?? "",
-    interpretation.technology ?? "",
-    interpretation.topicTokens?.join(" ") ?? "",
-    interpretation.post?.key ?? "",
-    interpretation.media ? `${interpretation.media.title.pointer}` : "",
-    interpretation.issuer ?? "",
-    interpretation.language?.code.value ?? "",
-    interpretation.topic?.id.value ?? ""
+    intent,
+    slots.experience?.id ?? "",
+    slots.technology ?? "",
+    slots.topicTokens?.join(" ") ?? "",
+    slots.post?.key ?? "",
+    slots.media ? `${slots.media.title.pointer}` : "",
+    slots.issuer ?? "",
+    slots.language?.code.value ?? "",
+    slots.topic?.id.value ?? ""
   ].join("|");
+}
+
+/** Resolves one captured slot to the slot values it stands for (or alternatives, or a reason). */
+type SlotResolver = (raw: string, index: SnapshotIndex) => SlotResult<SlotValues>;
+
+function slotValues<T>(result: SlotResult<T>, toValues: (value: T) => SlotValues): SlotResult<SlotValues> {
+  if ("value" in result) {
+    return { value: toValues(result.value) };
+  }
+  return "alternatives" in result ? { alternatives: result.alternatives.map(toValues), why: result.why } : result;
+}
+
+/** Slot resolvers, in the order a pattern's slots are resolved. */
+const SLOT_RESOLVERS: readonly (readonly [SlotName, SlotResolver])[] = [
+  ["company", (raw, index) => slotValues(resolveCompany(raw, index), experience => ({ experience }))],
+  ["technology", (raw, index) => slotValues(resolveTechnology(raw, index), technology => ({ technology }))],
+  ["network", (raw, index) => slotValues(resolveNetwork(raw, index), media => ({ media }))],
+  ["title", (raw, index) => slotValues(resolvePostTitle(raw, index), post => ({ post }))],
+  ["topic", raw => slotValues(resolveTopic(raw), topicTokens => ({ topicTokens }))],
+  ["issuer", (raw, index) => slotValues(resolveIssuer(raw, index), issuer => ({ issuer }))],
+  ["language", (raw, index) => slotValues(resolveLanguage(raw, index), language => ({ language }))],
+  ["area", (raw, index) => slotValues(resolveArea(raw, index), topic => ({ topic }))]
+];
+
+/** What one matched pattern's slots resolved to. */
+type PatternOutcome =
+  /** Every slot named exactly one record: these readings answer. */
+  | { readonly kind: "matched"; readonly readings: readonly Reading[] }
+  /** A slot was a near miss or named several records: the visitor chooses among the readings. */
+  | { readonly kind: "near"; readonly why: ClarifyReason; readonly readings: readonly Reading[] }
+  /** A slot names nothing in the CV. */
+  | { readonly kind: "rejected"; readonly reason: FallbackReason };
+
+/** Resolves a matched pattern's captured slots; pure, so each pattern's outcome stands alone. */
+function resolvePatternSlots(intent: IntentId, captured: Readonly<Record<string, string | undefined>>, index: SnapshotIndex): PatternOutcome {
+  let readings: Reading[] = [{ intent, slots: {} }];
+  let why: ClarifyReason | null = null;
+  for (const [name, resolve] of SLOT_RESOLVERS) {
+    const raw = captured[name];
+    if (raw === undefined) {
+      continue;
+    }
+    const result = resolve(raw, index);
+    if ("reason" in result) {
+      return { kind: "rejected", reason: result.reason };
+    }
+    const values = "value" in result ? [result.value] : result.alternatives;
+    if ("alternatives" in result) {
+      why = why === "ambiguous" || result.why === "ambiguous" ? "ambiguous" : "typo";
+    }
+    readings = readings.flatMap(reading => values.map(value => ({ intent, slots: { ...reading.slots, ...value } })));
+  }
+  return why ? { kind: "near", why, readings } : { kind: "matched", readings };
+}
+
+/** The interpretations of distinct readings; a reading missing a required record is dropped. */
+function interpretationsOf(readings: ReadonlyMap<string, Reading>): Interpretation[] {
+  return [...readings.values()].map(toInterpretation).filter((i): i is Interpretation => i !== null);
 }
 
 /** Strongest-first rejection reason when no pattern resolves. */
@@ -332,8 +462,8 @@ export function resolveQuestion(question: string, snapshot: KnowledgeSnapshot, c
 
 function resolveUtterance(utterance: string, snapshot: KnowledgeSnapshot, context: ConversationContext): Resolution {
   const index = indexFor(snapshot);
-  const candidates = new Map<string, Interpretation>();
-  const near = new Map<string, Interpretation>();
+  const candidates = new Map<string, Reading>();
+  const near = new Map<string, Reading>();
   let nearWhy: ClarifyReason = "typo";
   let reason: FallbackReason = "unrecognized";
   const reject = (next: FallbackReason) => {
@@ -349,8 +479,8 @@ function resolveUtterance(utterance: string, snapshot: KnowledgeSnapshot, contex
     const referent = snapshot.experiences.find(e => e.id === context.experienceId);
     const target = referent && neighbour(snapshot, referent, pattern.relation);
     if (target) {
-      const interpretation: Interpretation = { intent: pattern.intent, experience: target };
-      candidates.set(interpretationKey(interpretation), interpretation);
+      const reading: Reading = { intent: pattern.intent, slots: { experience: target } };
+      candidates.set(readingKey(reading), reading);
     } else {
       // No referent in the conversation, or no earlier/later role.
       reject(referent ? "missing-fact" : "unrecognized");
@@ -362,50 +492,27 @@ function resolveUtterance(utterance: string, snapshot: KnowledgeSnapshot, contex
     if (!match) {
       continue;
     }
-    const slots = match.groups ?? {};
-    // Every reading of this pattern: one, or several when a slot needs the visitor to choose.
-    let readings: Interpretation[] = [{ intent: pattern.intent }];
-    let approximate = false;
-    let rejected = false;
-    const apply = <T>(raw: string | undefined, resolve: (value: string) => SlotResult<T>, assign: (reading: Interpretation, value: T) => Interpretation) => {
-      if (raw === undefined || rejected) {
-        return;
-      }
-      const result = resolve(raw);
-      if ("reason" in result) {
-        rejected = true;
-        reject(result.reason);
-      } else if ("value" in result) {
-        readings = readings.map(reading => assign(reading, result.value));
-      } else {
-        approximate = true;
-        if (result.why === "ambiguous") {
-          nearWhy = "ambiguous";
-        }
-        readings = readings.flatMap(reading => result.alternatives.map(value => assign(reading, value)));
-      }
-    };
-    apply(slots["company"], raw => resolveCompany(raw, index), (r, experience) => ({ ...r, experience }));
-    apply(slots["technology"], raw => resolveTechnology(raw, index), (r, technology) => ({ ...r, technology }));
-    apply(slots["network"], raw => resolveNetwork(raw, index), (r, media) => ({ ...r, media }));
-    apply(slots["title"], raw => resolvePostTitle(raw, index), (r, post) => ({ ...r, post }));
-    apply(slots["topic"], resolveTopic, (r, topicTokens) => ({ ...r, topicTokens }));
-    apply(slots["issuer"], raw => resolveIssuer(raw, index), (r, issuer) => ({ ...r, issuer }));
-    apply(slots["language"], raw => resolveLanguage(raw, index), (r, language) => ({ ...r, language }));
-    apply(slots["area"], raw => resolveArea(raw, index), (r, topic) => ({ ...r, topic }));
-    if (!rejected) {
-      readings.forEach(reading => (approximate ? near : candidates).set(interpretationKey(reading), reading));
+    const outcome = resolvePatternSlots(pattern.intent, match.groups ?? {}, index);
+    if (outcome.kind === "rejected") {
+      reject(outcome.reason);
+      continue;
     }
+    if (outcome.kind === "near" && outcome.why === "ambiguous") {
+      nearWhy = "ambiguous";
+    }
+    outcome.readings.forEach(reading => (outcome.kind === "matched" ? candidates : near).set(readingKey(reading), reading));
   }
 
-  if (candidates.size === 1) {
-    return { kind: "resolved", interpretation: [...candidates.values()][0] };
+  const exact = interpretationsOf(candidates);
+  if (exact.length === 1) {
+    return { kind: "resolved", interpretation: exact[0] };
   }
-  if (candidates.size > 1) {
-    return { kind: "clarify", why: "ambiguous", options: [...candidates.values()] };
+  if (exact.length > 1) {
+    return { kind: "clarify", why: "ambiguous", options: exact };
   }
-  if (near.size > 0) {
-    return { kind: "clarify", why: nearWhy, options: [...near.values()] };
+  const options = interpretationsOf(near);
+  if (options.length > 0) {
+    return { kind: "clarify", why: nearWhy, options };
   }
   return { kind: "rejected", reason };
 }

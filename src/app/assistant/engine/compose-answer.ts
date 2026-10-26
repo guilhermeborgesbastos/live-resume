@@ -478,31 +478,30 @@ class Composer {
 
 export function composeAnswer(interpretation: Interpretation, snapshot: KnowledgeSnapshot, locale: Locale): ComposedAnswer | null {
   const c = new Composer(snapshot, locale);
-  const { experience, technology, topicTokens, post, media, issuer, language, topic } = interpretation;
   switch (interpretation.intent) {
     case "profile": return c.profile();
     case "employers": return c.employers();
     case "currentRole": return c.currentRole();
-    case "companyOverview": return c.companyOverview(experience!);
-    case "companyRole": return c.companyRole(experience!);
-    case "companyDates": return c.companyDates(experience!);
-    case "companyLocation": return c.companyLocation(experience!);
+    case "companyOverview": return c.companyOverview(interpretation.experience);
+    case "companyRole": return c.companyRole(interpretation.experience);
+    case "companyDates": return c.companyDates(interpretation.experience);
+    case "companyLocation": return c.companyLocation(interpretation.experience);
     case "technologies": return c.technologies();
-    case "technologyExperience": return c.technologyExperience(technology!);
-    case "companyTechnologies": return c.companyTechnologies(experience!);
-    case "technologyAtCompany": return c.technologyAtCompany(technology!, experience!);
+    case "technologyExperience": return c.technologyExperience(interpretation.technology);
+    case "companyTechnologies": return c.companyTechnologies(interpretation.experience);
+    case "technologyAtCompany": return c.technologyAtCompany(interpretation.technology, interpretation.experience);
     case "posts": return c.posts();
-    case "postSearch": return c.postSearch(topicTokens!);
-    case "postSummary": return c.postSummary(post!);
+    case "postSearch": return c.postSearch(interpretation.topicTokens);
+    case "postSummary": return c.postSummary(interpretation.post);
     case "hobbies": return c.hobbies();
-    case "socialLink": return c.socialLink(media!);
+    case "socialLink": return c.socialLink(interpretation.media);
     case "socialLinks": return c.socialLinks();
     case "education": return c.education();
     case "certifications": return c.certifications();
-    case "issuerCertifications": return c.certifications(issuer!);
+    case "issuerCertifications": return c.certifications(interpretation.issuer);
     case "languages": return c.languages();
-    case "languageProficiency": return c.languageProficiency(language!);
-    case "topicSummary": return c.topicSummary(topic!);
-    case "companyHighlights": return c.companyHighlights(experience!);
+    case "languageProficiency": return c.languageProficiency(interpretation.language);
+    case "topicSummary": return c.topicSummary(interpretation.topic);
+    case "companyHighlights": return c.companyHighlights(interpretation.experience);
   }
 }
