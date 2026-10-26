@@ -23,7 +23,7 @@ It recognizes the question forms listed below and their close variants. It does 
 | Entry point | Where | Behavior |
 | --- | --- | --- |
 | `/assistant` page | `/en/assistant`, `/pt/assistant` (lazy route, header item **AI Assistant** / **Assistente de IA**; the UI calls the feature "AI Assistant") | Full-page conversation: scope and disclosure, starter suggestions, transcript, composer, **Clear conversation**, **Back to the resume**. Not a dialog. |
-| Floating panel | Fixed **Ask about my CV** button with a robot icon on the resume while About, Experience or Posts is the active section | A modal `<dialog>` (desktop: about 420 px wide; phones: a bottom sheet above the keyboard with safe-area padding). Escape or the backdrop closes it, focus returns to the button and the page scroll position is restored. **Expand** carries the conversation and the unsent draft to `/assistant`. Not rendered on `/assistant` or the 404 page. |
+| Floating panel | Fixed **Ask my AI Assistant** button with a robot icon on the resume while About, Experience or Posts is the active section | A modal `<dialog>` (desktop: about 420 px wide; phones: a bottom sheet above the keyboard with safe-area padding). Escape or the backdrop closes it, focus returns to the button and the page scroll position is restored. **Expand** carries the conversation and the unsent draft to `/assistant`. Not rendered on `/assistant` or the 404 page. |
 
 Both use the same engine, data snapshot and session (`AssistantSessionService`).
 

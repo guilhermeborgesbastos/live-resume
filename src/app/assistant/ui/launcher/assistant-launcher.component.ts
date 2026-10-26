@@ -5,7 +5,7 @@ import { AssistantSessionService } from "../../state/assistant-session.service";
 import { ASSISTANT_COPY } from "../assistant-copy";
 import { AssistantPanelComponent } from "../panel/assistant-panel.component";
 
-/** The fixed "Ask about my CV" button on the resume and the panel it opens. */
+/** The fixed "Ask my AI Assistant" button on the resume and the panel it opens. */
 @Component({
   selector: "app-assistant-launcher",
   templateUrl: "./assistant-launcher.component.html",

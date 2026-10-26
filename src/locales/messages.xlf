@@ -131,7 +131,7 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.launcher.label" datatype="html">
-        <source>Ask about my CV</source>
+        <source>Ask my AI Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
           <context context-type="linenumber">12</context>

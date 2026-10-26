@@ -368,8 +368,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.launcher.label" datatype="html">
-        <source>Ask about my CV</source>
-        <target>Pergunte sobre meu currículo</target>
+        <source>Ask my AI Assistant</source>
+        <target>Pergunte ao meu Assistente de IA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
           <context context-type="linenumber">8</context>
