@@ -596,6 +596,15 @@
         </context-group>
         <note priority="1" from="description">nav</note>
       </trans-unit>
+      <trans-unit id="assistant.new" datatype="html">
+        <source>New</source>
+        <target>New</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+        <note priority="1" from="description">nav</note>
+      </trans-unit>
       <trans-unit id="assistant.clarify.typo" datatype="html">
         <source>I couldn’t find that name in my CV exactly. Did you mean one of these questions?</source>
         <target>I couldn’t find that name in my CV exactly. Did you mean one of these questions?</target>

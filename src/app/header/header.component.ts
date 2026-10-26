@@ -2,7 +2,9 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, LOCALE_ID, 
 import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { NgClass } from "@angular/common";
-import { Router, RouterLink } from "@angular/router";
+import { NavigationEnd, Router, RouterLink } from "@angular/router";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { filter } from "rxjs/operators";
 
 /** localStorage key set once the AI Assistant link has played its first-visit animation. */
 const ASSISTANT_INTRO_KEY = "live-resume.assistantIntroSeen";
@@ -10,6 +12,8 @@ const ASSISTANT_INTRO_KEY = "live-resume.assistantIntroSeen";
 const ASSISTANT_INTRO_DELAY = 1200;
 /** Matches the `assistant-intro-pill` animation in header.component.scss. */
 const ASSISTANT_INTRO_DURATION = 2600;
+/** localStorage key set once the visitor has opened the AI Assistant page (hides the "New" badge). */
+const ASSISTANT_VISITED_KEY = "live-resume.assistantVisited";
 
 @Component({
     selector: "app-header",
@@ -29,6 +33,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   private _pageXOffset: any;
   
   hasMenuToggled: boolean;
+  /** The "New" badge on the AI Assistant link, until the visitor has opened the assistant once. */
+  showNewBadge = !this.hasFlag(ASSISTANT_VISITED_KEY);
   faBars: IconDefinition;
   faShareAlt: IconDefinition;
   faCloudDownloadAlt: IconDefinition;
@@ -74,7 +80,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   */
   private introduceAssistantLink() {
     const link: HTMLElement | null = this.nav?.nativeElement.querySelector('a[data-section="assistant"]');
-    if (!link || this.assistantIntroSeen()) {
+    if (!link || this.hasFlag(ASSISTANT_INTRO_KEY)) {
       return;
     }
     let end: ReturnType<typeof setTimeout> | undefined;
@@ -84,7 +90,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
         return;
       }
       this.renderer.addClass(link, "assistant-intro");
-      this.rememberAssistantIntro();
+      this.setFlag(ASSISTANT_INTRO_KEY);
       end = setTimeout(() => this.renderer.removeClass(link, "assistant-intro"), ASSISTANT_INTRO_DURATION);
     }, ASSISTANT_INTRO_DELAY);
     this.destroyRef.onDestroy(() => {
@@ -93,19 +99,26 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private assistantIntroSeen(): boolean {
+  private markAssistantVisited() {
+    if (this.showNewBadge && this.isAssistantRoute()) {
+      this.showNewBadge = false;
+      this.setFlag(ASSISTANT_VISITED_KEY);
+    }
+  }
+
+  private hasFlag(key: string): boolean {
     try {
-      return localStorage.getItem(ASSISTANT_INTRO_KEY) !== null;
+      return localStorage.getItem(key) !== null;
     } catch {
       return false;
     }
   }
 
-  private rememberAssistantIntro() {
+  private setFlag(key: string) {
     try {
-      localStorage.setItem(ASSISTANT_INTRO_KEY, "1");
+      localStorage.setItem(key, "1");
     } catch {
-      // Storage blocked (e.g. some private windows): the animation may play again next visit.
+      // Storage blocked (e.g. some private windows): the badge or animation may show again next visit.
     }
   }
 
@@ -113,6 +126,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.faBars = faBars;
     this.faShareAlt = faShareAlt;
     this.faCloudDownloadAlt = faCloudDownloadAlt;
+
+    // On the assistant page the router may still report the previous URL while it renders, so
+    // also check after each navigation.
+    this.markAssistantVisited();
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd), takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.markAssistantVisited());
   }
 
   private updateNavigation() {

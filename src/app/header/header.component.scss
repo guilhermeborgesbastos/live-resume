@@ -63,6 +63,28 @@ header {
                     font-weight: 600;
                 }
 
+                .assistant-link {
+                    position: relative;
+                }
+
+                // Shown until the visitor opens the assistant once (see HeaderComponent).
+                .new-badge {
+                    position: absolute;
+                    top: -6px;
+                    right: -12px;
+                    padding: 1px 7px;
+                    font-size: 11px;
+                    font-weight: 700;
+                    line-height: 1.4;
+                    letter-spacing: 0.04em;
+                    text-transform: uppercase;
+                    color: #fff;
+                    background-color: #222f5c;
+                    border: 2px solid #d4e7fe;
+                    border-radius: 10px;
+                    pointer-events: none;
+                }
+
                 // First-visit highlight of the AI Assistant link (see HeaderComponent): a white
                 // pill fades in behind the label, a navy ring pulses out twice, then both fade.
                 .assistant-intro {
