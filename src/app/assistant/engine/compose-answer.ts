@@ -68,14 +68,13 @@ class Composer {
     };
   }
 
-  /** `place` names the About record's own anchor and label (education, languages, a topic). */
-  citeAbout(pointers: string[], externalUrl?: string, place?: { anchor: string; label: string }): void {
+  citeAbout(pointers: string[], externalUrl?: string): void {
     this.cite({
       file: "about.json",
       recordKey: "about",
       pointers,
-      label: place?.label ?? this.t.labels.about,
-      target: place ? { section: "about", anchor: place.anchor } : { section: "about" },
+      label: this.t.labels.about,
+      target: { section: "about" },
       ...(externalUrl ? { externalUrl } : {})
     });
   }
@@ -87,7 +86,7 @@ class Composer {
       recordKey: certification.pointer,
       pointers,
       label: certification.name.value,
-      target: { section: "about", anchor: "certifications" },
+      target: { section: "about" },
       ...(certification.url ? { externalUrl: certification.url.value } : {})
     });
   }
@@ -380,7 +379,7 @@ class Composer {
       const dates = [record.start, record.end].filter((d): d is SourcedPartialDate => d !== undefined);
       const period = dates.length === 0 ? null : dates.map(d => formatPartialDate(d, this.locale)).join(" – ");
       const facts = [fields.degree, ...(fields.field ? [fields.field] : []), record.school, ...dates.map(dateFact)];
-      this.citeAbout(facts.map(f => f.pointer), undefined, { anchor: "education", label: this.t.labels.education });
+      this.citeAbout(facts.map(f => f.pointer));
       return line(this.t.educationItem(fields.degree.value, fields.field?.value ?? null, record.school.value, period), ...facts);
     });
     return this.done([{ kind: "list", intro: line(this.t.educationIntro), items }]);
@@ -414,7 +413,7 @@ class Composer {
     }
     const items = records.map(record => {
       const { name, proficiency } = record.locales[this.locale]!;
-      this.citeAbout([name.pointer, proficiency.pointer], undefined, { anchor: "languages", label: this.t.labels.languages });
+      this.citeAbout([name.pointer, proficiency.pointer]);
       return line(this.t.languageItem(name.value, proficiency.value), name, proficiency);
     });
     return this.done([{ kind: "list", intro: line(this.t.languagesIntro), items }]);
@@ -425,7 +424,7 @@ class Composer {
     if (!fields) {
       return null;
     }
-    this.citeAbout([fields.name.pointer, fields.proficiency.pointer], undefined, { anchor: "languages", label: this.t.labels.languages });
+    this.citeAbout([fields.name.pointer, fields.proficiency.pointer]);
     return this.done([{
       kind: "text",
       line: line(this.t.languageProficiency(fields.name.value, fields.proficiency.value), fields.name, fields.proficiency)
@@ -441,8 +440,7 @@ class Composer {
     if (!fields || experiences.length === 0 || experiences.some(e => !e.locales[this.locale])) {
       return null;
     }
-    this.citeAbout([fields.name.pointer, fields.summary.pointer], undefined,
-      { anchor: `topic-${topic.id.value}`, label: this.t.labels.topic(fields.name.value) });
+    this.citeAbout([fields.name.pointer, fields.summary.pointer]);
     const items = experiences.map(experience => {
       const role = experience.locales[this.locale]!.role;
       this.citeExperience(experience, [role.pointer, ...this.rangeFacts(experience).map(f => f.pointer)]);

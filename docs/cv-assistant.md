@@ -124,16 +124,14 @@ Each answer lists its sources ("Experience · Swisscom AG", "About me", a post t
 
 | Source | Link |
 | --- | --- |
-| About (biography, hobbies, profiles) | `/#about` |
-| Education, languages, certifications | `/#education`, `/#languages`, `/#certifications` |
-| Topic summary | `/#topic-<id>` (opens that topic under **Focus areas**) |
+| About (including education, certifications, languages and topic summaries) | `/#about` |
 | Experience | `/?experienceId=<id>#experience` |
 | Post | `/?post=<url>#posts` |
 | Contact (fallback) | `/#contact` |
 
 `ExperienceComponent` and `PostsComponent` read these parameters after their data loads, and again on every navigation (including back/forward and following the same citation twice). They then select the experience by ID (mapped to its carousel position) or open the posts page that holds the URL, scroll to the section and focus the record. Unknown identifiers leave the carousel as it is. The resume keeps a `#fragment` target in view while its data-driven sections render, so a citation or the contact link lands on the right place on phones too. Only generated record identifiers ever go into the URL, never question or answer text.
 
-Education, languages, certifications and topic summaries are shown in a card under the About section (`about/about-details/`), and their citations ("About me · Education", "About me · DevOps", ...) lead to that record. When the resume is opened from `/assistant`, the card scrolls to the cited record (and opens a cited topic) once its data has rendered. Each certification is its own source, labelled with its name, so its credential page can be opened. Post, profile and certification citations also get an **Open link** to the article, profile or credential, but only for parsed `http(s)` URLs, opened with `rel="noopener noreferrer"`. A source with any other scheme keeps its internal citation and gets no outgoing link.
+Each certification is its own source, labelled with its name, so its credential page can be opened. Post, profile and certification citations also get an **Open link** to the article, profile or credential, but only for parsed `http(s)` URLs, opened with `rel="noopener noreferrer"`. A source with any other scheme keeps its internal citation and gets no outgoing link.
 
 ## Session lifetime and privacy
 

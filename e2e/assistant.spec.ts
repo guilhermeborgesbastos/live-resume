@@ -139,27 +139,6 @@ for (const locale of LOCALES) {
       await expect(selected).toHaveAttribute("id", String(deevo.id));
     });
 
-    test("About citations reveal the cited education record and topic", async ({ page }) => {
-      const about = locale === "en"
-        ? { study: "What did you study?", education: "About me · Education", devops: "Summarize your experience in DevOps.", topic: "About me · DevOps" }
-        : { study: "O que você estudou?", education: "Sobre mim · Formação", devops: "Resuma sua experiência em DevOps.", topic: "Sobre mim · DevOps" };
-      await openAssistantPage(page, locale);
-      await askIn(page, "app-assistant-chat", locale, about.study);
-      await page.locator(".message.assistant").last().getByRole("link", { name: about.education }).click();
-      await expect(page).toHaveURL(new RegExp(`/${locale}/#education$`));
-      const education = page.locator("app-about-details #education");
-      await expect(education).toBeInViewport();
-      await expect(education).toContainText("UniFACTHUS");
-
-      await page.goto(`/${locale}/assistant`);
-      await askIn(page, "app-assistant-chat", locale, about.devops);
-      await page.locator(".message.assistant").last().getByRole("link", { name: about.topic }).click();
-      const topic = page.locator("app-about-details details#topic-devops");
-      await expect(topic).toHaveAttribute("open", "");
-      await expect(topic).toBeInViewport();
-      await expect(topic).toContainText("Prometheus");
-    });
-
     test("a post citation reveals the post on its carousel page", async ({ page }) => {
       await openAssistantPage(page, locale);
       await askIn(page, "app-assistant-chat", locale, text.posts);

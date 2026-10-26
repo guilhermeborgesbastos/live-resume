@@ -266,69 +266,6 @@
         </context-group>
         <note priority="1" from="description">about</note>
       </trans-unit>
-      <trans-unit id="about.education" datatype="html">
-        <source>Education</source>
-        <target>Formação</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about/about-details/about-details.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <note priority="1" from="description">about</note>
-      </trans-unit>
-      <trans-unit id="about.languages" datatype="html">
-        <source>Languages</source>
-        <target>Idiomas</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about/about-details/about-details.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <note priority="1" from="description">about</note>
-      </trans-unit>
-      <trans-unit id="about.certifications" datatype="html">
-        <source>Certifications</source>
-        <target>Certificações</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about/about-details/about-details.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <note priority="1" from="description">about</note>
-      </trans-unit>
-      <trans-unit id="about.certification.type.certification" datatype="html">
-        <source>certification</source>
-        <target>certificação</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about/about-details/about-details.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <note priority="1" from="description">about</note>
-      </trans-unit>
-      <trans-unit id="about.certification.type.course" datatype="html">
-        <source>course certificate</source>
-        <target>certificado de curso</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about/about-details/about-details.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <note priority="1" from="description">about</note>
-      </trans-unit>
-      <trans-unit id="about.certification.type.badge" datatype="html">
-        <source>badge</source>
-        <target>badge</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about/about-details/about-details.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <note priority="1" from="description">about</note>
-      </trans-unit>
-      <trans-unit id="about.focusAreas" datatype="html">
-        <source>Focus areas</source>
-        <target>Áreas de atuação</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/about/about-details/about-details.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <note priority="1" from="description">about</note>
-      </trans-unit>
       <trans-unit id="hello" datatype="html">
         <source>Hello!</source>
         <target>Olá!</target>
