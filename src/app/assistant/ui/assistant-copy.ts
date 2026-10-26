@@ -10,6 +10,6 @@ export const ASSISTANT_COPY = {
     ambiguous: $localize`:assistant@@assistant.clarify.ambiguous:That could refer to more than one thing in my CV. Which question did you mean?`
   },
   openPanel: $localize`:assistant@@assistant.launcher.label:Ask about my CV`,
-  closePanel: $localize`:assistant@@assistant.panel.close:Close the CV assistant`,
-  expandPanel: $localize`:assistant@@assistant.panel.expand:Open the CV assistant in a full page`
+  closePanel: $localize`:assistant@@assistant.panel.close:Close the AI assistant`,
+  expandPanel: $localize`:assistant@@assistant.panel.expand:Open the AI assistant in a full page`
 };

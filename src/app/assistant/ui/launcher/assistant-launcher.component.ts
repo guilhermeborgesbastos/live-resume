@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, inject, input } from "@angular/core";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import { faComments } from "@fortawesome/free-solid-svg-icons";
+import { faRobot } from "@fortawesome/free-solid-svg-icons";
 import { AssistantSessionService } from "../../state/assistant-session.service";
 import { ASSISTANT_COPY } from "../assistant-copy";
 import { AssistantPanelComponent } from "../panel/assistant-panel.component";
@@ -18,7 +18,7 @@ export class AssistantLauncherComponent {
   readonly available = input(true);
 
   readonly label = ASSISTANT_COPY.openPanel;
-  readonly faComments = faComments;
+  readonly faRobot = faRobot;
 
   @ViewChild("button", { static: true }) button: ElementRef<HTMLButtonElement>;
 

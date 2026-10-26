@@ -276,8 +276,8 @@
         <note priority="1" from="description">dialog</note>
       </trans-unit>
       <trans-unit id="assistant.page.title" datatype="html">
-        <source>CV Assistant - Guilherme Borges Bastos</source>
-        <target>Assistente do CV - Guilherme Borges Bastos</target>
+        <source>AI Assistant - Guilherme Borges Bastos</source>
+        <target>Assistente de IA - Guilherme Borges Bastos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app-routing.module.ts</context>
           <context context-type="linenumber">12</context>
@@ -294,8 +294,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.title" datatype="html">
-        <source>CV Assistant</source>
-        <target>Assistente do CV</target>
+        <source>AI Assistant</source>
+        <target>Assistente de IA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/pages/assistant-page/assistant-page.component.html</context>
           <context context-type="linenumber">9,10</context>
@@ -377,8 +377,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.panel.close" datatype="html">
-        <source>Close the CV assistant</source>
-        <target>Fechar o assistente do CV</target>
+        <source>Close the AI assistant</source>
+        <target>Fechar o assistente de IA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
           <context context-type="linenumber">9</context>
@@ -386,8 +386,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.panel.expand" datatype="html">
-        <source>Open the CV assistant in a full page</source>
-        <target>Abrir o assistente do CV em uma página inteira</target>
+        <source>Open the AI assistant in a full page</source>
+        <target>Abrir o assistente de IA em uma página inteira</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
           <context context-type="linenumber">10</context>
@@ -588,8 +588,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant" datatype="html">
-        <source>CV Assistant</source>
-        <target>Assistente</target>
+        <source>AI Assistant</source>
+        <target>Assistente de IA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header/header.component.html</context>
           <context context-type="linenumber">17,19</context>

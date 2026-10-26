@@ -23,7 +23,7 @@
         <note priority="1" from="description">about</note>
       </trans-unit>
       <trans-unit id="assistant.page.title" datatype="html">
-        <source>CV Assistant - Guilherme Borges Bastos</source>
+        <source>AI Assistant - Guilherme Borges Bastos</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app-routing.module.ts</context>
           <context context-type="linenumber">12</context>
@@ -39,7 +39,7 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.title" datatype="html">
-        <source>CV Assistant</source>
+        <source>AI Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/pages/assistant-page/assistant-page.component.html</context>
           <context context-type="linenumber">9,10</context>
@@ -139,7 +139,7 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.panel.close" datatype="html">
-        <source>Close the CV assistant</source>
+        <source>Close the AI assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
           <context context-type="linenumber">13</context>
@@ -147,7 +147,7 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.panel.expand" datatype="html">
-        <source>Open the CV assistant in a full page</source>
+        <source>Open the AI assistant in a full page</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
           <context context-type="linenumber">14</context>
@@ -535,7 +535,7 @@
         <note priority="1" from="description">nav</note>
       </trans-unit>
       <trans-unit id="assistant" datatype="html">
-        <source>CV Assistant</source>
+        <source>AI Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header/header.component.html</context>
           <context context-type="linenumber">17,19</context>

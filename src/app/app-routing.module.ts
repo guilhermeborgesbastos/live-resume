@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: "assistant",
     loadComponent: () => import("./assistant/pages/assistant-page/assistant-page.component").then(m => m.AssistantPageComponent),
-    title: $localize`:assistant@@assistant.page.title:CV Assistant - Guilherme Borges Bastos`
+    title: $localize`:assistant@@assistant.page.title:AI Assistant - Guilherme Borges Bastos`
   },
   { path: "about", redirectTo: "/#about"},
   { path: "experience", redirectTo: "/#experience"},
