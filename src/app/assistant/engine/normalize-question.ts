@@ -45,6 +45,31 @@ export function normalizeUtterance(question: string): string {
     .trim();
 }
 
+/*
+ * Third-person wordings of the supported questions ("What did he achieve at Swisscom?", "Ele usou
+ * Java?"), rewritten to the second person the patterns use. The engine only tries this when the
+ * question as typed does not resolve, so names and post titles are never rewritten for a match.
+ * Ordered: auxiliary + "he" pairs first, then the remaining pronouns.
+ */
+const SECOND_PERSON: readonly (readonly [RegExp, string])[] = [
+  [/\b(?:does|do) he\b/g, "do you"],
+  [/\b(?:has|have) he\b/g, "have you"],
+  [/\bis he\b/g, "are you"],
+  [/\bwas he\b/g, "were you"],
+  [/\bhe (?:has|have)\b/g, "you have"],
+  [/\bhe is\b/g, "you are"],
+  [/\bhe was\b/g, "you were"],
+  [/\bhimself\b/g, "yourself"],
+  [/\bhis\b/g, "your"],
+  [/\b(?:he|him)\b/g, "you"],
+  [/(^|[\s,])ele\b/g, "$1voce"]
+];
+
+/** The normalized question with third-person pronouns turned into the second person. */
+export function toSecondPerson(utterance: string): string {
+  return SECOND_PERSON.reduce((text, [pattern, replacement]) => text.replace(pattern, replacement), utterance);
+}
+
 /** Compact key for entity names: letters and digits only ("E-tática" -> "etatica"). */
 export function entityKey(text: string): string {
   return foldText(text).replace(/[^\p{L}\p{N}]+/gu, "");

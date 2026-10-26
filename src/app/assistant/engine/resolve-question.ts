@@ -12,7 +12,7 @@ import {
 } from "../models/assistant.models";
 import { compareDates } from "../knowledge/knowledge-adapter";
 import { htmlToLine } from "../knowledge/plain-text";
-import { editDistance, entityKey, foldText, normalizeUtterance, technologyKey, tokenize, typoTolerance } from "./normalize-question";
+import { editDistance, entityKey, foldText, normalizeUtterance, technologyKey, toSecondPerson, tokenize, typoTolerance } from "./normalize-question";
 import { CONTEXT_PATTERNS, ContextRelation, QUESTION_PATTERNS } from "./question-patterns";
 
 export interface Interpretation {
@@ -319,6 +319,18 @@ function neighbour(snapshot: KnowledgeSnapshot, experience: ExperienceRecord, re
  */
 export function resolveQuestion(question: string, snapshot: KnowledgeSnapshot, context: ConversationContext = {}): Resolution {
   const utterance = normalizeUtterance(question);
+  const resolution = resolveUtterance(utterance, snapshot, context);
+  if (resolution.kind !== "rejected") {
+    return resolution;
+  }
+  // A third-person question ("What did he achieve at Swisscom?") gets a second try in the second
+  // person; if that does not resolve either, the original rejection reason stands.
+  const secondPerson = toSecondPerson(utterance);
+  const retry = secondPerson === utterance ? resolution : resolveUtterance(secondPerson, snapshot, context);
+  return retry.kind === "rejected" ? resolution : retry;
+}
+
+function resolveUtterance(utterance: string, snapshot: KnowledgeSnapshot, context: ConversationContext): Resolution {
   const index = indexFor(snapshot);
   const candidates = new Map<string, Interpretation>();
   const near = new Map<string, Interpretation>();

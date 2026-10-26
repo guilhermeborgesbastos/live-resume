@@ -283,7 +283,7 @@
             }
         ],
         "technologies": [
-            "AWS", "GitLab CI", "Java", "Spring Boot", "Angular", "Typescript", "Javascript", "Node.js", "SDX", "Versioning Control", "DevOps", "CI/CD", "JUnit", "Karma", "Jasmine", "Selenium", "Jenkins", "Docker", "NPM", "Gradle", "Prometheus", "Grafana", "Redis"
+            "AWS", "GitLab CI", "Java", "Spring Boot", "Angular", "Typescript", "Javascript", "Node.js", "SDX", "Versioning Control", "DevOps", "CI/CD", "JUnit", "Karma", "Jasmine", "Selenium", "Jenkins", "Docker", "Kubernetes", "NPM", "Gradle", "Prometheus", "Grafana", "Redis"
         ],
         "medias": [
             {

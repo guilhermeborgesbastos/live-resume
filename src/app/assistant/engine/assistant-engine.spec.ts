@@ -1,6 +1,6 @@
 import { answerQuestion, suggestedQuestions } from "./assistant-engine";
 import { ANSWER_TEMPLATES } from "./answer-templates";
-import { editDistance, normalizeUtterance, typoTolerance, validateQuestion } from "./normalize-question";
+import { editDistance, normalizeUtterance, toSecondPerson, typoTolerance, validateQuestion } from "./normalize-question";
 import { AnswerResult, IntentId, Locale } from "../models/assistant.models";
 import { answerText, CvJson, expectGrounded, realCv, snapshotOf } from "../testing/assistant-fixtures";
 
@@ -89,7 +89,17 @@ const POSITIVE: Record<Locale, Positive[]> = {
     },
     { question: "Tell me about your leadership experience.", intent: "topicSummary", contains: ["QAT Global", "Skydreamer"], excludes: ["Swisscom AG"] },
     { question: "What is your CI/CD experience?", intent: "topicSummary", contains: ["Kubernetes"] },
-    { question: "What did you achieve at Swisscom?", intent: "companyHighlights", contains: ["265"], sources: [String(swisscom.id)] }
+    { question: "What did you achieve at Swisscom?", intent: "companyHighlights", contains: ["265"], sources: [String(swisscom.id)] },
+    { question: "Did you use Kubernetes at Swisscom?", intent: "technologyAtCompany", contains: ["Kubernetes", "Swisscom AG"] },
+    { question: "Where have you used k8s?", intent: "technologyExperience", contains: ["Swisscom AG"], excludes: ["QAT Global"] },
+    // Third-person wordings get the same answers.
+    { question: "What did he achieve at Swisscom?", intent: "companyHighlights", contains: ["265"], sources: [String(swisscom.id)] },
+    { question: "Has he used Java?", intent: "technologyExperience", contains: ["Swisscom AG"] },
+    { question: "Which languages does he speak?", intent: "languages", contains: ["English"] },
+    { question: "What does he do?", intent: "currentRole", contains: ["Swisscom AG"] },
+    { question: "Is he AWS certified?", intent: "issuerCertifications", contains: ["AWS Certified Cloud Practitioner"] },
+    { question: "Tell me about his leadership experience.", intent: "topicSummary", contains: ["QAT Global"] },
+    { question: "What are his hobbies?", intent: "hobbies", sources: ["about"] }
   ],
   pt: [
     { question: "Fale sobre sua trajetória profissional.", intent: "profile", sources: ["about"], contains: ["mais de 10 anos"] },
@@ -117,7 +127,10 @@ const POSITIVE: Record<Locale, Positive[]> = {
     { question: "Você fala inglês?", intent: "languageProficiency", contains: ["inglês"] },
     { question: "Resuma sua experiência em DevOps.", intent: "topicSummary", contains: ["Prometheus", "Swisscom AG"] },
     { question: "Fale sobre sua experiência em liderança", intent: "topicSummary", contains: ["QAT Global"] },
-    { question: "O que você conquistou na QAT Global?", intent: "companyHighlights", contains: ["MongoDB"], sources: [String(qat.id)] }
+    { question: "O que você conquistou na QAT Global?", intent: "companyHighlights", contains: ["MongoDB"], sources: [String(qat.id)] },
+    { question: "Ele usou Java?", intent: "technologyExperience", contains: ["Swisscom AG"] },
+    { question: "O que ele estudou?", intent: "education", contains: ["Análise de Sistemas de Computação"] },
+    { question: "Ele fala inglês?", intent: "languageProficiency", contains: ["inglês"] }
   ]
 };
 
@@ -141,7 +154,7 @@ const NEGATIVE: Record<Locale, string[]> = {
     "Tell me about Swisscom and QAT Global.",
     "When did you work at Google?",
     "Where have you used C++?",
-    "Where have you used Kubernetes?",
+    "Where have you used Terraform?",
     "Do you have posts about flashcards?",
     "Do you have posts about quantum computing?",
     "Are you authorized to work in the US?",
@@ -157,7 +170,11 @@ const NEGATIVE: Record<Locale, string[]> = {
     "Is your AWS certification still valid?",
     "Did you graduate?",
     "Summarize your Rust experience.",
-    "What did you achieve at Google?"
+    "What did you achieve at Google?",
+    "Is he available?",
+    "Does he need a visa?",
+    "What is his salary?",
+    "What did he achieve at Google?"
   ],
   pt: [
     "Onde você já usou Rust?",
@@ -169,7 +186,9 @@ const NEGATIVE: Record<Locale, string[]> = {
     "Você tem artigos sobre computação quântica?",
     "Você mora onde?",
     "Você fala alemão?",
-    "Resuma sua experiência em Rust."
+    "Resuma sua experiência em Rust.",
+    "Ele mora onde?",
+    "Qual é o salário dele?"
   ]
 };
 
@@ -363,6 +382,20 @@ describe("CV assistant question validation", () => {
     expect(normalizeUtterance("  Onde você já usou Node.js?! ")).toBe("onde voce ja usou node.js");
     expect(normalizeUtterance("Where have you used C++?")).toBe("where have you used c++");
     expect(normalizeUtterance("What’s your CI/CD stack?")).toBe("what's your ci/cd stack");
+  });
+
+  it("rewrites third-person questions to the second person", () => {
+    expect(toSecondPerson("what did he achieve at swisscom")).toBe("what did you achieve at swisscom");
+    expect(toSecondPerson("does he speak english")).toBe("do you speak english");
+    expect(toSecondPerson("has he used java")).toBe("have you used java");
+    expect(toSecondPerson("is he aws certified")).toBe("are you aws certified");
+    expect(toSecondPerson("summarize his devops work")).toBe("summarize your devops work");
+    expect(toSecondPerson("tell me about himself")).toBe("tell me about yourself");
+    expect(toSecondPerson("ele usou java")).toBe("voce usou java");
+    // Whole words only.
+    expect(toSecondPerson("where have you used helm")).toBe("where have you used helm");
+    expect(toSecondPerson("do you have posts about chemistry")).toBe("do you have posts about chemistry");
+    expect(toSecondPerson("tell me about elementary")).toBe("tell me about elementary");
   });
 
   it("measures edit distance with transpositions and stops past the limit", () => {

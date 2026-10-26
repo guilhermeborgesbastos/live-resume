@@ -66,9 +66,11 @@ Patterns match the whole question after folding case, accents and typographic qu
 - Post titles: an exact title in either language, quotes optional.
 - Certificate issuers: the issuer as listed, and for "Name (ABBR)" also the name or the abbreviation alone ("AWS" → "Amazon Web Services (AWS)").
 - Languages: the language name in either site language ("English", "inglês").
-- Topics: the topic `id`, its localized names and its `aliases` ("CI/CD" → DevOps), with hyphens read as spaces. Topic forms also accept "his" ("Summarize his DevOps work").
+- Topics: the topic `id`, its localized names and its `aliases` ("CI/CD" → DevOps), with hyphens read as spaces.
 
 An alias only applies when its target exists in the data. A name that matches two records is ambiguous and gets the fallback.
+
+**Third person.** Questions about Guilherme in the third person get the same answers: when a question does not resolve as typed, the engine retries it with "he/his/him" (and "does he", "has he", "is he", ...) or the PT "ele" turned into the second person ("What did he achieve at Swisscom?" → "What did you achieve at Swisscom?"). The name itself is not recognized, and questions that stay unsupported ("Is he available?") still fall back.
 
 **Follow-up chips.** Each answer can offer follow-up questions that name the company or technology explicitly ("Which technologies did you use at Swisscom AG?").
 
@@ -199,5 +201,5 @@ npm run build-locale && npm run test:e2e:run           # e2e/assistant.spec.ts p
 - Only the forms in `question-patterns.ts` are understood; synonyms and word orders outside them fall back. Spelling tolerance applies to names (companies, technologies, profiles, post titles), not to the rest of the question: "Wher have you usd Java?" still falls back.
 - Follow-up context covers one experience at a time and only the forms listed above.
 - Post search matches whole words only (no stemming): "flashcards" does not match "flash card".
-- Answers about technologies reflect the `technologies` lists only. A tool mentioned only in a description (e.g. Kubernetes) is not found by "Where have you used …?", though it appears in that company's overview excerpt.
+- Answers about technologies reflect the `technologies` lists only. A tool mentioned only in a description (e.g. Terraform, named only in the PT Swisscom description) is not found by "Where have you used …?", though it appears in that company's overview excerpt.
 - One conversation per tab and language; no persistence across reloads or locale switches.

@@ -188,11 +188,11 @@ const EN: Readonly<Record<IntentId, readonly string[]>> = {
     `${WHAT_IS} your (?:level of|proficiency in) {language}`
   ],
   topicSummary: [
-    "(?:summarize|describe) (?:your|his) {area} (?:work|experience|background)",
-    "(?:summarize|describe) (?:your|his) experience (?:in|with) {area}",
-    "tell me about (?:your|his) {area} (?:work|experience|background)",
-    "tell me about (?:your|his) experience (?:in|with) {area}",
-    `(?:${WHAT_IS}|what was) (?:your|his) {area} experience`,
+    "(?:summarize|describe) your {area} (?:work|experience|background)",
+    "(?:summarize|describe) your experience (?:in|with) {area}",
+    "tell me about your {area} (?:work|experience|background)",
+    "tell me about your experience (?:in|with) {area}",
+    `(?:${WHAT_IS}|what was) your {area} experience`,
     "what experience do you have (?:in|with) {area}"
   ],
   companyHighlights: [
