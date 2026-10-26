@@ -13,18 +13,4 @@
             [data]="phrases"></span>
         <span class="visually-hidden">{{ stablePhrases }}</span>
     </div>
-    <div class="assistant-cta">
-        <p class="announcement" i18n="dialog@@assistant.announcement">Explore my CV with the assistant</p>
-        <a class="ask" routerLink="/assistant">
-            <fa-icon [icon]="faComments" aria-hidden="true"></fa-icon>
-            <span i18n="dialog@@assistant.cta">Ask about my CV</span>
-        </a>
-        @if (shortcuts().length > 0) {
-            <ul class="shortcuts">
-                @for (shortcut of shortcuts(); track shortcut) {
-                    <li><button type="button" [disabled]="dispatching" (click)="askShortcut(shortcut)">{{ shortcut }}</button></li>
-                }
-            </ul>
-        }
-    </div>
 </div>

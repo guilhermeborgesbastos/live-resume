@@ -18,7 +18,7 @@ interface ConversationState {
   /** True once older pairs were dropped to stay within MAX_CONVERSATION_PAIRS. */
   readonly trimmed: boolean;
   readonly validationError: QuestionError | null;
-  /** A question asked (e.g. from a welcome shortcut) before the CV data finished loading. */
+  /** A question asked before the CV data finished loading. */
   readonly pendingQuestion: string | null;
 }
 
@@ -36,9 +36,9 @@ export function siteLocale(localeId: string): Locale {
 }
 
 /**
- * The one in-memory conversation shared by the floating panel, the /assistant page and the
- * welcome shortcuts. It survives route changes inside the SPA and is lost on refresh, tab close
- * or locale switch (the locale links load the other build). Nothing is persisted or sent anywhere.
+ * The one in-memory conversation shared by the floating panel and the /assistant page. It
+ * survives route changes inside the SPA and is lost on refresh, tab close or locale switch (the
+ * locale links load the other build). Nothing is persisted or sent anywhere.
  */
 @Injectable({ providedIn: "root" })
 export class AssistantSessionService {

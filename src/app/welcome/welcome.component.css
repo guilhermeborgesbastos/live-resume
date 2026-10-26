@@ -1,6 +1,6 @@
 #welcome {
     flex-direction: column;
-    min-height: 780px;
+    height: 780px;
     padding-top: 5em;
 }
 

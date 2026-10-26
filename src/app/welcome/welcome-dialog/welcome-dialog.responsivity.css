@@ -154,28 +154,3 @@
         margin-top: 5px;
     }
 }
-/* CV assistant call to action: it grows the section instead of being clipped inside the bubble. */
-@media screen and (max-width: 1024px) {
-    .dialog-container .assistant-cta { width: 280px; margin: -24px 0 0 -2em; }
-    .dialog-container .assistant-cta .announcement { font-size: 17px; }
-    .dialog-container .assistant-cta .ask { font-size: 16px; padding: 10px 18px; }
-}
-
-@media screen and (max-width: 880px) {
-    .dialog-container .assistant-cta { width: 230px; margin: -16px 0 0 -1em; gap: 8px; }
-    .dialog-container .assistant-cta .announcement { font-size: 15px; }
-    /* Shortcuts would crowd the smaller bubble; the CTA leads to the same suggestions. */
-    .dialog-container .assistant-cta .shortcuts { display: none; }
-}
-
-@media screen and (max-width: 600px) {
-    .dialog-container .assistant-cta { width: 170px; margin: -8px 0 0 -10px; gap: 6px; }
-    .dialog-container .assistant-cta .announcement { font-size: 12px; }
-    .dialog-container .assistant-cta .ask { font-size: 13px; padding: 8px 12px; gap: 6px; border-radius: 12px; }
-}
-
-@media screen and (max-width: 500px) {
-    .dialog-container .assistant-cta { width: 150px; margin: -4px 0 0 -30px; }
-    .dialog-container .assistant-cta .announcement { font-size: 11px; }
-    .dialog-container .assistant-cta .ask { font-size: 12px; padding: 7px 10px; }
-}

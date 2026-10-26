@@ -22,11 +22,10 @@ It recognizes the question forms listed below and their close variants. It does 
 
 | Entry point | Where | Behavior |
 | --- | --- | --- |
-| Welcome bubble | Under the speech bubble in `#welcome` | "Explore my CV with the assistant" and an **Ask about my CV** link to `/assistant`, usable before the typing animation finishes. Wider screens also show two shortcut questions (current role, a post topic); a shortcut asks its question once through the shared session (never through the URL) and opens the page. |
 | `/assistant` page | `/en/assistant`, `/pt/assistant` (lazy route, header item **CV Assistant** / **Assistente**) | Full-page conversation: scope and disclosure, starter suggestions, transcript, composer, **Clear conversation**, **Back to the resume**. Not a dialog. |
 | Floating panel | Fixed **Ask about my CV** button on the resume while About, Experience or Posts is the active section | A modal `<dialog>` (desktop: about 420 px wide; phones: a bottom sheet above the keyboard with safe-area padding). Escape or the backdrop closes it, focus returns to the button and the page scroll position is restored. **Expand** carries the conversation and the unsent draft to `/assistant`. Not rendered on `/assistant` or the 404 page. |
 
-All three use the same engine, data snapshot and session (`AssistantSessionService`).
+Both use the same engine, data snapshot and session (`AssistantSessionService`).
 
 ## Supported questions
 
@@ -193,7 +192,7 @@ npm test -- --watch=false --browsers=ChromeHeadless   # adapter, plain text, eng
 npm run build-locale && npm run test:e2e:run           # e2e/assistant.spec.ts plus the existing suite
 ```
 
-`e2e/assistant.spec.ts` covers, in both locales and on desktop and mobile: the welcome CTA and shortcut, page suggestions (each one answers), citations revealing an experience and a post on another carousel page, the fallback and contact handoff (no Firestore traffic), validation, Enter/Shift+Enter, text-only rendering, the panel (focus, Escape, scroll restoration, history and draft across close/expand/return), header navigation, reload, data failure with Retry, the 320 px layout, and that questions never appear in requests, console output, URLs or the analytics `dataLayer`.
+`e2e/assistant.spec.ts` covers, in both locales and on desktop and mobile: page suggestions (each one answers), citations revealing an experience and a post on another carousel page, the fallback and contact handoff (no Firestore traffic), validation, Enter/Shift+Enter, text-only rendering, the panel (focus, Escape, scroll restoration, history and draft across close/expand/return), header navigation, reload, data failure with Retry, the 320 px layout, and that questions never appear in requests, console output, URLs or the analytics `dataLayer`.
 
 ## Limitations
 

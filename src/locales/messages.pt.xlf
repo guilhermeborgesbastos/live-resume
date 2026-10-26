@@ -596,24 +596,6 @@
         </context-group>
         <note priority="1" from="description">nav</note>
       </trans-unit>
-      <trans-unit id="assistant.announcement" datatype="html">
-        <source>Explore my CV with the assistant</source>
-        <target>Explore meu currículo com o assistente</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/welcome/welcome-dialog/welcome-dialog.component.html</context>
-          <context context-type="linenumber">17,19</context>
-        </context-group>
-        <note priority="1" from="description">dialog</note>
-      </trans-unit>
-      <trans-unit id="assistant.cta" datatype="html">
-        <source>Ask about my CV</source>
-        <target>Pergunte sobre meu currículo</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/welcome/welcome-dialog/welcome-dialog.component.html</context>
-          <context context-type="linenumber">20,24</context>
-        </context-group>
-        <note priority="1" from="description">dialog</note>
-      </trans-unit>
       <trans-unit id="assistant.clarify.typo" datatype="html">
         <source>I couldn’t find that name in my CV exactly. Did you mean one of these questions?</source>
         <target>Não encontrei exatamente esse nome no meu currículo. Você quis dizer uma destas perguntas?</target>

@@ -58,7 +58,6 @@ flowchart LR
   end
 
   subgraph UI["ui/ + pages/"]
-    W[Welcome CTA]
     L[Launcher + Panel dialog]
     PG[/assistant page/]
     CH[Chat component]
@@ -71,7 +70,7 @@ flowchart LR
   AE --> N --> QP --> R --> C --> T
   AE -- AnswerResult --> S
   S --> CH
-  W & L & PG --> CH
+  L & PG --> CH
   CH -- citations --> Resume[Resume sections<br/>Experience · Posts · Contact]
 ```
 
@@ -100,7 +99,7 @@ stateDiagram-v2
 ```
 
 - It reuses the existing `DataService.getAbout/getExperiences/getPosts` through `forkJoin`, so the three files succeed or fail together. There is never a partial snapshot.
-- Loading is triggered by the first consumer: the welcome dialog (to check its shortcuts), the chat component, or a queued question.
+- Loading is triggered by the first consumer: the chat component or a queued question.
 - In `error` state the UI shows the availability message with **Retry** and **Contact**, and the composer is disabled.
 
 ### 3.2 Validation and normalization (`knowledge-adapter.ts`)
@@ -321,8 +320,6 @@ A root, signal-based store holding a `Map<Locale, signal<ConversationState>>`. T
 
 ```mermaid
 flowchart LR
-  W[Welcome bubble<br/>CTA link · 2 shortcuts] -- routerLink /assistant --> PG
-  W -- shortcut: session.ask then navigate --> PG
   L[Floating button<br/>About · Experience · Posts only] -- session.openPanel --> D[Panel &lt;dialog&gt;]
   D -- expand: closePanel + navigate --> PG[/assistant page/]
   PG -- header / back link --> R[Resume]
@@ -339,7 +336,7 @@ All three render the same `AssistantChatComponent`, which contains the status, s
 - On phones the panel is a bottom sheet whose height follows `visualViewport` (above the keyboard) plus safe-area insets.
 - Focus returns to the launcher button on close.
 
-**Launcher visibility**: shown only while About, Experience or Posts is the active section. The welcome section has its own CTA, and the button must not cover the contact form.
+**Launcher visibility**: shown only while About, Experience or Posts is the active section. It stays off the welcome section and must not cover the contact form.
 
 ## 7. Citations and navigation
 
@@ -431,9 +428,8 @@ Unit specs run against the **real** JSON (imported in specs only), so a content 
 1. **Coverage vs. strictness.** 191 patterns cover the documented intents. Should more phrasings be added, e.g. "tell me about your hobbies", "did you graduate"? Anything new must stay grounded; the education record has years of study but no completion status.
 2. **Broad patterns.** `tell me about {company}` and `what is your {network}` are deliberately broad, kept safe only by slot resolution. Are they acceptable, or should they be narrowed?
 3. **Hard-coded aliases.** `COMPANY_ALIASES` names current companies (`swisscom`, `qat`, `deevo`, `facil`). They point to data and create no facts, but they need upkeep when companies are renamed. Keep, or rely only on the legal-form rule?
-4. **Duplicate requests.** The welcome dialog loads the knowledge on every resume visit, to check its shortcuts. That is three JSON requests on top of the sections' own fetches, since `DataService` doesn't cache. Options: share a cached `DataService`, or load only on first interaction and show the shortcuts afterwards.
-5. **Launcher visibility.** It is hidden over Welcome and Contact. On phones, About is already active at load, so the button shows immediately. Is that the intended behavior?
-6. **Answer wording location.** Answer sentences live in `answer-templates.ts` rather than XLF, so translators must edit TypeScript. Acceptable for a two-language personal site?
-7. **Generic resume change.** The fragment-settling logic changes deep-link scrolling for the whole resume (it fixed the mobile known issue). It is bounded to 2 s and cancelled by user input. Is it acceptable as general behavior?
-8. **Technology answers use only `technologies` lists.** Kubernetes is mentioned in descriptions and About, but "Where have you used Kubernetes?" falls back. Should descriptions ever count as evidence, which would need a dedicated, reviewed rule?
-9. **Remaining legacy assumption.** The experience carousel's background image still indexes `experiences[position - 1]`, so it assumes the array is ordered by position. That is pre-existing and outside the assistant's scope.
+4. **Launcher visibility.** It is hidden over Welcome and Contact. On phones, About is already active at load, so the button shows immediately. Is that the intended behavior?
+5. **Answer wording location.** Answer sentences live in `answer-templates.ts` rather than XLF, so translators must edit TypeScript. Acceptable for a two-language personal site?
+6. **Generic resume change.** The fragment-settling logic changes deep-link scrolling for the whole resume (it fixed the mobile known issue). It is bounded to 2 s and cancelled by user input. Is it acceptable as general behavior?
+7. **Technology answers use only `technologies` lists.** Kubernetes is mentioned in descriptions and About, but "Where have you used Kubernetes?" falls back. Should descriptions ever count as evidence, which would need a dedicated, reviewed rule?
+8. **Remaining legacy assumption.** The experience carousel's background image still indexes `experiences[position - 1]`, so it assumes the array is ordered by position. That is pre-existing and outside the assistant's scope.

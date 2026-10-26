@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { expect, isMobile, Locale, LOCALES, openResume, test } from "./fixtures";
 
-/* CV assistant journeys: welcome CTA, /assistant page, floating panel, citations and fallbacks. */
+/* CV assistant journeys: /assistant page, floating panel, citations and fallbacks. */
 
 const readData = (file: string) => JSON.parse(readFileSync(join(__dirname, "..", "src", "assets", "data", file), "utf8"));
 const experiences: any[] = readData("experiences.json");
@@ -19,8 +19,6 @@ const ASSISTANT = {
     pageTitle: "CV Assistant - Guilherme Borges Bastos",
     scope: "Ask about the experience, skills, and posts listed in this CV.",
     disclosure: "Answers use the information published in this CV.",
-    cta: "Ask about my CV",
-    announcement: "Explore my CV with the assistant",
     launcher: "Ask about my CV",
     close: "Close the CV assistant",
     expand: "Open the CV assistant in a full page",
@@ -50,8 +48,6 @@ const ASSISTANT = {
     pageTitle: "Assistente do CV - Guilherme Borges Bastos",
     scope: "Pergunte sobre a experiência, as habilidades e os artigos listados neste currículo.",
     disclosure: "As respostas usam as informações publicadas neste currículo.",
-    cta: "Pergunte sobre meu currículo",
-    announcement: "Explore meu currículo com o assistente",
     launcher: "Pergunte sobre meu currículo",
     close: "Fechar o assistente do CV",
     expand: "Abrir o assistente do CV em uma página inteira",
@@ -102,19 +98,11 @@ for (const locale of LOCALES) {
 
   test.describe(`${locale} CV assistant`, () => {
 
-    test("welcome CTA opens the assistant page with sourced suggestions", async ({ page }) => {
-      await openResume(page, locale);
-      const cta = page.locator("app-welcome-dialog .assistant-cta");
-      await expect(cta.locator(".announcement")).toHaveText(text.announcement);
-      // Usable while the greeting is still being typed, by keyboard (the bubble floats, so it
-      // never counts as "stable" for a pointer click here).
-      await cta.getByRole("link", { name: text.cta }).press("Enter");
-
-      await expect(page).toHaveURL(new RegExp(`/${locale}/assistant$`));
+    test("the assistant page offers sourced suggestions that all answer", async ({ page }) => {
+      await openAssistantPage(page, locale);
       await expect(page).toHaveTitle(text.pageTitle);
       await expect(page.locator("app-assistant-page .scope")).toHaveText(text.scope);
       await expect(page.locator("app-assistant-page .disclosure")).toHaveText(text.disclosure);
-      await expect(page.locator("app-assistant-chat .suggestions button")).not.toHaveCount(0);
       await expect(page.locator("app-assistant-launcher")).toHaveCount(0);
       await expect(page.locator("dialog")).toHaveCount(0);
 
@@ -125,19 +113,6 @@ for (const locale of LOCALES) {
         await expect(page.locator(".message.assistant").last()).toHaveAttribute("data-answer", "answered");
       }
       await expect(page.locator(".message.assistant")).toHaveCount(suggestions.length);
-    });
-
-    test("a welcome shortcut asks its question exactly once", async ({ page }) => {
-      test.skip(isMobile(page), "shortcuts only show where the bubble has room");
-      await openResume(page, locale);
-      const shortcut = page.locator("app-welcome-dialog .shortcuts button").first();
-      const question = await shortcut.innerText();
-      await shortcut.dblclick({ force: true });
-      await expect(page).toHaveURL(new RegExp(`/${locale}/assistant$`));
-      await expect(page.locator(".message.visitor")).toHaveCount(1);
-      await expect(page.locator(".message.visitor .bubble")).toHaveText(question);
-      await expect(page.locator(".message.assistant")).toHaveAttribute("data-answer", "answered");
-      expect(page.url()).not.toContain(encodeURIComponent(question.split(" ")[0]));
     });
 
     test("answers with citations that reveal the cited experience on the resume", async ({ page }) => {
