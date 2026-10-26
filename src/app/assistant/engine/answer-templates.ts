@@ -13,6 +13,9 @@ export interface AnswerTemplates {
 
   readonly labels: {
     readonly about: string;
+    readonly education: string;
+    readonly languages: string;
+    topic(name: string): string;
     experience(company: string): string;
   };
   readonly excerpts: {
@@ -99,6 +102,9 @@ const EN: AnswerTemplates = {
   hobbyTitles: null,
   labels: {
     about: "About me",
+    education: "About me · Education",
+    languages: "About me · Languages",
+    topic: name => `About me · ${name}`,
     experience: company => `Experience · ${company}`
   },
   excerpts: {
@@ -179,6 +185,9 @@ const PT: AnswerTemplates = {
   hobbyTitles: { Cycling: "Ciclismo", Gym: "Academia", Travel: "Viagens", Read: "Leitura" },
   labels: {
     about: "Sobre mim",
+    education: "Sobre mim · Formação",
+    languages: "Sobre mim · Idiomas",
+    topic: name => `Sobre mim · ${name}`,
     experience: company => `Experiência · ${company}`
   },
   excerpts: {

@@ -1,0 +1,68 @@
+@if (hasDetails) {
+  <div class="details-card">
+    @if (about?.education?.length) {
+      <div class="group" id="education">
+        <h3 i18n="about@@about.education">Education</h3>
+        <ul>
+          @for (record of about!.education; track record.school) {
+            <li>
+              <span class="primary">{{ localized(record.internationalizations, "degree") }}@if (localized(record.internationalizations, "fieldOfStudy")) {, {{ localized(record.internationalizations, "fieldOfStudy") }}}</span>
+              <span class="secondary">{{ record.school }}@if (record.startAt || record.endAt) { · {{ record.startAt }}@if (record.startAt && record.endAt) { – }{{ record.endAt }}}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    @if (about?.languages?.length) {
+      <div class="group" id="languages">
+        <h3 i18n="about@@about.languages">Languages</h3>
+        <ul>
+          @for (language of about!.languages; track language.code) {
+            <li>
+              <span class="primary">{{ localized(language.internationalizations, "name") }}</span>
+              <span class="secondary">{{ localized(language.internationalizations, "proficiency") }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    @if (about?.certifications?.length) {
+      <div class="group" id="certifications">
+        <h3 i18n="about@@about.certifications">Certifications</h3>
+        <ul>
+          @for (certification of about!.certifications; track trackCertification(certification)) {
+            <li>
+              @if (certification.url) {
+                <a class="primary" [href]="certification.url" target="_blank" rel="noopener noreferrer">{{ certification.name }}</a>
+              } @else {
+                <span class="primary">{{ certification.name }}</span>
+              }
+              <span class="secondary">
+                {{ certification.issuer }} · {{ year(certification.issuedAt) }} ·
+                @switch (certification.type) {
+                  @case ("certification") { <ng-container i18n="about@@about.certification.type.certification">certification</ng-container> }
+                  @case ("course") { <ng-container i18n="about@@about.certification.type.course">course certificate</ng-container> }
+                  @default { <ng-container i18n="about@@about.certification.type.badge">badge</ng-container> }
+                }
+              </span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    @if (about?.topics?.length) {
+      <div class="group topics">
+        <h3 i18n="about@@about.focusAreas">Focus areas</h3>
+        @for (topic of about!.topics; track topic.id) {
+          <details [id]="'topic-' + topic.id" [open]="isOpenTopic(topic.id)">
+            <summary>{{ localized(topic.internationalizations, "name") }}</summary>
+            <p>{{ localized(topic.internationalizations, "summary") }}</p>
+          </details>
+        }
+      </div>
+    }
+  </div>
+}

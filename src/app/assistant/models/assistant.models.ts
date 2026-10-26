@@ -155,7 +155,7 @@ export interface KnowledgeSnapshot {
 
 /** Where an internal citation leads on the resume page. */
 export type CitationTarget =
-  | { readonly section: "about" }
+  | { readonly section: "about"; readonly anchor?: string }
   | { readonly section: "experience"; readonly experienceId: number }
   | { readonly section: "posts"; readonly postUrl: string };
 

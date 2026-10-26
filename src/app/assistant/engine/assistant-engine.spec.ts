@@ -328,6 +328,20 @@ describe("CV assistant engine", () => {
     expect(ask("O que você conquistou na QAT Global?", "pt", data).kind).toBe("answered");
   });
 
+  it("points About citations at the cited record's own anchor", () => {
+    const targets = (question: string, locale: Locale = "en") => {
+      const result = ask(question, locale);
+      return result.kind === "answered" ? result.sources.map(source => [source.label, source.target]) : result.kind;
+    };
+    expect(targets("What did you study?")).toEqual([["About me · Education", { section: "about", anchor: "education" }]]);
+    expect(targets("Which languages do you speak?")).toEqual([["About me · Languages", { section: "about", anchor: "languages" }]]);
+    expect(targets("Quais idiomas você fala?", "pt")).toEqual([["Sobre mim · Idiomas", { section: "about", anchor: "languages" }]]);
+    expect(targets("Are you AWS certified?")).toEqual([["AWS Certified Cloud Practitioner", { section: "about", anchor: "certifications" }]]);
+    expect(targets("Summarize your experience in DevOps.")[0]).toEqual(["About me · DevOps", { section: "about", anchor: "topic-devops" }]);
+    // The biography itself is the About section.
+    expect(targets("Tell me about your professional background.")).toEqual([["About me", { section: "about" }]]);
+  });
+
   it("returns unavailable without a snapshot", () => {
     expect(ask("What is your current role?", "en", null as any)).toEqual({ kind: "unavailable" });
   });

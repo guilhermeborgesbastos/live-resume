@@ -18,7 +18,7 @@ export interface InternalLink {
 export function citationLink(target: CitationTarget): InternalLink {
   switch (target.section) {
     case "about":
-      return { commands: ["/"], fragment: "about", queryParams: null };
+      return { commands: ["/"], fragment: target.anchor ?? "about", queryParams: null };
     case "experience":
       return { commands: ["/"], fragment: "experience", queryParams: { [EXPERIENCE_QUERY_PARAM]: target.experienceId } };
     case "posts":

@@ -7,13 +7,14 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { Subscription } from "rxjs";
 import { InternationalizationDirective } from "../core/directive/internationalization.directive";
+import { AboutDetailsComponent } from "./about-details/about-details.component";
 
 
 @Component({
     selector: "app-about",
     templateUrl: "./about.component.html",
     styleUrls: ["./about.component.scss", "./about.component.responsivity.scss"],
-    imports: [InternationalizationDirective, FaIconComponent]
+    imports: [InternationalizationDirective, FaIconComponent, AboutDetailsComponent]
 })
 export class AboutComponent implements OnInit, OnDestroy {
   private dataService = inject(DataService);
