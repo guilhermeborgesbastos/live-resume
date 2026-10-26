@@ -377,6 +377,20 @@ for (const locale of LOCALES) {
   });
 }
 
+test("the AI Assistant nav link is highlighted once, on the first visit only", async ({ page }) => {
+  test.skip(isMobile(page), "the nav is collapsed behind the menu button on phones");
+  await openResume(page, "en");
+  const link = page.locator('app-header a[data-section="assistant"]');
+  await expect(link).toHaveClass(/assistant-intro/, { timeout: 5000 });
+  await expect(link).not.toHaveClass(/assistant-intro/, { timeout: 5000 });
+
+  await page.reload();
+  await expect(page.locator("app-header")).toBeVisible();
+  // Past the start delay: a returning visitor never gets the highlight again.
+  await page.waitForTimeout(2000);
+  await expect(link).not.toHaveClass(/assistant-intro/);
+});
+
 test("the 404 page has no assistant launcher", async ({ page }) => {
   await page.goto("/en/nothing-here");
   await expect(page.locator("app-page-not-found .page-not-found-text")).toBeVisible();

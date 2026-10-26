@@ -62,6 +62,40 @@ header {
                     color: #fff;
                     font-weight: 600;
                 }
+
+                // First-visit highlight of the AI Assistant link (see HeaderComponent): a white
+                // pill fades in behind the label, a navy ring pulses out twice, then both fade.
+                .assistant-intro {
+                    position: relative;
+                    isolation: isolate;
+
+                    &::before,
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        border-radius: 15px;
+                        pointer-events: none;
+                        opacity: 0;
+                    }
+
+                    &::before {
+                        z-index: -1;
+                        background-color: #fff;
+                        box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
+                        animation: assistant-intro-pill 2600ms cubic-bezier(0.23, 1, 0.32, 1) both;
+                    }
+
+                    &::after {
+                        border: 2px solid #222f5c;
+                        animation: assistant-intro-ring 900ms cubic-bezier(0.23, 1, 0.32, 1) 250ms 2 both;
+                    }
+
+                    @media (prefers-reduced-motion: reduce) {
+                        &::before { animation-name: assistant-intro-pill-fade; }
+                        &::after { animation: none; }
+                    }
+                }
             }
         }
     }
@@ -143,4 +177,22 @@ header {
             }
         }        
     }
+}
+
+@keyframes assistant-intro-pill {
+    0% { opacity: 0; transform: scale(0.95); }
+    10% { opacity: 1; transform: scale(1); }
+    85% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes assistant-intro-pill-fade {
+    0% { opacity: 0; }
+    10%, 85% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes assistant-intro-ring {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.25); }
 }

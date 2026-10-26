@@ -1,8 +1,15 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, LOCALE_ID, AfterViewInit, inject } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, LOCALE_ID, AfterViewInit, DestroyRef, inject } from "@angular/core";
 import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { NgClass } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
+
+/** localStorage key set once the AI Assistant link has played its first-visit animation. */
+const ASSISTANT_INTRO_KEY = "live-resume.assistantIntroSeen";
+/** Wait for the page to settle before drawing attention to the link. */
+const ASSISTANT_INTRO_DELAY = 1200;
+/** Matches the `assistant-intro-pill` animation in header.component.scss. */
+const ASSISTANT_INTRO_DURATION = 2600;
 
 @Component({
     selector: "app-header",
@@ -15,6 +22,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   locale = inject(LOCALE_ID);
   private renderer = inject(Renderer2);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
     
   private _activeSection: any;
@@ -56,6 +64,49 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       }
       // The active section may have been set (e.g. statically by the assistant page) before the view existed.
       this.updateNavigation();
+      this.introduceAssistantLink();
+  }
+
+  /*
+   * On a visitor's first visit, briefly highlight the AI Assistant link so it gets noticed. It
+   * only plays where the link is on screen (the desktop nav; the collapsed mobile menu hides it)
+   * and not on the assistant page itself, and it plays once per browser.
+  */
+  private introduceAssistantLink() {
+    const link: HTMLElement | null = this.nav?.nativeElement.querySelector('a[data-section="assistant"]');
+    if (!link || this.assistantIntroSeen()) {
+      return;
+    }
+    let end: ReturnType<typeof setTimeout> | undefined;
+    // Checked when it would play: the menu state follows the viewport width only after startup.
+    const start = setTimeout(() => {
+      if (link.offsetParent === null || this.isAssistantRoute()) {
+        return;
+      }
+      this.renderer.addClass(link, "assistant-intro");
+      this.rememberAssistantIntro();
+      end = setTimeout(() => this.renderer.removeClass(link, "assistant-intro"), ASSISTANT_INTRO_DURATION);
+    }, ASSISTANT_INTRO_DELAY);
+    this.destroyRef.onDestroy(() => {
+      clearTimeout(start);
+      clearTimeout(end);
+    });
+  }
+
+  private assistantIntroSeen(): boolean {
+    try {
+      return localStorage.getItem(ASSISTANT_INTRO_KEY) !== null;
+    } catch {
+      return false;
+    }
+  }
+
+  private rememberAssistantIntro() {
+    try {
+      localStorage.setItem(ASSISTANT_INTRO_KEY, "1");
+    } catch {
+      // Storage blocked (e.g. some private windows): the animation may play again next visit.
+    }
   }
 
   ngOnInit(): void {
