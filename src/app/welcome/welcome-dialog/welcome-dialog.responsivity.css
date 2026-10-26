@@ -84,6 +84,9 @@
         top: 40px;
         width: 130px;
         left: 0;
+        /* Keeps wrapped greeting lines inside the bubble's white area, clear of its outline. */
+        padding: 0 8px;
+        box-sizing: border-box;
     }
 
     .dialog-container .console .hello {

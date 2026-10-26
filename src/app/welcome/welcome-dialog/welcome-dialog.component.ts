@@ -14,11 +14,11 @@ export class WelcomeDialogComponent {
     readonly phrases = [
         {
             "language": "pt",
-            "phrases": [ "Meu nome é Guilherme.", "Bem-vindo ao meu Currículo Interativo.", "Role para baixo e saiba mais sobre mim... :)" ]
+            "phrases": [ "Bem-vindo! Eu sou o Guilherme.", "Role para baixo e explore meu CV...", "ou pergunte ao meu Assistente de IA :)" ]
         },
         {
             "language": "en",
-            "phrases": [ "My name is Guilherme.", "Welcome to my Interactive Resume.", "Scroll down to learn more about me... :)" ]
+            "phrases": [ "Welcome! I'm Guilherme.", "Scroll down to explore my resume...", "...or just ask my AI Assistant :)" ]
         }
     ];
 
