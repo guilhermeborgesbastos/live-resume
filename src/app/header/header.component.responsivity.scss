@@ -228,7 +228,9 @@
 // In the stacked mobile menu the "New" badge follows the label instead of overlapping the link above.
 @media screen and (max-width: 1024px) {
     header .child.nav-container ul li .new-badge {
-        position: static;
+        position: relative;
+        top: auto;
+        right: auto;
         margin-left: 8px;
         vertical-align: middle;
     }
