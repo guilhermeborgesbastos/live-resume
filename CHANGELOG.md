@@ -1,8 +1,11 @@
-#Unreleased
+#[2.1.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v2.1.0) (2026-10-27)
 ###📃 release notes
-- Add the CV Assistant: a rule-based, browser-only assistant that answers supported questions about the CV from the about/experiences/posts JSON with cited sources, from the welcome bubble, a floating panel and a new `/assistant` page (EN and PT); unsupported questions point to the Contact section. See `docs/ai-assistant-data.md` to update its data.
-- CV Assistant: "Did you mean…" options for misspelled or ambiguous names, and follow-ups about the role in the latest answer ("And before that?", "Which technologies did you use there?").
-- Keep a `#fragment` target (e.g. `#contact`) in view while the resume's data-driven sections render, so deep links land on the right section on phones.
+- Add the AI Assistant: a rule-based, browser-only Q&A that answers questions about the CV in English and Portuguese from the about/experiences/posts JSON, cites the source of every fact and points anything it can't answer to the Contact section. It is reachable from the header, a floating "Ask my AI Assistant" button and the new `/assistant` page. See `docs/ai-assistant-data.md` to update its data;
+- AI Assistant: "Did you mean…" options for misspelled or ambiguous names, follow-ups about the role in the latest answer ("And before that?"), and third-person questions ("What did he achieve at Swisscom?");
+- Add education, certifications, spoken languages, topic summaries and per-role highlights to the CV data;
+- Draw attention to the AI Assistant: a "New" badge and a one-time highlight on the header link, and a welcome greeting that invites visitors to ask it;
+- Keep a `#fragment` target (e.g. `#contact`) in view while the resume's data-driven sections render, so deep links land on the right section on phones;
+- Keep the active section (header highlight and assistant button) in sync while scrolling through tall sections.
 
 #[2.0.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v2.0.0) (2026-10-04)
 ###📃 release notes
