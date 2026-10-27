@@ -305,6 +305,38 @@ for (const locale of LOCALES) {
   });
 }
 
+/** window.scrollY right after clicking a header section link, sampled every 30ms. */
+async function scrollPositionsAfterClicking(page: Page, section: string): Promise<number[]> {
+  await openMobileMenuIfNeeded(page);
+  return page.evaluate(async target => {
+    const positions = [Math.round(window.scrollY)];
+    document.querySelector<HTMLAnchorElement>(`app-header .nav-container a[href='#${target}']`)!.click();
+    for (let i = 0; i < 20; i++) {
+      await new Promise(resolve => setTimeout(resolve, 30));
+      positions.push(Math.round(window.scrollY));
+    }
+    return positions;
+  }, section);
+}
+
+test("header section links scroll smoothly between sections", async ({ page }) => {
+  await openResume(page, "en", "#posts");
+  await expectScrolledToSection(page, "posts");
+  const positions = await scrollPositionsAfterClicking(page, "contact");
+  // An animated scroll passes through intermediate positions; a jump shows only start and end.
+  expect(new Set(positions).size).toBeGreaterThan(3);
+  await expectScrolledToSection(page, "contact");
+});
+
+test("header section links jump without animation for reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await openResume(page, "en", "#posts");
+  await expectScrolledToSection(page, "posts");
+  const positions = await scrollPositionsAfterClicking(page, "contact");
+  expect(new Set(positions).size).toBeLessThanOrEqual(2);
+  await expectScrolledToSection(page, "contact");
+});
+
 test("mobile navigation opens and closes", async ({ page }) => {
   test.skip(!isMobile(page), "the collapsible menu only exists on narrow viewports");
   await openResume(page, "en");

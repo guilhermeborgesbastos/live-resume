@@ -33,6 +33,13 @@ html, body {
     scroll-behavior: smooth;
 }
 
+// Section links jump instead of scrolling for visitors who ask for reduced motion.
+@media (prefers-reduced-motion: reduce) {
+    html, body {
+        scroll-behavior: auto;
+    }
+}
+
 section {
     display: flex;
 }

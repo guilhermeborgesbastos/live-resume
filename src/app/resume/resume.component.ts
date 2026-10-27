@@ -78,7 +78,20 @@ export class ResumeComponent {
     if (!target || typeof ResizeObserver === "undefined") {
       return;
     }
-    const observer = new ResizeObserver(() => target.scrollIntoView({ block: "start", behavior: "instant" }));
+    // Re-align only when a section's height really changes. ResizeObserver also reports every
+    // section once when observing starts; re-aligning then would cut the smooth scroll of an
+    // in-page link short with an instant jump.
+    const heights = new Map<Element, number>();
+    const observer = new ResizeObserver(entries => {
+      const resized = entries.some(entry => {
+        const previous = heights.get(entry.target);
+        heights.set(entry.target, entry.contentRect.height);
+        return previous !== undefined && previous !== entry.contentRect.height;
+      });
+      if (resized) {
+        target.scrollIntoView({ block: "start", behavior: "instant" });
+      }
+    });
     const userEvents = ["wheel", "touchstart", "keydown", "mousedown"];
     const stop = () => {
       observer.disconnect();
