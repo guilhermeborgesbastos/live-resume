@@ -28,9 +28,15 @@ export class TypingAnimationDirective implements OnInit {
         const nestedArr: IPhrase[] = this.data.filter(el => el.language === (this.locale || "en"));
         this.phrases = this._flatMap(el => el.phrases, nestedArr);
 
-        if(this.checkContent()) {
-            this.createTyped();
+        if(!this.checkContent()) {
+            return;
         }
+        // With reduced motion, show the greeting as static text instead of typing it.
+        if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+            this.elRef.nativeElement.textContent = this.phrases[0];
+            return;
+        }
+        this.createTyped();
     }
 
     private checkContent() {

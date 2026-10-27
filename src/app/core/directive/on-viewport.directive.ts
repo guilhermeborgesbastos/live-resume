@@ -35,10 +35,15 @@ export class InViewportDirective implements OnChanges {
         };
 
         const sectionMarging = 370;
-        const tViz = rec.top >= 0 && rec.top < (vp.height - sectionMarging);
-        const bViz = rec.bottom > 0 && rec.bottom <= (vp.height - sectionMarging);
+        // The band near the top of the viewport that decides the active section; on short
+        // viewports (e.g. a phone in landscape) it keeps 30% of the height instead of vanishing.
+        const bandEnd = Math.max(vp.height - sectionMarging, vp.height * 0.3);
+        const tViz = rec.top >= 0 && rec.top < bandEnd;
+        const bViz = rec.bottom > 0 && rec.bottom <= bandEnd;
+        // A section taller than the band covers it while neither of its edges is inside it.
+        const spansBand = rec.top < 0 && rec.bottom > bandEnd;
 
-        const vVisible = partial ? tViz || bViz : tViz && bViz;
+        const vVisible = partial ? tViz || bViz || spansBand : tViz && bViz;
 
         const event: InViewportEvent = {
             target: el,

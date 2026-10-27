@@ -1,0 +1,128 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+}
+
+.scroller {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+:host(.compact) {
+    flex: 1;
+    gap: 0;
+
+    .scroller {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 12px 16px;
+    }
+
+    .footer {
+        border-top: 1px solid #e3e8f2;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        background-color: #f7f9fd;
+    }
+
+    .session-note { display: none; }
+
+    // Phones: keep the keyboard hint for screen readers only, so the messages get the room.
+    @media screen and (max-width: 600px) {
+        ::ng-deep .composer .hint > span:first-child {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+    }
+}
+
+:host(:not(.compact)) .footer {
+    position: sticky;
+    bottom: 0;
+    padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
+    background-color: #d4e7fe;
+}
+
+.status {
+    margin: 0;
+    border-radius: 15px;
+    padding: 12px 14px;
+    color: #222f5c;
+    background-color: #fff;
+    box-shadow: 0 0 9px 0 rgba(112, 112, 112, 0.16);
+
+    p { margin: 0 0 10px; }
+}
+
+.status-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.retry, .contact, .clear {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 11px;
+    padding: 8px 14px;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:focus-visible {
+        outline: 3px solid #222f5c;
+        outline-offset: 2px;
+    }
+}
+
+.retry, .contact {
+    color: #fff;
+    background-color: #222f5c;
+    border: none;
+
+    &:hover { background-color: #34457f; }
+}
+
+.notice {
+    margin: 0;
+    font-size: 13px;
+    color: #576183;
+}
+
+.session-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.session-note {
+    flex: 1 1 260px;
+    margin: 0;
+    font-size: 12px;
+    color: #576183;
+}
+
+.clear {
+    margin-left: auto;
+    color: #222f5c;
+    background-color: transparent;
+    border: 1px solid #c9d6ea;
+    padding: 6px 12px;
+
+    &:hover { background-color: #eaf2fe; }
+}

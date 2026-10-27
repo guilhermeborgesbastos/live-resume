@@ -1,0 +1,20 @@
+<dialog #dialog class="assistant-panel" aria-labelledby="assistant-panel-title"
+        (close)="onDialogClose()" (click)="onDialogClick($event)">
+  <div class="sheet">
+    <div class="top">
+      <div class="titles">
+        <h2 id="assistant-panel-title" i18n="assistant@@assistant.title">AI Assistant</h2>
+        <p class="disclosure" i18n="assistant@@assistant.disclosure">Answers use the information published in this CV.</p>
+      </div>
+      <button type="button" class="icon-button" [attr.aria-label]="copy.expandPanel" [title]="copy.expandPanel" (click)="expand()">
+        <fa-icon [icon]="faExpandAlt" aria-hidden="true"></fa-icon>
+      </button>
+      <button type="button" class="icon-button" [attr.aria-label]="copy.closePanel" [title]="copy.closePanel" (click)="close()">
+        <fa-icon [icon]="faTimes" aria-hidden="true"></fa-icon>
+      </button>
+    </div>
+    @if (session.panelOpen()) {
+      <app-assistant-chat [compact]="true" (navigated)="close()"></app-assistant-chat>
+    }
+  </div>
+</dialog>

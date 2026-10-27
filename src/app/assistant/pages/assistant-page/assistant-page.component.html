@@ -1,0 +1,15 @@
+<app-header activeSection="assistant" [pageXOffset]="pageXOffset"></app-header>
+<main id="assistant" class="assistant-page">
+  <div class="container">
+    <a class="back" routerLink="/">
+      <fa-icon [icon]="faArrowLeft" aria-hidden="true"></fa-icon>
+      <span i18n="assistant@@assistant.page.back">Back to the resume</span>
+    </a>
+    <div class="intro">
+      <h1 #heading tabindex="-1" i18n="assistant@@assistant.title">AI Assistant</h1>
+      <p class="scope" i18n="assistant@@assistant.page.scope">Ask about the experience, skills, and posts listed in this CV.</p>
+      <p class="disclosure" i18n="assistant@@assistant.disclosure">Answers use the information published in this CV.</p>
+    </div>
+    <app-assistant-chat></app-assistant-chat>
+  </div>
+</main>

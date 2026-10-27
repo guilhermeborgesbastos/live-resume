@@ -39,13 +39,13 @@
         <div class="events-content">
           <ol #orderedList>
             @for (exp of experiencesOrdered; track exp; let i = $index) {
-              <li [ngClass]="{'selected': i === 0}" data-id="{{ exp.id }}">
+              <li [ngClass]="{'selected': i === 0}" data-id="{{ exp.id }}" [attr.data-position]="exp.position">
                 <div class="header-block">
                   <div class="logo-block">
                     <a href="{{ exp.website }}" target="_blank"><img src="{{ exp.logo }}" alt="{{ exp.companyName }}"></a>
                   </div>
                   <div class="info-block">
-                    <div class="company-name"><a href="{{ exp.website }}" target="_blank">{{ exp.companyName }}</a></div>
+                    <div class="company-name" tabindex="-1"><a href="{{ exp.website }}" target="_blank">{{ exp.companyName }}</a></div>
                     <div class="role" appInternationalization [data]="exp.internationalizations" property='role'>Loading...</div>
                     <div class="period">
                       <span>{{ exp.startAt | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>

@@ -13,14 +13,22 @@
                 "city": "Uberaba",
                 "country": "Brasil",
                 "role": "Estágio Webmaster",
-                "description": "📚 Sistemas Educacionais | Simuladores Online | Otimização de Processos.</br></br><b>Situação:</b> Empresa de referência nacional em materiais e soluções para a formação de condutores.</br></br><b>Tarefa:</b> Criar sistemas internos e produtos digitais que melhorassem o aprendizado e os processos logísticos.</br></br><b>Ação:</b></br>• Desenvolveu um simulador online da prova teórica, com milhares de usuários ativos por mês.</br>• Melhorou a intranet, o que reduziu erros logísticos e automatizou processos.</br>• Atuou em campanhas de marketing digital e SEO para atrair novos clientes.</br></br><b>Resultado:</b></br>✅ Expansão do mercado da empresa e aumento da base de clientes.</br>✅ Processos internos mais eficientes e escaláveis."
+                "description": "📚 Sistemas Educacionais | Simuladores Online | Otimização de Processos.</br></br><b>Situação:</b> Empresa de referência nacional em materiais e soluções para a formação de condutores.</br></br><b>Tarefa:</b> Criar sistemas internos e produtos digitais que melhorassem o aprendizado e os processos logísticos.</br></br><b>Ação:</b></br>• Desenvolveu um simulador online da prova teórica, com milhares de usuários ativos por mês.</br>• Melhorou a intranet, o que reduziu erros logísticos e automatizou processos.</br>• Atuou em campanhas de marketing digital e SEO para atrair novos clientes.</br></br><b>Resultado:</b></br>✅ Expansão do mercado da empresa e aumento da base de clientes.</br>✅ Processos internos mais eficientes e escaláveis.",
+                "highlights": [
+                    "Desenvolvi um simulador online da prova teórica vendido por assinatura, que trouxe milhares de novas assinaturas por mês.",
+                    "Reformulei os sistemas internos de estoque e logística, o que reduziu os erros de logística."
+                ]
             },
             {
                 "language": "en",
                 "city": "Uberaba",
                 "country": "Brazil",
                 "role": "Web Developer Intern",
-                "description": "📚 EdTech Systems | Simulators | Intranet Platforms | UX & Process Optimization.</br></br><b>Situation:</b> Built education tools for a national leader in driver's license training, reaching thousands of students nationwide.</br></br><b>Task:</b> Built systems to improve student preparation, logistics, and marketing across the organization.</br></br><b>Action:</b></br>• Developed a commercial online exam simulator tied to a subscription platform.</br>• Reworked internal systems to improve inventory tracking and logistics.</br>• Led online marketing campaigns based on SEO and analytics data.</br></br><b>Result:</b></br>✅ Simulator adoption brought in thousands of new subscriptions a month.</br>✅ Reduced logistics errors and improved operational efficiency.</br>✅ Supported the company's growth with digital products that could scale."
+                "description": "📚 EdTech Systems | Simulators | Intranet Platforms | UX & Process Optimization.</br></br><b>Situation:</b> Built education tools for a national leader in driver's license training, reaching thousands of students nationwide.</br></br><b>Task:</b> Built systems to improve student preparation, logistics, and marketing across the organization.</br></br><b>Action:</b></br>• Developed a commercial online exam simulator tied to a subscription platform.</br>• Reworked internal systems to improve inventory tracking and logistics.</br>• Led online marketing campaigns based on SEO and analytics data.</br></br><b>Result:</b></br>✅ Simulator adoption brought in thousands of new subscriptions a month.</br>✅ Reduced logistics errors and improved operational efficiency.</br>✅ Supported the company's growth with digital products that could scale.",
+                "highlights": [
+                    "Built an online exam simulator sold by subscription, which brought in thousands of new subscriptions a month.",
+                    "Reworked the internal inventory and logistics systems, which cut logistics errors."
+                ]
             }
         ],
         "technologies": [
@@ -49,14 +57,22 @@
                 "city": "Rio de Janeiro",
                 "country": "Brasil",
                 "role": "Desenvolvedor Full-stack",
-                "description": "🛒 E-commerce | SEO | Alta Performance | Integrações ERP/API.</br></br><b>Situação:</b> Agência de e-commerce e identidade visual que atendia clientes de diversos portes, com foco em datas de pico como a Black Friday.</br></br><b>Tarefa:</b> Desenvolver e manter lojas virtuais seguras, rápidas e bem posicionadas nos buscadores.</br></br><b>Ação:</b></br>• Criou dezenas de lojas online responsivas, integradas a ERPs e sistemas de pagamento.</br>• Aplicou técnicas de SEO e otimização de performance.</br>• Cuidou da segurança e do monitoramento, incluindo a mitigação de ataques DDoS.</br></br><b>Resultado:</b></br>✅ Lojas entregues para clientes como CBF Brasil e Ipiranga.</br>✅ Sites mais rápidos e mais bem posicionados no Google, Bing e outros buscadores."
+                "description": "🛒 E-commerce | SEO | Alta Performance | Integrações ERP/API.</br></br><b>Situação:</b> Agência de e-commerce e identidade visual que atendia clientes de diversos portes, com foco em datas de pico como a Black Friday.</br></br><b>Tarefa:</b> Desenvolver e manter lojas virtuais seguras, rápidas e bem posicionadas nos buscadores.</br></br><b>Ação:</b></br>• Criou dezenas de lojas online responsivas, integradas a ERPs e sistemas de pagamento.</br>• Aplicou técnicas de SEO e otimização de performance.</br>• Cuidou da segurança e do monitoramento, incluindo a mitigação de ataques DDoS.</br></br><b>Resultado:</b></br>✅ Lojas entregues para clientes como CBF Brasil e Ipiranga.</br>✅ Sites mais rápidos e mais bem posicionados no Google, Bing e outros buscadores.",
+                "highlights": [
+                    "Construí plataformas de e-commerce para clientes como CBF Brasil e Ipiranga.",
+                    "Protegi as lojas contra ataques DDoS e melhorei a posição delas nos buscadores."
+                ]
             },
             {
                 "language": "en",
                 "city": "Rio de Janeiro",
                 "country": "Brazil",
                 "role": "Full-stack Developer",
-                "description": "🛒 E-Commerce Dev | SEO Optimization | High-Traffic Systems | ERP/API Integrations.</br></br><b>Situation:</b> Worked with a digital agency focused on SEO-driven e-commerce and branding projects for companies of all sizes.</br></br><b>Task:</b> Delivered fast, secure e-commerce platforms and integrated the external systems behind logistics and payments.</br></br><b>Action:</b></br>• Built scalable, mobile-optimized online stores on Magento and custom CMS platforms.</br>• Integrated ERP and payment gateway APIs for real-time inventory and transactions.</br>• Optimized code for SEO and site performance so stores held up under peak traffic during events like Black Friday.</br></br><b>Result:</b></br>✅ Delivered platforms for clients such as CBF Brasil and Ipiranga.</br>✅ Hardened systems against DDoS attacks.</br>✅ Improved search engine rankings through SEO work."
+                "description": "🛒 E-Commerce Dev | SEO Optimization | High-Traffic Systems | ERP/API Integrations.</br></br><b>Situation:</b> Worked with a digital agency focused on SEO-driven e-commerce and branding projects for companies of all sizes.</br></br><b>Task:</b> Delivered fast, secure e-commerce platforms and integrated the external systems behind logistics and payments.</br></br><b>Action:</b></br>• Built scalable, mobile-optimized online stores on Magento and custom CMS platforms.</br>• Integrated ERP and payment gateway APIs for real-time inventory and transactions.</br>• Optimized code for SEO and site performance so stores held up under peak traffic during events like Black Friday.</br></br><b>Result:</b></br>✅ Delivered platforms for clients such as CBF Brasil and Ipiranga.</br>✅ Hardened systems against DDoS attacks.</br>✅ Improved search engine rankings through SEO work.",
+                "highlights": [
+                    "Built e-commerce platforms for clients such as CBF Brasil and Ipiranga.",
+                    "Protected the stores against DDoS attacks and moved them up in search rankings."
+                ]
             }
         ],
         "technologies": [
@@ -95,14 +111,22 @@
                 "city": "São Paulo",
                 "country": "Brasil",
                 "role": "Desenvolvedor Full-stack & Mobile",
-                "description": "🖥️ Aplicações Web & Mobile | Integração com ERPs | Arquiteturas Distribuídas.</br></br><b>Situação:</b> Agência digital que entrega soluções de tecnologia para clientes de diversos setores, incluindo governo, saúde e varejo.</br></br><b>Tarefa:</b> Desenvolver sistemas complexos, integrações com APIs externas e aplicativos Android nativos.</br></br><b>Ação:</b></br>• Desenvolveu módulos reutilizáveis e APIs para integrar ERPs e sistemas legados.</br>• Participou da criação de um framework interno que acelerou as entregas e aumentou a produtividade.</br>• Trabalhou com bancos de dados relacionais e não relacionais, cuidando de performance e consistência.</br></br><b>Resultado:</b></br>✅ Clientes satisfeitos se tornaram recorrentes e indicaram novos contratos.</br>✅ A qualidade técnica passou a ser reconhecida como diferencial da agência."
+                "description": "🖥️ Aplicações Web & Mobile | Integração com ERPs | Arquiteturas Distribuídas.</br></br><b>Situação:</b> Agência digital que entrega soluções de tecnologia para clientes de diversos setores, incluindo governo, saúde e varejo.</br></br><b>Tarefa:</b> Desenvolver sistemas complexos, integrações com APIs externas e aplicativos Android nativos.</br></br><b>Ação:</b></br>• Desenvolveu módulos reutilizáveis e APIs para integrar ERPs e sistemas legados.</br>• Participou da criação de um framework interno que acelerou as entregas e aumentou a produtividade.</br>• Trabalhou com bancos de dados relacionais e não relacionais, cuidando de performance e consistência.</br></br><b>Resultado:</b></br>✅ Clientes satisfeitos se tornaram recorrentes e indicaram novos contratos.</br>✅ A qualidade técnica passou a ser reconhecida como diferencial da agência.",
+                "highlights": [
+                    "Ajudei a agência a manter seus clientes e a ganhar novos por indicação.",
+                    "Introduzi módulos reutilizáveis e frameworks internos que aceleraram o desenvolvimento e facilitaram a manutenção do código."
+                ]
             },
             {
                 "language": "en",
                 "city": "São Paulo",
                 "country": "Brazil",
                 "role": "Mobile & Full-stack Developer",
-                "description": "🖥️ Custom Web & Mobile Apps | ERP Integrations | Cross-Platform Development.</br></br><b>Situation:</b> Delivered custom web and mobile solutions for major Brazilian clients in healthcare, e-commerce, and government.</br></br><b>Task:</b> Led development across backend systems, native Android apps, and large web apps.</br></br><b>Action:</b></br>• Built reusable modules, APIs, and integrations with several ERP systems.</br>• Pushed the adoption of internal frameworks to speed up development and keep code maintainable.</br>• Delivered applications on both SQL and NoSQL databases, with attention to performance and data integrity.</br></br><b>Result:</b></br>✅ Significantly increased client retention and brought in new business through referrals.</br>✅ The agency won new projects on the strength of its technical quality and delivery speed."
+                "description": "🖥️ Custom Web & Mobile Apps | ERP Integrations | Cross-Platform Development.</br></br><b>Situation:</b> Delivered custom web and mobile solutions for major Brazilian clients in healthcare, e-commerce, and government.</br></br><b>Task:</b> Led development across backend systems, native Android apps, and large web apps.</br></br><b>Action:</b></br>• Built reusable modules, APIs, and integrations with several ERP systems.</br>• Pushed the adoption of internal frameworks to speed up development and keep code maintainable.</br>• Delivered applications on both SQL and NoSQL databases, with attention to performance and data integrity.</br></br><b>Result:</b></br>✅ Significantly increased client retention and brought in new business through referrals.</br>✅ The agency won new projects on the strength of its technical quality and delivery speed.",
+                "highlights": [
+                    "Helped the agency keep its clients and win new ones through referrals.",
+                    "Introduced reusable modules and internal frameworks that made development faster and the code easier to maintain."
+                ]
             }
         ],
         "technologies": [
@@ -122,7 +146,7 @@
         "position": 4,
         "startAt": "01-02-2017",
         "endAt": "11-30-2017",
-        "companyName": "Skydreamer",
+        "companyName": "SkyDreamer",
         "logo": "assets/template/experience/logo/skydreamer-logo.png",
         "internationalizations": [
             {
@@ -130,14 +154,24 @@
                 "city": "Utrecht",
                 "country": "Países Baixos",
                 "role": "Desenvolvedor Full-stack",
-                "description": "📱 Aplicativos Híbridos | TravelTech | Arquitetura de Software | Liderança Técnica.</br></br><b>Situação:</b> Startup europeia que queria lançar o primeiro app de viagem em grupo com swipe-and-match e ofertas de voos e hospedagens em tempo real.</br></br><b>Tarefa:</b> Liderar o desenvolvimento técnico do produto, resolver os desafios de arquitetura e garantir entregas de alta qualidade.</br></br><b>Ação:</b></br>• Criou a arquitetura da aplicação e desenvolveu as APIs REST e os bancos de dados NoSQL.</br>• Gerenciou o roadmap técnico e a priorização de features de acordo com os milestones.</br>• Desenvolveu um painel administrativo para gerenciar destinos e promoções no mundo todo.</br></br><b>Resultado:</b></br>✅ App lançado com mais de 5.000 usuários no primeiro mês.</br>✅ Destaque na TechCrunch 2017 (São Francisco), o que atraiu investidores.</br>✅ Backend escalável que permitiu um crescimento rápido e seguro."
+                "description": "📱 Aplicativos Híbridos | TravelTech | Arquitetura de Software | Liderança Técnica.</br></br><b>Situação:</b> Startup europeia que queria lançar o primeiro app de viagem em grupo com swipe-and-match e ofertas de voos e hospedagens em tempo real.</br></br><b>Tarefa:</b> Liderar o desenvolvimento técnico do produto, resolver os desafios de arquitetura e garantir entregas de alta qualidade.</br></br><b>Ação:</b></br>• Criou a arquitetura da aplicação e desenvolveu as APIs REST e os bancos de dados NoSQL.</br>• Gerenciou o roadmap técnico e a priorização de features de acordo com os milestones.</br>• Desenvolveu um painel administrativo para gerenciar destinos e promoções no mundo todo.</br></br><b>Resultado:</b></br>✅ App lançado com mais de 5.000 usuários no primeiro mês.</br>✅ Destaque na TechCrunch 2017 (São Francisco), o que atraiu investidores.</br>✅ Backend escalável que permitiu um crescimento rápido e seguro.",
+                "highlights": [
+                    "Lancei o MVP, que passou de 5.000 usuários no primeiro mês.",
+                    "O app atraiu o interesse de investidores na TechCrunch 2017, em São Francisco.",
+                    "Construí um backend que escalava e deixava o time lançar mudanças rápido."
+                ]
             },
             {
                 "language": "en",
                 "city": "Utrecht",
                 "country": "Netherlands",
                 "role": "Lead Software Engineer",
-                "description": "📱 Hybrid Mobile Apps | TravelTech | Architecture Design | Team Leadership.</br></br><b>Situation:</b> Joined an early-stage startup building Europe's first swipe-to-match group travel app with real-time booking.</br></br><b>Task:</b> Led technical development end to end, from backend architecture to frontend UI, and kept the product plan in line with business goals.</br></br><b>Action:</b></br>• Designed the architecture and built the RESTful APIs and NoSQL databases for the mobile app.</br>• Led a small remote team, prioritized roadmap features, and tracked delivery KPIs.</br>• Built an internal CMS and admin panel for managing travel data worldwide.</br></br><b>Result:</b></br>✅ Launched the MVP with over 5,000 users in its first month.</br>✅ Drew significant investor interest at TechCrunch 2017 (San Francisco).</br>✅ Delivered a scalable backend that let the team iterate quickly."
+                "description": "📱 Hybrid Mobile Apps | TravelTech | Architecture Design | Team Leadership.</br></br><b>Situation:</b> Joined an early-stage startup building Europe's first swipe-to-match group travel app with real-time booking.</br></br><b>Task:</b> Led technical development end to end, from backend architecture to frontend UI, and kept the product plan in line with business goals.</br></br><b>Action:</b></br>• Designed the architecture and built the RESTful APIs and NoSQL databases for the mobile app.</br>• Led a small remote team, prioritized roadmap features, and tracked delivery KPIs.</br>• Built an internal CMS and admin panel for managing travel data worldwide.</br></br><b>Result:</b></br>✅ Launched the MVP with over 5,000 users in its first month.</br>✅ Drew significant investor interest at TechCrunch 2017 (San Francisco).</br>✅ Delivered a scalable backend that let the team iterate quickly.",
+                "highlights": [
+                    "Launched the MVP, which reached more than 5,000 users in its first month.",
+                    "The app drew investor interest at TechCrunch 2017 in San Francisco.",
+                    "Built a backend that scaled and let the team ship changes quickly."
+                ]
             }
         ],
         "technologies": [
@@ -146,7 +180,7 @@
         "medias": [
             {
                 "icon": "youtube",
-                "title": "YouTube Skydreamer",
+                "title": "YouTube SkyDreamer",
                 "http": "https://www.youtube.com/channel/UCZ6_SqHB-Sdl7EHIXbvYoSw"
             },
             {
@@ -171,14 +205,24 @@
                 "city": "Uberaba",
                 "country": "Brasil",
                 "role": "Engenheiro de Software Senior & Pod-Leader",
-                "description": "🌍 Dashboards com Big Data | NoSQL | Otimização de Performance | Smart Utilities.</br></br><b>Situação:</b> Desenvolvimento de uma aplicação analítica para a maior fornecedora mundial de tecnologia para utilities, presente em mais de 150 países.</br></br><b>Tarefa:</b> Criar um dashboard capaz de processar e exibir grandes volumes de dados de medidores inteligentes, com informações em tempo real.</br></br><b>Ação:</b></br>• Desenvolveu componentes full stack para ingestão e visualização de dados em larga escala.</br>• Otimizou consultas no MongoDB e scripts de batch para ganhar desempenho e confiabilidade.</br>• Promoveu boas práticas de código e orientou desenvolvedores juniores.</br>• Trabalhou em times ágeis com entregas contínuas.</br></br><b>Resultado:</b></br>✅ Contribuiu diretamente para a conquista de novos contratos estratégicos.</br>✅ Os padrões de qualidade de código foram adotados em toda a empresa e aumentaram a eficiência técnica."
+                "description": "🌍 Dashboards com Big Data | NoSQL | Otimização de Performance | Smart Utilities.</br></br><b>Situação:</b> Desenvolvimento de uma aplicação analítica para a maior fornecedora mundial de tecnologia para utilities, presente em mais de 150 países.</br></br><b>Tarefa:</b> Criar um dashboard capaz de processar e exibir grandes volumes de dados de medidores inteligentes, com informações em tempo real.</br></br><b>Ação:</b></br>• Desenvolveu componentes full stack para ingestão e visualização de dados em larga escala.</br>• Otimizou consultas no MongoDB e scripts de batch para ganhar desempenho e confiabilidade.</br>• Promoveu boas práticas de código e orientou desenvolvedores juniores.</br>• Trabalhou em times ágeis com entregas contínuas.</br></br><b>Resultado:</b></br>✅ Contribuiu diretamente para a conquista de novos contratos estratégicos.</br>✅ Os padrões de qualidade de código foram adotados em toda a empresa e aumentaram a eficiência técnica.",
+                "highlights": [
+                    "Ajudei a conquistar mais contratos com governos e empresas privadas.",
+                    "Ajustei consultas no MongoDB e o processamento em batch para que escalassem.",
+                    "Defini práticas de código compartilhadas e orientei desenvolvedores juniores."
+                ]
             },
             {
                 "language": "en",
                 "city": "Uberaba",
                 "country": "Brazil",
                 "role": "Senior Full-Stack Developer & Pod-Leader",
-                "description": "🌍 Big Data Dashboards | Java | Angular | NoSQL | Performance Optimization | Smart Utility Systems.</br></br><b>Situation:</b> Worked on a Big Data web app for the world's leading smart utility provider, which operates in 150+ countries.</br></br><b>Task:</b> Built an analytics dashboard that processes and visualizes large smart meter datasets in real time for municipal and industrial utilities.</br></br><b>Action:</b></br>• Built full-stack components for high-performance data ingestion and visualization.</br>• Optimized MongoDB queries and complex batch processing scripts so they scaled.</br>• Kept coding standards high and mentored junior developers.</br>• Worked in Agile teams to ship features on schedule.</br></br><b>Result:</b></br>✅ Helped win additional government and private-sector contracts.</br>✅ Established scalable coding practices that development teams still use."
+                "description": "🌍 Big Data Dashboards | Java | Angular | NoSQL | Performance Optimization | Smart Utility Systems.</br></br><b>Situation:</b> Worked on a Big Data web app for the world's leading smart utility provider, which operates in 150+ countries.</br></br><b>Task:</b> Built an analytics dashboard that processes and visualizes large smart meter datasets in real time for municipal and industrial utilities.</br></br><b>Action:</b></br>• Built full-stack components for high-performance data ingestion and visualization.</br>• Optimized MongoDB queries and complex batch processing scripts so they scaled.</br>• Kept coding standards high and mentored junior developers.</br>• Worked in Agile teams to ship features on schedule.</br></br><b>Result:</b></br>✅ Helped win additional government and private-sector contracts.</br>✅ Established scalable coding practices that development teams still use.",
+                "highlights": [
+                    "Helped win more government and private-sector contracts.",
+                    "Tuned MongoDB queries and batch processing so they scaled.",
+                    "Set shared coding practices and mentored junior developers."
+                ]
             }
         ],
         "technologies": [
@@ -216,18 +260,30 @@
                 "city": "Rotterdão",
                 "country": "Países Baixos",
                 "role": "Engenheiro Full-stack DevOps Senior",
-                "description": "🌟 Modernização de Conectividade Empresarial | Java | Angular | AWS | Kubernetes | CI/CD | Observabilidade.</br></br><b>Situação:</b> Desenvolvimento de uma aplicação web multiplataforma que simplifica as soluções complexas de Enterprise Connect e Business Network da maior operadora de telecomunicações da Suíça.</br></br><b>Tarefa:</b> Arquitetar e entregar software escalável, sustentável e de alto ROI, alinhado aos objetivos de transformação digital da Swisscom.</br></br><b>Ação:</b></br>• Projetou, desenvolveu e implantou soluções full stack seguindo práticas DevOps.</br>• Criou pipelines de CI/CD automatizados e deploys em containers com Docker e Kubernetes.</br>• Gerenciou a infraestrutura na AWS com Infrastructure as Code (Terraform).</br>• Montou uma stack de observabilidade (Prometheus, Grafana, ELK) para monitoramento proativo.</br></br><b>Resultado:</b></br>✅ Crescimento contínuo da base de clientes e de contratos de grande porte.</br>✅ Redução significativa de incidentes e do tempo de resposta com monitoramento preditivo.</br>✅ Padrões DevOps reutilizáveis adotados por vários times da organização."
+                "description": "🌟 Modernização de Conectividade Empresarial | Java | Angular | AWS | Kubernetes | CI/CD | Observabilidade.</br></br><b>Situação:</b> Desenvolvimento de uma aplicação web multiplataforma que simplifica as soluções complexas de Enterprise Connect e Business Network da maior operadora de telecomunicações da Suíça.</br></br><b>Tarefa:</b> Arquitetar e entregar software escalável, sustentável e de alto ROI, alinhado aos objetivos de transformação digital da Swisscom.</br></br><b>Ação:</b></br>• Projetou, desenvolveu e implantou soluções full stack seguindo práticas DevOps.</br>• Criou pipelines de CI/CD automatizados e deploys em containers com Docker e Kubernetes.</br>• Gerenciou a infraestrutura na AWS com Infrastructure as Code (Terraform).</br>• Montou uma stack de observabilidade (Prometheus, Grafana, ELK) para monitoramento proativo.</br></br><b>Resultado:</b></br>✅ Crescimento contínuo da base de clientes e de contratos de grande porte.</br>✅ Redução significativa de incidentes e do tempo de resposta com monitoramento preditivo.</br>✅ Padrões DevOps reutilizáveis adotados por vários times da organização.",
+                "highlights": [
+                    "Reduzi o tempo de resposta a incidentes com monitoramento preditivo.",
+                    "Criei padrões DevOps que times de toda a Swisscom adotaram.",
+                    "Apresentei uma tech talk sobre métricas e tendências de build para mais de 265 pessoas.",
+                    "Participei do ETS Hackathon, onde meu time criou skills de IA que assumem mudanças repetitivas no código."
+                ]
             },
             {
                 "language": "en",
                 "city": "Rotterdam",
                 "country": "Netherlands",
                 "role": "Senior Full-stack DevOps Engineer",
-                "description": "🌟 Modernizing Enterprise Connectivity | Java | Angular | AWS | Kubernetes | CI/CD | Monitoring & Observability.</br></br><b>Situation:</b> Work on a cross-platform web application that simplifies complex Business Network and Enterprise Connect solutions for Switzerland's largest telecom provider.</br></br><b>Task:</b> Lead architecture and DevOps work to deliver scalable, maintainable, cost-effective software in line with Swisscom's digital transformation goals.</br></br><b>Action:</b></br>• Designed, built, and deployed full-stack solutions with modern frameworks and DevOps practices.</br>• Implemented automated CI/CD pipelines and containerized deployments with Docker and Kubernetes.</br>• Promoted cost-efficient AWS infrastructure managed with Infrastructure as Code.</br>• Built observability stacks (Prometheus, Grafana, ELK) to improve uptime and reliability.</br></br><b>Result:</b></br>✅ Kept customer adoption and new contract rates high.</br>✅ Cut incident response times and caught more issues early through predictive monitoring.</br>✅ Scaled delivery with reusable, modular DevOps patterns adopted across the organization."
+                "description": "🌟 Modernizing Enterprise Connectivity | Java | Angular | AWS | Kubernetes | CI/CD | Monitoring & Observability.</br></br><b>Situation:</b> Work on a cross-platform web application that simplifies complex Business Network and Enterprise Connect solutions for Switzerland's largest telecom provider.</br></br><b>Task:</b> Lead architecture and DevOps work to deliver scalable, maintainable, cost-effective software in line with Swisscom's digital transformation goals.</br></br><b>Action:</b></br>• Designed, built, and deployed full-stack solutions with modern frameworks and DevOps practices.</br>• Implemented automated CI/CD pipelines and containerized deployments with Docker and Kubernetes.</br>• Promoted cost-efficient AWS infrastructure managed with Infrastructure as Code.</br>• Built observability stacks (Prometheus, Grafana, ELK) to improve uptime and reliability.</br></br><b>Result:</b></br>✅ Kept customer adoption and new contract rates high.</br>✅ Cut incident response times and caught more issues early through predictive monitoring.</br>✅ Scaled delivery with reusable, modular DevOps patterns adopted across the organization.",
+                "highlights": [
+                    "Cut incident response times with predictive monitoring.",
+                    "Built DevOps patterns that teams across Swisscom adopted.",
+                    "Gave a tech talk on build metrics and trends to more than 265 people.",
+                    "Took part in the ETS Hackathon, where my team built AI skills that take over repetitive code changes."
+                ]
             }
         ],
         "technologies": [
-            "AWS", "GitLab CI", "Java", "Spring Boot", "Angular", "Typescript", "Javascript", "Node.js", "SDX", "Versioning Control", "DevOps", "CI/CD", "JUnit", "Karma", "Jasmine", "Selenium", "Jenkins", "Docker", "NPM", "Gradle", "Prometheus", "Grafana", "Redis"
+            "AWS", "GitLab CI", "Java", "Spring Boot", "Angular", "Typescript", "Javascript", "Node.js", "SDX", "Versioning Control", "DevOps", "CI/CD", "JUnit", "Karma", "Jasmine", "Selenium", "Jenkins", "Docker", "Kubernetes", "NPM", "Gradle", "Prometheus", "Grafana", "Redis"
         ],
         "medias": [
             {

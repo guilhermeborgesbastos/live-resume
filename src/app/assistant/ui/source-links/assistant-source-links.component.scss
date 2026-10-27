@@ -1,0 +1,60 @@
+.sources {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #e3e8f2;
+
+    .heading {
+        margin: 0 0 6px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #576183;
+    }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px;
+        max-width: 100%;
+    }
+
+    a {
+        overflow-wrap: anywhere;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 5px 10px;
+        text-decoration: none;
+        transition: background-color 0.2s;
+    }
+
+    .citation {
+        color: #222f5c;
+        background-color: #eaf2fe;
+
+        &:hover { background-color: #d4e7fe; }
+    }
+
+    .external {
+        color: #576183;
+        text-decoration: underline;
+
+        fa-icon { margin-left: 4px; font-size: 11px; }
+    }
+
+    a:focus-visible {
+        outline: 3px solid #222f5c;
+        outline-offset: 2px;
+    }
+}

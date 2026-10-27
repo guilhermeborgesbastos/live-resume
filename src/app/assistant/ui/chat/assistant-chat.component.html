@@ -1,0 +1,62 @@
+<div class="scroller" #scroller>
+  @switch (session.knowledgeStatus()) {
+    @case ("error") {
+      <div class="status unavailable" role="alert">
+        <p i18n="assistant@@assistant.unavailable">The CV information could not be loaded. Please try again or contact me directly.</p>
+        <div class="status-actions">
+          <button type="button" class="retry" (click)="session.retry()">
+            <fa-icon [icon]="faRedo" aria-hidden="true"></fa-icon>
+            <span i18n="assistant@@assistant.retry">Retry</span>
+          </button>
+          <a class="contact"
+             [routerLink]="contactLink.commands"
+             [fragment]="contactLink.fragment"
+             (click)="navigated.emit()"
+             i18n="assistant@@assistant.contact">Contact Guilherme</a>
+        </div>
+      </div>
+    }
+    @case ("ready") {}
+    @default {
+      <p class="status loading" role="status" i18n="assistant@@assistant.loading">Loading the CV information…</p>
+    }
+  }
+
+  @if (session.pairs().length === 0) {
+    @if (session.ready()) {
+      <app-assistant-suggestions class="starters"
+        i18n-heading="assistant@@assistant.suggestions" heading="Try one of these questions"
+        [questions]="suggestionTexts()" (picked)="ask($event)"></app-assistant-suggestions>
+    }
+  } @else {
+    @if (session.trimmed()) {
+      <p class="notice" i18n="assistant@@assistant.historyLimit">Only the 50 most recent questions are kept in this conversation.</p>
+    }
+    <app-assistant-conversation
+      [pairs]="session.pairs()"
+      [fallbackSuggestions]="fallbackSuggestions()"
+      [disabled]="!session.ready()"
+      (asked)="ask($event)"
+      (navigated)="navigated.emit()"></app-assistant-conversation>
+  }
+</div>
+
+<div class="footer">
+  <app-assistant-composer
+    [draft]="session.draft()"
+    [disabled]="!session.ready()"
+    [error]="session.validationError()"
+    (draftChange)="session.setDraft($event)"
+    (submitted)="submit()"></app-assistant-composer>
+  <div class="session-info">
+    <p class="session-note" i18n="assistant@@assistant.sessionNote">This conversation is kept only in this tab and this language. Refreshing the page, closing the tab or switching language starts a new one.</p>
+    @if (session.pairs().length > 0) {
+      <button type="button" class="clear" (click)="clear()">
+        <fa-icon [icon]="faTrashAlt" aria-hidden="true"></fa-icon>
+        <span i18n="assistant@@assistant.clear">Clear conversation</span>
+      </button>
+    }
+  </div>
+</div>
+
+<p class="visually-hidden" aria-live="polite">{{ announcement() }}</p>

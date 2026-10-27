@@ -52,3 +52,10 @@ live-resume.code-workspace
 /test-results
 /playwright-report
 /blob-report
+
+# AI Assistant design notes and plans, kept locally only
+/docs/cv-assistant.md
+/docs/cv-assistant-design.md
+/AI_ASSISTANT_IMPLEMENTATION_PLAN.md
+/AI_ASSISTANT_LLM_PLANS_COMPARISON.md
+/AI_ASSISTANT_LLM_INTERPRETER_PLAN.md

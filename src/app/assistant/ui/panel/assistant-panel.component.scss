@@ -1,0 +1,76 @@
+.assistant-panel {
+    // Desktop: a compact panel anchored above the launcher, bounded by the viewport.
+    position: fixed;
+    inset: auto 24px 24px auto;
+    width: min(420px, calc(100vw - 48px));
+    height: min(640px, calc(var(--assistant-viewport-height, 100dvh) - 48px));
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 15px;
+    background-color: #fff;
+    color: #222f5c;
+    box-shadow: 0 10px 40px rgba(34, 47, 92, 0.3);
+    overflow: hidden;
+
+    &::backdrop {
+        background-color: rgba(34, 47, 92, 0.35);
+    }
+}
+
+.sheet {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.top {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 14px 12px 12px 16px;
+    border-bottom: 1px solid #e3e8f2;
+
+    .titles {
+        flex: 1;
+        min-width: 0;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .disclosure {
+        margin: 2px 0 0;
+        font-size: 12px;
+        color: #576183;
+    }
+}
+
+.icon-button {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    color: #222f5c;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover { background-color: #eaf2fe; }
+
+    &:focus-visible {
+        outline: 3px solid #222f5c;
+        outline-offset: -3px;
+    }
+}
+
+app-assistant-chat {
+    flex: 1;
+    min-height: 0;
+}

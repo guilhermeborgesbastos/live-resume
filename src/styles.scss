@@ -42,3 +42,21 @@ app-welcome, app-experience, app-about, app-posts, app-contact { display: block;
 // reCAPTCHA's floating badge (App Check on the contact form) is replaced by the notice under the
 // form's Send button, which reCAPTCHA's terms allow. It is hidden, not removed, so it keeps working.
 .grecaptcha-badge { visibility: hidden; }
+
+// Text for screen readers only.
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+// Set while the CV assistant's modal panel is open; the panel restores the scroll position on close.
+html.assistant-scroll-locked {
+    overflow: hidden;
+}

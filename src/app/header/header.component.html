@@ -5,15 +5,16 @@
     </div>
 
     <div class="child logo-container" itemprop="brand" itemscope itemtype="https://schema.org/Brand">
-        <a (click)="resetMenu()" href="#" class="logo" itemprop="name" itemprop="logo">gbastos</a>
+        <a (click)="onSectionLink($event, null)" href="#" class="logo" itemprop="name" itemprop="logo">gbastos</a>
     </div>
 
     <div class="child nav-container" #nav [hidden]="!hasMenuToggled" itemscope itemtype="https://schema.org/SiteNavigationElement">
         <ul>
-            <li><a (click)="resetMenu()" href="#about" itemprop="url"><span itemprop="name" i18n="nav@@aboutMe">About me</span></a></li>
-            <li><a (click)="resetMenu()" href="#experience" itemprop="url"><span itemprop="name" i18n="nav@@experiences">Experiences</span></a></li>
-            <li><a (click)="resetMenu()" href="#posts" itemprop="url"><span itemprop="name" i18n="nav@@posts">Posts</span></a></li>
-            <li><a (click)="resetMenu()" href="#contact" itemprop="url"><span itemprop="name" i18n="nav@@contact">Contact</span></a></li>
+            <li><a (click)="onSectionLink($event, 'about')" href="#about" data-section="about" itemprop="url"><span itemprop="name" i18n="nav@@aboutMe">About me</span></a></li>
+            <li><a (click)="onSectionLink($event, 'experience')" href="#experience" data-section="experience" itemprop="url"><span itemprop="name" i18n="nav@@experiences">Experiences</span></a></li>
+            <li><a (click)="onSectionLink($event, 'posts')" href="#posts" data-section="posts" itemprop="url"><span itemprop="name" i18n="nav@@posts">Posts</span></a></li>
+            <li><a (click)="onSectionLink($event, 'contact')" href="#contact" data-section="contact" itemprop="url"><span itemprop="name" i18n="nav@@contact">Contact</span></a></li>
+            <li><a (click)="resetMenu()" routerLink="/assistant" data-section="assistant" class="assistant-link" itemprop="url"><span itemprop="name" i18n="nav@@assistant">AI Assistant</span><span class="new-badge" aria-hidden="true" i18n="nav@@assistant.new">New</span></a></li>
             <!-- TODO: update here -->
             <li><a (click)="resetMenu()" href="assets/cv-english-guilherme-bastos-v2.0.pdf" i18n-title="nav@@open.as.pdf" title="Open Resume as PDF" target="_blank"><fa-icon [icon]="faCloudDownloadAlt" class="bar-icon"></fa-icon></a></li>
         </ul>
@@ -23,10 +24,10 @@
         <div class="frame">
             <ul>
                 <li itemprop="availableLanguage" itemscope itemtype="https://schema.org/Language">
-                    <a href="/en/index.html" [ngClass]="{'active': locale === 'en'}" itemprop="name">EN</a>
+                    <a [href]="localeHref('en')" [ngClass]="{'active': locale === 'en'}" itemprop="name">EN</a>
                 </li>
                 <li itemprop="availableLanguage" itemscope itemtype="https://schema.org/Language">
-                    <a href="/pt/index.html" [ngClass]="{'active': locale === 'pt'}" itemprop="name">PT</a>
+                    <a [href]="localeHref('pt')" [ngClass]="{'active': locale === 'pt'}" itemprop="name">PT</a>
                 </li>
             </ul>
         </div>

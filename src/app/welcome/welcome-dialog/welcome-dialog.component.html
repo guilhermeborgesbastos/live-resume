@@ -2,21 +2,15 @@
     <img loading="lazy" src="./assets/template/welcome/bubble-frame.png" alt="Welcome Speech Bobble"/>
     <div class="console">
         <p class="hello" i18n="dialog@@hello">Hello!</p>
+        <!-- The typed phrases are decorative; screen readers get the stable text below instead of every keystroke. -->
         <span
             class="txt-rotate"
+            aria-hidden="true"
             appTypingAnimation
             [phrasePeriod]="2000"
             [startDelay]="1500"
             [typeSpeed]="200"
-            [data]='[
-                {
-                    "language": "pt",
-                    "phrases": [ "Meu nome é Guilherme.", "Bem-vindo ao meu Currículo Interativo.", "Role para baixo e saiba mais sobre mim... :)" ]
-                },
-                {
-                    "language": "en",
-                    "phrases": [ "My name is Guilherme.", "Welcome to my Interactive Resume.", "Scroll down to learn more about me... :)" ]
-                }
-            ]'></span>
+            [data]="phrases"></span>
+        <span class="visually-hidden">{{ stablePhrases }}</span>
     </div>
 </div>

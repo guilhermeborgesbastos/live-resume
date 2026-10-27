@@ -33,18 +33,13 @@ async function swipe(page: Page, target: Locator, direction: "left" | "right"): 
   await cdp.detach();
 }
 
-/** Asserts that loading a URL with a #fragment scrolled the page to that section. */
+/**
+ * Asserts that loading a URL with a #fragment scrolled the page to that section. On narrow
+ * screens the content above grows after the first scroll (experience/posts data); the resume
+ * keeps the target aligned while it settles.
+ */
 async function expectScrolledToSection(page: Page, section: string): Promise<void> {
-  if (isMobile(page)) {
-    // Known pre-existing issue (present on the Angular 19 baseline): on narrow screens the
-    // router scrolls to the fragment before the experience/posts data has rendered, so the
-    // content above grows afterwards and the section ends up below the fold. Only assert
-    // that fragment scrolling happened.
-    test.info().annotations.push({ type: "known-issue", description: "initial #fragment scroll lands early on mobile" });
-    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(1000);
-  } else {
-    await expect(page.locator(`section#${section}`)).toBeInViewport();
-  }
+  await expect(page.locator(`section#${section}`)).toBeInViewport();
 }
 
 async function openMobileMenuIfNeeded(page: Page): Promise<void> {

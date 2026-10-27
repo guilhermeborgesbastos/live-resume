@@ -50,3 +50,13 @@
 		transform: translatey(0px);
 	}
 }
+/* The bubble's text is positioned against the container (not only while it is transformed by the float animation). */
+.dialog-container {
+	position: relative;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.dialog-container {
+		animation: none;
+	}
+}

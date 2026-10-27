@@ -1,0 +1,21 @@
+<div class="sources">
+  <p class="heading" i18n="assistant@@assistant.sources">Sources in this CV</p>
+  <ul>
+    @for (source of links(); track source.key) {
+      <li>
+        <a class="citation"
+           [routerLink]="source.link.commands"
+           [fragment]="source.link.fragment"
+           [queryParams]="source.link.queryParams"
+           (click)="followed.emit()">{{ source.label }}</a>
+        @if (source.externalUrl) {
+          <a class="external" [href]="source.externalUrl" target="_blank" rel="noopener noreferrer">
+            <span i18n="assistant@@assistant.sources.external">Open link</span>
+            <fa-icon [icon]="faExternalLinkAlt" aria-hidden="true"></fa-icon>
+            <span class="visually-hidden" i18n="assistant@@assistant.sources.newTab">(opens in a new tab)</span>
+          </a>
+        }
+      </li>
+    }
+  </ul>
+</div>

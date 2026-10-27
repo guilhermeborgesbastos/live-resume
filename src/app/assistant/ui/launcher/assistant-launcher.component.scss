@@ -1,0 +1,65 @@
+.launcher {
+    position: fixed;
+    right: calc(24px + env(safe-area-inset-right));
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    z-index: 1000; // below the header (1001), above the sections
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #222f5c;
+    // A light-blue ring keeps the button distinct over the dark Experience section too.
+    border: 3px solid #d4e7fe;
+    border-radius: 30px;
+    padding: 11px 17px;
+    box-shadow: 0 6px 20px rgba(34, 47, 92, 0.35);
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s, opacity 0.2s, visibility 0.2s;
+
+    &.hidden {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    fa-icon { font-size: 20px; }
+
+    &:hover {
+        background-color: #34457f;
+        transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+        outline: 3px solid #fff;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 6px #222f5c;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+
+        &:hover { transform: none; }
+    }
+
+    // Phones: a round icon button that covers as little of the page as possible.
+    @media screen and (max-width: 600px) {
+        right: calc(14px + env(safe-area-inset-right));
+        bottom: calc(14px + env(safe-area-inset-bottom));
+        width: 54px;
+        height: 54px;
+        justify-content: center;
+        padding: 0;
+
+        .label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+    }
+}
