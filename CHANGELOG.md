@@ -1,6 +1,6 @@
 #Unreleased
 ###📃 release notes
-- Add the CV Assistant: a rule-based, browser-only assistant that answers supported questions about the CV from the about/experiences/posts JSON with cited sources, from the welcome bubble, a floating panel and a new `/assistant` page (EN and PT); unsupported questions point to the Contact section. See `docs/cv-assistant.md`.
+- Add the CV Assistant: a rule-based, browser-only assistant that answers supported questions about the CV from the about/experiences/posts JSON with cited sources, from the welcome bubble, a floating panel and a new `/assistant` page (EN and PT); unsupported questions point to the Contact section. See `docs/ai-assistant-data.md` to update its data.
 - CV Assistant: "Did you mean…" options for misspelled or ambiguous names, and follow-ups about the role in the latest answer ("And before that?", "Which technologies did you use there?").
 - Keep a `#fragment` target (e.g. `#contact`) in view while the resume's data-driven sections render, so deep links land on the right section on phones.
 

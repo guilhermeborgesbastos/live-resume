@@ -146,7 +146,7 @@ The workflow fails unless the tag equals `package.json`'s version. It runs the b
 
 ## 🤖 AI Assistant
 
-Visitors can ask questions about the CV from the floating **Ask my AI Assistant** button (shown with a robot icon) or the **AI Assistant** page (`/en/assistant`, `/pt/assistant`). Under the hood it is a rule-based assistant that runs in the browser: answers are assembled only from `src/assets/data/{about,experiences,posts}.json`, cite their source, and anything outside the supported questions gets a fallback pointing to the Contact section. There is no language model or external service, and the conversation is kept in memory for the current tab only. Supported questions, limitations and how to extend it: [docs/cv-assistant.md](docs/cv-assistant.md).
+Visitors can ask questions about the CV from the floating **Ask my AI Assistant** button (shown with a robot icon) or the **AI Assistant** page (`/en/assistant`, `/pt/assistant`). Under the hood it is a rule-based assistant that runs in the browser: answers are assembled only from `src/assets/data/{about,experiences,posts}.json`, cite their source, and anything outside the supported questions gets a fallback pointing to the Contact section. There is no language model or external service, and the conversation is kept in memory for the current tab only. To change what it knows (jobs, education, certificates, languages, topics), see [Updating the AI Assistant's data](docs/ai-assistant-data.md).
 
 ## ✍️ Adding posts with Claude Code
 

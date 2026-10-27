@@ -7,7 +7,7 @@
 export type Locale = "en" | "pt";
 export const ASSISTANT_LOCALES: readonly Locale[] = ["en", "pt"];
 
-/** The only files the assistant may use as knowledge (see docs/cv-assistant.md). */
+/** The only files the assistant may use as knowledge (see docs/ai-assistant-data.md). */
 export type SourceFile = "about.json" | "experiences.json" | "posts.json";
 
 /** A plain-text value read from the JSON snapshot, with the JSON pointer it came from. */

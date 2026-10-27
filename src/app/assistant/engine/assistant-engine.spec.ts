@@ -9,6 +9,8 @@ const snapshot = snapshotOf(cv);
 
 const swisscom = cv.experiences.find(e => e.companyName === "Swisscom AG");
 const qat = cv.experiences.find(e => e.companyName === "QAT Global");
+// Matched case-insensitively so the test follows the company's spelling in the data.
+const skydreamer = cv.experiences.find(e => /^skydreamer$/i.test(e.companyName));
 const localized = (record: any, locale: Locale) => record.internationalizations.find((i: any) => i.language === locale);
 
 function ask(question: string, locale: Locale, data = snapshot): AnswerResult {
@@ -87,7 +89,7 @@ const POSITIVE: Record<Locale, Positive[]> = {
       question: "Summarize his DevOps work", intent: "topicSummary",
       contains: ["Prometheus", "Swisscom AG", "Roles this summary covers"], sources: ["about", String(swisscom.id)]
     },
-    { question: "Tell me about your leadership experience.", intent: "topicSummary", contains: ["QAT Global", "Skydreamer"], excludes: ["Swisscom AG"] },
+    { question: "Tell me about your leadership experience.", intent: "topicSummary", contains: ["QAT Global", skydreamer.companyName], excludes: ["Swisscom AG"] },
     { question: "What is your CI/CD experience?", intent: "topicSummary", contains: ["Kubernetes"] },
     { question: "What did you achieve at Swisscom?", intent: "companyHighlights", contains: ["265"], sources: [String(swisscom.id)] },
     { question: "Did you use Kubernetes at Swisscom?", intent: "technologyAtCompany", contains: ["Kubernetes", "Swisscom AG"] },
