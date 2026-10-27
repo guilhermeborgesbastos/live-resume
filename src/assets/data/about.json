@@ -9,7 +9,7 @@
             "description": "I'm a <i>Full-Stack & DevOps Engineer</i> with over 10 years of experience delivering scalable, secure, high-performance software for companies of all sizes, from startups to global enterprises like <a href=\"https://swisscom.com\" target=\"_blank\">Swisscom</a>. My passion is turning complex ideas into digital products that balance performance, automation, and user experience.<br><br>I work across software engineering and operations, taking projects from technical design to production deployment and monitoring. I have broad experience with AWS, Docker, Kubernetes, CI/CD, Node.js, Angular, and SQL and NoSQL databases, and I specialize in Infrastructure as Code and proactive monitoring with Prometheus, ELK, and Grafana."
         }
     ],
-    "medias": [        
+    "medias": [
         {
             "icon": "linkedin",
             "title": "LinkedIn",
@@ -26,7 +26,7 @@
             "http": "https://www.facebook.com/guilherme.borgesbastos"
         }
     ],
-    "hobbies": [        
+    "hobbies": [
         {
             "icon": "biking",
             "title": "Cycling"
@@ -223,12 +223,12 @@
                 {
                     "language": "en",
                     "name": "leadership and mentoring",
-                    "summary": "At Skydreamer I led a small remote team, set the roadmap priorities and tracked our delivery KPIs. Later, as Pod-Leader at QAT Global, I mentored junior developers and helped set the coding practices the teams shared."
+                    "summary": "At SkyDreamer I led a small remote team, set the roadmap priorities and tracked our delivery KPIs. Later, as Pod-Leader at QAT Global, I mentored junior developers and helped set the coding practices the teams shared."
                 },
                 {
                     "language": "pt",
                     "name": "liderança e mentoria",
-                    "summary": "Na Skydreamer, liderei um pequeno time remoto, defini as prioridades do roadmap e acompanhei nossos KPIs de entrega. Depois, como Pod-Leader na QAT Global, orientei desenvolvedores juniores e ajudei a definir as práticas de código que os times usavam."
+                    "summary": "Na SkyDreamer, liderei um pequeno time remoto, defini as prioridades do roadmap e acompanhei nossos KPIs de entrega. Depois, como Pod-Leader na QAT Global, orientei desenvolvedores juniores e ajudei a definir as práticas de código que os times usavam."
                 }
             ]
         },
