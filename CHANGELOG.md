@@ -1,3 +1,7 @@
+#[2.1.1](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v2.1.1) (2026-10-27)
+###📃 release notes
+- Scroll smoothly between resume sections (e.g. from Posts to Contact) instead of jumping; visitors who ask for reduced motion keep the instant jump.
+
 #[2.1.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v2.1.0) (2026-10-27)
 ###📃 release notes
 - Add the AI Assistant: a rule-based, browser-only Q&A that answers questions about the CV in English and Portuguese from the about/experiences/posts JSON, cites the source of every fact and points anything it can't answer to the Contact section. It is reachable from the header, a floating "Ask my AI Assistant" button and the new `/assistant` page. See `docs/ai-assistant-data.md` to update its data;
