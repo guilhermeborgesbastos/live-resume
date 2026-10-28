@@ -9,6 +9,13 @@
 
 # dependencies
 /node_modules
+/functions/node_modules
+
+# Cloud Functions build output and Firebase emulator logs
+/functions/lib
+/firebase-debug*.log
+/firestore-debug.log
+/ui-debug.log
 
 # profiling files
 chrome-profiler-events*.json

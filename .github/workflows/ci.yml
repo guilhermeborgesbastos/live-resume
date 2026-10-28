@@ -32,6 +32,13 @@ jobs:
       - name: Unit tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
 
+      - name: Cloud Functions (install, type-check, test, bundle)
+        run: |
+          npm --prefix functions ci
+          npm --prefix functions run typecheck
+          npm --prefix functions test
+          npm --prefix functions run build
+
       - name: Production build
         run: npm run build -- --configuration production
 

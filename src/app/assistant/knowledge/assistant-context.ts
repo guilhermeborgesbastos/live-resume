@@ -56,8 +56,11 @@ export interface ContextParseResult {
 }
 
 export interface ContextParseOptions {
-  /** The current month, for the staleness rules. */
-  readonly today: YearMonth;
+  /**
+   * The current month, for the staleness rules. Left out at runtime (the function), where an
+   * old note must not take the service down; the build and CI check age instead.
+   */
+  readonly today?: YearMonth;
   /** When given, every `related` entry must name one of these experiences. */
   readonly experienceIds?: readonly number[];
 }
@@ -194,7 +197,7 @@ function checkNote(draft: Draft, options: ContextParseOptions, errors: string[],
     const month = parseYearMonth(updated);
     if (!month) {
       errors.push(`${where}: "updated" must be YYYY-MM`);
-    } else {
+    } else if (options.today) {
       const age = monthsBetween(month, options.today);
       if (age < 0) {
         errors.push(`${where}: "updated" ${updated} is in the future`);
