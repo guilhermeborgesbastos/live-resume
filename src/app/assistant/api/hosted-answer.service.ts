@@ -2,7 +2,9 @@ import { inject, Injectable } from "@angular/core";
 import { AppCheckService } from "../../core/app-check.service";
 import { FIREBASE_APP } from "../../core/firebase";
 import { environment } from "../../../environments/environment";
-import { AskAssistantRequest, AskAssistantResult, HOSTED_FUNCTION_NAME } from "../models/hosted-answer.models";
+import {
+  AskAssistantRequest, AskAssistantResult, HOSTED_FUNCTION_NAME, HostedResultKind, UnavailableReason
+} from "../models/hosted-answer.models";
 
 /** Function error codes worth trying again later (the others mean the request or setup is wrong). */
 const RETRYABLE_CODES = ["functions/deadline-exceeded", "functions/unavailable", "functions/internal", "functions/resource-exhausted"];
@@ -41,7 +43,7 @@ export class HostedAnswerService {
       return data;
     } catch (error) {
       const code = (error as { code?: string } | null)?.code ?? "";
-      return { kind: "unavailable", reason: "error", retryable: RETRYABLE_CODES.includes(code) };
+      return { kind: HostedResultKind.Unavailable, reason: UnavailableReason.Error, retryable: RETRYABLE_CODES.includes(code) };
     }
   }
 }

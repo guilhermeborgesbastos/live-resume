@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { knowledgeVersion } from "../../src/app/assistant/knowledge/evidence-map";
 import { buildHostedKnowledge } from "../src/core/knowledge";
-import { knowledge, NOTES, rawCv } from "./helpers";
+import { knowledge, NOTES, OWNER, rawCv } from "./helpers";
 
 describe("buildHostedKnowledge", () => {
   it("builds byte-identical prompts and schemas from the same data", () => {
@@ -20,6 +20,18 @@ describe("buildHostedKnowledge", () => {
     expect(en.system[0]).not.toMatch(/\d{4}-\d{2}-\d{2}/); // no dates: the cached prefix must not change daily
   });
 
+  it("names the CV owner from configuration, not from code", () => {
+    const instructions = knowledge().locales.en.system[0];
+    expect(instructions).toContain(`the online CV of ${OWNER.name}, published on ${OWNER.firstName}'s own website`);
+    expect(instructions).toContain(`Speak as ${OWNER.firstName}`);
+    expect(instructions).not.toContain("Guilherme");
+  });
+
+  it("bounds a request's input tokens above the prompt itself", () => {
+    const en = knowledge().locales.en;
+    expect(en.maxInputTokens).toBeGreaterThan((en.system[0].length + en.system[1].length) / 4);
+  });
+
   it("lists CV names for the name check, without everyday hobby words", () => {
     const names = knowledge().locales.en.names;
     expect(names).toEqual(expect.arrayContaining(["Swisscom AG", "Java", "Kubernetes", "QAT Global"]));
@@ -27,7 +39,7 @@ describe("buildHostedKnowledge", () => {
   });
 
   it("refuses invalid notes", () => {
-    expect(() => buildHostedKnowledge(rawCv(), NOTES.replace("pt: Trabalho com Java desde 2014.\n", ""))).toThrow(/"pt" is required/);
+    expect(() => buildHostedKnowledge(rawCv(), NOTES.replace("pt: Trabalho com Java desde 2014.\n", ""), OWNER)).toThrow(/"pt" is required/);
   });
 
   it("works with no notes", () => {

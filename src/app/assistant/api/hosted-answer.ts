@@ -5,9 +5,11 @@
  */
 import { answerPlainText } from "../engine/assistant-engine";
 import { ContextNote } from "../knowledge/assistant-context";
-import { buildEvidenceMap, sourcesFor } from "../knowledge/evidence-map";
-import { AnswerResult, FallbackReason, KnowledgeSnapshot, Locale, PairAnswer } from "../models/assistant.models";
-import { AskAssistantResult, HistoryPair, MAX_HISTORY_ANSWER_LENGTH, MAX_HISTORY_PAIRS } from "../models/hosted-answer.models";
+import { buildEvidenceMap, NOTE_EVIDENCE_PREFIX, sourcesFor } from "../knowledge/evidence-map";
+import { AnswerResult, FallbackReason, HostedAnswerKind, KnowledgeSnapshot, Locale, PairAnswer } from "../models/assistant.models";
+import {
+  AskAssistantResult, HistoryPair, HostedResultKind, MAX_HISTORY_ANSWER_LENGTH, MAX_HISTORY_PAIRS
+} from "../models/hosted-answer.models";
 
 /**
  * Local fallbacks the model may be able to answer. "missing-fact" (the CV doesn't hold the fact)
@@ -23,7 +25,7 @@ export function isHostedEligible(answer: AnswerResult): boolean {
 export function answerText(answer: PairAnswer): string {
   switch (answer.kind) {
     case "answered": return answerPlainText(answer.blocks);
-    case "generated": return answer.paragraphs.join("\n");
+    case HostedAnswerKind.Generated: return answer.paragraphs.join("\n");
     default: return "";
   }
 }
@@ -31,7 +33,7 @@ export function answerText(answer: PairAnswer): string {
 /** The latest answered exchanges (at most MAX_HISTORY_PAIRS), oldest first, trimmed to the request limits. */
 export function historyFor(pairs: readonly { readonly question: string; readonly answer: PairAnswer }[]): HistoryPair[] {
   return pairs
-    .filter(pair => pair.answer.kind === "answered" || pair.answer.kind === "generated")
+    .filter(pair => pair.answer.kind === "answered" || pair.answer.kind === HostedAnswerKind.Generated)
     .slice(-MAX_HISTORY_PAIRS)
     .map(pair => ({ question: pair.question, answer: truncate(answerText(pair.answer), MAX_HISTORY_ANSWER_LENGTH) }));
 }
@@ -48,13 +50,13 @@ function truncate(text: string, max: number): string {
  */
 export function toPairAnswer(result: AskAssistantResult, snapshot: KnowledgeSnapshot, locale: Locale): PairAnswer {
   switch (result.kind) {
-    case "fallback":
+    case HostedResultKind.Fallback:
       return { kind: "fallback", reason: "unrecognized" };
-    case "unavailable":
-      return { kind: "ai-unavailable" };
-    case "version-mismatch":
-      return { kind: "version-mismatch" };
-    case "generated": {
+    case HostedResultKind.Unavailable:
+      return { kind: HostedAnswerKind.Unavailable };
+    case HostedResultKind.VersionMismatch:
+      return { kind: HostedAnswerKind.VersionMismatch };
+    case HostedResultKind.Generated: {
       const notes: ContextNote[] = result.notes.map(note => ({
         id: note.id,
         updated: note.updated,
@@ -66,11 +68,11 @@ export function toPairAnswer(result: AskAssistantResult, snapshot: KnowledgeSnap
       const ids = result.paragraphs.flatMap(p => p.evidence);
       const subject = result.subject && snapshot.experiences.some(e => e.id === result.subject!.experienceId) ? result.subject : undefined;
       return {
-        kind: "generated",
+        kind: HostedAnswerKind.Generated,
         paragraphs: result.paragraphs.map(p => p.text),
         sources: sourcesFor(map, ids),
         partial: result.partial,
-        usesNotes: ids.some(id => id.startsWith("ctx.")),
+        usesNotes: ids.some(id => id.startsWith(NOTE_EVIDENCE_PREFIX)),
         ...(subject ? { subject: { experienceId: subject.experienceId } } : {})
       };
     }

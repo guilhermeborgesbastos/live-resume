@@ -2,7 +2,7 @@
  * The contract between the browser and the askAssistant Cloud Function (hosted AI answers for
  * questions the local engine can't answer). Shared by both sides, so it stays free of Angular.
  */
-import type { Locale } from "./assistant.models";
+import { ASSISTANT_LOCALES, Locale } from "./assistant.models";
 
 export const HOSTED_FUNCTION_NAME = "askAssistant";
 export const MAX_HOSTED_QUESTION_LENGTH = 500;
@@ -46,19 +46,27 @@ export interface HostedNote {
   readonly related: readonly number[];
 }
 
-export type UnavailableReason =
+export enum UnavailableReason {
   /** The kill switch is off. */
-  | "disabled"
+  Disabled = "disabled",
   /** A daily, monthly or per-visitor limit was reached. */
-  | "limited"
+  Limited = "limited",
   /** The model or a dependency failed or timed out. */
-  | "error"
+  Error = "error",
   /** The model's output failed validation; nothing of it is shown. */
-  | "invalid";
+  Invalid = "invalid"
+}
+
+export enum HostedResultKind {
+  Generated = "generated",
+  Fallback = "fallback",
+  Unavailable = "unavailable",
+  VersionMismatch = "version-mismatch"
+}
 
 export type AskAssistantResult =
   | {
-      readonly kind: "generated";
+      readonly kind: HostedResultKind.Generated;
       readonly knowledgeVersion: string;
       readonly paragraphs: readonly GeneratedParagraph[];
       /** Part of the question isn't covered by the CV; the browser adds the fixed "not covered" line. */
@@ -67,9 +75,12 @@ export type AskAssistantResult =
       readonly notes: readonly HostedNote[];
     }
   /** The model found nothing in the CV to answer with; the browser shows the fixed fallback. */
-  | { readonly kind: "fallback" }
-  | { readonly kind: "unavailable"; readonly reason: UnavailableReason; readonly retryable: boolean }
-  | { readonly kind: "version-mismatch" };
+  | { readonly kind: HostedResultKind.Fallback }
+  | { readonly kind: HostedResultKind.Unavailable; readonly reason: UnavailableReason; readonly retryable: boolean }
+  | { readonly kind: HostedResultKind.VersionMismatch };
+
+/** Every field a request may carry; anything else is rejected. */
+const REQUEST_FIELDS: readonly (keyof AskAssistantRequest)[] = ["question", "locale", "knowledgeVersion", "context", "history"];
 
 /** Code points, like validateQuestion: a surrogate pair counts once. */
 const length = (text: string): number => [...text].length;
@@ -82,28 +93,28 @@ export function parseAskRequest(body: unknown, experienceIds: readonly number[])
   if (!body || typeof body !== "object" || Array.isArray(body)) {
     return { error: "body must be an object" };
   }
-  const input = body as Record<string, unknown>;
-  const extra = Object.keys(input).filter(k => !["question", "locale", "knowledgeVersion", "context", "history"].includes(k));
+  const input = body as Partial<Record<keyof AskAssistantRequest, unknown>>;
+  const extra = Object.keys(input).filter(key => !(REQUEST_FIELDS as readonly string[]).includes(key));
   if (extra.length) {
     return { error: `unexpected field(s): ${extra.join(", ")}` };
   }
-  const question = typeof input["question"] === "string" ? input["question"].trim() : "";
+  const question = typeof input.question === "string" ? input.question.trim() : "";
   if (!question || length(question) > MAX_HOSTED_QUESTION_LENGTH) {
     return { error: `question must be 1-${MAX_HOSTED_QUESTION_LENGTH} characters` };
   }
-  const locale = input["locale"];
-  if (locale !== "en" && locale !== "pt") {
-    return { error: "locale must be en or pt" };
+  const locale = ASSISTANT_LOCALES.find(l => l === input.locale);
+  if (!locale) {
+    return { error: `locale must be one of ${ASSISTANT_LOCALES.join(", ")}` };
   }
-  const knowledgeVersion = input["knowledgeVersion"];
+  const knowledgeVersion = input.knowledgeVersion;
   if (typeof knowledgeVersion !== "string" || !/^v\d+-[0-9a-f]{8}-[0-9a-f]+$/.test(knowledgeVersion)) {
     return { error: "knowledgeVersion is malformed" };
   }
 
   let context: AskAssistantRequest["context"];
-  if (input["context"] !== undefined) {
-    const raw = input["context"] as Record<string, unknown> | null;
-    const id = raw && typeof raw === "object" ? raw["experienceId"] : undefined;
+  if (input.context !== undefined) {
+    const raw = input.context as Partial<Record<keyof NonNullable<AskAssistantRequest["context"]>, unknown>> | null;
+    const id = raw && typeof raw === "object" ? raw.experienceId : undefined;
     if (!raw || Object.keys(raw).length !== 1 || typeof id !== "number" || !experienceIds.includes(id)) {
       return { error: "context must be { experienceId } of an existing experience" };
     }
@@ -111,8 +122,8 @@ export function parseAskRequest(body: unknown, experienceIds: readonly number[])
   }
 
   let history: HistoryPair[] | undefined;
-  if (input["history"] !== undefined) {
-    const raw = input["history"];
+  if (input.history !== undefined) {
+    const raw = input.history;
     if (!Array.isArray(raw) || raw.length > MAX_HISTORY_PAIRS) {
       return { error: `history must be an array of at most ${MAX_HISTORY_PAIRS} pairs` };
     }

@@ -269,10 +269,19 @@ export type QuestionError = "empty" | "too-long";
  * Cloud Function). Kept apart from AnswerResult: generated prose is never a TemplateLine, and its
  * citations come from the evidence the model cited, not from template slots.
  */
+export enum HostedAnswerKind {
+  Pending = "pending",
+  Generated = "generated",
+  /** Hosted answers are off, over a limit, or failed; the UI says so and offers Contact. */
+  Unavailable = "ai-unavailable",
+  /** The page's CV data differs from the function's (a deploy happened); the UI offers a reload. */
+  VersionMismatch = "version-mismatch"
+}
+
 export type HostedAnswer =
-  | { readonly kind: "pending" }
+  | { readonly kind: HostedAnswerKind.Pending }
   | {
-      readonly kind: "generated";
+      readonly kind: HostedAnswerKind.Generated;
       /** Plain text, shown as text (never as HTML). */
       readonly paragraphs: readonly string[];
       readonly sources: readonly SourceRef[];
@@ -282,10 +291,8 @@ export type HostedAnswer =
       readonly usesNotes: boolean;
       readonly subject?: ConversationContext;
     }
-  /** Hosted answers are off, over a limit, or failed; the UI says so and offers Contact. */
-  | { readonly kind: "ai-unavailable" }
-  /** The page's CV data differs from the function's (a deploy happened); the UI offers a reload. */
-  | { readonly kind: "version-mismatch" };
+  | { readonly kind: HostedAnswerKind.Unavailable }
+  | { readonly kind: HostedAnswerKind.VersionMismatch };
 
 /** What a conversation pair shows: a local engine result or a hosted answer. */
 export type PairAnswer = AnswerResult | HostedAnswer;

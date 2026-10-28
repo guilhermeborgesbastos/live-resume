@@ -7,8 +7,15 @@ import { parseAssistantContext, ContextNote } from "../../../src/app/assistant/k
 import { buildEvidenceMap, evidenceText, EvidenceMap, knowledgeVersion, stableHash } from "../../../src/app/assistant/knowledge/evidence-map";
 import { adaptKnowledge, RawKnowledge } from "../../../src/app/assistant/knowledge/knowledge-adapter";
 import { ASSISTANT_LOCALES, KnowledgeSnapshot, Locale } from "../../../src/app/assistant/models/assistant.models";
-import { instructions } from "./prompt";
+import { CvOwner, instructions } from "./prompt";
 import { answerSchema } from "./schema";
+
+/**
+ * The longest user turn: a 500-character question, two history pairs of 500 + 600 characters,
+ * and the tags around them, at a conservative 2 characters per token.
+ */
+const MAX_USER_TURN_TOKENS = 1_500;
+const CHARACTERS_PER_TOKEN_FLOOR = 2;
 
 export interface LocaleKnowledge {
   readonly map: EvidenceMap;
@@ -16,6 +23,8 @@ export interface LocaleKnowledge {
   readonly schema: Record<string, unknown>;
   /** CV names (companies, technologies, schools, ...) in this locale, longest first. */
   readonly names: readonly string[];
+  /** An upper bound on a request's input tokens, for the monthly cost reservation. */
+  readonly maxInputTokens: number;
 }
 
 export interface HostedKnowledge {
@@ -29,7 +38,7 @@ export interface HostedKnowledge {
 }
 
 /** Throws if the JSON or the notes are invalid: the deploy build validates both first. */
-export function buildHostedKnowledge(raw: RawKnowledge, notesSource: string): HostedKnowledge {
+export function buildHostedKnowledge(raw: RawKnowledge, notesSource: string, owner: CvOwner): HostedKnowledge {
   const snapshot = adaptKnowledge(raw);
   const experienceIds = snapshot.experiences.map(e => e.id);
   const parsed = parseAssistantContext(notesSource, { experienceIds });
@@ -39,11 +48,13 @@ export function buildHostedKnowledge(raw: RawKnowledge, notesSource: string): Ho
   const locales = {} as Record<Locale, LocaleKnowledge>;
   for (const locale of ASSISTANT_LOCALES) {
     const map = buildEvidenceMap(snapshot, parsed.notes, locale);
+    const system: [string, string] = [instructions(locale, owner), evidenceText(map)];
     locales[locale] = {
       map,
-      system: [instructions(locale), evidenceText(map)],
+      system,
       schema: answerSchema(map, experienceIds),
-      names: cvNames(snapshot, locale)
+      names: cvNames(snapshot, locale),
+      maxInputTokens: Math.ceil((system[0].length + system[1].length) / CHARACTERS_PER_TOKEN_FLOOR) + MAX_USER_TURN_TOKENS
     };
   }
   return {

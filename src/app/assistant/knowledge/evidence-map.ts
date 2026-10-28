@@ -11,8 +11,11 @@
 import { ANSWER_TEMPLATES, AnswerTemplates, formatMonthYear, formatPartialDate } from "../engine/answer-templates";
 import { byDateDescending, byStartDescending } from "../engine/compose-answer";
 import { Excerpt, ExperienceRecord, KnowledgeSnapshot, Locale, SourceRef } from "../models/assistant.models";
-import { ContextNote, parseYearMonth } from "./assistant-context";
+import { CONTEXT_FILE, ContextNote, parseYearMonth } from "./assistant-context";
 import { RawKnowledge } from "./knowledge-adapter";
+
+/** Prefix of the evidence IDs of notes from assistant-context.txt. */
+export const NOTE_EVIDENCE_PREFIX = "ctx.";
 
 /** Bump when the evidence IDs or texts change shape, so browser and function never mix versions. */
 export const EVIDENCE_FORMAT_VERSION = 1;
@@ -205,9 +208,9 @@ export function buildEvidenceMap(snapshot: KnowledgeSnapshot, notes: readonly Co
     const month = parseYearMonth(note.updated);
     const updated = month ? `${t.months[month.month - 1]} ${month.year}` : note.updated;
     const related = note.related.map(id => byExperienceId.get(id)).filter((e): e is ExperienceRecord => !!e);
-    b.add(`ctx.${note.id}`, `${fields.title}: ${fields.text} (${t.snapshot.updated} ${updated})`,
+    b.add(`${NOTE_EVIDENCE_PREFIX}${note.id}`, `${fields.title}: ${fields.text} (${t.snapshot.updated} ${updated})`,
       {
-        file: "assistant-context.txt",
+        file: CONTEXT_FILE,
         recordKey: note.id,
         pointers: [`/${note.id}/${locale}`],
         label: t.labels.note(fields.title, updated),

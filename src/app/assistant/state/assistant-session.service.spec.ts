@@ -7,7 +7,8 @@ import { AssistantKnowledgeService } from "../knowledge/assistant-knowledge.serv
 import { realCv } from "../testing/assistant-fixtures";
 import { AssistantSessionService, MAX_CONVERSATION_PAIRS, siteLocale } from "./assistant-session.service";
 import { HostedAnswerService } from "../api/hosted-answer.service";
-import { AskAssistantResult } from "../models/hosted-answer.models";
+import { HostedAnswerKind } from "../models/assistant.models";
+import { AskAssistantResult, HostedResultKind } from "../models/hosted-answer.models";
 
 const FILES = ["about", "experiences", "posts"] as const;
 
@@ -180,7 +181,7 @@ describe("CV assistant knowledge and session", () => {
     /** Lets every pending promise step run (the reply passes through a short then/catch chain). */
     const settled = () => new Promise(resolve => setTimeout(resolve));
     const generated = (text: string, extra: Partial<AskAssistantResult> = {}): AskAssistantResult =>
-      ({ kind: "generated", knowledgeVersion: "v1-00000000-1", paragraphs: [{ text, evidence: ["exp.6"] }], partial: false, notes: [], ...extra } as AskAssistantResult);
+      ({ kind: HostedResultKind.Generated, knowledgeVersion: "v1-00000000-1", paragraphs: [{ text, evidence: ["exp.6"] }], partial: false, notes: [], ...extra } as AskAssistantResult);
 
     it("answers supported questions locally, without a request", () => {
       session.ask("Where have you used Java?");
@@ -191,7 +192,7 @@ describe("CV assistant knowledge and session", () => {
 
     it("sends an unrecognized question once, waits, then shows the AI answer", async () => {
       session.ask("What salary are you looking for?");
-      expect(session.pairs()[0].answer).toEqual({ kind: "pending" });
+      expect(session.pairs()[0].answer).toEqual({ kind: HostedAnswerKind.Pending });
       expect(session.busy()).toBeTrue();
       expect(session.ask("What are your hobbies?")).toBeFalse();
       expect(hosted.ask).toHaveBeenCalledTimes(1);
@@ -201,8 +202,8 @@ describe("CV assistant knowledge and session", () => {
       replies[0](generated("I work at Swisscom AG.", { subject: { experienceId: 6 } }));
       await settled();
       const answer = session.pairs()[0].answer;
-      expect(answer.kind).toBe("generated");
-      expect(answer.kind === "generated" && answer.sources.map(s => s.recordKey)).toEqual(["6"]);
+      expect(answer.kind).toBe(HostedAnswerKind.Generated);
+      expect(answer.kind === HostedAnswerKind.Generated && answer.sources.map(s => s.recordKey)).toEqual(["6"]);
       expect(session.busy()).toBeFalse();
     });
 
@@ -234,7 +235,7 @@ describe("CV assistant knowledge and session", () => {
       hosted.ask.and.returnValue(Promise.reject(new Error("network")));
       session.ask("What salary are you looking for?");
       await settled();
-      expect(session.pairs()[0].answer).toEqual({ kind: "ai-unavailable" });
+      expect(session.pairs()[0].answer).toEqual({ kind: HostedAnswerKind.Unavailable });
     });
   });
 

@@ -5,7 +5,8 @@
  */
 import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 import Anthropic from "@anthropic-ai/sdk";
-import type { Usage } from "./limits";
+import { ModelReplyKind, NoAnswerReason } from "./constants";
+import type { Usage } from "./pricing";
 
 export interface ModelRequest {
   /** [instructions, CV facts]; the second block carries the cache breakpoint. */
@@ -15,9 +16,9 @@ export interface ModelRequest {
 }
 
 export type ModelReply =
-  | { readonly kind: "ok"; readonly json: unknown; readonly usage: Usage }
-  /** A safety refusal or a reply cut off at max_tokens: its output may not follow the schema. */
-  | { readonly kind: "no-answer"; readonly reason: "refusal" | "max_tokens" | "unparseable"; readonly usage: Usage };
+  | { readonly kind: ModelReplyKind.Ok; readonly json: unknown; readonly usage: Usage }
+  /** A safety refusal, a reply cut off at max_tokens, or text that isn't JSON: it may not follow the schema. */
+  | { readonly kind: ModelReplyKind.NoAnswer; readonly reason: NoAnswerReason; readonly usage: Usage };
 
 export class ModelError extends Error {
   constructor(message: string, readonly retryable: boolean) {
@@ -37,7 +38,7 @@ export const MAX_OUTPUT_TOKENS = 1024;
 export class VertexAnswerModel implements AnswerModel {
   private readonly client: AnthropicVertex;
 
-  constructor(projectId: string, region: string, readonly modelId: string, private readonly timeoutMs = 12_000) {
+  constructor(projectId: string, region: string, readonly modelId: string, timeoutMs = 12_000) {
     // Authenticates as the function's service account (Application Default Credentials).
     this.client = new AnthropicVertex({ projectId, region, maxRetries: 0, timeout: timeoutMs });
   }
@@ -67,14 +68,14 @@ export class VertexAnswerModel implements AnswerModel {
       cacheWriteTokens: response.usage.cache_creation_input_tokens ?? 0,
       outputTokens: response.usage.output_tokens
     };
-    if (response.stop_reason === "refusal" || response.stop_reason === "max_tokens") {
-      return { kind: "no-answer", reason: response.stop_reason, usage };
+    if (response.stop_reason === NoAnswerReason.Refusal || response.stop_reason === NoAnswerReason.MaxTokens) {
+      return { kind: ModelReplyKind.NoAnswer, reason: response.stop_reason === NoAnswerReason.Refusal ? NoAnswerReason.Refusal : NoAnswerReason.MaxTokens, usage };
     }
     const text = response.content.filter((b): b is Anthropic.TextBlock => b.type === "text").map(b => b.text).join("");
     try {
-      return { kind: "ok", json: JSON.parse(text), usage };
+      return { kind: ModelReplyKind.Ok, json: JSON.parse(text), usage };
     } catch {
-      return { kind: "no-answer", reason: "unparseable", usage };
+      return { kind: ModelReplyKind.NoAnswer, reason: NoAnswerReason.Unparseable, usage };
     }
   }
 }

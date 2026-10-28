@@ -1,5 +1,5 @@
 import { Injectable, LOCALE_ID, computed, effect, inject, signal } from "@angular/core";
-import { ConversationContext, KnowledgeSnapshot, Locale, PairAnswer, QuestionError } from "../models/assistant.models";
+import { ConversationContext, HostedAnswerKind, KnowledgeSnapshot, Locale, PairAnswer, QuestionError } from "../models/assistant.models";
 import { AssistantKnowledgeService } from "../knowledge/assistant-knowledge.service";
 import { answerQuestion, suggestedQuestions, SuggestedQuestion, validateQuestion } from "../engine/assistant-engine";
 import { HostedAnswerService } from "../api/hosted-answer.service";
@@ -71,7 +71,7 @@ export class AssistantSessionService {
   /** Whether AI answers exist in this build (the notice and the local-only switch show only then). */
   readonly hostedAvailable = this.hosted.enabled;
   /** A question is waiting for its AI answer; new questions wait until it arrives. */
-  readonly busy = computed(() => this.state().pairs.some(pair => pair.answer.kind === "pending"));
+  readonly busy = computed(() => this.state().pairs.some(pair => pair.answer.kind === HostedAnswerKind.Pending));
   readonly suggestions = computed<SuggestedQuestion[]>(() => {
     const state = this.knowledge.state();
     return state.status === "ready" ? suggestedQuestions(state.snapshot, this.locale) : [];
@@ -147,7 +147,7 @@ export class AssistantSessionService {
       const hosted = this.hosted.enabled && !this.state().localOnly && isHostedEligible(local);
       const history = historyFor(this.state().pairs);
       const id = this.nextId++;
-      this.append({ id, question: validation.question, answer: hosted ? { kind: "pending" } : local });
+      this.append({ id, question: validation.question, answer: hosted ? { kind: HostedAnswerKind.Pending } : local });
       if (hosted) {
         this.askHosted(id, validation.question, knowledge.snapshot, knowledge.version, context, history);
       }
@@ -183,7 +183,7 @@ export class AssistantSessionService {
       ...(history.length ? { history } : {})
     })
       .then(result => toPairAnswer(result, snapshot, this.locale))
-      .catch((): PairAnswer => ({ kind: "ai-unavailable" }))
+      .catch((): PairAnswer => ({ kind: HostedAnswerKind.Unavailable }))
       .then(answer => {
         if (generation === this.generation) {
           this.update({ pairs: this.state().pairs.map(pair => pair.id === id ? { ...pair, answer } : pair) });
@@ -208,7 +208,7 @@ export class AssistantSessionService {
   private context(): ConversationContext {
     const pairs = this.state().pairs;
     const latest = pairs[pairs.length - 1]?.answer;
-    return (latest?.kind === "answered" || latest?.kind === "generated") && latest.subject ? latest.subject : {};
+    return (latest?.kind === "answered" || latest?.kind === HostedAnswerKind.Generated) && latest.subject ? latest.subject : {};
   }
 
   private update(changes: Partial<ConversationState>): void {

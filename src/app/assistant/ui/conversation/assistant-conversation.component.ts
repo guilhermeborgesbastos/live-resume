@@ -1,7 +1,7 @@
 import { DOCUMENT } from "@angular/common";
 import { Component, computed, inject, input, output } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { AnswerBlock, ClarifyReason, PairAnswer, SourceRef } from "../../models/assistant.models";
+import { AnswerBlock, ClarifyReason, HostedAnswerKind, PairAnswer, SourceRef } from "../../models/assistant.models";
 import { ConversationPair } from "../../state/assistant-session.service";
 import { AssistantSourceLinksComponent } from "../source-links/assistant-source-links.component";
 import { AssistantSuggestionsComponent } from "../suggestions/assistant-suggestions.component";
@@ -57,6 +57,7 @@ export class AssistantConversationComponent {
   readonly navigated = output<void>();
 
   readonly contactLink = CONTACT_LINK;
+  readonly Kind = HostedAnswerKind;
   private readonly document = inject(DOCUMENT);
 
   readonly views = computed<PairView[]>(() => this.pairs().map(pair => {
@@ -66,13 +67,13 @@ export class AssistantConversationComponent {
       question: pair.question,
       kind: answer.kind,
       blocks: answer.kind === "answered" ? answer.blocks.map(toBlockView) : [],
-      sources: answer.kind === "answered" || answer.kind === "generated" ? answer.sources : [],
+      sources: answer.kind === "answered" || answer.kind === HostedAnswerKind.Generated ? answer.sources : [],
       followUps: answer.kind === "answered" ? answer.followUps : [],
       clarifyReason: answer.kind === "clarify" ? answer.reason : null,
       options: answer.kind === "clarify" ? answer.options : [],
-      paragraphs: answer.kind === "generated" ? answer.paragraphs : [],
-      partial: answer.kind === "generated" && answer.partial,
-      usesNotes: answer.kind === "generated" && answer.usesNotes
+      paragraphs: answer.kind === HostedAnswerKind.Generated ? answer.paragraphs : [],
+      partial: answer.kind === HostedAnswerKind.Generated && answer.partial,
+      usesNotes: answer.kind === HostedAnswerKind.Generated && answer.usesNotes
     };
   }));
 

@@ -8,6 +8,8 @@ export const environment = {
   personal: {
     caricature: "gbastos-illustration@2x.png",
     name: "Guilherme Borges Bastos",
+    // how the assistant's AI answers refer to you (functions/src/core/prompt.ts)
+    firstName: "Guilherme",
     birth: "1993-06-19",
     email: "guilhermeborgesbastos@gmail.com",
     location: "Gouda, South Holland, Netherlands"

@@ -3,6 +3,7 @@ import { RouterLink } from "@angular/router";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { faRedo, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { answerPlainText } from "../../engine/assistant-engine";
+import { HostedAnswerKind } from "../../models/assistant.models";
 import { AssistantSessionService } from "../../state/assistant-session.service";
 import { ASSISTANT_COPY } from "../assistant-copy";
 import { CONTACT_LINK } from "../citations";
@@ -43,13 +44,13 @@ export class AssistantChatComponent implements OnInit {
     const answer = pairs[pairs.length - 1]?.answer;
     switch (answer?.kind) {
       case "answered": return answerPlainText(answer.blocks);
-      case "generated": return [...answer.paragraphs, ...(answer.partial ? [ASSISTANT_COPY.ai.partial] : [])].join("\n");
+      case HostedAnswerKind.Generated: return [...answer.paragraphs, ...(answer.partial ? [ASSISTANT_COPY.ai.partial] : [])].join("\n");
       case "clarify": return [ASSISTANT_COPY.clarify[answer.reason], ...answer.options].join("\n");
       case "fallback": return ASSISTANT_COPY.fallback;
       case "unavailable": return ASSISTANT_COPY.unavailable;
-      case "pending": return ASSISTANT_COPY.ai.pending;
-      case "ai-unavailable": return ASSISTANT_COPY.ai.unavailable;
-      case "version-mismatch": return ASSISTANT_COPY.ai.versionMismatch;
+      case HostedAnswerKind.Pending: return ASSISTANT_COPY.ai.pending;
+      case HostedAnswerKind.Unavailable: return ASSISTANT_COPY.ai.unavailable;
+      case HostedAnswerKind.VersionMismatch: return ASSISTANT_COPY.ai.versionMismatch;
       default: return "";
     }
   });

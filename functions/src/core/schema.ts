@@ -4,9 +4,10 @@
  * exist. Counts and lengths aren't expressible here; validate-answer.ts enforces them.
  */
 import type { EvidenceMap } from "../../../src/app/assistant/knowledge/evidence-map";
+import { ModelAnswerStatus } from "./constants";
 
 export interface ModelAnswer {
-  readonly status: "answered" | "unsupported";
+  readonly status: ModelAnswerStatus;
   readonly partial: boolean;
   readonly subjectExperienceId: number | null;
   readonly paragraphs: readonly { readonly text: string; readonly evidence: readonly string[] }[];
@@ -16,9 +17,9 @@ export function answerSchema(map: EvidenceMap, experienceIds: readonly number[])
   return {
     type: "object",
     additionalProperties: false,
-    required: ["status", "partial", "subjectExperienceId", "paragraphs"],
+    required: ["status", "partial", "subjectExperienceId", "paragraphs"] satisfies (keyof ModelAnswer)[],
     properties: {
-      status: { type: "string", enum: ["answered", "unsupported"] },
+      status: { type: "string", enum: Object.values(ModelAnswerStatus) },
       partial: { type: "boolean" },
       subjectExperienceId: { anyOf: [{ type: "integer", enum: [...experienceIds].sort((a, b) => b - a) }, { type: "null" }] },
       paragraphs: {

@@ -1,15 +1,18 @@
 /*
- * One hosted question, cheapest checks first (plan §3.3): kill switch, request validation,
- * knowledge version, limits (one atomic reservation), one model call, grounding checks, usage
- * counters. App Check has already been verified and consumed by the time this runs.
- *
- * Logs carry outcomes, counts and timings only: never the question, the answer or the IP.
+ * One hosted question, cheapest checks first: kill switch, request validation, knowledge
+ * version, limits and cost reservation (one atomic step), one model call, grounding checks,
+ * settlement. Logs carry outcomes, counts and timings only: never the question, the answer or the IP.
  */
+import { CONTEXT_FILE } from "../../../src/app/assistant/knowledge/assistant-context";
 import { sourcesFor } from "../../../src/app/assistant/knowledge/evidence-map";
-import { AskAssistantResult, HostedNote, parseAskRequest } from "../../../src/app/assistant/models/hosted-answer.models";
+import {
+  AskAssistantResult, HostedNote, HostedResultKind, parseAskRequest, UnavailableReason
+} from "../../../src/app/assistant/models/hosted-answer.models";
+import { CheckStatus, Failure, LogEvent, ModelReplyKind, NoAnswerReason, Outcome } from "./constants";
 import type { HostedKnowledge } from "./knowledge";
-import { LimitStore, Outcome, Usage } from "./limits";
-import { AnswerModel, ModelError } from "./model";
+import { LimitStore, Settlement } from "./limits";
+import { AnswerModel, MAX_OUTPUT_TOKENS, ModelError } from "./model";
+import type { CostPolicy } from "./pricing";
 import { userTurn } from "./prompt";
 import { checkAnswer } from "./validate-answer";
 
@@ -17,7 +20,7 @@ export interface AskDeps {
   readonly knowledge: HostedKnowledge;
   readonly store: LimitStore;
   readonly model: AnswerModel;
-  /** clientKey() of the caller's IP for today. */
+  readonly costs: CostPolicy;
   readonly clientKey: string;
   readonly now: () => Date;
   readonly log: (event: Record<string, unknown>) => void;
@@ -30,73 +33,87 @@ export class InvalidRequestError extends Error {
   }
 }
 
+const unavailable = (reason: UnavailableReason, retryable: boolean): AskAssistantResult =>
+  ({ kind: HostedResultKind.Unavailable, reason, retryable });
+
 export async function ask(body: unknown, deps: AskDeps): Promise<AskAssistantResult> {
   const started = deps.now();
-  const finish = async (result: AskAssistantResult, outcome?: Outcome, extra: Record<string, unknown> = {}, usage?: Usage) => {
+  const finish = async (result: AskAssistantResult, outcome?: Outcome, extra: Record<string, unknown> = {}, settlement?: Settlement) => {
     if (outcome) {
-      await deps.store.record(deps.now(), outcome, usage).catch(() => deps.log({ event: "record-failed" }));
+      await deps.store.record(deps.now(), outcome, settlement).catch(() => deps.log({ event: LogEvent.RecordFailed }));
     }
-    deps.log({ event: "ask", result: result.kind, outcome, ms: deps.now().getTime() - started.getTime(), ...extra, ...(usage ? { usage } : {}) });
+    deps.log({
+      event: LogEvent.Ask,
+      result: result.kind,
+      outcome,
+      ms: deps.now().getTime() - started.getTime(),
+      ...extra,
+      ...(settlement?.usage ? { usage: settlement.usage } : {})
+    });
     return result;
   };
 
   if (!(await deps.store.enabled().catch(() => false))) {
-    return finish({ kind: "unavailable", reason: "disabled", retryable: false });
+    return finish(unavailable(UnavailableReason.Disabled, false));
   }
 
   const request = parseAskRequest(body, deps.knowledge.experienceIds);
   if ("error" in request) {
-    deps.log({ event: "ask", result: "invalid-request", reason: request.error });
+    deps.log({ event: LogEvent.InvalidRequest, reason: request.error });
     throw new InvalidRequestError(request.error);
   }
   if (request.knowledgeVersion !== deps.knowledge.version) {
-    return finish({ kind: "version-mismatch" });
-  }
-
-  let reservation;
-  try {
-    reservation = await deps.store.reserve(deps.clientKey, started);
-  } catch {
-    // Fail closed: without the counters, no model call.
-    return finish({ kind: "unavailable", reason: "error", retryable: true }, undefined, { failure: "limit-store" });
-  }
-  if (!reservation.allowed) {
-    return finish({ kind: "unavailable", reason: "limited", retryable: false }, "limited", { limit: reservation.limit });
+    return finish({ kind: HostedResultKind.VersionMismatch });
   }
 
   const locale = deps.knowledge.locales[request.locale];
+  let reservation;
+  try {
+    reservation = await deps.store.reserve(deps.clientKey, started, deps.costs.ceiling(locale.maxInputTokens, MAX_OUTPUT_TOKENS));
+  } catch {
+    // Fail closed: without the counters, no model call.
+    return finish(unavailable(UnavailableReason.Error, true), undefined, { failure: Failure.LimitStore });
+  }
+  if (!reservation.allowed) {
+    return finish(unavailable(UnavailableReason.Limited, false), Outcome.Limited, { limit: reservation.limit });
+  }
+  const reservedMicros = reservation.reservedMicros;
+
   let reply;
   try {
     reply = await deps.model.answer({ system: locale.system, user: userTurn(request), schema: locale.schema });
   } catch (error) {
+    // Usage is unknown, so the reservation stays on the month.
     const retryable = error instanceof ModelError && error.retryable;
-    return finish({ kind: "unavailable", reason: "error", retryable }, "error", { failure: error instanceof Error ? error.message : "unknown" });
+    return finish(unavailable(UnavailableReason.Error, retryable), Outcome.Error,
+      { failure: Failure.Model, detail: error instanceof Error ? error.message : undefined }, { reservedMicros });
   }
-  if (reply.kind === "no-answer") {
-    return reply.reason === "refusal"
-      ? finish({ kind: "fallback" }, "unsupported", { stop: reply.reason }, reply.usage)
-      : finish({ kind: "unavailable", reason: "invalid", retryable: false }, "invalid", { stop: reply.reason }, reply.usage);
+  const settlement: Settlement = { reservedMicros, usage: reply.usage };
+  if (reply.kind === ModelReplyKind.NoAnswer) {
+    return reply.reason === NoAnswerReason.Refusal
+      ? finish({ kind: HostedResultKind.Fallback }, Outcome.Unsupported, { stop: reply.reason }, settlement)
+      : finish(unavailable(UnavailableReason.Invalid, false), Outcome.Invalid, { stop: reply.reason }, settlement);
   }
 
   const checked = checkAnswer(reply.json, locale, request.locale);
-  if (checked.status === "invalid") {
-    return finish({ kind: "unavailable", reason: "invalid", retryable: false }, "invalid", { check: checked.check }, reply.usage);
+  if (checked.status === CheckStatus.Invalid) {
+    return finish(unavailable(UnavailableReason.Invalid, false), Outcome.Invalid, { check: checked.check }, settlement);
   }
-  if (checked.status === "unsupported") {
-    return finish({ kind: "fallback" }, "unsupported", {}, reply.usage);
+  if (checked.status === CheckStatus.Unsupported) {
+    return finish({ kind: HostedResultKind.Fallback }, Outcome.Unsupported, {}, settlement);
   }
 
   const cited = checked.paragraphs.flatMap(p => p.evidence);
   const notes: HostedNote[] = sourcesFor(locale.map, cited)
-    .filter(source => source.target.section === "notes")
-    .map(source => deps.knowledge.notes.find(n => n.id === source.recordKey)!)
+    .map(source => deps.knowledge.notes.find(n => n.id === source.recordKey && source.file === CONTEXT_FILE))
+    .filter(note => note !== undefined)
     .map(note => ({ id: note.id, title: note.locales[request.locale].title, updated: note.updated, related: note.related }));
   return finish({
-    kind: "generated",
+    kind: HostedResultKind.Generated,
     knowledgeVersion: deps.knowledge.version,
     paragraphs: checked.paragraphs,
     partial: checked.partial,
     ...(checked.subjectExperienceId !== undefined ? { subject: { experienceId: checked.subjectExperienceId } } : {}),
     notes
-  }, "answered", { paragraphs: checked.paragraphs.length, evidence: cited.length, partial: checked.partial }, reply.usage);
+  }, Outcome.Answered, { paragraphs: checked.paragraphs.length, evidence: cited.length, partial: checked.partial }, settlement);
 }
