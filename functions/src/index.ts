@@ -1,6 +1,6 @@
 /*
- * Cloud Functions for the CV Assistant's hosted AI answers (see AI_ASSISTANT_LLM_FIREBASE_PLAN.md
- * and docs/cv-assistant-design.md):
+ * Cloud Functions for the CV Assistant's hosted AI answers (setup and operation: DEPLOYMENT.md,
+ * "AI answers (Firebase)"):
  *
  *   askAssistant   callable, App Check required and consumed; answers one question with
  *                  Claude Haiku 5.5 on Vertex AI, from the CV data bundled at deploy time

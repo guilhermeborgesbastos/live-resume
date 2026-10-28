@@ -275,8 +275,8 @@ The CV assistant answers the questions it recognizes in the browser. The ones it
 can go to the `askAssistant` Cloud Function, which asks Claude Haiku 5.5 on Vertex AI to write a
 short answer from the CV and the notes in `src/assets/data/assistant-context.txt`, checks it,
 and returns it with its sources. Everything runs in the Firebase project `live-resume-a575a`;
-AWS only serves the static site. The design and its reasons are in
-`AI_ASSISTANT_LLM_FIREBASE_PLAN.md`.
+AWS only serves the static site. What the AI may use, and how to add notes, is in
+[`docs/ai-assistant-data.md`](docs/ai-assistant-data.md).
 
 Two switches keep it off until you turn it on: `assistantHosted.enabled` in
 `src/environments/environment*.ts` (the site sends nothing while it's `false`) and the Firestore
