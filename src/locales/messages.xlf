@@ -102,7 +102,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
-          <context context-type="linenumber">76,82</context>
+          <context context-type="linenumber">115,121</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -130,11 +130,59 @@
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
+      <trans-unit id="assistant.ai.pending" datatype="html">
+        <source>Thinking about your question…</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">98,100</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.unavailable" datatype="html">
+        <source>AI answers aren’t available right now. You can try a suggested question or contact me.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">100,103</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.versionMismatch" datatype="html">
+        <source>This page has an older copy of my CV. Reload it to ask this question again.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">112,113</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.partial" datatype="html">
+        <source>My CV doesn’t cover the rest of your question. You can ask me directly.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">80,84</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
       <trans-unit id="assistant.launcher.label" datatype="html">
         <source>Ask my AI Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -142,7 +190,7 @@
         <source>Close the AI assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">19</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -150,7 +198,7 @@
         <source>Open the AI assistant in a full page</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/assistant-copy.ts</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">20</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -175,6 +223,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
           <context context-type="linenumber">69,71</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">95,98</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">105,107</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -202,11 +258,59 @@
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
+      <trans-unit id="assistant.ai.notice" datatype="html">
+        <source>Most questions are answered right here in your browser. If I can’t answer one, it goes to Google Cloud in the EU, where Anthropic’s Claude model writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">53,55</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.howItWorks" datatype="html">
+        <source>How this works</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.howItWorks.sent" datatype="html">
+        <source>Only a question this assistant can’t answer is sent, with up to two of your previous questions and answers in this chat. A security check (Firebase App Check with Google reCAPTCHA) confirms the request comes from this website. To limit abuse, a code derived from your IP address that changes daily and can’t be reversed is kept for up to 48 hours.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.howItWorks.model" datatype="html">
+        <source>Claude, run by Google Cloud’s Vertex AI in the EU, answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. The answer is checked against the CV before you see it, and it lists its sources.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.howItWorks.storage" datatype="html">
+        <source>This website doesn’t store your questions or answers or write them to its logs; it keeps only anonymous counts. Your conversation stays in this tab.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">58,61</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.localOnly" datatype="html">
+        <source>Answer only locally (don’t send questions)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
+          <context context-type="linenumber">62,67</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
       <trans-unit id="assistant.sessionNote" datatype="html">
         <source>This conversation is kept only in this tab and this language. Refreshing the page, closing the tab or switching language starts a new one.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
-          <context context-type="linenumber">52,55</context>
+          <context context-type="linenumber">67,70</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -214,7 +318,7 @@
         <source>Clear conversation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
-          <context context-type="linenumber">56,62</context>
+          <context context-type="linenumber">71,77</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -304,13 +408,41 @@
           <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
           <context context-type="linenumber">72,73</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">108,109</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.labelNotes" datatype="html">
+        <source>AI-generated from my CV and my notes. It can contain mistakes, so check the sources.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">84,86</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.label" datatype="html">
+        <source>AI-generated from my CV. It can contain mistakes, so check the sources.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">86,89</context>
+        </context-group>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.reload" datatype="html">
+        <source>Reload the page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/assistant/ui/conversation/assistant-conversation.component.html</context>
+          <context context-type="linenumber">113,115</context>
+        </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.sources" datatype="html">
         <source>Sources in this CV</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/source-links/assistant-source-links.component.html</context>
-          <context context-type="linenumber">2,7</context>
+          <context context-type="linenumber">2,6</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -318,7 +450,7 @@
         <source>Open link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/source-links/assistant-source-links.component.html</context>
-          <context context-type="linenumber">13,15</context>
+          <context context-type="linenumber">17,19</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -326,7 +458,7 @@
         <source>(opens in a new tab)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/source-links/assistant-source-links.component.html</context>
-          <context context-type="linenumber">15,22</context>
+          <context context-type="linenumber">19,26</context>
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
@@ -538,7 +670,7 @@
         <source>AI Assistant</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header/header.component.html</context>
-          <context context-type="linenumber">17,19</context>
+          <context context-type="linenumber">17</context>
         </context-group>
         <note priority="1" from="description">nav</note>
       </trans-unit>

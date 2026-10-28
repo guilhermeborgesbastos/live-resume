@@ -4,6 +4,8 @@ export const environment = {
   personal: {
     caricature: "gbastos-illustration@2x.png",
     name: "Guilherme Borges Bastos",
+    // how the assistant's AI answers refer to you (functions/src/core/prompt.ts)
+    firstName: "Guilherme",
     birth: "1993-06-19",
     email: "guilhermeborgesbastos@gmail.com",
     location: "Gouda, South Holland, Netherlands"
@@ -20,7 +22,13 @@ export const environment = {
     measurementId: "G-00VXD77WNG"
   },
   // reCAPTCHA Enterprise (Google Cloud Fraud Defense) score-based key used by Firebase App Check to
-  // protect the contact form (see DEPLOYMENT.md).
-  // Leave it empty to send messages without App Check.
-  recaptchaSiteKey: "6Le1N_0tAAAAACfacFRB183pWUFi2kjjYM9pA2hY"
+  // protect the contact form and the assistant's AI answers (see DEPLOYMENT.md).
+  // Leave it empty to send messages without App Check (AI answers then stay off).
+  recaptchaSiteKey: "6Le1N_0tAAAAACfacFRB183pWUFi2kjjYM9pA2hY",
+  // AI answers for questions the local CV assistant can't answer, through the askAssistant Cloud
+  // Function (see DEPLOYMENT.md, "AI answers (Firebase)"). Off until the function is deployed and evaluated.
+  assistantHosted: {
+    enabled: false,
+    functionsRegion: "europe-west4"
+  }
 };

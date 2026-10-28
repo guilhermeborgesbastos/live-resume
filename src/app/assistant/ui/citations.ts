@@ -12,10 +12,11 @@ export interface InternalLink {
 }
 
 /**
- * Router link to the cited record on the resume (relative to the locale's base href). Only
- * generated record identifiers go into the URL, never question or answer text.
+ * Router link to the cited record on the resume (relative to the locale's base href), or null
+ * for a note, which the page doesn't show. Only generated record identifiers go into the URL,
+ * never question or answer text.
  */
-export function citationLink(target: CitationTarget): InternalLink {
+export function citationLink(target: CitationTarget): InternalLink | null {
   switch (target.section) {
     case "about":
       return { commands: ["/"], fragment: "about", queryParams: null };
@@ -23,6 +24,8 @@ export function citationLink(target: CitationTarget): InternalLink {
       return { commands: ["/"], fragment: "experience", queryParams: { [EXPERIENCE_QUERY_PARAM]: target.experienceId } };
     case "posts":
       return { commands: ["/"], fragment: "posts", queryParams: { [POST_QUERY_PARAM]: target.postUrl } };
+    case "notes":
+      return null;
   }
 }
 

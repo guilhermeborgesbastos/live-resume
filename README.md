@@ -109,6 +109,8 @@ npx ng serve -o --host 0.0.0.0 --configuration en
 | --- | --- |
 | `npm run lint` | ESLint (flat config in `eslint.config.js`) with the angular-eslint rules for TypeScript and templates. |
 | `npm run validate:posts` | Checks `src/assets/data/posts.json` (see [Validating posts.json](docs/add-post-skill.md#validating-postsjson)). |
+| `npm run validate:context` | Checks the AI Assistant's notes in `src/assets/data/assistant-context.txt` (see [Notes for AI answers](docs/ai-assistant-data.md#notes-for-ai-answers-assistant-contexttxt)). |
+| `npm --prefix functions ci && npm --prefix functions test` | Installs and tests the Cloud Functions behind the AI answers (`functions/`); the model is stubbed, so no paid calls. |
 | `npm test -- --watch=false --browsers=ChromeHeadless` | Unit tests (Jasmine + Karma). |
 | `npm run build -- --configuration production` | Production build; must finish without warnings. |
 | `npm run build-locale` | Localized builds for both languages (`dist/en`, `dist/pt`). Missing translations fail the build. |
@@ -146,7 +148,9 @@ The workflow fails unless the tag equals `package.json`'s version. It runs the b
 
 ## 🤖 AI Assistant
 
-Visitors can ask questions about the CV from the floating **Ask my AI Assistant** button (shown with a robot icon) or the **AI Assistant** page (`/en/assistant`, `/pt/assistant`). Under the hood it is a rule-based assistant that runs in the browser: answers are assembled only from `src/assets/data/{about,experiences,posts}.json`, cite their source, and anything outside the supported questions gets a fallback pointing to the Contact section. There is no language model or external service, and the conversation is kept in memory for the current tab only. To change what it knows (jobs, education, certificates, languages, topics), see [Updating the AI Assistant's data](docs/ai-assistant-data.md).
+Visitors can ask questions about the CV from the floating **Ask my AI Assistant** button (shown with a robot icon) or the **AI Assistant** page (`/en/assistant`, `/pt/assistant`). Under the hood it is a rule-based assistant that runs in the browser: answers are assembled only from `src/assets/data/{about,experiences,posts}.json`, cite their source, and anything outside the supported questions gets a fallback pointing to the Contact section. The conversation is kept in memory for the current tab only. To change what it knows (jobs, education, certificates, languages, topics), see [Updating the AI Assistant's data](docs/ai-assistant-data.md).
+
+Optionally, questions the rule-based assistant can't answer can go to **AI answers**: a Firebase Cloud Function (`functions/`) asks Claude Haiku 5.5 on Vertex AI to write a short answer from the same JSON files and from notes in `src/assets/data/assistant-context.txt`, checks it against them, and returns it with its sources, labelled as AI-generated. It's behind App Check and daily, monthly and per-visitor limits, visitors can switch it off, and it stays off until `assistantHosted.enabled` is set in the environment files. Setup, limits and rollback are in [DEPLOYMENT.md](DEPLOYMENT.md#ai-answers-firebase).
 
 ## ✍️ Adding posts with Claude Code
 
@@ -163,6 +167,8 @@ The repository includes a [Claude Code](https://claude.com/claude-code) skill th
 ## 🔨 How to customize?
 
 In the [Wiki Doc.](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations) there is a specific page supporting you on how to apply customizations to the layout and more... [See page](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)
+
+Your personal details live in `personal` in `src/environments/environment.ts` and `environment.prod.ts`. `name` and `firstName` there are also how the AI Assistant's AI answers refer to you, so set both when you adapt this site.
 
 ## 🖋 Contribute
 

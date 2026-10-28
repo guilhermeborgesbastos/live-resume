@@ -35,7 +35,7 @@
     <app-assistant-conversation
       [pairs]="session.pairs()"
       [fallbackSuggestions]="fallbackSuggestions()"
-      [disabled]="!session.ready()"
+      [disabled]="!session.ready() || session.busy()"
       (asked)="ask($event)"
       (navigated)="navigated.emit()"></app-assistant-conversation>
   }
@@ -44,10 +44,25 @@
 <div class="footer">
   <app-assistant-composer
     [draft]="session.draft()"
-    [disabled]="!session.ready()"
+    [disabled]="!session.ready() || session.busy()"
     [error]="session.validationError()"
     (draftChange)="session.setDraft($event)"
     (submitted)="submit()"></app-assistant-composer>
+  @if (session.hostedAvailable) {
+    <div class="ai-notice">
+      <p i18n="assistant@@assistant.ai.notice">Most questions are answered right here in your browser. If I can’t answer one, it goes to Google Cloud in the EU, where Anthropic’s Claude model writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</p>
+      <details>
+        <summary i18n="assistant@@assistant.ai.howItWorks">How this works</summary>
+        <p i18n="assistant@@assistant.ai.howItWorks.sent">Only a question this assistant can’t answer is sent, with up to two of your previous questions and answers in this chat. A security check (Firebase App Check with Google reCAPTCHA) confirms the request comes from this website. To limit abuse, a code derived from your IP address that changes daily and can’t be reversed is kept for up to 48 hours.</p>
+        <p i18n="assistant@@assistant.ai.howItWorks.model">Claude, run by Google Cloud’s Vertex AI in the EU, answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. The answer is checked against the CV before you see it, and it lists its sources.</p>
+        <p i18n="assistant@@assistant.ai.howItWorks.storage">This website doesn’t store your questions or answers or write them to its logs; it keeps only anonymous counts. Your conversation stays in this tab.</p>
+      </details>
+      <label class="local-only">
+        <input type="checkbox" [checked]="session.localOnly()" (change)="setLocalOnly($event)">
+        <span i18n="assistant@@assistant.ai.localOnly">Answer only locally (don’t send questions)</span>
+      </label>
+    </div>
+  }
   <div class="session-info">
     <p class="session-note" i18n="assistant@@assistant.sessionNote">This conversation is kept only in this tab and this language. Refreshing the page, closing the tab or switching language starts a new one.</p>
     @if (session.pairs().length > 0) {

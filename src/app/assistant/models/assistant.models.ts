@@ -7,8 +7,11 @@
 export type Locale = "en" | "pt";
 export const ASSISTANT_LOCALES: readonly Locale[] = ["en", "pt"];
 
-/** The only files the assistant may use as knowledge (see docs/ai-assistant-data.md). */
-export type SourceFile = "about.json" | "experiences.json" | "posts.json";
+/**
+ * The only files the assistant may use as knowledge (see docs/ai-assistant-data.md). The local
+ * engine reads the JSON files; assistant-context.txt is read only by the hosted AI answers.
+ */
+export type SourceFile = "about.json" | "experiences.json" | "posts.json" | "assistant-context.txt";
 
 /** A plain-text value read from the JSON snapshot, with the JSON pointer it came from. */
 export interface SourcedText {
@@ -157,7 +160,9 @@ export interface KnowledgeSnapshot {
 export type CitationTarget =
   | { readonly section: "about" }
   | { readonly section: "experience"; readonly experienceId: number }
-  | { readonly section: "posts"; readonly postUrl: string };
+  | { readonly section: "posts"; readonly postUrl: string }
+  /** A note from assistant-context.txt: shown as a label, with nothing on the page to link to. */
+  | { readonly section: "notes"; readonly noteId: string };
 
 export interface SourceRef {
   readonly file: SourceFile;
@@ -258,3 +263,36 @@ export type AnswerResult =
   | { readonly kind: "unavailable" };
 
 export type QuestionError = "empty" | "too-long";
+
+/**
+ * A question the local engine couldn't answer, handed to the hosted AI answers (the askAssistant
+ * Cloud Function). Kept apart from AnswerResult: generated prose is never a TemplateLine, and its
+ * citations come from the evidence the model cited, not from template slots.
+ */
+export enum HostedAnswerKind {
+  Pending = "pending",
+  Generated = "generated",
+  /** Hosted answers are off, over a limit, or failed; the UI says so and offers Contact. */
+  Unavailable = "ai-unavailable",
+  /** The page's CV data differs from the function's (a deploy happened); the UI offers a reload. */
+  VersionMismatch = "version-mismatch"
+}
+
+export type HostedAnswer =
+  | { readonly kind: HostedAnswerKind.Pending }
+  | {
+      readonly kind: HostedAnswerKind.Generated;
+      /** Plain text, shown as text (never as HTML). */
+      readonly paragraphs: readonly string[];
+      readonly sources: readonly SourceRef[];
+      /** Part of the question isn't covered; the UI adds the fixed "not covered" line. */
+      readonly partial: boolean;
+      /** Whether a note from assistant-context.txt was cited (changes the AI label). */
+      readonly usesNotes: boolean;
+      readonly subject?: ConversationContext;
+    }
+  | { readonly kind: HostedAnswerKind.Unavailable }
+  | { readonly kind: HostedAnswerKind.VersionMismatch };
+
+/** What a conversation pair shows: a local engine result or a hosted answer. */
+export type PairAnswer = AnswerResult | HostedAnswer;

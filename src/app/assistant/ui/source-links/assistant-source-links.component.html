@@ -3,11 +3,15 @@
   <ul>
     @for (source of links(); track source.key) {
       <li>
-        <a class="citation"
-           [routerLink]="source.link.commands"
-           [fragment]="source.link.fragment"
-           [queryParams]="source.link.queryParams"
-           (click)="followed.emit()">{{ source.label }}</a>
+        @if (source.link; as link) {
+          <a class="citation"
+             [routerLink]="link.commands"
+             [fragment]="link.fragment"
+             [queryParams]="link.queryParams"
+             (click)="followed.emit()">{{ source.label }}</a>
+        } @else {
+          <span class="citation note">{{ source.label }}</span>
+        }
         @if (source.externalUrl) {
           <a class="external" [href]="source.externalUrl" target="_blank" rel="noopener noreferrer">
             <span i18n="assistant@@assistant.sources.external">Open link</span>

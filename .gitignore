@@ -9,6 +9,13 @@
 
 # dependencies
 /node_modules
+/functions/node_modules
+
+# Cloud Functions build output and Firebase emulator logs
+/functions/lib
+/firebase-debug*.log
+/firestore-debug.log
+/ui-debug.log
 
 # profiling files
 chrome-profiler-events*.json
@@ -59,3 +66,5 @@ live-resume.code-workspace
 /AI_ASSISTANT_IMPLEMENTATION_PLAN.md
 /AI_ASSISTANT_LLM_PLANS_COMPARISON.md
 /AI_ASSISTANT_LLM_INTERPRETER_PLAN.md
+/AI_ASSISTANT_LLM_FIREBASE_PLAN.md
+/AI_ASSISTANT_NEXT_STEPS.md

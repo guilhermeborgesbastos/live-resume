@@ -1,6 +1,7 @@
-import { Component, computed, input, output } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { Component, computed, inject, input, output } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { AnswerBlock, AnswerResult, ClarifyReason, SourceRef } from "../../models/assistant.models";
+import { AnswerBlock, ClarifyReason, HostedAnswerKind, PairAnswer, SourceRef } from "../../models/assistant.models";
 import { ConversationPair } from "../../state/assistant-session.service";
 import { AssistantSourceLinksComponent } from "../source-links/assistant-source-links.component";
 import { AssistantSuggestionsComponent } from "../suggestions/assistant-suggestions.component";
@@ -18,13 +19,17 @@ interface BlockView {
 interface PairView {
   readonly id: number;
   readonly question: string;
-  readonly kind: AnswerResult["kind"];
+  readonly kind: PairAnswer["kind"];
   readonly clarifyReason: ClarifyReason | null;
   /** "Did you mean" questions (clarify only). */
   readonly options: readonly string[];
   readonly blocks: readonly BlockView[];
   readonly sources: readonly SourceRef[];
   readonly followUps: readonly string[];
+  /** AI-generated paragraphs (generated only), shown as plain text. */
+  readonly paragraphs: readonly string[];
+  readonly partial: boolean;
+  readonly usesNotes: boolean;
 }
 
 function toBlockView(block: AnswerBlock): BlockView {
@@ -52,6 +57,8 @@ export class AssistantConversationComponent {
   readonly navigated = output<void>();
 
   readonly contactLink = CONTACT_LINK;
+  readonly Kind = HostedAnswerKind;
+  private readonly document = inject(DOCUMENT);
 
   readonly views = computed<PairView[]>(() => this.pairs().map(pair => {
     const answer = pair.answer;
@@ -60,10 +67,17 @@ export class AssistantConversationComponent {
       question: pair.question,
       kind: answer.kind,
       blocks: answer.kind === "answered" ? answer.blocks.map(toBlockView) : [],
-      sources: answer.kind === "answered" ? answer.sources : [],
+      sources: answer.kind === "answered" || answer.kind === HostedAnswerKind.Generated ? answer.sources : [],
       followUps: answer.kind === "answered" ? answer.followUps : [],
       clarifyReason: answer.kind === "clarify" ? answer.reason : null,
-      options: answer.kind === "clarify" ? answer.options : []
+      options: answer.kind === "clarify" ? answer.options : [],
+      paragraphs: answer.kind === HostedAnswerKind.Generated ? answer.paragraphs : [],
+      partial: answer.kind === HostedAnswerKind.Generated && answer.partial,
+      usesNotes: answer.kind === HostedAnswerKind.Generated && answer.usesNotes
     };
   }));
+
+  reload(): void {
+    this.document.location.reload();
+  }
 }

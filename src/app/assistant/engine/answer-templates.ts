@@ -14,6 +14,20 @@ export interface AnswerTemplates {
   readonly labels: {
     readonly about: string;
     experience(company: string): string;
+    /** A note from assistant-context.txt; `updated` is already formatted ("Oct 2026"). */
+    note(title: string, updated: string): string;
+  };
+  /** Wording of the CV snapshot sent to the hosted model (see knowledge/evidence-map.ts). */
+  readonly snapshot: {
+    readonly ongoing: string;
+    readonly technologies: string;
+    readonly highlights: string;
+    readonly hobbies: string;
+    readonly profiles: string;
+    readonly issued: string;
+    readonly expires: string;
+    readonly roles: string;
+    readonly updated: string;
   };
   readonly excerpts: {
     readonly about: string;
@@ -99,7 +113,19 @@ const EN: AnswerTemplates = {
   hobbyTitles: null,
   labels: {
     about: "About me",
-    experience: company => `Experience · ${company}`
+    experience: company => `Experience · ${company}`,
+    note: (title, updated) => `My notes · ${title} (${updated})`
+  },
+  snapshot: {
+    ongoing: "listed as ongoing",
+    technologies: "technologies",
+    highlights: "results",
+    hobbies: "Hobbies",
+    profiles: "Profiles",
+    issued: "issued",
+    expires: "expires",
+    roles: "roles",
+    updated: "updated"
   },
   excerpts: {
     about: "From the About section of my CV",
@@ -179,7 +205,19 @@ const PT: AnswerTemplates = {
   hobbyTitles: { Cycling: "Ciclismo", Gym: "Academia", Travel: "Viagens", Read: "Leitura" },
   labels: {
     about: "Sobre mim",
-    experience: company => `Experiência · ${company}`
+    experience: company => `Experiência · ${company}`,
+    note: (title, updated) => `Minhas anotações · ${title} (${updated})`
+  },
+  snapshot: {
+    ongoing: "listado como atual",
+    technologies: "tecnologias",
+    highlights: "resultados",
+    hobbies: "Hobbies",
+    profiles: "Perfis",
+    issued: "emitido em",
+    expires: "expira em",
+    roles: "cargos",
+    updated: "atualizado em"
   },
   excerpts: {
     about: "Da seção Sobre mim do meu currículo",
