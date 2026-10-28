@@ -30,3 +30,113 @@
 # title.pt: Experiência com Java
 # en: I have worked with Java since <year>, <what you used it for>.
 # pt: Trabalho com Java desde <ano>, <para que o usou>.
+
+# Editorial review, October 2026: the notes below connect facts already published in
+# about.json, experiences.json and posts.json. They do not add unverified achievements.
+# Research used to choose topics: CoderPad State of Tech Hiring 2026; LinkedIn U.S.
+# Software Engineer Talent Landscape, February 2026; Linux Foundation 2026 State of
+# Tech Talent Report; DORA platform engineering guidance based on its 2025 research.
+# These sources inform topic selection, not claims about my personal experience.
+
+[system-design-examples]
+updated: 2026-10
+related: exp.4 exp.6
+title.en: System design across startup and enterprise
+title.pt: Design de sistemas em startup e grande empresa
+en: My system design experience spans a travel startup and enterprise telecom. At SkyDreamer I designed the backend architecture, REST APIs and data storage for a mobile MVP. At Swisscom I combine architecture work with full-stack delivery, deployment and monitoring, with scalability, maintainability and cost as explicit goals.
+pt: Minha experiência em design de sistemas abrange uma startup de viagens e telecom empresarial. Na SkyDreamer, projetei a arquitetura backend, APIs REST e armazenamento de dados de um MVP mobile. Na Swisscom, combino arquitetura com entrega full-stack, deploy e monitoramento, com escalabilidade, manutenção e custo como objetivos explícitos.
+
+[delivery-ownership]
+updated: 2026-10
+related: exp.4 exp.6
+title.en: Ownership from design to production
+title.pt: Responsabilidade do design à produção
+en: I work across application code and the systems that run it. At Swisscom my responsibilities connect technical design, implementation, CI/CD, AWS infrastructure, container deployments and observability. At SkyDreamer I led development from backend architecture to the mobile interface and MVP launch.
+pt: Atuo no código da aplicação e nos sistemas que a executam. Na Swisscom, minhas responsabilidades conectam design técnico, implementação, CI/CD, infraestrutura AWS, deploys em containers e observabilidade. Na SkyDreamer, liderei o desenvolvimento da arquitetura backend à interface mobile e ao lançamento do MVP.
+
+[agentic-work-examples]
+updated: 2026-10
+related: exp.6
+title.en: Practical AI agents and reusable skills
+title.pt: Agentes de IA e skills na prática
+en: I extended the Live Resume itself and other private applications using AI agents. As documented in my April 2026 post, I also used agents to collect and organize vocabulary for an open-source Dutch A2 flashcard game in hours instead of days. At Swisscom's ETS Hackathon, my team built AI skills for repetitive code changes. These examples span application development, data collection and code automation.
+pt: Extendi o próprio Live Resume e outras aplicações privadas usando agentes de IA. Conforme meu artigo de abril de 2026, também usei agentes para coletar e organizar vocabulário de um jogo open source de flashcards de holandês A2 em horas, em vez de dias. No ETS Hackathon da Swisscom, meu time criou skills de IA para mudanças repetitivas no código. Esses exemplos abrangem desenvolvimento de aplicações, coleta de dados e automação de código.
+
+[ai-learning-scope]
+updated: 2026-10
+title.en: AI learning and experience scope
+title.pt: Aprendizado e escopo da experiência em IA
+en: In May 2026 I completed introductory courses on Claude Code, agent skills, subagents, Claude Cowork, and AI capabilities and limitations. My published AI examples concern software automation and vocabulary collection. Those examples and courses do not establish experience training models or operating production ML platforms.
+pt: Em maio de 2026, concluí cursos introdutórios sobre Claude Code, agent skills, subagentes, Claude Cowork e capacidades e limitações da IA. Meus exemplos publicados de IA envolvem automação de software e coleta de vocabulário. Esses exemplos e cursos não comprovam experiência em treinar modelos ou operar plataformas de ML em produção.
+
+[developer-enablement]
+updated: 2026-10
+related: exp.3 exp.6
+title.en: Reusable tooling and developer experience
+title.pt: Ferramentas reutilizáveis e experiência do dev
+en: My work relevant to platform engineering includes reusable DevOps patterns adopted by other Swisscom teams, automated CI/CD and container deployments. Earlier, at Deevo Studio, I introduced reusable modules and internal frameworks to speed up delivery and improve maintainability. The common thread is making good engineering practices easier for other developers to reuse.
+pt: Meu trabalho relevante para engenharia de plataforma inclui padrões DevOps reutilizáveis adotados por outros times da Swisscom, CI/CD automatizado e deploys em containers. Antes, na Deevo Studio, introduzi módulos reutilizáveis e frameworks internos para acelerar entregas e facilitar a manutenção. O ponto em comum é facilitar o reuso de boas práticas por outros desenvolvedores.
+
+[production-reliability]
+updated: 2026-10
+related: exp.6
+title.en: Reliability and production feedback
+title.pt: Confiabilidade e feedback de produção
+en: At Swisscom I built observability with Prometheus, Grafana and ELK alongside deployment automation. This work helped detect problems earlier and reduce incident response times. It connects my development work to production reliability; my published profile does not specify uptime targets, on-call duties or incident reduction percentages.
+pt: Na Swisscom, montei observabilidade com Prometheus, Grafana e ELK junto à automação de deploy. Esse trabalho ajudou a detectar problemas antes e reduzir o tempo de resposta a incidentes. Ele conecta meu desenvolvimento à confiabilidade em produção; meu perfil publicado não especifica metas de disponibilidade, plantões ou percentuais de redução de incidentes.
+
+[data-design-performance]
+updated: 2026-10
+related: exp.3 exp.5
+title.en: Data design and performance troubleshooting
+title.pt: Design de dados e análise de performance
+en: My database work includes SQL and NoSQL applications at Deevo Studio and smart-meter analytics at QAT Global. At QAT I tuned MongoDB queries and batch processing as data volumes grew, and built ingestion and visualization components. My MongoDB performance and diagnostics courses date from 2019.
+pt: Meu trabalho com bancos inclui aplicações SQL e NoSQL na Deevo Studio e análise de medidores inteligentes na QAT Global. Na QAT, ajustei consultas MongoDB e processamento em lote conforme os dados cresciam, além de criar componentes de ingestão e visualização. Meus cursos de performance e diagnóstico de MongoDB são de 2019.
+
+[integration-experience]
+updated: 2026-10
+related: exp.2 exp.3 exp.4
+title.en: APIs and business system integration
+title.pt: APIs e integração de sistemas de negócio
+en: I have connected applications to business systems in several domains: ERP and payment gateway integrations for e-commerce at E-tática, reusable APIs and ERP integrations at Deevo Studio, and REST APIs for a travel app at SkyDreamer. My integration experience covers both customer-facing products and the operational systems behind them.
+pt: Conectei aplicações a sistemas de negócio em vários setores: integrações com ERP e gateways de pagamento no e-commerce da E-tática, APIs reutilizáveis e integrações com ERP na Deevo Studio, e APIs REST para viagens na SkyDreamer. Minha experiência abrange produtos para clientes e os sistemas operacionais que os sustentam.
+
+[testing-background]
+updated: 2026-10
+related: exp.4 exp.5 exp.6
+title.en: Testing across the application stack
+title.pt: Testes nas diferentes camadas da aplicação
+en: My testing background includes unit tests and TDD at SkyDreamer, unit and integration tests at QAT Global, and JUnit, Karma, Jasmine and Selenium at Swisscom. This spans backend and frontend work alongside CI/CD. My published profile does not specify coverage percentages or which tests gate each deployment.
+pt: Minha experiência em testes inclui testes unitários e TDD na SkyDreamer, testes unitários e de integração na QAT Global, e JUnit, Karma, Jasmine e Selenium na Swisscom. Isso abrange backend e frontend junto ao CI/CD. Meu perfil publicado não especifica percentuais de cobertura nem quais testes condicionam cada deploy.
+
+[security-background]
+updated: 2026-10
+related: exp.2 exp.6
+title.en: Security experience and dated recognition
+title.pt: Experiência em segurança e reconhecimento
+en: As of October 2026, I am responsible for security across 13 enterprise applications, covering security patching, threat modeling, penetration testing and legal compliance. At E-tática I helped protect e-commerce systems against DDoS attacks. I received the Swisscom Security Champion 2026/27 badge in July 2026, with expiry recorded as July 2027.
+pt: Em outubro de 2026, sou responsável pela segurança de 13 aplicações empresariais, abrangendo aplicação de patches de segurança, modelagem de ameaças, testes de invasão e conformidade legal. Na E-tática, ajudei a proteger sistemas de e-commerce contra ataques DDoS. Recebi o badge Swisscom Security Champion 2026/27 em julho de 2026, com expiração registrada para julho de 2027.
+
+[technical-leadership-scope]
+updated: 2026-10
+related: exp.4 exp.5 exp.6
+title.en: Hands-on leadership and technical influence
+title.pt: Liderança prática e influência técnica
+en: My leadership combines hands-on delivery with helping other engineers. At SkyDreamer I led a small remote team and prioritized the roadmap; at QAT Global I mentored junior developers and set shared coding practices.
+pt: Minha liderança combina entrega prática e apoio a outros engenheiros. Na SkyDreamer, liderei um pequeno time remoto e priorizei o roadmap; na QAT Global, orientei desenvolvedores juniores e defini práticas de código compartilhadas.
+
+[tech-talks-knowledge-sharing]
+updated: 2026-10
+related: exp.6
+title.en: Tech talks and knowledge sharing
+title.pt: Palestras e compartilhamento de conhecimento
+en: I have given several tech talks, including talks at Swisscom. One covered build metrics and trends and reached more than 265 people, in person and online, across Rotterdam, Riga and Switzerland. Giving technical presentations is part of how I share engineering knowledge beyond my immediate team.
+pt: Apresentei várias palestras técnicas, incluindo palestras na Swisscom. Uma delas abordou métricas e tendências de build e alcançou mais de 265 pessoas, presencialmente e online, em Roterdã, Riga e na Suíça. Apresentar conteúdo técnico é uma das formas como compartilho conhecimento de engenharia além do meu próprio time.
+
+[product-business-impact]
+updated: 2026-10
+related: exp.1 exp.4
+title.en: Product delivery and business outcomes
+title.pt: Entrega de produto e resultados de negócio
+en: My work connects technical delivery to business outcomes. At Fácil Tecnologias I built a subscription exam simulator that brought in thousands of new subscriptions a month. At SkyDreamer I helped launch a travel MVP that reached over 5,000 users in its first month while leading development and roadmap priorities.
+pt: Meu trabalho conecta entrega técnica e resultados de negócio. Na Fácil Tecnologias, criei um simulador de provas por assinatura que trouxe milhares de novas assinaturas por mês. Na SkyDreamer, ajudei a lançar um MVP de viagens que alcançou mais de 5.000 usuários no primeiro mês, liderando o desenvolvimento e as prioridades do roadmap.
