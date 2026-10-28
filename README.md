@@ -168,6 +168,8 @@ The repository includes a [Claude Code](https://claude.com/claude-code) skill th
 
 In the [Wiki Doc.](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations) there is a specific page supporting you on how to apply customizations to the layout and more... [See page](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)
 
+Your personal details live in `personal` in `src/environments/environment.ts` and `environment.prod.ts`. `name` and `firstName` there are also how the AI Assistant's AI answers refer to you, so set both when you adapt this site.
+
 ## 🖋 Contribute
 
 Feel free to add new features, language supports, fix bugs, or improve the docs. Any kind of help is appreciated! If you make any kind of improvements, please, send them back as a **Pull Request**. Let's keep making it better and up-to-date.
