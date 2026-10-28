@@ -631,6 +631,71 @@
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
+      <trans-unit id="assistant.ai.pending" datatype="html">
+        <source>Thinking about your question…</source>
+        <target>Pensando na sua pergunta…</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.unavailable" datatype="html">
+        <source>AI answers aren’t available right now. You can try a suggested question or contact me.</source>
+        <target>As respostas por IA não estão disponíveis agora. Você pode tentar uma pergunta sugerida ou entrar em contato comigo.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.versionMismatch" datatype="html">
+        <source>This page has an older copy of my CV. Reload it to ask this question again.</source>
+        <target>Esta página tem uma cópia antiga do meu currículo. Recarregue a página para fazer esta pergunta de novo.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.partial" datatype="html">
+        <source>My CV doesn’t cover the rest of your question. You can ask me directly.</source>
+        <target>Meu currículo não cobre o restante da sua pergunta. Você pode me perguntar diretamente.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.label" datatype="html">
+        <source>AI-generated from my CV. It can contain mistakes, so check the sources.</source>
+        <target>Gerado por IA a partir do meu currículo. Pode conter erros, então confira as fontes.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.labelNotes" datatype="html">
+        <source>AI-generated from my CV and my notes. It can contain mistakes, so check the sources.</source>
+        <target>Gerado por IA a partir do meu currículo e das minhas anotações. Pode conter erros, então confira as fontes.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.reload" datatype="html">
+        <source>Reload the page</source>
+        <target>Recarregar a página</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.notice" datatype="html">
+        <source>Most questions are answered right here in your browser. If I can’t answer one, it goes to Google Cloud in the EU, where Anthropic’s Claude model writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</source>
+        <target>A maioria das perguntas é respondida aqui mesmo, no seu navegador. Se eu não conseguir responder, a pergunta vai para o Google Cloud na UE, onde o modelo Claude, da Anthropic, escreve uma resposta com base no meu currículo. Respostas de IA podem conter erros, então confira as fontes. Não inclua informações pessoais.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.howItWorks" datatype="html">
+        <source>How this works</source>
+        <target>Como funciona</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.howItWorks.sent" datatype="html">
+        <source>Only a question this assistant can’t answer is sent, with up to two of your previous questions and answers in this chat. A security check (Firebase App Check with Google reCAPTCHA) confirms the request comes from this website. To limit abuse, a code derived from your IP address that changes daily and can’t be reversed is kept for up to 48 hours.</source>
+        <target>Só é enviada a pergunta que este assistente não consegue responder, com até duas das suas perguntas e respostas anteriores nesta conversa. Uma verificação de segurança (Firebase App Check com Google reCAPTCHA) confirma que a solicitação vem deste site. Para limitar abusos, um código derivado do seu endereço IP, que muda todo dia e não pode ser revertido, fica guardado por até 48 horas.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.howItWorks.model" datatype="html">
+        <source>Claude, run by Google Cloud’s Vertex AI in the EU, answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. The answer is checked against the CV before you see it, and it lists its sources.</source>
+        <target>O Claude, executado pela Vertex AI do Google Cloud na UE, responde apenas com base no meu currículo e em algumas anotações que escrevi para este assistente, publicadas neste site. A resposta é conferida com o currículo antes de aparecer para você e mostra as fontes.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.howItWorks.storage" datatype="html">
+        <source>This website doesn’t store your questions or answers or write them to its logs; it keeps only anonymous counts. Your conversation stays in this tab.</source>
+        <target>Este site não guarda suas perguntas nem as respostas, nem as grava nos registros; só mantém contagens anônimas. A conversa fica nesta aba.</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
+      <trans-unit id="assistant.ai.localOnly" datatype="html">
+        <source>Answer only locally (don’t send questions)</source>
+        <target>Responder só localmente (não enviar perguntas)</target>
+        <note priority="1" from="description">assistant</note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

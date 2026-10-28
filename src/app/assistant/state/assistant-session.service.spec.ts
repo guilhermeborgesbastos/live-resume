@@ -6,6 +6,8 @@ import { DataService } from "../../core/data.service";
 import { AssistantKnowledgeService } from "../knowledge/assistant-knowledge.service";
 import { realCv } from "../testing/assistant-fixtures";
 import { AssistantSessionService, MAX_CONVERSATION_PAIRS, siteLocale } from "./assistant-session.service";
+import { HostedAnswerService } from "../api/hosted-answer.service";
+import { AskAssistantResult } from "../models/hosted-answer.models";
 
 const FILES = ["about", "experiences", "posts"] as const;
 
@@ -150,6 +152,89 @@ describe("CV assistant knowledge and session", () => {
       expect(session.trimmed()).toBeFalse();
       expect(session.ready()).toBeTrue();
       expect(session.suggestions().length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("session with hosted answers", () => {
+    let session: AssistantSessionService;
+    let replies: ((result: AskAssistantResult) => void)[];
+    let hosted: { enabled: boolean; prepare: jasmine.Spy; ask: jasmine.Spy };
+
+    beforeEach(() => {
+      replies = [];
+      hosted = {
+        enabled: true,
+        prepare: jasmine.createSpy("prepare"),
+        ask: jasmine.createSpy("ask").and.callFake(() => new Promise<AskAssistantResult>(resolve => replies.push(resolve)))
+      };
+      TestBed.configureTestingModule({
+        providers: [DataService, provideHttpClient(), provideHttpClientTesting(), { provide: LOCALE_ID, useValue: "en" },
+          { provide: HostedAnswerService, useValue: hosted }]
+      });
+      http = TestBed.inject(HttpTestingController);
+      session = TestBed.inject(AssistantSessionService);
+      session.ensureLoaded();
+      respond();
+    });
+
+    /** Lets every pending promise step run (the reply passes through a short then/catch chain). */
+    const settled = () => new Promise(resolve => setTimeout(resolve));
+    const generated = (text: string, extra: Partial<AskAssistantResult> = {}): AskAssistantResult =>
+      ({ kind: "generated", knowledgeVersion: "v1-00000000-1", paragraphs: [{ text, evidence: ["exp.6"] }], partial: false, notes: [], ...extra } as AskAssistantResult);
+
+    it("answers supported questions locally, without a request", () => {
+      session.ask("Where have you used Java?");
+      expect(session.pairs()[0].answer.kind).toBe("answered");
+      expect(hosted.ask).not.toHaveBeenCalled();
+      expect(hosted.prepare).toHaveBeenCalled();
+    });
+
+    it("sends an unrecognized question once, waits, then shows the AI answer", async () => {
+      session.ask("What salary are you looking for?");
+      expect(session.pairs()[0].answer).toEqual({ kind: "pending" });
+      expect(session.busy()).toBeTrue();
+      expect(session.ask("What are your hobbies?")).toBeFalse();
+      expect(hosted.ask).toHaveBeenCalledTimes(1);
+      const request = hosted.ask.calls.mostRecent().args[0];
+      expect(request).toEqual({ question: "What salary are you looking for?", locale: "en", knowledgeVersion: jasmine.stringMatching(/^v1-/) });
+
+      replies[0](generated("I work at Swisscom AG.", { subject: { experienceId: 6 } }));
+      await settled();
+      const answer = session.pairs()[0].answer;
+      expect(answer.kind).toBe("generated");
+      expect(answer.kind === "generated" && answer.sources.map(s => s.recordKey)).toEqual(["6"]);
+      expect(session.busy()).toBeFalse();
+    });
+
+    it("sends earlier answers as history and the latest subject as context", async () => {
+      session.ask("What is your current role?");
+      session.ask("What salary are you looking for?");
+      const request = hosted.ask.calls.mostRecent().args[0];
+      expect(request.history).toEqual([{ question: "What is your current role?", answer: jasmine.any(String) }]);
+      expect(request.context).toEqual({ experienceId: jasmine.any(Number) });
+    });
+
+    it("never sends when the visitor chose local-only", () => {
+      session.setLocalOnly(true);
+      session.ask("What salary are you looking for?");
+      expect(session.pairs()[0].answer).toEqual({ kind: "fallback", reason: "unrecognized" });
+      expect(hosted.ask).not.toHaveBeenCalled();
+    });
+
+    it("drops a reply that arrives after the conversation was cleared", async () => {
+      session.ask("What salary are you looking for?");
+      session.clear();
+      replies[0](generated("Late."));
+      await settled();
+      expect(session.pairs()).toEqual([]);
+      expect(session.busy()).toBeFalse();
+    });
+
+    it("shows a failed request as unavailable, not as missing CV knowledge", async () => {
+      hosted.ask.and.returnValue(Promise.reject(new Error("network")));
+      session.ask("What salary are you looking for?");
+      await settled();
+      expect(session.pairs()[0].answer).toEqual({ kind: "ai-unavailable" });
     });
   });
 

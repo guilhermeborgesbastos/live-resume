@@ -263,3 +263,29 @@ export type AnswerResult =
   | { readonly kind: "unavailable" };
 
 export type QuestionError = "empty" | "too-long";
+
+/**
+ * A question the local engine couldn't answer, handed to the hosted AI answers (the askAssistant
+ * Cloud Function). Kept apart from AnswerResult: generated prose is never a TemplateLine, and its
+ * citations come from the evidence the model cited, not from template slots.
+ */
+export type HostedAnswer =
+  | { readonly kind: "pending" }
+  | {
+      readonly kind: "generated";
+      /** Plain text, shown as text (never as HTML). */
+      readonly paragraphs: readonly string[];
+      readonly sources: readonly SourceRef[];
+      /** Part of the question isn't covered; the UI adds the fixed "not covered" line. */
+      readonly partial: boolean;
+      /** Whether a note from assistant-context.txt was cited (changes the AI label). */
+      readonly usesNotes: boolean;
+      readonly subject?: ConversationContext;
+    }
+  /** Hosted answers are off, over a limit, or failed; the UI says so and offers Contact. */
+  | { readonly kind: "ai-unavailable" }
+  /** The page's CV data differs from the function's (a deploy happened); the UI offers a reload. */
+  | { readonly kind: "version-mismatch" };
+
+/** What a conversation pair shows: a local engine result or a hosted answer. */
+export type PairAnswer = AnswerResult | HostedAnswer;

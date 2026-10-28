@@ -43,9 +43,13 @@ export class AssistantChatComponent implements OnInit {
     const answer = pairs[pairs.length - 1]?.answer;
     switch (answer?.kind) {
       case "answered": return answerPlainText(answer.blocks);
+      case "generated": return [...answer.paragraphs, ...(answer.partial ? [ASSISTANT_COPY.ai.partial] : [])].join("\n");
       case "clarify": return [ASSISTANT_COPY.clarify[answer.reason], ...answer.options].join("\n");
       case "fallback": return ASSISTANT_COPY.fallback;
       case "unavailable": return ASSISTANT_COPY.unavailable;
+      case "pending": return ASSISTANT_COPY.ai.pending;
+      case "ai-unavailable": return ASSISTANT_COPY.ai.unavailable;
+      case "version-mismatch": return ASSISTANT_COPY.ai.versionMismatch;
       default: return "";
     }
   });
@@ -102,5 +106,9 @@ export class AssistantChatComponent implements OnInit {
   clear(): void {
     this.session.clear();
     this.focusComposer();
+  }
+
+  setLocalOnly(event: Event): void {
+    this.session.setLocalOnly((event.target as HTMLInputElement).checked);
   }
 }

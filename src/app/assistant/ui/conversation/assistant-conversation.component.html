@@ -72,6 +72,45 @@
               i18n-heading="assistant@@assistant.fallback.suggestions" heading="Questions I can answer"
               [questions]="fallbackSuggestions()" [disabled]="disabled()" (picked)="asked.emit($event)"></app-assistant-suggestions>
           }
+        } @else if (pair.kind === "generated") {
+          @for (paragraph of pair.paragraphs; track $index) {
+            <p class="line generated">{{ paragraph }}</p>
+          }
+          @if (pair.partial) {
+            <p class="line partial" i18n="assistant@@assistant.ai.partial">My CV doesn’t cover the rest of your question. You can ask me directly.</p>
+          }
+          <p class="ai-label">
+            @if (pair.usesNotes) {
+              <span i18n="assistant@@assistant.ai.labelNotes">AI-generated from my CV and my notes. It can contain mistakes, so check the sources.</span>
+            } @else {
+              <span i18n="assistant@@assistant.ai.label">AI-generated from my CV. It can contain mistakes, so check the sources.</span>
+            }
+          </p>
+          <app-assistant-source-links [sources]="pair.sources" (followed)="navigated.emit()"></app-assistant-source-links>
+          @if (pair.partial) {
+            <a class="contact"
+               [routerLink]="contactLink.commands"
+               [fragment]="contactLink.fragment"
+               (click)="navigated.emit()"
+               i18n="assistant@@assistant.contact">Contact Guilherme</a>
+          }
+        } @else if (pair.kind === "pending") {
+          <p class="line pending" role="status" i18n="assistant@@assistant.ai.pending">Thinking about your question…</p>
+        } @else if (pair.kind === "ai-unavailable") {
+          <p class="line fallback" i18n="assistant@@assistant.ai.unavailable">AI answers aren’t available right now. You can try a suggested question or contact me.</p>
+          <a class="contact"
+             [routerLink]="contactLink.commands"
+             [fragment]="contactLink.fragment"
+             (click)="navigated.emit()"
+             i18n="assistant@@assistant.contact">Contact Guilherme</a>
+          @if (last && fallbackSuggestions().length > 0) {
+            <app-assistant-suggestions class="follow-ups"
+              i18n-heading="assistant@@assistant.fallback.suggestions" heading="Questions I can answer"
+              [questions]="fallbackSuggestions()" [disabled]="disabled()" (picked)="asked.emit($event)"></app-assistant-suggestions>
+          }
+        } @else if (pair.kind === "version-mismatch") {
+          <p class="line fallback" i18n="assistant@@assistant.ai.versionMismatch">This page has an older copy of my CV. Reload it to ask this question again.</p>
+          <button type="button" class="reload" (click)="reload()" i18n="assistant@@assistant.ai.reload">Reload the page</button>
         } @else {
           <p class="line" i18n="assistant@@assistant.unavailable">The CV information could not be loaded. Please try again or contact me directly.</p>
         }

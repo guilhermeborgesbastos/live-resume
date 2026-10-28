@@ -2,12 +2,14 @@ import { Injectable, inject, signal } from "@angular/core";
 import { forkJoin, Subscription } from "rxjs";
 import { DataService } from "../../core/data.service";
 import { KnowledgeSnapshot } from "../models/assistant.models";
+import { knowledgeVersion } from "./evidence-map";
 import { adaptKnowledge } from "./knowledge-adapter";
 
 export type KnowledgeState =
   | { readonly status: "idle" }
   | { readonly status: "loading" }
-  | { readonly status: "ready"; readonly snapshot: KnowledgeSnapshot }
+  /** `version` identifies the loaded JSON for hosted answers (see evidence-map.ts). */
+  | { readonly status: "ready"; readonly snapshot: KnowledgeSnapshot; readonly version: string }
   | { readonly status: "error" };
 
 /**
@@ -37,7 +39,7 @@ export class AssistantKnowledgeService {
     }).subscribe({
       next: raw => {
         try {
-          this._state.set({ status: "ready", snapshot: adaptKnowledge(raw) });
+          this._state.set({ status: "ready", snapshot: adaptKnowledge(raw), version: knowledgeVersion(raw) });
         } catch (error) {
           console.warn("CV assistant data rejected:", error);
           this._state.set({ status: "error" });
