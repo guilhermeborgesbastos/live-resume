@@ -289,13 +289,22 @@ Do these in order. Nothing costs money until the last steps turn the feature on.
 
 1. **Blaze plan.** Cloud Functions, Vertex AI and Secret Manager need the pay-as-you-go plan
    (Firebase console → Usage and billing).
-2. **Firestore rules.** The function writes `assistantUsage`, `assistantRate` and
-   `assistantConfig` with the Admin SDK, which bypasses the rules. Visitors must not reach them:
-   check in Firestore → Rules that no rule allows these paths (Firestore denies anything no rule
-   allows). The rules aren't in the repository yet. Before you ever run
-   `firebase deploy --only firestore:rules`, copy the console rules into a `firestore.rules`
-   file first, or the deploy replaces them, including the `contacts` rules the contact form
-   relies on.
+2. **Firestore rules.** The rules live in `firestore.rules` (wired up in `firebase.json`). They
+   allow one thing: the contact form creating a message in `contacts` with exactly its four
+   fields. Everything else is denied, including `assistantUsage`, `assistantRate` and
+   `assistantConfig`, which the functions write through the Admin SDK (not bound by the rules).
+   The rules the project had before (`allow write: if true` on every document) would have let
+   any visitor reset the assistant's limits or flip its kill switch, so publish these before
+   turning AI answers on:
+
+   ```bash
+   npm run test:rules                                      # emulator check: 10 allowed/denied cases
+   firebase deploy --only firestore:rules --project live-resume-a575a
+   ```
+
+   Then send yourself a message through the live contact form to confirm it still arrives. The
+   console's Rules tab keeps the earlier versions if you ever need to roll back. From now on,
+   change the rules in the file, not in the console: a deploy replaces whatever the console holds.
 3. **TTL for the rate-limit keys.** Firestore → TTL policies → collection group `assistantRate`,
    field `expireAt`. Firestore then deletes each key about 48 hours after it was written.
 4. **Vertex AI and the model.** Enable the Vertex AI API, then open Model Garden, find

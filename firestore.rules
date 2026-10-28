@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// Security rules for the default Firestore database of live-resume-a575a.
+// Deploy with `firebase deploy --only firestore:rules`; this file replaces the rules in the console.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // The contact form (src/app/contact/contact.service.ts): visitors may only add a message,
+    // with exactly the form's fields, and never read, change or delete one.
+    match /contacts/{contactId} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'email', 'message', 'date'])
+        && request.resource.data.name is string && request.resource.data.name.size() <= 200
+        && request.resource.data.email is string && request.resource.data.email.size() <= 320
+        && request.resource.data.message is string && request.resource.data.message.size() <= 10000
+        && request.resource.data.date is timestamp;
+    }
+
+    // Everything else is denied. That includes assistantConfig (the AI answers' kill switch),
+    // assistantUsage and assistantRate (their limits and spend), which only the Cloud Functions
+    // write, through the Admin SDK, which these rules don't apply to.
+  }
+}
