@@ -269,6 +269,115 @@ Do the steps in this order. Enforcing before the site key is deployed rejects ev
 5. Click **Enforce** for Cloud Firestore. From then on, writes without a valid App Check token
    fail, and the form shows its error message. **Unenforce** turns it off again at once.
 
+## AI answers (Firebase)
+
+The CV assistant answers the questions it recognizes in the browser. The ones it can't answer
+can go to the `askAssistant` Cloud Function, which asks Claude Haiku 5.5 on Vertex AI to write a
+short answer from the CV and the notes in `src/assets/data/assistant-context.txt`, checks it,
+and returns it with its sources. Everything runs in the Firebase project `live-resume-a575a`;
+AWS only serves the static site. The design and its reasons are in
+`AI_ASSISTANT_LLM_FIREBASE_PLAN.md`.
+
+Two switches keep it off until you turn it on: `assistantHosted.enabled` in
+`src/environments/environment*.ts` (the site sends nothing while it's `false`) and the Firestore
+document `assistantConfig/runtime` (the function answers "unavailable" unless `enabled` is
+`true`; a missing document counts as off).
+
+### One-time setup
+
+Do these in order. Nothing costs money until the last steps turn the feature on.
+
+1. **Blaze plan.** Cloud Functions, Vertex AI and Secret Manager need the pay-as-you-go plan
+   (Firebase console → Usage and billing).
+2. **Firestore rules.** The function writes `assistantUsage`, `assistantRate` and
+   `assistantConfig` with the Admin SDK, which bypasses the rules. Visitors must not reach them:
+   check in Firestore → Rules that no rule allows these paths (Firestore denies anything no rule
+   allows). The rules aren't in the repository yet. Before you ever run
+   `firebase deploy --only firestore:rules`, copy the console rules into a `firestore.rules`
+   file first, or the deploy replaces them, including the `contacts` rules the contact form
+   relies on.
+3. **TTL for the rate-limit keys.** Firestore → TTL policies → collection group `assistantRate`,
+   field `expireAt`. Firestore then deletes each key about 48 hours after it was written.
+4. **Vertex AI and the model.** Enable the Vertex AI API, then open Model Garden, find
+   **Claude Haiku 5.5**, accept the terms and enable it. Check that it's offered on the `eu`
+   multi-region (the function's default, `VERTEX_REGION=eu`); if it isn't, set
+   `VERTEX_REGION=global` at deploy and change the "in the EU" sentences in the notice. Check
+   the default quota and record the `eu` price (the cost estimate assumes $0.11 / $0.55 per
+   million input / output tokens).
+5. **Service account.** The function calls Vertex AI and Firestore as its runtime service
+   account. Create a dedicated one (for example `assistant-fn@live-resume-a575a.iam.gserviceaccount.com`)
+   with only **Vertex AI User** and **Cloud Datastore User**, and set
+   `ASSISTANT_SERVICE_ACCOUNT` to its e-mail (or `assistant-fn@`) at deploy. Left at
+   `default`, the function runs as the project's default compute service account, which then
+   also needs **Vertex AI User**.
+6. **Rate-limit salt.** `firebase functions:secrets:set RATE_LIMIT_SALT` and paste a random
+   value (`openssl rand -hex 32`). The function hashes visitor IPs with it, so keep it secret.
+7. **Budget backstop.** Billing → Budgets & alerts: create a budget for the project (for
+   example $10/month) with alerts at 50%, 90% and 100%, and connect it to a new Pub/Sub topic
+   `assistant-budget`. When the actual cost reaches the budget, `onBudgetAlert` sets
+   `assistantConfig/runtime.enabled` to `false`. Billing data arrives hours late, so this is a
+   backstop; the per-call limits below are what keep spending bounded.
+8. **Deploy the functions.** Install the Firebase CLI (`npm install -g firebase-tools`), run
+   `firebase login`, then `npm --prefix functions run deploy`. The first deploy asks for the
+   parameters below and stores your answers in `functions/.env.live-resume-a575a`.
+9. **Watch App Check.** App Check → APIs → Cloud Functions shows verified and unverified
+   calls. The function already enforces App Check in code (`enforceAppCheck`,
+   `consumeAppCheckToken`); there's nothing to click.
+
+### Turning it on
+
+1. Run the evaluation (deliverable H6 in the plan) against the deployed function with the
+   switch on only for that run, and check the release gate.
+2. In Firestore, create `assistantConfig/runtime` with `enabled: true` (boolean).
+3. Set `assistantHosted.enabled: true` in `environment.prod.ts` and `environment.ts`, run the
+   browser suite, and deploy the site with `./deploy.sh`.
+4. Ask a question the local assistant can't answer, in a **normal** browser window: App Check
+   always fails in headless and incognito browsers, so a test there shows "AI answers aren't
+   available right now".
+
+### Limits and parameters
+
+Set at deploy time (`functions/.env.live-resume-a575a`, or the prompts on first deploy):
+
+| Parameter | Default | Meaning |
+| --- | --- | --- |
+| `DAILY_CALL_LIMIT` | 150 | Model calls per UTC day, for everyone |
+| `PER_CLIENT_PER_MINUTE` / `PER_CLIENT_PER_DAY` | 3 / 20 | Per visitor (per daily IP key) |
+| `MONTHLY_BUDGET_MICROS` | 5000000 | Estimated model spend per month, in millionths of a dollar ($5); raise to 6000000 if the notes grow towards their 1,500-token limit |
+| `VERTEX_REGION` | `eu` | Vertex AI endpoint for Claude |
+| `ASSISTANT_MODEL` | `claude-haiku-5-5` | Model ID |
+| `ASSISTANT_SERVICE_ACCOUNT` | `default` | Runtime service account: an e-mail, `name@`, or `default` (the default compute account) |
+| `BUDGET_TOPIC` | `assistant-budget` | Pub/Sub topic of the budget alerts |
+
+### Monitoring
+
+- **Firestore** `assistantUsage/<YYYY-MM-DD>`: calls, outcomes (`answered`, `unsupported`,
+  `invalid`, `error`, `limited`), token counts and estimated cost; `assistantUsage/<YYYY-MM>`:
+  the month's estimated cost.
+- **Cloud Logging**, function `askAssistant`: one `ask` event per question, with the result,
+  the failed check if any (`number`, `name`, `guarded-topic`, …), timing and token usage.
+  Questions and answers are never logged.
+- A rising `invalid` count means the model is producing answers the checks reject: look at the
+  `check` field before changing the prompt.
+
+### Changing the CV data or the notes
+
+The function bundles its own copy of the four data files. After changing any of them:
+`npm run validate:context`, then `npm --prefix functions run deploy`, then `./deploy.sh`.
+Deploying the function first means it already knows the new data when the new pages go live.
+Pages still open from before then get "Reload the page" for AI questions; a change to the notes
+alone doesn't cause that.
+
+### Rolling back
+
+1. Set `assistantConfig/runtime.enabled` to `false` in Firestore. Within 30 seconds the function
+   answers "unavailable" and visitors see the normal fallback with the Contact link.
+2. Deploy the site with `assistantHosted.enabled: false`: no AI requests at all.
+3. If needed, remove **Vertex AI User** from the function's service account, or disable the
+   model in Model Garden.
+
+The local assistant, its suggestions and the Contact link keep working through every step.
+
 ## Troubleshooting
 
 | Symptom | Cause | Fix |

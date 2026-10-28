@@ -29,6 +29,10 @@ const PER_CLIENT_PER_MINUTE = defineInt("PER_CLIENT_PER_MINUTE", { default: 3 })
 const PER_CLIENT_PER_DAY = defineInt("PER_CLIENT_PER_DAY", { default: 20 });
 const MONTHLY_BUDGET_MICROS = defineInt("MONTHLY_BUDGET_MICROS", { default: 5_000_000 });
 const BUDGET_TOPIC = defineString("BUDGET_TOPIC", { default: "assistant-budget" });
+const ASSISTANT_SERVICE_ACCOUNT = defineString("ASSISTANT_SERVICE_ACCOUNT", {
+  default: "default",
+  description: "Runtime service account e-mail or name@ (Vertex AI User + Cloud Datastore User); 'default' is the default compute account"
+});
 const RATE_LIMIT_SALT = defineSecret("RATE_LIMIT_SALT");
 
 initializeApp();
@@ -54,6 +58,7 @@ export const askAssistant = onCall(
     consumeAppCheckToken: true,
     cors: ALLOWED_ORIGINS,
     secrets: [RATE_LIMIT_SALT],
+    serviceAccount: ASSISTANT_SERVICE_ACCOUNT,
     maxInstances: 2,
     concurrency: 10,
     timeoutSeconds: 20,
