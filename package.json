@@ -13,6 +13,7 @@
     "lint": "ng lint",
     "validate:posts": "node .claude/skills/add-post/scripts/posts.mjs validate",
     "validate:context": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/assistant-context.mjs validate",
+    "test:rules": "firebase emulators:exec --only firestore --project live-resume-a575a scripts/firestore-rules-check.sh",
     "test:e2e": "npm run build-locale && playwright test",
     "test:e2e:run": "playwright test",
     "test:e2e:docker": "bash e2e/docker.sh",

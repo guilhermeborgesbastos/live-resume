@@ -8,6 +8,9 @@
       "ignore": ["node_modules", "src", "test", "*.log", "tsconfig.json", "vitest.config.ts", "build.mjs"]
     }
   ],
+  "firestore": {
+    "rules": "firestore.rules"
+  },
   "emulators": {
     "singleProjectMode": true,
     "functions": { "port": 5001 },
