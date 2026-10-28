@@ -1,0 +1,32 @@
+# Notes for the CV Assistant's AI answers.
+#
+# Facts the resume page doesn't show (how long you've used a technology, how you work, the kind
+# of teams you've been in) go here. Only the hosted AI answers read this file; the local
+# assistant uses about.json, experiences.json and posts.json. Guide: docs/ai-assistant-data.md.
+#
+# This file is PUBLIC: it ships with the site. Write in the first person, only what you would
+# tell a recruiter. No phone numbers, addresses, e-mail addresses, links, HTML or Markdown, no
+# other people's names, and nothing time-sensitive without a date in the text itself.
+#
+# Format: a blank line ends a note; lines starting with "#" are comments. Every note needs:
+#
+#   [note-id]                 lowercase letters, digits and dashes; never reuse an id
+#   updated: YYYY-MM          the month you last checked the note
+#   related: exp.4 exp.6      optional: experience ids (experiences.json) the note is about
+#   title.en: <≤ 60 chars>    citation label in English
+#   title.pt: <≤ 60 chars>    citation label in Portuguese
+#   en: <≤ 600 chars>         the note in English, on one line
+#   pt: <≤ 600 chars>         the same note in Portuguese, on one line
+#
+# Check your change with `npm run validate:context`, then redeploy the function
+# (`firebase deploy --only functions`) and the site (`deploy.sh`).
+#
+# Example (remove the "# " to use it, and replace every <…> with your own words):
+#
+# [java-experience]
+# updated: 2026-10
+# related: exp.3 exp.4 exp.5 exp.6
+# title.en: Java experience
+# title.pt: Experiência com Java
+# en: I have worked with Java since <year>, <what you used it for>.
+# pt: Trabalho com Java desde <ano>, <para que o usou>.

@@ -8,7 +8,8 @@ import { citationLink, InternalLink } from "../citations";
 interface SourceLinkView {
   readonly key: string;
   readonly label: string;
-  readonly link: InternalLink;
+  /** Null for a note, which is shown as a plain label. */
+  readonly link: InternalLink | null;
   readonly externalUrl?: string;
 }
 

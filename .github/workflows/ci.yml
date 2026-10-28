@@ -26,6 +26,9 @@ jobs:
       - name: Validate posts data
         run: npm run validate:posts
 
+      - name: Validate assistant notes
+        run: npm run validate:context
+
       - name: Unit tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
 

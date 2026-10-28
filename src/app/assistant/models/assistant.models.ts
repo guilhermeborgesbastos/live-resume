@@ -7,8 +7,11 @@
 export type Locale = "en" | "pt";
 export const ASSISTANT_LOCALES: readonly Locale[] = ["en", "pt"];
 
-/** The only files the assistant may use as knowledge (see docs/ai-assistant-data.md). */
-export type SourceFile = "about.json" | "experiences.json" | "posts.json";
+/**
+ * The only files the assistant may use as knowledge (see docs/ai-assistant-data.md). The local
+ * engine reads the JSON files; assistant-context.txt is read only by the hosted AI answers.
+ */
+export type SourceFile = "about.json" | "experiences.json" | "posts.json" | "assistant-context.txt";
 
 /** A plain-text value read from the JSON snapshot, with the JSON pointer it came from. */
 export interface SourcedText {
@@ -157,7 +160,9 @@ export interface KnowledgeSnapshot {
 export type CitationTarget =
   | { readonly section: "about" }
   | { readonly section: "experience"; readonly experienceId: number }
-  | { readonly section: "posts"; readonly postUrl: string };
+  | { readonly section: "posts"; readonly postUrl: string }
+  /** A note from assistant-context.txt: shown as a label, with nothing on the page to link to. */
+  | { readonly section: "notes"; readonly noteId: string };
 
 export interface SourceRef {
   readonly file: SourceFile;
