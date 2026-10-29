@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { expect, isMobile, Locale, LOCALES, openResume, test } from "./fixtures";
+import { expect, hostedAnswersEnabled, isMobile, Locale, LOCALES, openResume, test } from "./fixtures";
 
 /* CV assistant journeys: /assistant page, floating panel, citations and fallbacks. */
 
@@ -40,7 +40,15 @@ const ASSISTANT = {
     typoOption: "When did you work at Swisscom AG?",
     clarifyTypo: "I couldn’t find that name in my CV exactly. Did you mean one of these questions?",
     before: "And before that?",
-    experience: (company: string) => `Experience · ${company}`
+    experience: (company: string) => `Experience · ${company}`,
+    ai: {
+      pending: "Thinking about your question…",
+      label: "AI-generated from my CV. It can contain mistakes, so check the sources.",
+      unavailable: "AI answers aren’t available right now. You can try a suggested question or contact me.",
+      versionMismatch: "This page has an older copy of my CV. Reload it to ask this question again.",
+      reload: "Reload the page",
+      localOnly: "Answer only locally (don’t send questions)"
+    }
   },
   pt: {
     nav: "Assistente de IA",
@@ -69,7 +77,15 @@ const ASSISTANT = {
     typoOption: "Quando você trabalhou na Swisscom AG?",
     clarifyTypo: "Não encontrei exatamente esse nome no meu currículo. Você quis dizer uma destas perguntas?",
     before: "E antes disso?",
-    experience: (company: string) => `Experiência · ${company}`
+    experience: (company: string) => `Experiência · ${company}`,
+    ai: {
+      pending: "Pensando na sua pergunta…",
+      label: "Gerado por IA a partir do meu currículo. Pode conter erros, então confira as fontes.",
+      unavailable: "As respostas por IA não estão disponíveis agora. Você pode tentar uma pergunta sugerida ou entrar em contato comigo.",
+      versionMismatch: "Esta página tem uma cópia antiga do meu currículo. Recarregue a página para fazer esta pergunta de novo.",
+      reload: "Recarregar a página",
+      localOnly: "Responder só localmente (não enviar perguntas)"
+    }
   }
 } as const;
 
@@ -153,6 +169,7 @@ for (const locale of LOCALES) {
 
     test("unsupported questions get the fallback with a contact action that never sends anything", async ({ page, diagnostics }) => {
       await openAssistantPage(page, locale);
+      const hosted = await hostedAnswersEnabled(page);
       await askIn(page, "app-assistant-chat", locale, text.salary);
       const answer = page.locator(".message.assistant").last();
       await expect(answer).toHaveAttribute("data-answer", "fallback");
@@ -165,6 +182,19 @@ for (const locale of LOCALES) {
       // Nothing is prefilled or submitted.
       await expect(page.locator("#contact textarea[name='message']")).toHaveValue("");
       expect(diagnostics.blockedFirestoreRequests).toEqual([]);
+
+      // Without AI answers the question stays in the browser. With them, only this question went
+      // to askAssistant (the stub answered "nothing in the CV"), with an App Check token and only
+      // the documented fields.
+      const calls = diagnostics.askAssistant.calls;
+      if (hosted) {
+        expect(calls).toHaveLength(1);
+        expect(Object.keys(calls[0].data).sort()).toEqual(["knowledgeVersion", "locale", "question"]);
+        expect(calls[0].data).toEqual(expect.objectContaining({ question: text.salary, locale }));
+        expect(calls[0].appCheck).not.toBe("");
+      } else {
+        expect(calls).toEqual([]);
+      }
     });
 
     test("offers a correction for a misspelled name and follows up on the role in context", async ({ page }) => {
@@ -358,21 +388,110 @@ for (const locale of LOCALES) {
       await scrollToSection(page, "posts");
       await page.getByRole("button", { name: text.launcher }).click();
       await expect(page.locator("dialog .suggestions button").first()).toBeVisible();
+      const hosted = await hostedAnswersEnabled(page);
       const before = requests.length;
       const externalBefore = diagnostics.externalRequests.length;
 
-      await askIn(page, "dialog", locale, `${text.currentRole} ${marker}`);
+      // With AI answers on, a question with the marker appended is unrecognized and is meant to go
+      // to askAssistant, so there the marker only goes in the unsent draft below.
+      await askIn(page, "dialog", locale, hosted ? text.currentRole : `${text.currentRole} ${marker}`);
       await askIn(page, "dialog", locale, text.java);
       await page.locator("dialog").getByRole("textbox", { name: text.composer }).fill(`draft ${marker}`);
       await page.waitForTimeout(500);
 
-      // Answering made no request at all (the data was already loaded), first- or third-party.
-      expect(requests.slice(before)).toEqual([]);
-      expect(diagnostics.externalRequests.length).toBe(externalBefore);
+      if (hosted) {
+        // With AI answers on, opening the assistant starts App Check (its script and token
+        // exchange), but questions the browser answers still never reach askAssistant.
+        expect(diagnostics.askAssistant.calls).toEqual([]);
+      } else {
+        // Answering made no request at all (the data was already loaded), first- or third-party.
+        expect(requests.slice(before)).toEqual([]);
+        expect(diagnostics.externalRequests.length).toBe(externalBefore);
+      }
       expect(requests.some(r => r.includes(marker))).toBe(false);
       expect(consoleText.some(t => t.includes(marker))).toBe(false);
       expect(page.url()).not.toContain(marker);
       expect(await page.evaluate(m => JSON.stringify((window as any).dataLayer ?? []).includes(m), marker)).toBe(false);
+    });
+  });
+}
+
+/*
+ * AI answers (askAssistant, stubbed in fixtures.ts). These run only in builds with
+ * assistantHosted.enabled, such as a checkout that deploys them; CI's committed build has them off.
+ */
+for (const locale of LOCALES) {
+  const text = ASSISTANT[locale];
+
+  test.describe(`${locale} CV assistant AI answers`, () => {
+    test.beforeEach(async ({ page }) => {
+      await openAssistantPage(page, locale);
+      test.skip(!(await hostedAnswersEnabled(page)), "AI answers are off in this build (assistantHosted.enabled)");
+    });
+
+    test("an unrecognized question gets a labelled AI answer with its sources", async ({ page, diagnostics }) => {
+      const sentence = `E2E answer about ${ongoing.companyName}.`;
+      diagnostics.askAssistant.reply = data => ({
+        kind: "generated",
+        knowledgeVersion: data.knowledgeVersion,
+        paragraphs: [{ text: sentence, evidence: [`exp.${ongoing.id}`] }],
+        partial: false,
+        notes: []
+      });
+      await askIn(page, "app-assistant-chat", locale, text.salary);
+      const answer = page.locator(".message.assistant").last();
+      await expect(answer).toHaveAttribute("data-answer", "generated");
+      await expect(answer.locator(".line.generated")).toHaveText(sentence);
+      await expect(answer.locator(".ai-label")).toHaveText(text.ai.label);
+      await expect(answer.getByRole("link", { name: text.experience(ongoing.companyName) })).toBeVisible();
+      expect(diagnostics.askAssistant.calls).toHaveLength(1);
+    });
+
+    test("shows a pending state and takes one question at a time", async ({ page, diagnostics }) => {
+      let release!: () => void;
+      const gate = new Promise<void>(resolve => release = resolve);
+      diagnostics.askAssistant.reply = async () => {
+        await gate;
+        return { kind: "fallback" };
+      };
+      await askIn(page, "app-assistant-chat", locale, text.salary);
+      const answer = page.locator(".message.assistant").last();
+      await expect(answer).toHaveAttribute("data-answer", "pending");
+      await expect(answer.locator(".pending")).toHaveText(text.ai.pending);
+      // The visitor can keep typing, but can't send until the answer arrives.
+      const send = page.locator("app-assistant-chat").getByRole("button", { name: text.send, exact: true });
+      await expect(send).toBeDisabled();
+
+      release();
+      await expect(answer).toHaveAttribute("data-answer", "fallback");
+      await expect(send).toBeEnabled();
+      expect(diagnostics.askAssistant.calls).toHaveLength(1);
+    });
+
+    test("says when AI answers are unavailable, with the contact link", async ({ page, diagnostics }) => {
+      diagnostics.askAssistant.reply = () => ({ kind: "unavailable", reason: "limited", retryable: false });
+      await askIn(page, "app-assistant-chat", locale, text.salary);
+      const answer = page.locator(".message.assistant").last();
+      await expect(answer).toHaveAttribute("data-answer", "ai-unavailable");
+      await expect(answer.locator(".fallback")).toHaveText(text.ai.unavailable);
+      await expect(answer.getByRole("link", { name: text.contact })).toBeVisible();
+    });
+
+    test("offers a reload when the page's CV data is out of date", async ({ page, diagnostics }) => {
+      diagnostics.askAssistant.reply = () => ({ kind: "version-mismatch" });
+      await askIn(page, "app-assistant-chat", locale, text.salary);
+      const answer = page.locator(".message.assistant").last();
+      await expect(answer).toHaveAttribute("data-answer", "version-mismatch");
+      await expect(answer.locator(".fallback")).toHaveText(text.ai.versionMismatch);
+      await expect(answer.getByRole("button", { name: text.ai.reload })).toBeVisible();
+    });
+
+    test("the local-only switch stops sending questions", async ({ page, diagnostics }) => {
+      await page.getByLabel(text.ai.localOnly).check();
+      await askIn(page, "app-assistant-chat", locale, text.salary);
+      await expect(page.locator(".message.assistant").last()).toHaveAttribute("data-answer", "fallback");
+      await page.waitForTimeout(300);
+      expect(diagnostics.askAssistant.calls).toEqual([]);
     });
   });
 }
