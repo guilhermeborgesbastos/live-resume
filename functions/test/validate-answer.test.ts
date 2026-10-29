@@ -45,12 +45,19 @@ describe("checkAnswer", () => {
     ["a non-string evidence ID", reply([{ text: "Something.", evidence: [6] }]), CheckName.UnknownEvidence],
     ["no evidence", reply([{ text: "Something.", evidence: [] }]), CheckName.EvidenceCount],
     ["four paragraphs", reply(Array(4).fill({ text: "Something.", evidence: ["about.description"] })), CheckName.ParagraphCount],
-    ["a long paragraph", reply([{ text: "word ".repeat(130), evidence: ["about.description"] }]), CheckName.ParagraphLength],
+    ["a long paragraph", reply([{ text: "word ".repeat(170), evidence: ["about.description"] }]), CheckName.ParagraphLength],
+    ["a long answer", reply(Array(3).fill({ text: "word ".repeat(120), evidence: ["about.description"] })), CheckName.AnswerLength],
     ["the other language", reply([{ text: "Eu trabalho com Java desde 2014 e uso o Java para o meu trabalho.", evidence: ["ctx.java-experience"] }]), CheckName.Language],
     ["a broken shape", { status: "maybe" }, CheckName.Shape]
   ];
   invalid.forEach(([name, input, check]) =>
     it(`rejects ${name}`, () => expect(checkAnswer(input, en, "en")).toEqual({ status: CheckStatus.Invalid, check })));
+
+  it("accepts a summary paragraph of up to 800 characters", () => {
+    const text = "word ".repeat(140).trim();
+    expect(text.length).toBeGreaterThan(600);
+    expect(checkAnswer(reply([{ text, evidence: ["about.description"] }]), en, "en").status).toBe(CheckStatus.Answered);
+  });
 
   it("allows a guarded topic when a cited note says it", () => {
     const result = checkAnswer(reply([{ text: "I hold an EU work permit.", evidence: ["ctx.relocation"] }]), en, "en");
