@@ -44,7 +44,26 @@ export interface BrowserDiagnostics {
   appCheckExchanges: string[];
   /** The App Check token each Firestore request carried ("" when it had none). */
   firestoreAppCheckTokens: string[];
+  /** The askAssistant Cloud Function, stubbed (builds with assistantHosted.enabled call it). */
+  askAssistant: AskAssistantStub;
 }
+
+export interface AskAssistantCall {
+  /** The callable's `data`: the request the site sent. */
+  readonly data: any;
+  /** The X-Firebase-AppCheck header ("" when it had none). */
+  readonly appCheck: string;
+}
+
+export interface AskAssistantStub {
+  readonly calls: AskAssistantCall[];
+  /** The function's reply to each call; a test replaces it. Defaults to the "nothing in the CV" result. */
+  reply: (data: any) => unknown | Promise<unknown>;
+}
+
+/** Where the site calls the askAssistant callable (functions region europe-west4). */
+const ASK_ASSISTANT_HOST = "europe-west4-live-resume-a575a.cloudfunctions.net";
+const ASK_ASSISTANT_PATH = "/askAssistant";
 
 const FIREBASE_PROJECT = "live-resume-a575a";
 const FIREBASE_APP_ID = "1:681076751855:web:18bae3866ebfcc4fcd8a1a";
@@ -109,6 +128,21 @@ async function stubThirdParty(route: Route, request: Request, diagnostics: Brows
     diagnostics.appCheckExchanges.push(request.postDataJSON()?.recaptcha_enterprise_token ?? "");
     return route.fulfill({ json: { token: APP_CHECK_TOKEN, ttl: "3600s" } });
   }
+  if (url.host === ASK_ASSISTANT_HOST && url.pathname === ASK_ASSISTANT_PATH) {
+    const cors = {
+      "access-control-allow-origin": APP_ORIGIN,
+      "access-control-allow-methods": "POST, OPTIONS",
+      "access-control-allow-headers": "*",
+      vary: "Origin"
+    };
+    if (request.method() === "OPTIONS") {
+      return route.fulfill({ status: 204, headers: cors });
+    }
+    const data = request.postDataJSON()?.data;
+    diagnostics.askAssistant.calls.push({ data, appCheck: request.headers()["x-firebase-appcheck"] ?? "" });
+    // A callable replies with { result }, as firebase-functions' onCall does.
+    return route.fulfill({ headers: cors, json: { result: await diagnostics.askAssistant.reply(data) } });
+  }
   if (url.host === "firestore.googleapis.com") {
     diagnostics.blockedFirestoreRequests.push(`${request.method()} ${url.pathname} ${request.postData() ?? ""}`);
     // Firestore's WebChannel sends its own headers in the form-encoded body's "headers" field.
@@ -127,7 +161,8 @@ export const test = base.extend<{ diagnostics: BrowserDiagnostics }>({
       externalRequests: [],
       blockedFirestoreRequests: [],
       appCheckExchanges: [],
-      firestoreAppCheckTokens: []
+      firestoreAppCheckTokens: [],
+      askAssistant: { calls: [], reply: () => ({ kind: "fallback" }) }
     };
 
     page.on("console", message => {
@@ -176,6 +211,15 @@ export async function openResume(page: Page, locale: Locale, fragment = ""): Pro
   await expect(page.locator("#experience .events-content li").first()).toBeAttached();
   await expect(page.locator("app-posts-carousel li").first()).toBeAttached();
   await expect(page.locator("#about .text")).not.toHaveText("Loading...");
+}
+
+/**
+ * Whether this build has the assistant's AI answers on (assistantHosted.enabled): its notice
+ * renders under the composer only then. Call it with the assistant chat on screen.
+ */
+export async function hostedAnswersEnabled(page: Page): Promise<boolean> {
+  await expect(page.locator("app-assistant-chat .composer, app-assistant-chat app-assistant-composer").first()).toBeVisible();
+  return (await page.locator("app-assistant-chat .ai-notice").count()) > 0;
 }
 
 export function isMobile(page: Page): boolean {
