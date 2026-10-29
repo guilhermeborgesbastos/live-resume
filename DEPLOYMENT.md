@@ -358,14 +358,30 @@ Do these in order. Nothing costs money until the last steps turn the feature on.
 9. **Deploy the functions.** Install the Firebase CLI (`npm install -g firebase-tools`), run
    `firebase login`, then `npm --prefix functions run deploy`. The first deploy asks for the
    parameters below and stores your answers in `functions/.env.live-resume-a575a`.
+
+   After the first deploy, let the budget alerts reach `onBudgetAlert`. Its Pub/Sub trigger calls
+   the function as the runtime account, and a custom account isn't allowed to invoke the
+   function's Cloud Run service until you grant it (the service only exists after the deploy):
+
+   ```bash
+   gcloud run services add-iam-policy-binding onbudgetalert --region=europe-west4 \
+     --project=live-resume-a575a --role=roles/run.invoker \
+     --member=serviceAccount:assistant-fn@live-resume-a575a.iam.gserviceaccount.com
+   ```
+
+   Without it, every alert is rejected before the function runs, and the backstop never turns
+   the switch off. The grant is on the service, so it survives later deploys.
 10. **Check the deployment.**
     - App Check → APIs → Cloud Functions shows verified and unverified calls. App Check is
       enforced in code (`enforceAppCheck`, `consumeAppCheckToken`), and a replayed token is
       rejected before any work is done; there's nothing to click.
     - Test the budget backstop with the switch on, then put it back:
       `gcloud pubsub topics publish assistant-budget --message='{"costAmount":1,"budgetAmount":1}'`
-      should set `assistantConfig/runtime.enabled` to `false` within a minute. If it doesn't,
-      the runtime account is missing **Cloud Datastore User** (see the `onBudgetAlert` logs).
+      should set `assistantConfig/runtime.enabled` to `false`, with `disabledReason: "budget"`,
+      within a minute. If it doesn't, the `onBudgetAlert` logs say why: "lacks
+      run.routes.invoke" means the Cloud Run Invoker grant from step 9 is missing; a Firestore
+      permission error means the runtime account lacks **Cloud Datastore User**. Pub/Sub keeps
+      retrying the alert, so it goes through once the missing role is granted.
     - Check the per-visitor limits use your real address: ask
       `PER_CLIENT_PER_MINUTE + 1` AI questions within a minute, adding a different fake
       `X-Forwarded-For` address to each request (for example with a browser extension). The
