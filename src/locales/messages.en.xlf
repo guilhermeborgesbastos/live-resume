@@ -666,36 +666,6 @@
         <target>Reload the page</target>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
-      <trans-unit id="assistant.ai.notice" datatype="html">
-        <source>Most questions are answered right here in your browser. If I can’t answer one, it goes to Anthropic’s Claude API, which writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</source>
-        <target>Most questions are answered right here in your browser. If I can’t answer one, it goes to Anthropic’s Claude API, which writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</target>
-        <note priority="1" from="description">assistant</note>
-      </trans-unit>
-      <trans-unit id="assistant.ai.howItWorks" datatype="html">
-        <source>How this works</source>
-        <target>How this works</target>
-        <note priority="1" from="description">assistant</note>
-      </trans-unit>
-      <trans-unit id="assistant.ai.howItWorks.sent" datatype="html">
-        <source>Only a question this assistant can’t answer is sent, with up to two of your previous questions and answers in this chat. A security check (Firebase App Check with Google reCAPTCHA) confirms the request comes from this website. To limit abuse, a code derived from your IP address that changes daily and can’t be reversed is kept for up to 48 hours.</source>
-        <target>Only a question this assistant can’t answer is sent, with up to two of your previous questions and answers in this chat. A security check (Firebase App Check with Google reCAPTCHA) confirms the request comes from this website. To limit abuse, a code derived from your IP address that changes daily and can’t be reversed is kept for up to 48 hours.</target>
-        <note priority="1" from="description">assistant</note>
-      </trans-unit>
-      <trans-unit id="assistant.ai.howItWorks.model" datatype="html">
-        <source>Anthropic’s Claude model answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. Anthropic may process your question outside the EU. The answer is checked against the CV before you see it, and it lists its sources.</source>
-        <target>Anthropic’s Claude model answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. Anthropic may process your question outside the EU. The answer is checked against the CV before you see it, and it lists its sources.</target>
-        <note priority="1" from="description">assistant</note>
-      </trans-unit>
-      <trans-unit id="assistant.ai.howItWorks.storage" datatype="html">
-        <source>This website doesn’t store your questions or answers or write them to its logs; it keeps only anonymous counts. Your conversation stays in this tab.</source>
-        <target>This website doesn’t store your questions or answers or write them to its logs; it keeps only anonymous counts. Your conversation stays in this tab.</target>
-        <note priority="1" from="description">assistant</note>
-      </trans-unit>
-      <trans-unit id="assistant.ai.localOnly" datatype="html">
-        <source>Answer only locally (don’t send questions)</source>
-        <target>Answer only locally (don’t send questions)</target>
-        <note priority="1" from="description">assistant</note>
-      </trans-unit>
     </body>
   </file>
 </xliff>

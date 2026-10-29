@@ -20,7 +20,7 @@ import { AssistantSuggestionsComponent } from "../suggestions/assistant-suggesti
   templateUrl: "./assistant-chat.component.html",
   styleUrls: ["./assistant-chat.component.scss"],
   imports: [RouterLink, FaIconComponent, AssistantComposerComponent, AssistantConversationComponent, AssistantSuggestionsComponent],
-  host: { "[class.compact]": "compact()" }
+  host: { "[class.compact]": "compact()", "[attr.data-ai-answers]": "session.hostedAvailable ? 'on' : 'off'" }
 })
 export class AssistantChatComponent implements OnInit {
   readonly session = inject(AssistantSessionService);
@@ -107,9 +107,5 @@ export class AssistantChatComponent implements OnInit {
   clear(): void {
     this.session.clear();
     this.focusComposer();
-  }
-
-  setLocalOnly(event: Event): void {
-    this.session.setLocalOnly((event.target as HTMLInputElement).checked);
   }
 }

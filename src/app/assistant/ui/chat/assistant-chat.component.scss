@@ -101,30 +101,6 @@
     color: #576183;
 }
 
-.ai-notice {
-    margin-top: 8px;
-    font-size: 12px;
-    line-height: 1.4;
-    color: #576183;
-
-    p { margin: 0 0 4px; }
-
-    summary {
-        cursor: pointer;
-        font-weight: 600;
-    }
-
-    details p { margin-top: 4px; }
-
-    .local-only {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 4px;
-        cursor: pointer;
-    }
-}
-
 .session-info {
     display: flex;
     flex-wrap: wrap;
