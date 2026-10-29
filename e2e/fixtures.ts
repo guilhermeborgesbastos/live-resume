@@ -214,12 +214,12 @@ export async function openResume(page: Page, locale: Locale, fragment = ""): Pro
 }
 
 /**
- * Whether this build has the assistant's AI answers on (assistantHosted.enabled): its notice
- * renders under the composer only then. Call it with the assistant chat on screen.
+ * Whether this build has the assistant's AI answers on (assistantHosted.enabled), from the
+ * chat's data-ai-answers attribute. Call it with the assistant chat on screen.
  */
 export async function hostedAnswersEnabled(page: Page): Promise<boolean> {
   await expect(page.locator("app-assistant-chat .composer, app-assistant-chat app-assistant-composer").first()).toBeVisible();
-  return (await page.locator("app-assistant-chat .ai-notice").count()) > 0;
+  return (await page.locator("app-assistant-chat").first().getAttribute("data-ai-answers")) === "on";
 }
 
 export function isMobile(page: Page): boolean {

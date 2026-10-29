@@ -323,7 +323,7 @@ Do these in order. Nothing costs money until the last steps turn the feature on.
      those prices; a model without an entry there stops the function from starting rather than
      being priced by guess.
    - Questions are processed by Anthropic, not in Google Cloud, and may be processed outside the
-     EU; the notice and "How this works" say so.
+     EU. The assistant page no longer explains this, so say it in your privacy notice.
 5. **Service account.** Both functions (`askAssistant` and `onBudgetAlert`) run as the account
    in `ASSISTANT_SERVICE_ACCOUNT`. Create a dedicated one and give it exactly these roles:
 

@@ -215,13 +215,6 @@ describe("CV assistant knowledge and session", () => {
       expect(request.context).toEqual({ experienceId: jasmine.any(Number) });
     });
 
-    it("never sends when the visitor chose local-only", () => {
-      session.setLocalOnly(true);
-      session.ask("What salary are you looking for?");
-      expect(session.pairs()[0].answer).toEqual({ kind: "fallback", reason: "unrecognized" });
-      expect(hosted.ask).not.toHaveBeenCalled();
-    });
-
     it("drops a reply that arrives after the conversation was cleared", async () => {
       session.ask("What salary are you looking for?");
       session.clear();

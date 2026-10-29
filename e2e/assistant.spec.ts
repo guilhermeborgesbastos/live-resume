@@ -46,8 +46,7 @@ const ASSISTANT = {
       label: "AI-generated from my CV. It can contain mistakes, so check the sources.",
       unavailable: "AI answers aren’t available right now. You can try a suggested question or contact me.",
       versionMismatch: "This page has an older copy of my CV. Reload it to ask this question again.",
-      reload: "Reload the page",
-      localOnly: "Answer only locally (don’t send questions)"
+      reload: "Reload the page"
     }
   },
   pt: {
@@ -83,8 +82,7 @@ const ASSISTANT = {
       label: "Gerado por IA a partir do meu currículo. Pode conter erros, então confira as fontes.",
       unavailable: "As respostas por IA não estão disponíveis agora. Você pode tentar uma pergunta sugerida ou entrar em contato comigo.",
       versionMismatch: "Esta página tem uma cópia antiga do meu currículo. Recarregue a página para fazer esta pergunta de novo.",
-      reload: "Recarregar a página",
-      localOnly: "Responder só localmente (não enviar perguntas)"
+      reload: "Recarregar a página"
     }
   }
 } as const;
@@ -484,14 +482,6 @@ for (const locale of LOCALES) {
       await expect(answer).toHaveAttribute("data-answer", "version-mismatch");
       await expect(answer.locator(".fallback")).toHaveText(text.ai.versionMismatch);
       await expect(answer.getByRole("button", { name: text.ai.reload })).toBeVisible();
-    });
-
-    test("the local-only switch stops sending questions", async ({ page, diagnostics }) => {
-      await page.getByLabel(text.ai.localOnly).check();
-      await askIn(page, "app-assistant-chat", locale, text.salary);
-      await expect(page.locator(".message.assistant").last()).toHaveAttribute("data-answer", "fallback");
-      await page.waitForTimeout(300);
-      expect(diagnostics.askAssistant.calls).toEqual([]);
     });
   });
 }

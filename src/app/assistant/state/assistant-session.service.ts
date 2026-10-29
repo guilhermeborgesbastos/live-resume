@@ -22,8 +22,6 @@ interface ConversationState {
   readonly validationError: QuestionError | null;
   /** A question asked before the CV data finished loading. */
   readonly pendingQuestion: string | null;
-  /** The visitor chose to keep every question in the browser (no AI answers) for this tab. */
-  readonly localOnly: boolean;
 }
 
 const EMPTY_STATE: ConversationState = {
@@ -32,8 +30,7 @@ const EMPTY_STATE: ConversationState = {
   panelOpen: false,
   trimmed: false,
   validationError: null,
-  pendingQuestion: null,
-  localOnly: false
+  pendingQuestion: null
 };
 
 export function siteLocale(localeId: string): Locale {
@@ -44,8 +41,7 @@ export function siteLocale(localeId: string): Locale {
  * The one in-memory conversation shared by the floating panel and the /assistant page. It
  * survives route changes inside the SPA and is lost on refresh, tab close or locale switch (the
  * locale links load the other build). Nothing is persisted. Questions the local engine can't
- * answer go to the hosted AI answers when they're enabled and the visitor hasn't chosen
- * local-only; nothing else leaves the browser.
+ * answer go to the hosted AI answers when they're enabled; nothing else leaves the browser.
  */
 @Injectable({ providedIn: "root" })
 export class AssistantSessionService {
@@ -65,10 +61,9 @@ export class AssistantSessionService {
   readonly panelOpen = computed(() => this.state().panelOpen);
   readonly trimmed = computed(() => this.state().trimmed);
   readonly validationError = computed(() => this.state().validationError);
-  readonly localOnly = computed(() => this.state().localOnly);
   readonly knowledgeStatus = computed(() => this.knowledge.state().status);
   readonly ready = computed(() => this.knowledgeStatus() === "ready");
-  /** Whether AI answers exist in this build (the notice and the local-only switch show only then). */
+  /** Whether AI answers exist in this build. */
   readonly hostedAvailable = this.hosted.enabled;
   /** A question is waiting for its AI answer; new questions wait until it arrives. */
   readonly busy = computed(() => this.state().pairs.some(pair => pair.answer.kind === HostedAnswerKind.Pending));
@@ -90,9 +85,7 @@ export class AssistantSessionService {
 
   ensureLoaded(): void {
     this.knowledge.load();
-    if (!this.state().localOnly) {
-      this.hosted.prepare();
-    }
+    this.hosted.prepare();
   }
 
   retry(): void {
@@ -101,10 +94,6 @@ export class AssistantSessionService {
 
   setDraft(draft: string): void {
     this.update({ draft, validationError: null });
-  }
-
-  setLocalOnly(localOnly: boolean): void {
-    this.update({ localOnly });
   }
 
   /** Validates and asks the current draft; the draft is cleared only when it was accepted. */
@@ -144,7 +133,7 @@ export class AssistantSessionService {
     try {
       const context = this.context();
       const local = answerQuestion(validation.question, this.locale, knowledge.snapshot, context);
-      const hosted = this.hosted.enabled && !this.state().localOnly && isHostedEligible(local);
+      const hosted = this.hosted.enabled && isHostedEligible(local);
       const history = historyFor(this.state().pairs);
       const id = this.nextId++;
       this.append({ id, question: validation.question, answer: hosted ? { kind: HostedAnswerKind.Pending } : local });
