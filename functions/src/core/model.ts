@@ -1,9 +1,8 @@
 /*
  * The model behind hosted answers, behind a small interface so tests use a stub and never call
- * a paid API. The Vertex AI implementation makes exactly one request per question: no SDK
+ * a paid API. The Claude API implementation makes exactly one request per question: no SDK
  * retries, no second attempt to repair a bad reply.
  */
-import { AnthropicVertex } from "@anthropic-ai/vertex-sdk";
 import Anthropic from "@anthropic-ai/sdk";
 import { ModelReplyKind, NoAnswerReason } from "./constants";
 import type { Usage } from "./pricing";
@@ -35,12 +34,11 @@ export interface AnswerModel {
 
 export const MAX_OUTPUT_TOKENS = 1024;
 
-export class VertexAnswerModel implements AnswerModel {
-  private readonly client: AnthropicVertex;
+export class ClaudeApiAnswerModel implements AnswerModel {
+  private readonly client: Anthropic;
 
-  constructor(projectId: string, region: string, readonly modelId: string, timeoutMs = 12_000) {
-    // Authenticates as the function's service account (Application Default Credentials).
-    this.client = new AnthropicVertex({ projectId, region, maxRetries: 0, timeout: timeoutMs });
+  constructor(apiKey: string, readonly modelId: string, timeoutMs = 12_000) {
+    this.client = new Anthropic({ apiKey, maxRetries: 0, timeout: timeoutMs });
   }
 
   async answer(request: ModelRequest): Promise<ModelReply> {
@@ -87,14 +85,18 @@ function toModelError(error: unknown): ModelError {
   if (error instanceof Anthropic.APIConnectionError) {
     return new ModelError("could not reach the model", true);
   }
+  if (error instanceof Anthropic.AuthenticationError || error instanceof Anthropic.PermissionDeniedError) {
+    // 401/403: the API key is missing, revoked or not allowed this model.
+    return new ModelError(`model request rejected with ${error.status}: check ANTHROPIC_API_KEY`, false);
+  }
   if (error instanceof Anthropic.RateLimitError) {
-    return new ModelError("model quota or rate limit reached", true);
+    return new ModelError("model rate limit or spend limit reached", true);
   }
   if (error instanceof Anthropic.InternalServerError) {
     return new ModelError(`model service error ${error.status}`, true);
   }
   if (error instanceof Anthropic.APIError) {
-    // 400: our request is wrong; 403/404: Model Garden enablement or IAM is missing.
+    // 400: our request is wrong; 404: unknown model ID.
     return new ModelError(`model request rejected with ${error.status}`, false);
   }
   return new ModelError("unexpected model error", false);

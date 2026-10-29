@@ -667,8 +667,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.ai.notice" datatype="html">
-        <source>Most questions are answered right here in your browser. If I can’t answer one, it goes to Google Cloud in the EU, where Anthropic’s Claude model writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</source>
-        <target>Most questions are answered right here in your browser. If I can’t answer one, it goes to Google Cloud in the EU, where Anthropic’s Claude model writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</target>
+        <source>Most questions are answered right here in your browser. If I can’t answer one, it goes to Anthropic’s Claude API, which writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</source>
+        <target>Most questions are answered right here in your browser. If I can’t answer one, it goes to Anthropic’s Claude API, which writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</target>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.ai.howItWorks" datatype="html">
@@ -682,8 +682,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.ai.howItWorks.model" datatype="html">
-        <source>Claude, run by Google Cloud’s Vertex AI in the EU, answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. The answer is checked against the CV before you see it, and it lists its sources.</source>
-        <target>Claude, run by Google Cloud’s Vertex AI in the EU, answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. The answer is checked against the CV before you see it, and it lists its sources.</target>
+        <source>Anthropic’s Claude model answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. Anthropic may process your question outside the EU. The answer is checked against the CV before you see it, and it lists its sources.</source>
+        <target>Anthropic’s Claude model answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. Anthropic may process your question outside the EU. The answer is checked against the CV before you see it, and it lists its sources.</target>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.ai.howItWorks.storage" datatype="html">

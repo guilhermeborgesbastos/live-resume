@@ -50,11 +50,11 @@
     (submitted)="submit()"></app-assistant-composer>
   @if (session.hostedAvailable) {
     <div class="ai-notice">
-      <p i18n="assistant@@assistant.ai.notice">Most questions are answered right here in your browser. If I can’t answer one, it goes to Google Cloud in the EU, where Anthropic’s Claude model writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</p>
+      <p i18n="assistant@@assistant.ai.notice">Most questions are answered right here in your browser. If I can’t answer one, it goes to Anthropic’s Claude API, which writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</p>
       <details>
         <summary i18n="assistant@@assistant.ai.howItWorks">How this works</summary>
         <p i18n="assistant@@assistant.ai.howItWorks.sent">Only a question this assistant can’t answer is sent, with up to two of your previous questions and answers in this chat. A security check (Firebase App Check with Google reCAPTCHA) confirms the request comes from this website. To limit abuse, a code derived from your IP address that changes daily and can’t be reversed is kept for up to 48 hours.</p>
-        <p i18n="assistant@@assistant.ai.howItWorks.model">Claude, run by Google Cloud’s Vertex AI in the EU, answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. The answer is checked against the CV before you see it, and it lists its sources.</p>
+        <p i18n="assistant@@assistant.ai.howItWorks.model">Anthropic’s Claude model answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. Anthropic may process your question outside the EU. The answer is checked against the CV before you see it, and it lists its sources.</p>
         <p i18n="assistant@@assistant.ai.howItWorks.storage">This website doesn’t store your questions or answers or write them to its logs; it keeps only anonymous counts. Your conversation stays in this tab.</p>
       </details>
       <label class="local-only">
