@@ -27,8 +27,9 @@ const DATA_FILES = { about: "about.json", experiences: "experiences.json", posts
 const ALLOWED_ORIGINS = ["https://guilhermeborgesbastos.com", "https://www.guilhermeborgesbastos.com", /^http:\/\/(localhost|127\.0\.0\.1):\d+$/];
 
 const ASSISTANT_MODEL = defineString("ASSISTANT_MODEL", { default: "claude-haiku-5-5" });
-// Sized so the month's worst case (every call a cache miss, the notes at their limit) stays within MONTHLY_BUDGET_MICROS.
-const DAILY_CALL_LIMIT = defineInt("DAILY_CALL_LIMIT", { default: 500 });
+// Sized so the month's worst case stays within MONTHLY_BUDGET_MICROS: 400 × 31 × $0.0016 (a cache miss with the
+// ~10,000-token prompt of the current notes) ≈ $19.80.
+const DAILY_CALL_LIMIT = defineInt("DAILY_CALL_LIMIT", { default: 400 });
 const PER_CLIENT_PER_MINUTE = defineInt("PER_CLIENT_PER_MINUTE", { default: 3 });
 const PER_CLIENT_PER_DAY = defineInt("PER_CLIENT_PER_DAY", { default: 80 });
 const MONTHLY_BUDGET_MICROS = defineInt("MONTHLY_BUDGET_MICROS", { default: 20_000_000 });

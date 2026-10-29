@@ -407,7 +407,7 @@ Set at deploy time (`functions/.env.live-resume-a575a`, or the prompts on first 
 | Parameter | Default | Meaning |
 | --- | --- | --- |
 | `MONTHLY_BUDGET_MICROS` | 20000000 | Model spend per UTC month, in millionths of a dollar ($20). Each call reserves its cost ceiling before it runs and is settled to its actual cost afterwards; a call whose cost is unknown (a timeout) keeps its reservation |
-| `DAILY_CALL_LIMIT` | 500 | Model calls per UTC day, for everyone. 500 × 31 days × $0.00115 (the worst case: every call a cache miss, notes at their size limit) ≈ $17.90, so a month of full days stays under the $20 cap |
+| `DAILY_CALL_LIMIT` | 400 | Model calls per UTC day, for everyone. A cache miss with the current ~10,000-token prompt (CV plus notes) costs about $0.0016, measured on the live function, so 400 × 31 days ≈ $19.80 keeps a month of full days under the $20 cap. If the notes grow, re-measure (the `usage` in the `askAssistant` logs) and lower it |
 | `PER_CLIENT_PER_MINUTE` / `PER_CLIENT_PER_DAY` | 3 / 80 | Per visitor (per daily IP key). The daily figure is 4× the earlier 20, in step with the budget |
 | `TRUSTED_PROXY_HOPS` | 1 | Proxies in front of the function that append to `X-Forwarded-For` (Google's front end). The visitor's address is read that many places from the right, so addresses a caller adds are ignored; a request whose address can't be found is refused |
 | `ASSISTANT_MODEL` | `claude-haiku-5-5` | Claude API model ID; it needs a price in `TARIFFS` |

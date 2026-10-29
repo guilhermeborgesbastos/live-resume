@@ -9,8 +9,8 @@ export const MAX_HOSTED_QUESTION_LENGTH = 500;
 export const MAX_HISTORY_PAIRS = 2;
 export const MAX_HISTORY_ANSWER_LENGTH = 600;
 export const MAX_PARAGRAPHS = 3;
-export const MAX_PARAGRAPH_LENGTH = 600;
-export const MAX_ANSWER_LENGTH = 900;
+export const MAX_PARAGRAPH_LENGTH = 800;
+export const MAX_ANSWER_LENGTH = 1600;
 export const MAX_EVIDENCE_PER_PARAGRAPH = 8;
 
 /** One earlier exchange in the visible conversation, as plain text. Never used as evidence. */
