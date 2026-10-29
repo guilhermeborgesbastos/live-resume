@@ -33,6 +33,7 @@ const call = (forwardedFor: string | undefined, extra: Partial<AskCall> = {}): A
 const untouchable = (): LimitStore => ({
   enabled: vi.fn(async () => { throw new Error("store must not be called"); }),
   reserve: vi.fn(async () => { throw new Error("store must not be called"); }),
+  saveQuestion: vi.fn(async () => { throw new Error("store must not be called"); }),
   record: vi.fn(async () => { throw new Error("store must not be called"); })
 });
 

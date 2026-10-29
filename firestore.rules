@@ -16,7 +16,8 @@ service cloud.firestore {
     }
 
     // Everything else is denied. That includes assistantConfig (the AI answers' kill switch),
-    // assistantUsage and assistantRate (their limits and spend), which only the Cloud Functions
-    // write, through the Admin SDK, which these rules don't apply to.
+    // assistantUsage and assistantRate (their limits and spend) and assistantQuestions (the
+    // questions and answers kept for review), which only the Cloud Functions write, through the
+    // Admin SDK, which these rules don't apply to.
   }
 }

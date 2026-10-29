@@ -25,5 +25,7 @@ expect "delete a contact message"            403 -X DELETE "$BASE/contacts/m1"
 expect "turn the AI kill switch on"          403 -X PATCH "$BASE/assistantConfig/runtime" -H 'Content-Type: application/json' -d '{"fields":{"enabled":{"booleanValue":true}}}'
 expect "reset the daily usage counter"       403 -X PATCH "$BASE/assistantUsage/2026-10-28" -H 'Content-Type: application/json' -d '{"fields":{"calls":{"integerValue":"0"}}}'
 expect "reset a visitor's rate limit"        403 -X PATCH "$BASE/assistantRate/somekey" -H 'Content-Type: application/json' -d '{"fields":{"dayCount":{"integerValue":"0"}}}'
+expect "read the kept questions"             403 "$BASE/assistantQuestions/q1"
+expect "add a fake question"                 403 -X POST "$BASE/assistantQuestions?documentId=q2" -H 'Content-Type: application/json' -d '{"fields":{"question":{"stringValue":"x"}}}'
 expect "write to another collection"         403 -X POST "$BASE/anything?documentId=x" -H 'Content-Type: application/json' -d '{"fields":{"a":{"stringValue":"b"}}}'
 exit $fail
