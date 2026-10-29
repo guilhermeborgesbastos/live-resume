@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
@@ -15,22 +15,26 @@ export class DataService {
 
     baseUrl: string = "assets/data/";
 
+    // Browsers that cached these files before they were served with no-cache keep reusing
+    // years-old copies; this header makes every load skip the HTTP cache.
+    private readonly noCache = { headers: new HttpHeaders({ "Cache-Control": "no-cache" }) };
+
     getExperiences() : Observable<IExperience[]> {
-        return this.http.get<IExperience[]>(this.baseUrl + "experiences.json")
+        return this.http.get<IExperience[]>(this.baseUrl + "experiences.json", this.noCache)
             .pipe(
                 catchError(this.handleError)
             );
     }
     
     getAbout() : Observable<IAbout> {
-      return this.http.get<IAbout>(this.baseUrl + "about.json")
+      return this.http.get<IAbout>(this.baseUrl + "about.json", this.noCache)
           .pipe(
               catchError(this.handleError)
           );
     }
 
     getPosts() : Observable<IPost[]> {
-        return this.http.get<IPost[]>(this.baseUrl + "posts.json")
+        return this.http.get<IPost[]>(this.baseUrl + "posts.json", this.noCache)
             .pipe(
                 catchError(this.handleError)
             );
