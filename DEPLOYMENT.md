@@ -272,10 +272,11 @@ Do the steps in this order. Enforcing before the site key is deployed rejects ev
 ## AI answers (Firebase)
 
 The CV assistant answers the questions it recognizes in the browser. The ones it can't answer
-can go to the `askAssistant` Cloud Function, which asks Claude Haiku 5.5 on Vertex AI to write a
-short answer from the CV and the notes in `src/assets/data/assistant-context.txt`, checks it,
-and returns it with its sources. Everything runs in the Firebase project `live-resume-a575a`;
-AWS only serves the static site. What the AI may use, and how to add notes, is in
+can go to the `askAssistant` Cloud Function, which asks Claude Haiku 5.5 on the Claude API to
+write a short answer from the CV and the notes in `src/assets/data/assistant-context.txt`,
+checks it, and returns it with its sources. The function, its limits and App Check run in the
+Firebase project `live-resume-a575a`; the model call goes to Anthropic with an API key; AWS only
+serves the static site. What the AI may use, and how to add notes, is in
 [`docs/ai-assistant-data.md`](docs/ai-assistant-data.md).
 
 Two switches keep it off until you turn it on: `assistantHosted.enabled` in
@@ -287,7 +288,7 @@ document `assistantConfig/runtime` (the function answers "unavailable" unless `e
 
 Do these in order. Nothing costs money until the last steps turn the feature on.
 
-1. **Blaze plan.** Cloud Functions, Vertex AI and Secret Manager need the pay-as-you-go plan
+1. **Blaze plan.** Cloud Functions and Secret Manager need the pay-as-you-go plan
    (Firebase console → Usage and billing).
 2. **Firestore rules.** The rules live in `firestore.rules` (wired up in `firebase.json`). They
    allow one thing: the contact form creating a message in `contacts` with exactly its four
@@ -307,33 +308,40 @@ Do these in order. Nothing costs money until the last steps turn the feature on.
    change the rules in the file, not in the console: a deploy replaces whatever the console holds.
 3. **TTL for the rate-limit keys.** Firestore → TTL policies → collection group `assistantRate`,
    field `expireAt`. Firestore then deletes each key about 48 hours after it was written.
-4. **Vertex AI and the model.** Enable the Vertex AI API, then open Model Garden, find
-   **Claude Haiku 5.5**, accept the terms and enable it. Check that it's offered on the `eu`
-   multi-region (the function's default, `VERTEX_REGION=eu`); if it isn't, set
-   `VERTEX_REGION=global` at deploy and change the "in the EU" sentences in the notice. The
-   `eu` multi-region costs about 10% more than `global`, the price of keeping processing in the
-   EU (GDPR). Check the default quota, and compare the prices with `TARIFFS` in
-   `functions/src/core/pricing.ts` (Claude Haiku 5.5 on `eu`: $0.11 / $0.55 per million input /
-   output tokens). The monthly cap uses those prices; a model and region without an entry there
-   stop the function from starting rather than being priced by guess.
+4. **Claude API key.** The Claude API is separate from a Claude.ai (Pro or Max) subscription.
+   - In the Claude Console (https://platform.claude.com), create an account or organization,
+     add a payment method and a small prepaid credit balance (a few dollars lasts months here).
+   - Create a workspace for this site (for example `live-resume`) and give it a **monthly spend
+     limit**, for example $20. Anthropic enforces it: past the limit, calls fail and visitors
+     see "AI answers aren't available right now". The Google Cloud budget in step 7 doesn't see
+     this spend.
+   - Create an API key in that workspace and store it as a function secret:
+     `firebase functions:secrets:set ANTHROPIC_API_KEY` (paste the key). It lives in Secret
+     Manager, is readable only by the functions, and never reaches the browser or the repo.
+   - Compare Anthropic's current prices with `TARIFFS` in `functions/src/core/pricing.ts`
+     (Claude Haiku 5.5: $0.10 / $0.50 per million input / output tokens). The monthly cap uses
+     those prices; a model without an entry there stops the function from starting rather than
+     being priced by guess.
+   - Questions are processed by Anthropic, not in Google Cloud, and may be processed outside the
+     EU; the notice and "How this works" say so.
 5. **Service account.** Both functions (`askAssistant` and `onBudgetAlert`) run as the account
    in `ASSISTANT_SERVICE_ACCOUNT`. Create a dedicated one and give it exactly these roles:
 
    ```bash
    gcloud iam service-accounts create assistant-fn --display-name="CV assistant functions"
-   for role in roles/aiplatform.user roles/datastore.user roles/firebaseappcheck.tokenVerifier; do
+   for role in roles/datastore.user roles/firebaseappcheck.tokenVerifier; do
      gcloud projects add-iam-policy-binding live-resume-a575a \
        --member=serviceAccount:assistant-fn@live-resume-a575a.iam.gserviceaccount.com --role=$role
    done
    ```
 
-   **Vertex AI User** calls the model, **Cloud Datastore User** reads and writes the limits and
-   lets `onBudgetAlert` turn the switch off, and **Firebase App Check Token Verifier** lets the
-   callable consume single-use App Check tokens (without it, every visitor request fails App
-   Check before reaching the code). Set `ASSISTANT_SERVICE_ACCOUNT` to
-   `assistant-fn@live-resume-a575a.iam.gserviceaccount.com` at deploy. Left at `default`, both
-   functions run as the project's default compute service account, which then needs the same
-   three roles.
+   **Cloud Datastore User** reads and writes the limits and lets `onBudgetAlert` turn the switch
+   off, and **Firebase App Check Token Verifier** lets the callable consume single-use App Check
+   tokens (without it, every visitor request fails App Check before reaching the code). Access to
+   the `RATE_LIMIT_SALT` and `ANTHROPIC_API_KEY` secrets is granted by `firebase deploy` itself.
+   Set `ASSISTANT_SERVICE_ACCOUNT` to `assistant-fn@live-resume-a575a.iam.gserviceaccount.com` at
+   deploy. Left at `default`, both functions run as the project's default compute service
+   account, which then needs the same two roles.
 6. **Rate-limit salt.** `firebase functions:secrets:set RATE_LIMIT_SALT` and paste a random
    value (`openssl rand -hex 32`). The function hashes visitor IPs with it, so keep it secret.
 7. **Budget backstop.** Create the Pub/Sub topic (`gcloud pubsub topics create assistant-budget`),
@@ -341,7 +349,9 @@ Do these in order. Nothing costs money until the last steps turn the feature on.
    (for example $30/month) with alerts at 50%, 90% and 100%, connected to that topic. When the
    actual cost reaches the budget, `onBudgetAlert` sets `assistantConfig/runtime.enabled` to
    `false`. Billing data arrives hours late, so this is a backstop; the per-call limits below are
-   what keep spending bounded.
+   what keep spending bounded. This budget only covers Google Cloud costs (functions, Firestore,
+   App Check); the Claude API spend is capped by `MONTHLY_BUDGET_MICROS` and the Anthropic
+   workspace's spend limit (step 4).
 8. **Your name.** The model speaks as the CV's owner, named from `personal.name` and
    `personal.firstName` in `src/environments/environment.prod.ts` (the function bundles that
    file). If you run your own copy of this site, set them there; nothing else holds the name.
@@ -381,11 +391,11 @@ Set at deploy time (`functions/.env.live-resume-a575a`, or the prompts on first 
 | Parameter | Default | Meaning |
 | --- | --- | --- |
 | `MONTHLY_BUDGET_MICROS` | 20000000 | Model spend per UTC month, in millionths of a dollar ($20). Each call reserves its cost ceiling before it runs and is settled to its actual cost afterwards; a call whose cost is unknown (a timeout) keeps its reservation |
-| `DAILY_CALL_LIMIT` | 500 | Model calls per UTC day, for everyone. 500 × 31 days × $0.00127 (the worst case: every call a cache miss, notes at their size limit) ≈ $19.70, so a month of full days stays under the $20 cap |
+| `DAILY_CALL_LIMIT` | 500 | Model calls per UTC day, for everyone. 500 × 31 days × $0.00115 (the worst case: every call a cache miss, notes at their size limit) ≈ $17.90, so a month of full days stays under the $20 cap |
 | `PER_CLIENT_PER_MINUTE` / `PER_CLIENT_PER_DAY` | 3 / 80 | Per visitor (per daily IP key). The daily figure is 4× the earlier 20, in step with the budget |
 | `TRUSTED_PROXY_HOPS` | 1 | Proxies in front of the function that append to `X-Forwarded-For` (Google's front end). The visitor's address is read that many places from the right, so addresses a caller adds are ignored; a request whose address can't be found is refused |
-| `VERTEX_REGION` | `eu` | Vertex AI endpoint for Claude |
-| `ASSISTANT_MODEL` | `claude-haiku-5-5` | Model ID; it needs a price for `VERTEX_REGION` in `TARIFFS` |
+| `ASSISTANT_MODEL` | `claude-haiku-5-5` | Claude API model ID; it needs a price in `TARIFFS` |
+| `ANTHROPIC_API_KEY` (secret) | none | The Claude API key, set with `firebase functions:secrets:set ANTHROPIC_API_KEY` |
 | `ASSISTANT_SERVICE_ACCOUNT` | `default` | Runtime account of both functions: an e-mail, `name@`, or `default` (the default compute account) |
 | `BUDGET_TOPIC` | `assistant-budget` | Pub/Sub topic of the budget alerts |
 
@@ -419,8 +429,8 @@ alone doesn't cause that.
 1. Set `assistantConfig/runtime.enabled` to `false` in Firestore. Within 30 seconds the function
    answers "unavailable" and visitors see the normal fallback with the Contact link.
 2. Deploy the site with `assistantHosted.enabled: false`: no AI requests at all.
-3. If needed, remove **Vertex AI User** from the function's service account, or disable the
-   model in Model Garden.
+3. If needed, revoke the API key in the Claude Console, or set the workspace's spend limit to
+   $0.
 
 The local assistant, its suggestions and the Contact link keep working through every step.
 

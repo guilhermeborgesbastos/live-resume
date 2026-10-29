@@ -38,7 +38,7 @@ export function knowledge(notes = NOTES): HostedKnowledge {
 
 export const USAGE: Usage = { inputTokens: 300, cacheReadTokens: 0, cacheWriteTokens: 6000, outputTokens: 200 };
 
-export const COSTS: CostPolicy = costPolicy(tariffFor("claude-haiku-5-5", "eu"));
+export const COSTS: CostPolicy = costPolicy(tariffFor("claude-haiku-5-5"));
 
 export const CONFIG: LimitConfig = { dailyCalls: 5, perClientPerMinute: 3, perClientPerDay: 4, monthlyBudgetMicros: 1_000_000 };
 

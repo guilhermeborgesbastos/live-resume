@@ -259,7 +259,7 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.ai.notice" datatype="html">
-        <source>Most questions are answered right here in your browser. If I can’t answer one, it goes to Google Cloud in the EU, where Anthropic’s Claude model writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</source>
+        <source>Most questions are answered right here in your browser. If I can’t answer one, it goes to Anthropic’s Claude API, which writes an answer from my CV. AI answers can contain mistakes, so check the sources. Please don’t include personal information.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
           <context context-type="linenumber">53,55</context>
@@ -283,7 +283,7 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.ai.howItWorks.model" datatype="html">
-        <source>Claude, run by Google Cloud’s Vertex AI in the EU, answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. The answer is checked against the CV before you see it, and it lists its sources.</source>
+        <source>Anthropic’s Claude model answers only from my CV and a short set of notes I wrote for this assistant, which are published with this site. Anthropic may process your question outside the EU. The answer is checked against the CV before you see it, and it lists its sources.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
           <context context-type="linenumber">57,58</context>

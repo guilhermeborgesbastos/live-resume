@@ -1,6 +1,6 @@
 /*
  * The model's instructions and the per-request user turn. The instructions and the CV text are
- * byte-stable for a given deploy and locale (no dates, no request data), so Vertex AI can cache
+ * byte-stable for a given deploy and locale (no dates, no request data), so the Claude API can cache
  * them as one prefix; only the user turn changes between questions.
  */
 import type { Locale } from "../../../src/app/assistant/models/assistant.models";

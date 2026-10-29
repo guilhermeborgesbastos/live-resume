@@ -3,7 +3,7 @@
  * "AI answers (Firebase)"):
  *
  *   askAssistant   callable, App Check required and consumed; answers one question with
- *                  Claude Haiku 5.5 on Vertex AI, from the CV data bundled at deploy time
+ *                  Claude Haiku 5.5 on the Claude API, from the CV data bundled at deploy time
  *   onBudgetAlert  Pub/Sub; turns the kill switch off when the project budget is exceeded
  */
 import { readFileSync } from "node:fs";
@@ -18,7 +18,7 @@ import { environment } from "../../src/environments/environment.prod";
 import { DisabledReason, FirestoreField, FirestorePath, LogEvent } from "./core/constants";
 import { AskServices, createAskHandler } from "./core/handler";
 import { buildHostedKnowledge } from "./core/knowledge";
-import { VertexAnswerModel } from "./core/model";
+import { AnswerModel, ClaudeApiAnswerModel } from "./core/model";
 import { costPolicy, tariffFor } from "./core/pricing";
 import { FirestoreLimitStore } from "./firestore-store";
 
@@ -26,8 +26,6 @@ const REGION = "europe-west4";
 const DATA_FILES = { about: "about.json", experiences: "experiences.json", posts: "posts.json", notes: "assistant-context.txt" } as const;
 const ALLOWED_ORIGINS = ["https://guilhermeborgesbastos.com", "https://www.guilhermeborgesbastos.com", /^http:\/\/(localhost|127\.0\.0\.1):\d+$/];
 
-// The eu multi-region costs about 10% more than global; it keeps processing in the EU (GDPR).
-const VERTEX_REGION = defineString("VERTEX_REGION", { default: "eu", description: "Vertex AI endpoint for Claude: eu multi-region" });
 const ASSISTANT_MODEL = defineString("ASSISTANT_MODEL", { default: "claude-haiku-5-5" });
 // Sized so the month's worst case (every call a cache miss, the notes at their limit) stays within MONTHLY_BUDGET_MICROS.
 const DAILY_CALL_LIMIT = defineInt("DAILY_CALL_LIMIT", { default: 500 });
@@ -44,14 +42,16 @@ const ASSISTANT_SERVICE_ACCOUNT = defineString("ASSISTANT_SERVICE_ACCOUNT", {
   description: "Runtime service account for both functions: an e-mail, name@, or 'default' (the default compute account)"
 });
 const RATE_LIMIT_SALT = defineSecret("RATE_LIMIT_SALT");
+const ANTHROPIC_API_KEY = defineSecret("ANTHROPIC_API_KEY");
 
 initializeApp();
 
-let services: Omit<AskServices, "salt"> | undefined;
+let services: Omit<AskServices, "salt" | "model"> | undefined;
+let model: AnswerModel | undefined;
 
-// Runs once per instance; an unknown model/region price throws here, so the instance never serves with a wrong cost.
+// Runs once per instance; a model without a price throws here, so the instance never serves with a wrong cost.
 onInit(() => {
-  const costs = costPolicy(tariffFor(ASSISTANT_MODEL.value(), VERTEX_REGION.value()));
+  const costs = costPolicy(tariffFor(ASSISTANT_MODEL.value()));
   const read = (name: string) => readFileSync(new URL(`./data/${name}`, import.meta.url), "utf8");
   services = {
     knowledge: buildHostedKnowledge({
@@ -65,7 +65,6 @@ onInit(() => {
       perClientPerDay: PER_CLIENT_PER_DAY.value(),
       monthlyBudgetMicros: MONTHLY_BUDGET_MICROS.value()
     }, costs),
-    model: new VertexAnswerModel(process.env.GCLOUD_PROJECT!, VERTEX_REGION.value(), ASSISTANT_MODEL.value()),
     costs,
     trustedProxyHops: TRUSTED_PROXY_HOPS.value(),
     now: () => new Date(),
@@ -79,20 +78,25 @@ export const askAssistant = onCall(
     enforceAppCheck: true,
     consumeAppCheckToken: true,
     cors: ALLOWED_ORIGINS,
-    secrets: [RATE_LIMIT_SALT],
+    secrets: [RATE_LIMIT_SALT, ANTHROPIC_API_KEY],
     serviceAccount: ASSISTANT_SERVICE_ACCOUNT,
     maxInstances: 2,
     concurrency: 10,
     timeoutSeconds: 20,
     memory: "256MiB"
   },
-  createAskHandler(() => ({ ...services!, salt: RATE_LIMIT_SALT.value() }))
+  // The API key is a secret of this function only, so the client is created on its first request rather than in onInit.
+  createAskHandler(() => ({
+    ...services!,
+    model: model ??= new ClaudeApiAnswerModel(ANTHROPIC_API_KEY.value(), ASSISTANT_MODEL.value()),
+    salt: RATE_LIMIT_SALT.value()
+  }))
 );
 
 /**
- * Cloud Billing budget notifications (JSON with costAmount and budgetAmount). Billing data
- * arrives hours late, so this is the backstop; the per-call limits keep spend bounded. It writes
- * to Firestore, so its service account needs Cloud Datastore User too.
+ * Cloud Billing budget notifications (JSON with costAmount and budgetAmount). They cover Google
+ * Cloud costs only; Claude API spend is capped by MONTHLY_BUDGET_MICROS and the Anthropic
+ * workspace's spend limit. It writes to Firestore, so its service account needs Cloud Datastore User.
  */
 export const onBudgetAlert = onMessagePublished({ topic: BUDGET_TOPIC, region: REGION, serviceAccount: ASSISTANT_SERVICE_ACCOUNT }, async event => {
   const data = event.data.message.json as { costAmount?: number; budgetAmount?: number } | undefined;
