@@ -59,6 +59,22 @@ describe("checkAnswer", () => {
     expect(checkAnswer(reply([{ text, evidence: ["about.description"] }]), en, "en").status).toBe(CheckStatus.Answered);
   });
 
+  it("accepts a paragraph that refers back to a company another paragraph cites", () => {
+    const result = checkAnswer(reply([
+      { text: "I work at Swisscom AG as a Senior Full-stack DevOps Engineer.", evidence: ["exp.6"] },
+      { text: "Before Swisscom AG I worked at QAT Global.", evidence: ["exp.5"] }
+    ]), en, "en");
+    expect(result.status).toBe(CheckStatus.Answered);
+  });
+
+  it("still rejects a technology that only another paragraph's role used", () => {
+    const result = checkAnswer(reply([
+      { text: "At Swisscom AG I use Kubernetes.", evidence: ["exp.6", "exp.6.tech"] },
+      { text: "At SkyDreamer I used Kubernetes too.", evidence: ["exp.4", "exp.4.tech"] }
+    ]), en, "en");
+    expect(result).toEqual({ status: CheckStatus.Invalid, check: CheckName.Name });
+  });
+
   it("allows a guarded topic when a cited note says it", () => {
     const result = checkAnswer(reply([{ text: "I hold an EU work permit.", evidence: ["ctx.relocation"] }]), en, "en");
     expect(result.status).toBe(CheckStatus.Answered);
