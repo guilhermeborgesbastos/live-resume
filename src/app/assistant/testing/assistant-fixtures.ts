@@ -1,7 +1,7 @@
-/* Test helpers: the real CV JSON, isolated mutable copies of it, and provenance checks. */
-import about from "../../../assets/data/about.json";
-import experiences from "../../../assets/data/experiences.json";
-import posts from "../../../assets/data/posts.json";
+/* Test helpers: the fixture CV JSON, isolated mutable copies of it, and provenance checks. */
+import about from "../../../testing/cv/about.json";
+import experiences from "../../../testing/cv/experiences.json";
+import posts from "../../../testing/cv/posts.json";
 import { adaptKnowledge, RawKnowledge } from "../knowledge/knowledge-adapter";
 import { htmlToLine, htmlToParagraphs } from "../knowledge/plain-text";
 import { ANSWER_TEMPLATES } from "../engine/answer-templates";
@@ -13,7 +13,7 @@ export interface CvJson {
   posts: any[];
 }
 
-/** A deep copy of the real CV data that a test may change freely. */
+/** A deep copy of the fixture CV (src/testing/cv, not the site's own data) that a test may change freely. */
 export function realCv(): CvJson {
   return JSON.parse(JSON.stringify({ about, experiences, posts }));
 }

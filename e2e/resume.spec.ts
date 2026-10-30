@@ -1,7 +1,9 @@
 import { Locator, Page } from "@playwright/test";
 import { join } from "path";
 import { environment } from "../src/environments/environment.prod";
-import { APP_CHECK_TOKEN, expect, isMobile, Locale, LOCALES, openResume, RECAPTCHA_TOKEN, test, TEXT } from "./fixtures";
+import {
+  APP_CHECK_TOKEN, expect, FIREBASE_CONFIGURED, isMobile, Locale, LOCALES, openResume, OWNER, RECAPTCHA_TOKEN, test, TEXT
+} from "./fixtures";
 
 const SECTIONS = ["about", "experience", "posts", "contact"] as const;
 
@@ -57,15 +59,21 @@ for (const locale of LOCALES) {
     test("boots and renders every section without layout overflow", async ({ page, diagnostics }, testInfo) => {
       await openResume(page, locale);
 
-      // Firebase Analytics initialized (against the fixture's stubs) and recorded the screen view.
-      await expect.poll(() => diagnostics.externalRequests.some(r => r.includes("googletagmanager.com/gtag/js"))).toBe(true);
-      await expect.poll(() => page.evaluate(() => ((window as any).dataLayer ?? [])
-        .some((entry: IArguments) => entry[0] === "event" && entry[1] === "screen_view"))).toBe(true);
+      if (FIREBASE_CONFIGURED && environment.firebaseConfig.measurementId) {
+        // Firebase Analytics initialized (against the fixture's stubs) and recorded the screen view.
+        await expect.poll(() => diagnostics.externalRequests.some(r => r.includes("googletagmanager.com/gtag/js"))).toBe(true);
+        await expect.poll(() => page.evaluate(() => ((window as any).dataLayer ?? [])
+          .some((entry: IArguments) => entry[0] === "event" && entry[1] === "screen_view"))).toBe(true);
+      } else {
+        // Without a Firebase project nothing leaves the browser.
+        await page.waitForTimeout(500);
+        expect(diagnostics.externalRequests.filter(r => /googleapis|googletagmanager/.test(r))).toEqual([]);
+      }
 
-      await expect(page).toHaveTitle("Live Resume - Guilherme Borges Bastos");
+      await expect(page).toHaveTitle(`Live Resume - ${OWNER.name}`);
       await expect(page.locator("html")).toHaveAttribute("lang", locale);
       await expect(page.locator("app-header header")).toBeVisible();
-      await expect(page.locator("app-header .logo")).toHaveText("gbastos");
+      await expect(page.locator("app-header .logo")).toHaveText(OWNER.brand);
 
       for (const id of ["welcome", ...SECTIONS]) {
         await expect(page.locator(`section#${id}`)).toBeAttached();
@@ -284,6 +292,15 @@ for (const locale of LOCALES) {
       await expect(form.locator(".warnings small")).toHaveCount(0);
       await expect(form.locator(".is-invalid")).toHaveCount(0);
 
+      if (!FIREBASE_CONFIGURED) {
+        // Without a Firebase project (the committed environment), the form reports the failure at once.
+        await form.locator("input[type='submit']").click();
+        await expect(page.locator("#contact .feedback-container")).toHaveClass(/error/);
+        await expect(form.locator(".recaptcha-notice")).toHaveCount(0);
+        expect(diagnostics.blockedFirestoreRequests).toEqual([]);
+        return;
+      }
+
       // Submission path: Firestore traffic is intercepted and aborted by the fixture.
       await form.locator("input[type='submit']").click();
       await expect(form).toHaveClass(/loading/);
@@ -448,7 +465,7 @@ test("share button uses the Web Share API when the browser supports it", async (
   await expect(shareButton).toBeVisible();
   await shareButton.locator("fa-icon").click();
   await expect.poll(() => page.evaluate(() => (window as any).sharedPayloads)).toEqual([
-    expect.objectContaining({ title: "Live Resume - Guilherme Borges Bastos", url: "https://guilhermeborgesbastos.com" })
+    expect.objectContaining({ title: `Live Resume - ${OWNER.name}`, url: OWNER.siteUrl })
   ]);
 });
 

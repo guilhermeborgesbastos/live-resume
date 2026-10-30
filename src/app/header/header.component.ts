@@ -3,6 +3,7 @@ import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawe
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { NgClass } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
+import { environment } from "../../environments/environment";
 
 /** localStorage key set once the AI Assistant link has played its first-visit animation. */
 const ASSISTANT_INTRO_KEY = "live-resume.assistantIntroSeen";
@@ -32,6 +33,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   faBars: IconDefinition;
   faShareAlt: IconDefinition;
   faCloudDownloadAlt: IconDefinition;
+
+  readonly brand = environment.personal.brand;
+  readonly cvFile = environment.personal.cvFile;
 
   @ViewChild("nav") nav: ElementRef;
   @ViewChild("shareBtn") shareBtn: ElementRef;
@@ -182,9 +186,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   async share() {
     try{
       await navigator.share({
-        title: "Live Resume - Guilherme Borges Bastos",
-        text: "Hello, I'm a Full-stack Java Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!",
-        url: "https://guilhermeborgesbastos.com"
+        title: `Live Resume - ${environment.personal.name}`,
+        text: environment.personal.pitch,
+        url: environment.personal.siteUrl
       });
     } catch(error) {
       console.log("You app is not shared, reason: ", error);

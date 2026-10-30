@@ -1,5 +1,5 @@
 import { inject, Injectable, NgZone } from "@angular/core";
-import { FIREBASE_APP } from "./firebase";
+import { FIREBASE_APP, FIREBASE_CONFIGURED } from "./firebase";
 import { environment } from "../../environments/environment";
 
 /**
@@ -18,8 +18,8 @@ export class AppCheckService {
 
   private started?: Promise<void>;
 
-  /** Whether App Check is configured (a reCAPTCHA site key is set). */
-  readonly configured = !!environment.recaptchaSiteKey;
+  /** Whether App Check is configured (a Firebase project and a reCAPTCHA site key are set). */
+  readonly configured = FIREBASE_CONFIGURED && !!environment.recaptchaSiteKey;
 
   start(): Promise<void> {
     if (!this.configured) {

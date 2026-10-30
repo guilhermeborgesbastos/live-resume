@@ -5,7 +5,7 @@
     </div>
 
     <div class="child logo-container" itemprop="brand" itemscope itemtype="https://schema.org/Brand">
-        <a (click)="onSectionLink($event, null)" href="#" class="logo" itemprop="name" itemprop="logo">gbastos</a>
+        <a (click)="onSectionLink($event, null)" href="#" class="logo" itemprop="name" itemprop="logo">{{ brand }}</a>
     </div>
 
     <div class="child nav-container" #nav [hidden]="!hasMenuToggled" itemscope itemtype="https://schema.org/SiteNavigationElement">
@@ -15,8 +15,7 @@
             <li><a (click)="onSectionLink($event, 'posts')" href="#posts" data-section="posts" itemprop="url"><span itemprop="name" i18n="nav@@posts">Posts</span></a></li>
             <li><a (click)="onSectionLink($event, 'contact')" href="#contact" data-section="contact" itemprop="url"><span itemprop="name" i18n="nav@@contact">Contact</span></a></li>
             <li><a (click)="resetMenu()" routerLink="/assistant" data-section="assistant" class="assistant-link" itemprop="url"><span itemprop="name" i18n="nav@@assistant">AI Assistant</span><span class="new-badge" aria-hidden="true" i18n="nav@@assistant.new">New</span></a></li>
-            <!-- TODO: update here -->
-            <li><a (click)="resetMenu()" href="assets/cv-english-guilherme-bastos-v2.0.pdf" i18n-title="nav@@open.as.pdf" title="Open Resume as PDF" target="_blank"><fa-icon [icon]="faCloudDownloadAlt" class="bar-icon"></fa-icon></a></li>
+            <li><a (click)="resetMenu()" [href]="cvFile" i18n-title="nav@@open.as.pdf" title="Open Resume as PDF" target="_blank"><fa-icon [icon]="faCloudDownloadAlt" class="bar-icon"></fa-icon></a></li>
         </ul>
     </div>
 

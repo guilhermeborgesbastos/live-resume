@@ -1,13 +1,10 @@
 import { Page } from "@playwright/test";
-import { readFileSync } from "fs";
-import { join } from "path";
-import { expect, hostedAnswersEnabled, isMobile, Locale, LOCALES, openResume, test } from "./fixtures";
+import { expect, hostedAnswersEnabled, isMobile, Locale, LOCALES, openResume, OWNER, readCvFixture, test } from "./fixtures";
 
-/* CV assistant journeys: /assistant page, floating panel, citations and fallbacks. */
+/* CV assistant journeys: /assistant page, floating panel, citations and fallbacks, on the fixture CV. */
 
-const readData = (file: string) => JSON.parse(readFileSync(join(__dirname, "..", "src", "assets", "data", file), "utf8"));
-const experiences: any[] = readData("experiences.json");
-const posts: any[] = readData("posts.json");
+const experiences: any[] = readCvFixture("experiences.json");
+const posts: any[] = readCvFixture("posts.json");
 const ongoing = experiences.find(e => !e.endAt);
 const deevo = experiences.find(e => e.companyName === "Deevo Studio");
 const oldestPost = [...posts].sort((a, b) => a.date.slice(6) + a.date.slice(0, 5) < b.date.slice(6) + b.date.slice(0, 5) ? -1 : 1)[0];
@@ -16,7 +13,7 @@ const ASSISTANT = {
   en: {
     nav: "AI Assistant",
     title: "AI Assistant",
-    pageTitle: "AI Assistant - Guilherme Borges Bastos",
+    pageTitle: `AI Assistant - ${OWNER.name}`,
     scope: "Ask about the experience, skills, and posts listed in this CV.",
     disclosure: "Answers use the information published in this CV.",
     launcher: "Ask my AI Assistant",
@@ -28,7 +25,7 @@ const ASSISTANT = {
     back: "Back to the resume",
     retry: "Retry",
     fallback: "I can’t answer this question using the information available in my CV. Please contact me directly so I can help.",
-    contact: "Contact Guilherme",
+    contact: `Contact ${OWNER.firstName}`,
     unavailable: "The CV information could not be loaded. Please try again or contact me directly.",
     empty: "Please type a question first.",
     tooLong: "Please shorten your question to 500 characters or fewer.",
@@ -52,7 +49,7 @@ const ASSISTANT = {
   pt: {
     nav: "Assistente de IA",
     title: "Assistente de IA",
-    pageTitle: "Assistente de IA - Guilherme Borges Bastos",
+    pageTitle: `Assistente de IA - ${OWNER.name}`,
     scope: "Pergunte sobre a experiência, as habilidades e os artigos listados neste currículo.",
     disclosure: "As respostas usam as informações publicadas neste currículo.",
     launcher: "Pergunte ao meu Assistente de IA",
@@ -64,7 +61,7 @@ const ASSISTANT = {
     back: "Voltar ao currículo",
     retry: "Tentar novamente",
     fallback: "Não consigo responder a esta pergunta com as informações disponíveis no meu currículo. Entre em contato comigo diretamente para que eu possa ajudar.",
-    contact: "Entrar em contato com Guilherme",
+    contact: `Entrar em contato com ${OWNER.firstName}`,
     unavailable: "Não foi possível carregar as informações do currículo. Tente novamente ou entre em contato comigo diretamente.",
     empty: "Digite uma pergunta primeiro.",
     tooLong: "Reduza a sua pergunta para no máximo 500 caracteres.",

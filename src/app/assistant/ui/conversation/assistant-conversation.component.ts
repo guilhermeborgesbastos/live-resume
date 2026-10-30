@@ -1,6 +1,7 @@
 import { DOCUMENT } from "@angular/common";
 import { Component, computed, inject, input, output } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { environment } from "../../../../environments/environment";
 import { AnswerBlock, ClarifyReason, HostedAnswerKind, PairAnswer, SourceRef } from "../../models/assistant.models";
 import { ConversationPair } from "../../state/assistant-session.service";
 import { AssistantSourceLinksComponent } from "../source-links/assistant-source-links.component";
@@ -57,6 +58,7 @@ export class AssistantConversationComponent {
   readonly navigated = output<void>();
 
   readonly contactLink = CONTACT_LINK;
+  readonly ownerFirstName = environment.personal.firstName;
   readonly Kind = HostedAnswerKind;
   private readonly document = inject(DOCUMENT);
 

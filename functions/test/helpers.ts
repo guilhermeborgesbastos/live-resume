@@ -7,7 +7,8 @@ import { costPolicy, CostPolicy, tariffFor, Usage } from "../src/core/pricing";
 import type { CvOwner } from "../src/core/prompt";
 import type { RawKnowledge } from "../../src/app/assistant/knowledge/knowledge-adapter";
 
-const data = (name: string) => readFileSync(new URL(`../../src/assets/data/${name}`, import.meta.url), "utf8");
+// The frozen fixture CV, not the site's own data, so a fork's CV can't break these tests.
+const data = (name: string) => readFileSync(new URL(`../../src/testing/cv/${name}`, import.meta.url), "utf8");
 
 export function rawCv(): RawKnowledge {
   return { about: JSON.parse(data("about.json")), experiences: JSON.parse(data("experiences.json")), posts: JSON.parse(data("posts.json")) };

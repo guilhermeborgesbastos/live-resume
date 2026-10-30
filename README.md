@@ -150,7 +150,7 @@ The workflow fails unless the tag equals `package.json`'s version. It runs the b
 
 Visitors can ask questions about the CV from the floating **Ask my AI Assistant** button (shown with a robot icon) or the **AI Assistant** page (`/en/assistant`, `/pt/assistant`). Under the hood it is a rule-based assistant that runs in the browser: answers are assembled only from `src/assets/data/{about,experiences,posts}.json`, cite their source, and anything outside the supported questions gets a fallback pointing to the Contact section. The conversation is kept in memory for the current tab only. To change what it knows (jobs, education, certificates, languages, topics), see [Updating the AI Assistant's data](docs/ai-assistant-data.md).
 
-Optionally, questions the rule-based assistant can't answer can go to **AI answers**: a Firebase Cloud Function (`functions/`) asks Claude Haiku 5.5 on the Claude API to write a short answer from the same JSON files and from notes in `src/assets/data/assistant-context.txt`, checks it against them, and returns it with its sources, labelled as AI-generated. It's behind App Check and daily, monthly and per-visitor limits, visitors can switch it off, and it stays off until `assistantHosted.enabled` is set in the environment files. Setup, limits and rollback are in [DEPLOYMENT.md](DEPLOYMENT.md#ai-answers-firebase).
+Optionally, questions the rule-based assistant can't answer can go to **AI answers**: a Firebase Cloud Function (`functions/`) asks Claude Haiku 5.5 on the Claude API to write a short answer from the same JSON files and from notes in `src/assets/data/assistant-context.txt`, checks it against them, and returns it with its sources, labelled as AI-generated. It's behind App Check and daily, monthly and per-visitor limits. The function keeps each question it receives, with its answer, in Firestore for 90 days (nothing that identifies the visitor), so say so in your privacy notice if you turn it on. It stays off until a Firebase project, a reCAPTCHA key and `assistantHosted.enabled` are set in the environment files. Setup, limits and rollback are in [DEPLOYMENT.md](DEPLOYMENT.md#ai-answers-firebase).
 
 ## ✍️ Adding posts with Claude Code
 
@@ -168,7 +168,14 @@ The repository includes a [Claude Code](https://claude.com/claude-code) skill th
 
 In the [Wiki Doc.](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations) there is a specific page supporting you on how to apply customizations to the layout and more... [See page](https://github.com/guilhermeborgesbastos/live-resume/wiki/applying-customizations)
 
-Your personal details live in `personal` in `src/environments/environment.ts` and `environment.prod.ts`. `name` and `firstName` there are also how the AI Assistant's AI answers refer to you, so set both when you adapt this site.
+To turn this site into yours:
+
+1. **Personal details:** `personal` in `src/environments/environment.ts` and `environment.prod.ts` (keep both in step). `name` and `firstName` are used for the page titles, the welcome message, the assistant's "Contact …" button and how the AI answers refer to you. `brand` is the header logo, `cvFile` the PDF behind the download button (put yours under `src/assets/`), `siteUrl` your site's address and `pitch` the line used when the page is shared.
+2. **Firebase (optional):** the committed `firebaseConfig` and `recaptchaSiteKey` are empty, so the site runs without Firebase: no analytics, the contact form says it can't send, and the assistant answers only in the browser. To enable them, create your own Firebase project and fill in both environment files ([DEPLOYMENT.md](DEPLOYMENT.md) covers App Check and the Firestore rules). To keep your keys out of a public fork, run `git update-index --skip-worktree src/environments/environment.ts src/environments/environment.prod.ts` after filling them in.
+3. **Your CV:** `src/assets/data/about.json`, `experiences.json` and `posts.json`, plus the notes in `assistant-context.txt` ([docs/ai-assistant-data.md](docs/ai-assistant-data.md)). The tests run against a frozen copy in `src/testing/cv/`, so changing your data doesn't break them.
+4. **Images:** replace the photo and illustrations under `src/assets/template/` (`about/`, `contact/`, `welcome/`) and the company logos referenced from `experiences.json`.
+5. **Static files the build copies as they are:** the title and `<meta>` tags in `src/index.html`, `src/sitemap.xml`, `src/robots.txt` and `src/assets/favicon/site.webmanifest`.
+6. **Hosting:** `deploy.sh` (the S3 bucket and site URL) and, if you deploy the AI answers, `ALLOWED_ORIGINS` in `functions/src/index.ts` and `.firebaserc`.
 
 ## 🖋 Contribute
 

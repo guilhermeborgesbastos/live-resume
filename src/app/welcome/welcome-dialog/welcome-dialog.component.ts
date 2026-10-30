@@ -1,5 +1,8 @@
 import { Component, LOCALE_ID, inject } from "@angular/core";
+import { environment } from "../../../environments/environment";
 import { TypingAnimationDirective } from "./welcome-dialog-typing/typing-animation.directive";
+
+const FIRST_NAME = environment.personal.firstName;
 
 @Component({
     selector: "app-welcome-dialog",
@@ -14,11 +17,11 @@ export class WelcomeDialogComponent {
     readonly phrases = [
         {
             "language": "pt",
-            "phrases": [ "Bem-vindo! Eu sou o Guilherme.", "Role para baixo e explore meu CV...", "ou pergunte ao meu Assistente de IA :)" ]
+            "phrases": [ `Bem-vindo! Eu sou ${FIRST_NAME}.`, "Role para baixo e explore meu CV...", "ou pergunte ao meu Assistente de IA :)" ]
         },
         {
             "language": "en",
-            "phrases": [ "Welcome! I'm Guilherme.", "Scroll down to explore my resume...", "or just ask my AI Assistant :)" ]
+            "phrases": [ `Welcome! I'm ${FIRST_NAME}.`, "Scroll down to explore my resume...", "or just ask my AI Assistant :)" ]
         }
     ];
 

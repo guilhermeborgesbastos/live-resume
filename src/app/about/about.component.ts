@@ -22,6 +22,7 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   name: string;
   yearsOld: number;
+  readonly owner = environment.personal;
 
   subscription: Subscription;
   aboutData: IAbout;

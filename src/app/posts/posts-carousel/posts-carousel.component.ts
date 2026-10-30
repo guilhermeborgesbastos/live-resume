@@ -5,6 +5,7 @@ import { NgClass } from "@angular/common";
 import { InternationalizationDirective } from "../../core/directive/internationalization.directive";
 import { SafariDateFormatterPipe } from "../../core/pipe/safari-date-formatter.pipe";
 import { LocalizedDatePipe } from "../../core/pipe/localized-date.pipe";
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: "app-posts-carousel",
@@ -16,6 +17,7 @@ import { LocalizedDatePipe } from "../../core/pipe/localized-date.pipe";
 export class PostsCarouselComponent {
     private elRef = inject(ElementRef);
 
+    readonly ownerName = environment.personal.name;
 
     public _posts: IPost[] = [];
     public _originalPosts: IPost[] = [];
