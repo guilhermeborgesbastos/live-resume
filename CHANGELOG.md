@@ -1,3 +1,15 @@
+#[2.2.0](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v2.2.0) (2026-10-30)
+###📃 release notes
+- AI Assistant: questions the rule-based assistant can't answer can go to Claude Haiku 5.5 through a Firebase Cloud Function (`functions/`). The answer is written from the CV JSON and the owner's notes in `src/assets/data/assistant-context.txt`, checked against them, labelled as AI-generated and shown with its sources. It is protected by App Check, daily, monthly and per-visitor limits, a kill switch and a budget backstop, and it stays off until it's set up (DEPLOYMENT.md, "AI answers (Firebase)");
+- The function keeps each question that reaches the model, with its answer, in Firestore for 90 days, with nothing that identifies the visitor;
+- Firestore security rules now live in the repository (`firestore.rules`, checked with `npm run test:rules`);
+- The CV data is always loaded fresh, so browsers that cached an old copy no longer show an outdated CV;
+- `/pt/` and `/pt/assistant` serve the Portuguese site on S3/CloudFront through a CloudFront Function (`cloudfront/locale-routing.js`, DEPLOYMENT.md step 6);
+- Easier to fork: the tests run on a frozen copy of the CV (`src/testing/cv/`), the committed environment files no longer point at the maintainer's Firebase project (the site runs without Firebase until you add yours), the owner's name, logo, CV file, site address and share text come from `environment.personal`, and the README lists everything to change;
+- Update the Angular tooling to 21.2.29 and fix the dependency vulnerabilities reported by Dependabot (29 of 31; the remaining two are in Firebase's Node-only gRPC code).
+
+**Upgrading a fork:** add `brand`, `cvFile`, `siteUrl` and `pitch` to `personal` in both environment files, or the build fails. The Docker image is built from the committed files, so it now runs without Firebase: no analytics or AI answers, and the contact form shows its error message.
+
 #[2.1.1](https://github.com/guilhermeborgesbastos/live-resume/releases/tag/v2.1.1) (2026-10-27)
 ###📃 release notes
 - Scroll smoothly between resume sections (e.g. from Posts to Contact) instead of jumping; visitors who ask for reduced motion keep the instant jump.
