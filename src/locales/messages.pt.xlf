@@ -276,8 +276,8 @@
         <note priority="1" from="description">dialog</note>
       </trans-unit>
       <trans-unit id="assistant.page.title" datatype="html">
-        <source>AI Assistant - Guilherme Borges Bastos</source>
-        <target>Assistente de IA - Guilherme Borges Bastos</target>
+        <source>AI Assistant - <x id="ownerName" equiv-text="OWNER_NAME"/></source>
+        <target>Assistente de IA - <x id="ownerName" equiv-text="OWNER_NAME"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app-routing.module.ts</context>
           <context context-type="linenumber">12</context>
@@ -329,8 +329,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.page.description" datatype="html">
-        <source>Ask questions about the experience, skills and posts listed in Guilherme Borges Bastos&apos;s CV.</source>
-        <target>Faça perguntas sobre a experiência, as habilidades e os artigos listados no currículo de Guilherme Borges Bastos.</target>
+        <source>Ask questions about the experience, skills and posts listed in <x id="ownerName" equiv-text="OWNER_NAME"/>&apos;s CV.</source>
+        <target>Faça perguntas sobre a experiência, as habilidades e os artigos listados no currículo de <x id="ownerName" equiv-text="OWNER_NAME"/>.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/pages/assistant-page/assistant-page.component.ts</context>
           <context context-type="linenumber">11</context>
@@ -404,8 +404,8 @@
         <note priority="1" from="description">assistant</note>
       </trans-unit>
       <trans-unit id="assistant.contact" datatype="html">
-        <source>Contact Guilherme</source>
-        <target>Entrar em contato com Guilherme</target>
+        <source>Contact <x id="INTERPOLATION" equiv-text="{{ ownerFirstName }}"/></source>
+        <target>Entrar em contato com <x id="INTERPOLATION" equiv-text="{{ ownerFirstName }}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/assistant/ui/chat/assistant-chat.component.html</context>
           <context context-type="linenumber">15,21</context>

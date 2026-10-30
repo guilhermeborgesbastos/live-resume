@@ -5,10 +5,12 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { HeaderComponent } from "../../../header/header.component";
 import { debounce } from "../../../core/utils";
+import { environment } from "../../../../environments/environment";
 import { AssistantSessionService } from "../../state/assistant-session.service";
 import { AssistantChatComponent } from "../../ui/chat/assistant-chat.component";
 
-const PAGE_DESCRIPTION = $localize`:assistant@@assistant.page.description:Ask questions about the experience, skills and posts listed in Guilherme Borges Bastos's CV.`;
+const OWNER_NAME = environment.personal.name;
+const PAGE_DESCRIPTION = $localize`:assistant@@assistant.page.description:Ask questions about the experience, skills and posts listed in ${OWNER_NAME}:ownerName:'s CV.`;
 
 /** The full-page conversation (not a dialog). The floating panel is not rendered on this route. */
 @Component({

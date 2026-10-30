@@ -1,6 +1,6 @@
 <div class="events-content" itemscope itemtype="https://schema.org/Article">
-  <meta itemprop="publisher" content="Guilherme Borges Bastos" />
-  <meta itemprop="author" content="Guilherme Borges Bastos" />
+  <meta itemprop="publisher" [attr.content]="ownerName" />
+  <meta itemprop="author" [attr.content]="ownerName" />
   <ol [ngClass]="{'partial': _posts.length < 3 && currentPage >= (_originalPosts.length / resultsPerPage)}">
     @for (post of _posts; track post) {
       <li animate.enter="fade-in" itemprop="techArticle" itemscope itemtype="https://schema.org/TechArticle">
@@ -12,9 +12,9 @@
               <span class="date" itemprop="datePublished">{{ post.date | safariDateFormatter | localizedDate:'MMM yyyy' }}</span>
             </div>
             <div class="content">
-              <meta itemprop="author" content="Guilherme Borges Bastos" />
-              <meta itemprop="creator" content="Guilherme Borges Bastos" />
-              <meta itemprop="publisher" content="Guilherme Borges Bastos" />
+              <meta itemprop="author" [attr.content]="ownerName" />
+              <meta itemprop="creator" [attr.content]="ownerName" />
+              <meta itemprop="publisher" [attr.content]="ownerName" />
               <h2 class="title" appInternationalization [data]="post.internationalizations" property='title' itemprop="name" itemprop="headline">Loading...</h2>
               <p class="description" appInternationalization [data]="post.internationalizations" property='description' [ellipsis]="275" itemprop="description">Loading...</p>
             </div>

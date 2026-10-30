@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild, afterRenderEffect, computed, 
 import { RouterLink } from "@angular/router";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { faRedo, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { environment } from "../../../../environments/environment";
 import { answerPlainText } from "../../engine/assistant-engine";
 import { HostedAnswerKind } from "../../models/assistant.models";
 import { AssistantSessionService } from "../../state/assistant-session.service";
@@ -32,6 +33,7 @@ export class AssistantChatComponent implements OnInit {
   readonly navigated = output<void>();
 
   readonly contactLink = CONTACT_LINK;
+  readonly ownerFirstName = environment.personal.firstName;
   readonly faRedo = faRedo;
   readonly faTrashAlt = faTrashAlt;
 

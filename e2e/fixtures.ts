@@ -1,5 +1,24 @@
 import { test as base, expect, Page, Request, Route } from "@playwright/test";
+import { readFileSync } from "fs";
+import { basename, join } from "path";
+import { environment } from "../src/environments/environment.prod";
 import { APP_ORIGIN } from "./target";
+
+/** The frozen CV the suite runs against (src/testing/cv), served in place of the site's own data. */
+const CV_FIXTURE_DIR = join(__dirname, "..", "src", "testing", "cv");
+export const readCvFixture = (file: "about.json" | "experiences.json" | "posts.json") =>
+  JSON.parse(readFileSync(join(CV_FIXTURE_DIR, file), "utf8"));
+const CV_DATA_REQUEST = /\/assets\/data\/(about|experiences|posts)\.json$/;
+/** Images the fixture CV points to; a fork that replaced them gets a blank image instead of a 404. */
+const CV_FIXTURE_IMAGES = new Set((["about.json", "experiences.json", "posts.json"] as const)
+  .flatMap(file => JSON.stringify(readCvFixture(file)).match(/assets\/[^"]+\.(?:png|jpe?g|gif|svg|webp)/g) ?? []));
+const BLANK_PNG = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=", "base64");
+
+/** The owner details the build was made with (environment.prod.ts), for titles and labels. */
+export const OWNER = environment.personal;
+
+/** Whether the build has a Firebase project (src/app/core/firebase.ts uses the same rule). */
+export const FIREBASE_CONFIGURED = !!environment.firebaseConfig.projectId && !!environment.firebaseConfig.apiKey;
 
 export const LOCALES = ["en", "pt"] as const;
 export type Locale = typeof LOCALES[number];
@@ -61,13 +80,14 @@ export interface AskAssistantStub {
   reply: (data: any) => unknown | Promise<unknown>;
 }
 
-/** Where the site calls the askAssistant callable (functions region europe-west4). */
-const ASK_ASSISTANT_HOST = "europe-west4-live-resume-a575a.cloudfunctions.net";
-const ASK_ASSISTANT_PATH = "/askAssistant";
+/** The Firebase project the build talks to (stubbed below); empty when the build has none. */
+const FIREBASE_PROJECT = environment.firebaseConfig.projectId;
+const FIREBASE_APP_ID = environment.firebaseConfig.appId;
+const MEASUREMENT_ID = environment.firebaseConfig.measurementId;
 
-const FIREBASE_PROJECT = "live-resume-a575a";
-const FIREBASE_APP_ID = "1:681076751855:web:18bae3866ebfcc4fcd8a1a";
-const MEASUREMENT_ID = "G-00VXD77WNG";
+/** Where the site calls the askAssistant callable. */
+const ASK_ASSISTANT_HOST = `${environment.assistantHosted.functionsRegion}-${FIREBASE_PROJECT}.cloudfunctions.net`;
+const ASK_ASSISTANT_PATH = "/askAssistant";
 export const RECAPTCHA_TOKEN = "e2e-stub-recaptcha-token";
 export const APP_CHECK_TOKEN = "e2e-stub-app-check-token";
 
@@ -189,6 +209,12 @@ export const test = base.extend<{ diagnostics: BrowserDiagnostics }>({
     });
     await page.route(url => !isFirstParty(url.href), (route, request) =>
       stubThirdParty(route, request, diagnostics));
+    await page.route(CV_DATA_REQUEST, route =>
+      route.fulfill({ path: join(CV_FIXTURE_DIR, basename(new URL(route.request().url()).pathname)) }));
+    await page.route(url => isFirstParty(url.href) && [...CV_FIXTURE_IMAGES].some(image => url.pathname.endsWith(`/${image}`)), async route => {
+      const response = await route.fetch();
+      return response.status() === 404 ? route.fulfill({ contentType: "image/png", body: BLANK_PNG }) : route.fulfill({ response });
+    });
 
     await use(diagnostics);
 

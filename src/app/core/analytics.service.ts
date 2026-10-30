@@ -1,7 +1,8 @@
-import { DestroyRef, inject, Injectable, NgZone } from "@angular/core";
+import { DestroyRef, inject, Injectable, Injector, NgZone } from "@angular/core";
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
-import { FIREBASE_APP } from "./firebase";
+import { environment } from "../../environments/environment";
+import { FIREBASE_APP, FIREBASE_CONFIGURED } from "./firebase";
 
 /**
  * Google Analytics for Firebase: initializes analytics (which records the page view) and
@@ -10,18 +11,20 @@ import { FIREBASE_APP } from "./firebase";
 @Injectable({ providedIn: "root" })
 export class AnalyticsService {
 
-  private readonly app = inject(FIREBASE_APP);
   private readonly router = inject(Router);
   private readonly zone = inject(NgZone);
   private readonly destroyRef = inject(DestroyRef);
+  // The Firebase app is created only when analytics actually starts.
+  private readonly injector = inject(Injector);
 
   private started = false;
 
   start(): void {
-    if (this.started) {
+    if (this.started || !FIREBASE_CONFIGURED || !environment.firebaseConfig.measurementId) {
       return;
     }
     this.started = true;
+    const app = this.injector.get(FIREBASE_APP);
 
     // Analytics schedules its own timers; keep them from triggering change detection.
     this.zone.runOutsideAngular(async () => {
@@ -29,7 +32,7 @@ export class AnalyticsService {
       if (!(await isSupported())) {
         return;
       }
-      const analytics = getAnalytics(this.app);
+      const analytics = getAnalytics(app);
       const logScreen = (url: string) => logEvent(analytics, "screen_view", {
         firebase_screen: url,
         firebase_screen_class: this.screenClass(this.router.routerState.snapshot.root)

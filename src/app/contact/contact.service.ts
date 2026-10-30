@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import type { CollectionReference, DocumentReference } from 'firebase/firestore';
 import { AppCheckService } from '../core/app-check.service';
-import { FIREBASE_APP } from '../core/firebase';
+import { FIREBASE_APP, FIREBASE_CONFIGURED } from '../core/firebase';
 import { Contact } from '../model/contact.model';
 
 @Injectable({ providedIn: 'root' })
@@ -22,6 +22,9 @@ export class ContactService {
   }
 
   async createContact(contact: Contact): Promise<DocumentReference<Contact>> {
+    if (!FIREBASE_CONFIGURED) {
+      throw new Error("No Firebase project is configured (environment.firebaseConfig), so the message can't be sent.");
+    }
     // App Check must be running before Firestore sends the write, so the write carries its token.
     await this.protect();
     // Firestore is only needed when a message is sent, so it is loaded on demand.

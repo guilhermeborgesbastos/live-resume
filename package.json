@@ -63,5 +63,16 @@
     "karma-jasmine-html-reporter": "2.1.0",
     "typescript": "5.9.3",
     "typescript-eslint": "8.71.0"
+  },
+  "allowScripts": {
+    "@firebase/util": true,
+    "@fortawesome/free-brands-svg-icons": true,
+    "@fortawesome/fontawesome-common-types": true,
+    "@fortawesome/free-solid-svg-icons": true,
+    "@parcel/watcher": true,
+    "esbuild": true,
+    "lmdb": true,
+    "msgpackr-extract": true,
+    "protobufjs": true
   }
 }

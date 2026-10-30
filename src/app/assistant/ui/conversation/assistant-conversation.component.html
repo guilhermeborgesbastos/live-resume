@@ -59,14 +59,14 @@
              [routerLink]="contactLink.commands"
              [fragment]="contactLink.fragment"
              (click)="navigated.emit()"
-             i18n="assistant@@assistant.contact">Contact Guilherme</a>
+             i18n="assistant@@assistant.contact">Contact {{ ownerFirstName }}</a>
         } @else if (pair.kind === "fallback") {
           <p class="line fallback" i18n="assistant@@assistant.fallback">I can’t answer this question using the information available in my CV. Please contact me directly so I can help.</p>
           <a class="contact"
              [routerLink]="contactLink.commands"
              [fragment]="contactLink.fragment"
              (click)="navigated.emit()"
-             i18n="assistant@@assistant.contact">Contact Guilherme</a>
+             i18n="assistant@@assistant.contact">Contact {{ ownerFirstName }}</a>
           @if (last && fallbackSuggestions().length > 0) {
             <app-assistant-suggestions class="follow-ups"
               i18n-heading="assistant@@assistant.fallback.suggestions" heading="Questions I can answer"
@@ -92,7 +92,7 @@
                [routerLink]="contactLink.commands"
                [fragment]="contactLink.fragment"
                (click)="navigated.emit()"
-               i18n="assistant@@assistant.contact">Contact Guilherme</a>
+               i18n="assistant@@assistant.contact">Contact {{ ownerFirstName }}</a>
           }
         } @else if (pair.kind === Kind.Pending) {
           <p class="line pending" role="status" i18n="assistant@@assistant.ai.pending">Thinking about your question…</p>
@@ -102,7 +102,7 @@
              [routerLink]="contactLink.commands"
              [fragment]="contactLink.fragment"
              (click)="navigated.emit()"
-             i18n="assistant@@assistant.contact">Contact Guilherme</a>
+             i18n="assistant@@assistant.contact">Contact {{ ownerFirstName }}</a>
           @if (last && fallbackSuggestions().length > 0) {
             <app-assistant-suggestions class="follow-ups"
               i18n-heading="assistant@@assistant.fallback.suggestions" heading="Questions I can answer"

@@ -1,0 +1,172 @@
+[
+    {
+        "thumbnail": "assets/posts/post-05-04-2026.jpg",
+        "http": "https://www.linkedin.com/pulse/ai-agents-dutch-learning-future-building-small-useful-borges-bastos-fepse/",
+        "date": "05-04-2026",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "AI Agents, Dutch Learning, and the Future of Building Small Useful Tools.",
+                "description": "I built an open-source <b>flash card game</b> for the <i>Dutch A2 Inburgering exam</i>. <b>AI agents</b> helped me scrape and sort its vocabulary in a few hours instead of days. As code becomes a commodity, the value moves to the problem and the user experience."
+            },
+            {
+                "language": "pt",
+                "title": "Agentes de IA, aprendizado de holandês e o futuro de criar pequenas ferramentas úteis.",
+                "description": "Criei um <b>jogo de flashcards</b> open source para o <i>exame de holandês A2 do Inburgering</i>. Com <b>agentes de IA</b>, coletei e organizei o vocabulário em horas, e não em dias. O código virou commodity e o valor está no problema e na experiência do usuário."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-11-03-2019.jpg",
+        "http": "https://www.linkedin.com/pulse/anti-traversing-2d-array-formula-guilherme-borges-bastos/",
+        "date": "11-03-2019",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "The anti-traversing 2D Array formula.",
+                "description": "Have you ever considered the <b>mathematical relationship</b> between the <i>rows</i> and <i>columns</i> of a two-dimensional array <i>(2D matrix)</i>? This data structure holds a <b>data location formula</b> that let me avoid a costly <b>O(n²) time complexity</b> and get <b>O(1) constant time</b> access instead."
+            },
+            {
+                "language": "pt",
+                "title": "A fórmula de matriz 2D anti-deslocamento.",
+                "description": "Você já pensou na <b>relação matemática</b> entre <i>linhas</i> e <i>colunas</i> de um array bidimensional <i>(matriz 2D)</i>? Essa estrutura de dados esconde uma <b>fórmula de localização</b> que me permitiu evitar a <i>complexidade de tempo O(n²)</i> e chegar a um acesso em <i>tempo constante, O(1)</i>."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-01-15-2019.jpg",
+        "http": "https://www.linkedin.com/pulse/em-2019-saia-do-desemprego-seja-voc%C3%AA-um-web-developer-borges-bastos/",
+        "date": "01-15-2019",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "In 2019, get out of unemployment! Become a Web Developer.",
+                "description": "I noticed countless openings for <i>Web developers</i> posted on the wall, while <b>12.7 million people were unemployed</b> in Brazil, and that contrast stuck with me. Once I got home, I remembered a free course by <i>Bob Tabor (Senior Program Manager at Microsoft)</i> on the Microsoft Virtual Academy."
+            },
+            {
+                "language": "pt",
+                "title": "Em 2019, saia do desemprego! Seja você um Web Developer.",
+                "description": "Vi inúmeras vagas para <i>desenvolvedores web</i> no mural, enquanto <b>12,7 milhões de pessoas estavam desempregadas</b> no Brasil, e esse contraste ficou na minha cabeça. Quando cheguei em casa, lembrei de um curso gratuito do <i>Bob Tabor (Senior Program Manager na Microsoft)</i>, disponível na Microsoft Virtual Academy."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-07-10-2016.jpg",
+        "http": "https://www.linkedin.com/pulse/map-item-navigation-android-opensource-en-guilherme-borges-bastos/",
+        "date": "07-10-2016",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Map Item Navigation for Android - <i>an open-source component</i>.",
+                "description": "Mobile apps often combine a map with an ordered list for a better user experience. This article introduces an open-source Android app that provides a working, ready-to-use component for it."
+            },
+            {
+                "language": "pt",
+                "title": "Navegação por Item no Mapa para Android - <i>Componente de código aberto</i>.",
+                "description": "Aplicativos móveis costumam combinar um mapa com uma lista ordenada para melhorar a experiência do usuário. Este artigo apresenta um aplicativo Android de código aberto com um componente completo e funcional para isso."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-05-07-2016.jpg",
+        "http": "https://www.linkedin.com/pulse/geo-distance-search-mysql-php-guilherme-borges-bastos/",
+        "date": "05-07-2016",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Geo Distance search with MySQL & PHP.",
+                "description": "<b>Geolocation</b> is part of many everyday activities. Who hasn't asked Google where the nearest market is? In this article, I show how to write a <i>SQL query</i> that searches by location from a fixed point within a given radius."
+            },
+            {
+                "language": "pt",
+                "title": "Pesquisa por distância geográfica com MySQL e PHP.",
+                "description": "Hoje a <b>geolocalização</b> está presente na maioria das atividades do dia a dia. Quem nunca perguntou ao Google onde fica o mercado mais próximo? Neste artigo, mostro como criar uma <i>consulta SQL</i> que faz uma pesquisa geolocalizada a partir de um ponto fixo e de um raio de abrangência."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-06-18-2016.jpg",
+        "http": "https://www.linkedin.com/pulse/envio-de-e-mail-autenticado-php-guilherme-borges-bastos/",
+        "date": "06-18-2016",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Sending authenticated e-mail using PHP.",
+                "description": "The email security policies of the <i>Web 2.0</i> era brought new measures against <i>spamming</i>. One of them is authenticated email: every message carries the <i>signature</i> of the host that sent it, which makes spammers easier to control. In this article, I'll show you how to send authenticated email so your messages are more likely to be delivered and read."
+            },
+            {
+                "language": "pt",
+                "title": "Envio de e-mail autenticado usando PHP.",
+                "description": "Com as políticas de segurança de e-mail da <i>Web 2.0</i>, surgiu a necessidade de dificultar o <i>spamming</i>. Uma das medidas adotadas foi o e-mail autenticado: cada mensagem leva a <i>assinatura</i> do host que a enviou, o que dá mais controle sobre quem pratica spam. Neste artigo, mostro como enviar e-mails autenticados e aumentar as chances de a sua mensagem ser lida pelo destinatário."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-06-04-2016.jpg",
+        "http": "https://www.linkedin.com/pulse/sharing-android-6-opensource-download-guilherme-borges-bastos/",
+        "date": "06-04-2016",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Sharing Intent for Android - <i>an open-source component</i>.",
+                "description": "Apps like <i>WhatsApp, Facebook, Twitter, and Snapchat</i> can receive shared content, which opens up a lot of possibilities. You can share videos, text, URLs, and even your app's Play Store page, so other users can find and install it."
+            },
+            {
+                "language": "pt",
+                "title": "Compartilhamento para Android - <i>Componente de código aberto</i>.",
+                "description": "Aplicativos como <i>WhatsApp, Facebook, Twitter e Snapchat</i> podem receber conteúdo compartilhado. Isso abre várias possibilidades: dá para compartilhar vídeos, textos, URLs e até a página do seu aplicativo na Play Store para que outras pessoas o instalem."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-05-28-2016.jpg",
+        "http": "https://www.linkedin.com/pulse/capturing-contact-list-android-open-source-en-borges-bastos/",
+        "date": "05-28-2016",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Contact List for Android - <i>an open-source component</i>.",
+                "description": "When you build a mobile app, you'll probably want to make it easy for users to share it with their friends. For that, I created ContactPickerList, a simple component that gives quick access to the device's contact list."
+            },
+            {
+                "language": "pt",
+                "title": "Lista de contatos para Android - <i>Componente de código aberto</i>.",
+                "description": "Ao desenvolver um aplicativo móvel, você provavelmente vai precisar facilitar que o usuário o compartilhe com os amigos. Para isso, criei o ContactPickerList, uma forma simples e prática de acessar a lista de contatos da agenda."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-05-14-2016.jpg",
+        "http": "https://www.linkedin.com/pulse/tinder-slide-card-android-open-source-en-guilherme-borges-bastos/",
+        "date": "05-14-2016",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Tinder Slide Card for Android - <i>an open-source component</i>.",
+                "description": "A complete Android component for a dynamic card deck with interactive charts, similar to the one in <i>Tinder</i>. It's fully open source, so you can customize and extend it."
+            },
+            {
+                "language": "pt",
+                "title": "Tinder Slide Card para Android - <i>Componente de código aberto</i>.",
+                "description": "Um componente completo para Android, para quem precisa de um baralho de cartas dinâmicas com gráficos interativos, parecido com o do <i>Tinder</i>. O código é totalmente aberto para alterações e melhorias."
+            }
+        ]
+    },
+    {
+        "thumbnail": "assets/posts/post-05-21-2016.jpg",
+        "http": "https://www.linkedin.com/pulse/push-notification-para-android-totorial-open-source-borges-bastos/",
+        "date": "05-21-2016",
+        "internationalizations": [
+            {
+                "language": "en",
+                "title": "Push Notification for Android - <i>an open-source component</i>.",
+                "description": "Who hasn't come across a push notification? Smartphone users see them every day. In this article, I'll show you how to send near real-time notifications to any Android device, whether it's a smartphone, a smartwatch, or something else."
+            },
+            {
+                "language": "pt",
+                "title": "Notificação de usuário no Android - <i>Componente de código aberto</i>.",
+                "description": "Quem nunca recebeu uma notificação? Todos nós, usuários de smartphone, as vemos todos os dias. Neste artigo, mostro como enviar notificações quase em tempo real para qualquer dispositivo Android, seja um smartphone, um smartwatch ou outro aparelho."
+            }
+        ]
+    }
+]
