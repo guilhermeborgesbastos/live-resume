@@ -9,7 +9,9 @@
  * settlement), the reservation stays, so the cap fails closed.
  */
 import { createHmac } from "node:crypto";
-import { LimitName, Outcome } from "./constants";
+import type { Locale } from "../../../src/app/assistant/models/assistant.models";
+import type { GeneratedParagraph } from "../../../src/app/assistant/models/hosted-answer.models";
+import { CheckName, LimitName, NoAnswerReason, Outcome } from "./constants";
 import type { CostPolicy, Usage } from "./pricing";
 
 export interface LimitConfig {
@@ -103,6 +105,29 @@ export function clientKey(salt: string, ip: string, now: Date): string {
   return createHmac("sha256", salt).update(`${ip}|${dayKey(now)}`).digest("hex").slice(0, 32);
 }
 
+/**
+ * A question that reached the model and what came of it, kept for review for 90 days. It holds
+ * nothing that identifies the visitor: no IP, client key or App Check token.
+ */
+export interface QuestionRecord {
+  readonly question: string;
+  readonly locale: Locale;
+  readonly outcome: Outcome;
+  /** The paragraphs the visitor saw, when answered. */
+  readonly answer?: readonly GeneratedParagraph[];
+  readonly partial?: boolean;
+  /** The grounding check that rejected the reply, and the reply itself (capped). */
+  readonly check?: CheckName;
+  readonly rejected?: string;
+  readonly stop?: NoAnswerReason;
+  readonly model: string;
+  readonly promptVersion: number;
+  readonly knowledgeVersion: string;
+  readonly contextVersion: string;
+  /** The call's actual cost, when its usage is known. */
+  readonly costMicros?: number;
+}
+
 export interface LimitStore {
   /** Whether the kill switch allows hosted answers. A missing switch means off. */
   enabled(): Promise<boolean>;
@@ -110,6 +135,8 @@ export interface LimitStore {
   reserve(clientKey: string, now: Date, reservationMicros: number): Promise<Reservation>;
   /** Counts an outcome and settles a reservation; best effort, but the monthly cap never loses a reservation. */
   record(now: Date, outcome: Outcome, settlement?: Settlement): Promise<void>;
+  /** Keeps a question and its answer for review; best effort. */
+  saveQuestion(now: Date, entry: QuestionRecord): Promise<void>;
 }
 
 /** The in-process store used by tests. */
@@ -117,6 +144,7 @@ export class MemoryLimitStore implements LimitStore {
   readonly days = new Map<string, DayUsage & { outcomes: Partial<Record<Outcome, number>> }>();
   readonly months = new Map<string, MonthUsage>();
   readonly clients = new Map<string, ClientUsage>();
+  readonly questions: QuestionRecord[] = [];
 
   constructor(private readonly config: LimitConfig, private readonly costs: CostPolicy, public switchOn = true) {}
 
@@ -143,5 +171,9 @@ export class MemoryLimitStore implements LimitStore {
       const month = this.months.get(monthKey(now)) ?? { costMicros: 0 };
       this.months.set(monthKey(now), { costMicros: month.costMicros + delta });
     }
+  }
+
+  async saveQuestion(_now: Date, entry: QuestionRecord): Promise<void> {
+    this.questions.push(entry);
   }
 }

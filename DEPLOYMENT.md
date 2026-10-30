@@ -292,22 +292,26 @@ Do these in order. Nothing costs money until the last steps turn the feature on.
    (Firebase console → Usage and billing).
 2. **Firestore rules.** The rules live in `firestore.rules` (wired up in `firebase.json`). They
    allow one thing: the contact form creating a message in `contacts` with exactly its four
-   fields. Everything else is denied, including `assistantUsage`, `assistantRate` and
-   `assistantConfig`, which the functions write through the Admin SDK (not bound by the rules).
+   fields. Everything else is denied, including `assistantUsage`, `assistantRate`,
+   `assistantQuestions` and `assistantConfig`, which the functions write through the Admin SDK
+   (not bound by the rules).
    The rules the project had before (`allow write: if true` on every document) would have let
    any visitor reset the assistant's limits or flip its kill switch, so publish these before
    turning AI answers on:
 
    ```bash
-   npm run test:rules                                      # emulator check: 10 allowed/denied cases
+   npm run test:rules                                      # emulator check: 12 allowed/denied cases
    firebase deploy --only firestore:rules --project live-resume-a575a
    ```
 
    Then send yourself a message through the live contact form to confirm it still arrives. The
    console's Rules tab keeps the earlier versions if you ever need to roll back. From now on,
    change the rules in the file, not in the console: a deploy replaces whatever the console holds.
-3. **TTL for the rate-limit keys.** Firestore → TTL policies → collection group `assistantRate`,
-   field `expireAt`. Firestore then deletes each key about 48 hours after it was written.
+3. **TTL for the rate-limit keys and the kept questions.** Firestore → TTL policies, field
+   `expireAt`, once for the collection group `assistantRate` and once for `assistantQuestions`
+   (or `gcloud firestore fields ttls update expireAt --collection-group=<group> --enable-ttl`).
+   Firestore then deletes each rate-limit key about 48 hours after it was written, and each kept
+   question 90 days after it was asked.
 4. **Claude API key.** The Claude API is separate from a Claude.ai (Pro or Max) subscription.
    - In the Claude Console (https://platform.claude.com), create an account or organization,
      add a payment method and a small prepaid credit balance (a few dollars lasts months here).
@@ -323,7 +327,8 @@ Do these in order. Nothing costs money until the last steps turn the feature on.
      those prices; a model without an entry there stops the function from starting rather than
      being priced by guess.
    - Questions are processed by Anthropic, not in Google Cloud, and may be processed outside the
-     EU. The assistant page no longer explains this, so say it in your privacy notice.
+     EU. The assistant page no longer explains this, so say it in your privacy notice, together
+     with the 90 days for which questions and answers are kept (see Monitoring).
 5. **Service account.** Both functions (`askAssistant` and `onBudgetAlert`) run as the account
    in `ASSISTANT_SERVICE_ACCOUNT`. Create a dedicated one and give it exactly these roles:
 
@@ -421,11 +426,21 @@ Set at deploy time (`functions/.env.live-resume-a575a`, or the prompts on first 
   `invalid`, `error`, `limited`) and token counts; `assistantUsage/<YYYY-MM>`: the month's
   spend in millionths of a dollar (settled costs plus the reservations of calls whose cost is
   unknown).
+- **Firestore** `assistantQuestions`: one document per question that reached the model, with
+  the question, locale, outcome, the answer's paragraphs and cited evidence IDs (or, for a
+  rejected reply, the failed `check` and the reply, capped at 4,000 characters), the model,
+  prompt, knowledge and notes versions, the cost in millionths of a dollar, `createdAt` and
+  `expireAt` (90 days later, deleted by the TTL policy). Nothing identifies the visitor: no IP,
+  rate-limit key or App Check token. Questions the browser answers itself, and questions refused
+  by a limit, the kill switch or a version mismatch, are not kept. Read them in the Firebase
+  console (Firestore → `assistantQuestions`, sorted by `createdAt`) to find questions worth a
+  pattern, an alias or a note.
 - **Cloud Logging**, function `askAssistant`: one `ask` event per question, with the result,
   the failed check if any (`number`, `name`, `guarded-topic`, …), timing and token usage;
-  `replayed-token`, `unknown-client`, `invalid-request` and `record-failed` events for requests
-  that were refused or couldn't be counted. The names are the enums in
-  `functions/src/core/constants.ts`. Questions and answers are never logged.
+  `replayed-token`, `unknown-client`, `invalid-request`, `record-failed` and
+  `question-save-failed` events for requests that were refused or couldn't be counted or kept.
+  The names are the enums in `functions/src/core/constants.ts`. Questions and answers are never
+  logged; they are only in `assistantQuestions`.
 - A rising `invalid` count means the model is producing answers the checks reject: look at the
   `check` field before changing the prompt.
 

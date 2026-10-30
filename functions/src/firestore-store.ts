@@ -6,16 +6,18 @@
  *   assistantUsage/{YYYY-MM-DD}    { calls, outcomes.*, tokens.* }
  *   assistantUsage/{YYYY-MM}       { costMicros }  reserved before each call, settled after it
  *   assistantRate/{clientKey}      { minuteWindow, minuteCount, day, dayCount, expireAt }  (TTL on expireAt)
+ *   assistantQuestions/{autoId}    QuestionRecord + { createdAt, expireAt }  (TTL on expireAt, 90 days)
  */
 import { FieldValue, Firestore, Timestamp } from "firebase-admin/firestore";
 import { FirestoreField, FirestorePath, Outcome } from "./core/constants";
 import {
-  ClientUsage, dayKey, LimitConfig, LimitStore, monthKey, Reservation, reserve, Settlement, settlementDelta
+  ClientUsage, dayKey, LimitConfig, LimitStore, monthKey, QuestionRecord, Reservation, reserve, Settlement, settlementDelta
 } from "./core/limits";
 import type { CostPolicy } from "./core/pricing";
 
 const SWITCH_CACHE_MS = 30_000;
 const RATE_TTL_MS = 48 * 60 * 60 * 1000;
+const QUESTION_TTL_MS = 90 * 24 * 60 * 60 * 1000;
 
 export class FirestoreLimitStore implements LimitStore {
   private switchCache?: { readonly value: boolean; readonly at: number };
@@ -71,5 +73,15 @@ export class FirestoreLimitStore implements LimitStore {
       batch.set(this.db.doc(`${FirestorePath.Usage}/${monthKey(now)}`), { [FirestoreField.CostMicros]: FieldValue.increment(delta) }, { merge: true });
     }
     await batch.commit();
+  }
+
+  async saveQuestion(now: Date, entry: QuestionRecord): Promise<void> {
+    // Firestore rejects undefined values, so optional fields that aren't set are left out.
+    const fields = Object.fromEntries(Object.entries(entry).filter(([, value]) => value !== undefined));
+    await this.db.collection(FirestorePath.Questions).add({
+      ...fields,
+      createdAt: Timestamp.fromDate(now),
+      expireAt: Timestamp.fromMillis(now.getTime() + QUESTION_TTL_MS)
+    });
   }
 }

@@ -6,6 +6,7 @@ export enum LogEvent {
   ReplayedToken = "replayed-token",
   UnknownClient = "unknown-client",
   RecordFailed = "record-failed",
+  QuestionSaveFailed = "question-save-failed",
   Failed = "ask-failed",
   BudgetExceeded = "budget-exceeded"
 }
@@ -50,7 +51,8 @@ export enum Failure {
 export enum FirestorePath {
   RuntimeConfig = "assistantConfig/runtime",
   Usage = "assistantUsage",
-  Rate = "assistantRate"
+  Rate = "assistantRate",
+  Questions = "assistantQuestions"
 }
 
 /** Document fields the function reads back. */

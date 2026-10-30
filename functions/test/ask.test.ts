@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { HostedResultKind, UnavailableReason } from "../../src/app/assistant/models/hosted-answer.models";
 import { ask, AskDeps, InvalidRequestError } from "../src/core/ask";
-import { LogEvent, ModelAnswerStatus, ModelReplyKind, NoAnswerReason, Outcome } from "../src/core/constants";
+import { CheckName, LogEvent, ModelAnswerStatus, ModelReplyKind, NoAnswerReason, Outcome } from "../src/core/constants";
 import { LimitStore, MemoryLimitStore } from "../src/core/limits";
 import { MAX_OUTPUT_TOKENS, ModelError } from "../src/core/model";
+import { PROMPT_VERSION } from "../src/core/prompt";
 import { answered, CONFIG, COSTS, knowledge, StubModel, store, USAGE } from "./helpers";
 
 const K = knowledge();
@@ -70,7 +71,12 @@ describe("ask", () => {
   });
 
   it("fails closed when the limit store is down", async () => {
-    const broken: LimitStore = { enabled: async () => true, reserve: async () => { throw new Error("down"); }, record: async () => undefined };
+    const broken: LimitStore = {
+      enabled: async () => true,
+      reserve: async () => { throw new Error("down"); },
+      record: async () => undefined,
+      saveQuestion: async () => undefined
+    };
     const model = new StubModel(() => { throw new Error("must not be called"); });
     expect(await ask(body(), deps({ store: broken, model }))).toEqual(unavailable(UnavailableReason.Error, true));
   });
@@ -111,6 +117,58 @@ describe("ask", () => {
     expect(await run(() => answered([{ text: "I have 12 years of Java experience.", evidence: ["ctx.java-experience"] }])))
       .toEqual(unavailable(UnavailableReason.Invalid));
     expect(await run(() => { throw new ModelError("timed out", true); })).toEqual(unavailable(UnavailableReason.Error, true));
+  });
+
+  it("keeps an answered question with its answer, versions and cost, and nothing about the visitor", async () => {
+    const d = deps();
+    await ask(body(), d);
+    const saved = (d.store as MemoryLimitStore).questions;
+    expect(saved).toEqual([{
+      question: "How many years of Java experience do you have?",
+      locale: "en",
+      outcome: Outcome.Answered,
+      answer: [{ text: "I have worked with Java since 2014.", evidence: ["ctx.java-experience"] }],
+      partial: false,
+      model: "stub",
+      promptVersion: PROMPT_VERSION,
+      knowledgeVersion: K.version,
+      contextVersion: K.contextVersion,
+      costMicros: COSTS.cost(USAGE)
+    }]);
+    expect(JSON.stringify(saved)).not.toContain(d.clientKey);
+  });
+
+  it("keeps a rejected reply with the check that rejected it", async () => {
+    const d = deps({ model: new StubModel(() => answered([{ text: "I have 12 years of Java experience.", evidence: ["ctx.java-experience"] }])) });
+    await ask(body(), d);
+    const [saved] = (d.store as MemoryLimitStore).questions;
+    expect(saved).toEqual(expect.objectContaining({ outcome: Outcome.Invalid, check: CheckName.Number }));
+    expect(saved.rejected).toContain("12 years");
+    expect(saved.answer).toBeUndefined();
+  });
+
+  it("keeps a question whose model call failed, without a cost", async () => {
+    const d = deps({ model: new StubModel(() => { throw new ModelError("timed out", true); }) });
+    await ask(body(), d);
+    expect((d.store as MemoryLimitStore).questions).toEqual([expect.objectContaining({ outcome: Outcome.Error, costMicros: undefined })]);
+  });
+
+  it("keeps no question that never reached the model", async () => {
+    const memory = store();
+    for (let i = 0; i < CONFIG.dailyCalls; i++) {
+      await memory.reserve(`other-${i}`, NOW, 0);
+    }
+    await ask(body(), deps({ store: memory }));
+    await ask(body({ knowledgeVersion: "v1-00000000-1" }), deps({ store: memory }));
+    expect(memory.questions).toEqual([]);
+  });
+
+  it("still answers when the question can't be saved", async () => {
+    const memory = store();
+    memory.saveQuestion = async () => { throw new Error("write failed"); };
+    const d = deps({ store: memory });
+    expect(await ask(body(), d)).toEqual(expect.objectContaining({ kind: HostedResultKind.Generated }));
+    expect(d.events.some(e => e["event"] === LogEvent.QuestionSaveFailed)).toBe(true);
   });
 
   it("keeps the question and the answer out of the logs", async () => {
