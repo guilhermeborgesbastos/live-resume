@@ -29,6 +29,9 @@ jobs:
       - name: Validate assistant notes
         run: npm run validate:context
 
+      - name: CloudFront locale routing
+        run: npm run test:cloudfront
+
       - name: Unit tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
 

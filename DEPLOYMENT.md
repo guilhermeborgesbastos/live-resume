@@ -8,7 +8,7 @@ IAM permissions, credentials) and then each deploy.
 | --- | --- |
 | S3 bucket | `www.guilhermeborgesbastos.com` (region `eu-central-1`) |
 | CloudFront distributions | `E2FO2ELLS8J6VG` and `E14O8X5D7XL2SZ` (one for `guilhermeborgesbastos.com`, one for `www.`), read from `CLOUDFRONT_LIVERESUME_DISTRIBUTION_ID` |
-| Public URLs | https://guilhermeborgesbastos.com/ (English), `/en/`, `/pt/index.html` |
+| Public URLs | https://guilhermeborgesbastos.com/ (English), `/en/`, `/pt/` (`/pt/` and app routes such as `/pt/assistant` need the CloudFront Function, step 6) |
 
 > **The deploy empties the bucket before uploading.** Never run `./deploy.sh` without
 > `--stage-only` unless you mean to replace production.
@@ -179,6 +179,35 @@ aws iam simulate-principal-policy \
   --query 'EvaluationResults[].[EvalActionName,EvalDecision]' --output table
 ```
 
+### 6. Route the locale paths (CloudFront Function)
+
+S3 has no object for `pt/` or `pt/assistant`, so without help CloudFront answers those with its
+error page, the English `index.html`, and the English app shows "page not found". The function
+in `cloudfront/locale-routing.js` routes like the Docker image's `docker/nginx.conf`: `/en` and
+`/pt` redirect to `/en/` and `/pt/`, any extension-less path under a locale serves that
+locale's `index.html`, and files pass through unchanged. `npm run test:cloudfront` checks it.
+
+This needs CloudFront admin rights, not the deploy-only user. In the CloudFront console:
+
+1. **Functions → Create function**: name `live-resume-locale-routing`, runtime
+   `cloudfront-js-2.0`. Paste the contents of `cloudfront/locale-routing.js`, **Save**, then on
+   the **Test** tab try the event URI `/pt/` (expect `/pt/index.html`), and **Publish**.
+2. **Associate** it with both distributions (`E2FO2ELLS8J6VG` and `E14O8X5D7XL2SZ`): on the
+   function's **Publish** tab, **Add association**, choose the distribution, event type
+   **Viewer request**, cache behavior **Default (\*)**. Repeat for the other distribution.
+3. Wait until both distributions show **Deployed**, then check (no invalidation needed):
+
+   ```bash
+   for host in guilhermeborgesbastos.com www.guilhermeborgesbastos.com; do
+     curl -sI "https://$host/pt" | grep -iE "^HTTP|^location"   # 301 to /pt/
+     curl -s "https://$host/pt/" | grep -o '<html lang="[a-z]*"'  # lang="pt"
+     curl -s "https://$host/pt/assistant" | grep -o '<html lang="[a-z]*"'
+   done
+   ```
+
+When you change the function, edit the file first, run the test, paste it into the console and
+publish again; the associations follow the published version.
+
 ## Deploying
 
 1. Start from an up-to-date `master` with a clean working tree. The script deploys whatever
@@ -217,7 +246,7 @@ aws iam simulate-principal-policy \
    AWS_PROFILE=live-resume aws cloudfront wait invalidation-completed \
      --distribution-id <distribution-id> --id <invalidation-id>    # once per line printed above
    for host in guilhermeborgesbastos.com www.guilhermeborgesbastos.com; do
-     for p in / /en/ /en/index.html /pt/index.html; do
+     for p in / /en/ /en/index.html /pt/ /pt/index.html; do
        curl -s -o /dev/null -w "%{http_code} $host$p\n" "https://$host$p"
      done
    done
@@ -484,10 +513,10 @@ The local assistant, its suggestions and the Contact link keep working through e
 
 - **The site is down for the length of the upload.** The bucket is emptied first, and
   `aws s3 sync --delete` per locale would avoid that.
-- **`/pt/` shows the English site.** CloudFront serves `/en/index.html` for any missing key,
-  including the `pt/` "folder", so only `/pt/index.html` shows Portuguese. The header's
-  language links use `/pt/index.html`. Fixing it takes a CloudFront Function that rewrites
-  `/<locale>/` to `/<locale>/index.html`.
+- **`/pt/` needs the CloudFront Function.** Until `cloudfront/locale-routing.js` is associated
+  with both distributions (One-time setup, step 6), CloudFront serves `/en/index.html` for any
+  missing key, so `/pt/` and `/pt/assistant` show English "page not found" and only
+  `/pt/index.html` shows Portuguese.
 - **Browsers that cached the 2022 page can still show it.** Before 2026-10-21, files were
   served without `Cache-Control`, so a browser may hold the old `index.html` for weeks based
   on its age. That page loads `runtime.js`, which no longer exists. Pages uploaded since then
