@@ -46,9 +46,9 @@
     "zone.js": "0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "21.2.24",
+    "@angular-devkit/build-angular": "21.2.29",
     "@angular-eslint/builder": "21.4.0",
-    "@angular/cli": "21.2.24",
+    "@angular/cli": "21.2.29",
     "@angular/compiler-cli": "21.2.25",
     "@angular/language-service": "21.2.25",
     "@playwright/test": "1.63.0",
@@ -64,6 +64,11 @@
     "karma-jasmine-html-reporter": "2.1.0",
     "typescript": "5.9.3",
     "typescript-eslint": "8.71.0"
+  },
+  "overrides": {
+    "sockjs": {
+      "uuid": "^11.1.1"
+    }
   },
   "allowScripts": {
     "@firebase/util": true,
