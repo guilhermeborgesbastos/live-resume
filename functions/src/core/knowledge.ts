@@ -23,6 +23,11 @@ export interface LocaleKnowledge {
   readonly schema: Record<string, unknown>;
   /** CV names (companies, technologies, schools, ...) in this locale, longest first. */
   readonly names: readonly string[];
+  /**
+   * The organizations among `names` (employers, schools, certification issuers). An answer may
+   * name one in any paragraph ("Before Swisscom, …") as long as some paragraph cites it.
+   */
+  readonly organizations: ReadonlySet<string>;
   /** An upper bound on a request's input tokens, for the monthly cost reservation. */
   readonly maxInputTokens: number;
 }
@@ -54,6 +59,7 @@ export function buildHostedKnowledge(raw: RawKnowledge, notesSource: string, own
       system,
       schema: answerSchema(map, experienceIds),
       names: cvNames(snapshot, locale),
+      organizations: organizationNames(snapshot),
       maxInputTokens: Math.ceil((system[0].length + system[1].length) / CHARACTERS_PER_TOKEN_FLOOR) + MAX_USER_TURN_TOKENS
     };
   }
@@ -93,4 +99,13 @@ export function cvNames(snapshot: KnowledgeSnapshot, locale: Locale): string[] {
   about.medias.forEach(m => add(m.title.value));
   // Hobby titles ("Read", "Gym") are everyday words, so they're left out to avoid rejecting plain prose.
   return [...names].sort((a, b) => b.length - a.length || a.localeCompare(b));
+}
+
+/** Employers, schools and certification issuers, as they appear in cvNames(). */
+export function organizationNames(snapshot: KnowledgeSnapshot): Set<string> {
+  return new Set([
+    ...snapshot.experiences.map(e => e.companyName.value),
+    ...snapshot.about.education.map(e => e.school.value),
+    ...snapshot.about.certifications.map(c => c.issuer.value)
+  ].map(name => name?.trim()).filter((name): name is string => !!name && name.length >= 2));
 }

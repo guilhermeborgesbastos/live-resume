@@ -38,6 +38,13 @@ describe("buildHostedKnowledge", () => {
     expect(names).not.toContain("Read");
   });
 
+  it("marks employers, schools and issuers as organizations, not technologies", () => {
+    const { names, organizations } = knowledge().locales.en;
+    expect([...organizations]).toEqual(expect.arrayContaining(["Swisscom AG", "QAT Global"]));
+    expect(organizations.has("Java")).toBe(false);
+    expect([...organizations].every(name => names.includes(name))).toBe(true);
+  });
+
   it("refuses invalid notes", () => {
     expect(() => buildHostedKnowledge(rawCv(), NOTES.replace("pt: Trabalho com Java desde 2014.\n", ""), OWNER)).toThrow(/"pt" is required/);
   });

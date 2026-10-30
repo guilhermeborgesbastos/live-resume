@@ -1,7 +1,9 @@
 /*
  * Deterministic checks on the model's reply before anything reaches a visitor. They
  * catch the obvious inventions: a number or a CV name that isn't in the cited facts, a topic the
- * CV doesn't cover, links or markup, the wrong language. They can't prove that a sentence follows
+ * CV doesn't cover, links or markup, the wrong language. Numbers, technologies and other names
+ * must be in the paragraph's own evidence; an organization (employer, school, issuer) only in the
+ * evidence of some paragraph of the answer, so a paragraph can refer back to it ("Before Swisscom, …"). They can't prove that a sentence follows
  * from its sources; the evaluation set is the release gate for that.
  */
 import { contentProblems } from "../../../src/app/assistant/knowledge/assistant-context";
@@ -72,6 +74,7 @@ export function checkAnswer(reply: unknown, knowledge: LocaleKnowledge, locale: 
   }
 
   const paragraphs: GeneratedParagraph[] = [];
+  const citedByParagraph: string[] = [];
   let total = 0;
   for (const paragraph of answer.paragraphs) {
     const text = typeof paragraph?.text === "string" ? paragraph.text.replace(/\s+/g, " ").trim() : "";
@@ -96,7 +99,7 @@ export function checkAnswer(reply: unknown, knowledge: LocaleKnowledge, locale: 
     if (numbers(text).some(n => !citedNumbers.has(n))) {
       return invalid(CheckName.Number);
     }
-    if (knowledge.names.some(name => mentions(text, name) && !mentions(cited, name))) {
+    if (knowledge.names.some(name => !knowledge.organizations.has(name) && mentions(text, name) && !mentions(cited, name))) {
       return invalid(CheckName.Name);
     }
     const lower = text.toLowerCase();
@@ -108,6 +111,11 @@ export function checkAnswer(reply: unknown, knowledge: LocaleKnowledge, locale: 
       return invalid(CheckName.Markup);
     }
     paragraphs.push({ text, evidence });
+    citedByParagraph.push(cited);
+  }
+  const citedInAnswer = citedByParagraph.join("\n");
+  if ([...knowledge.organizations].some(name => paragraphs.some(p => mentions(p.text, name)) && !mentions(citedInAnswer, name))) {
+    return invalid(CheckName.Name);
   }
   if (total > MAX_ANSWER_LENGTH) {
     return invalid(CheckName.AnswerLength);
