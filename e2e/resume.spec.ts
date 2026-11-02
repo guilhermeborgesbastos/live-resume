@@ -86,6 +86,15 @@ for (const locale of LOCALES) {
       await expect(page.locator("app-header a[href='#experience'] span")).toHaveText(text.nav.experience);
       await expect(page.locator("app-header a[href='#posts'] span")).toHaveText(text.nav.posts);
       await expect(page.locator("app-header a[href='#contact'] span")).toHaveText(text.nav.contact);
+      const sideProject = page.locator("app-header a.side-project-link");
+      if (OWNER.sideProjectUrl) {
+        await expect(sideProject).toHaveAttribute("href", OWNER.sideProjectUrl);
+        await expect(sideProject).toHaveAttribute("target", "_blank");
+        await expect(sideProject).toHaveAttribute("rel", "noopener");
+        await expect(sideProject.locator("span")).toHaveText(text.nav.sideProject);
+      } else {
+        await expect(sideProject).toHaveCount(0);
+      }
       await expect(page.locator("#about h1")).toHaveText(text.nav.about);
       await expect(page.locator("#about .years-old")).toContainText(text.yearsOld);
       await expect(page.locator("#posts h1")).toHaveText(text.nav.posts);

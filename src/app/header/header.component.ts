@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, LOCALE_ID, AfterViewInit, DestroyRef, inject } from "@angular/core";
-import { faBars, faShareAlt, faCloudDownloadAlt, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faShareAlt, faCloudDownloadAlt, faExternalLinkAlt, faLanguage, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { NgClass } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
@@ -36,6 +36,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   readonly brand = environment.personal.brand;
   readonly cvFile = environment.personal.cvFile;
+  readonly sideProjectUrl = environment.personal.sideProjectUrl;
+  readonly faExternalLinkAlt = faExternalLinkAlt;
+  readonly faLanguage = faLanguage;
 
   @ViewChild("nav") nav: ElementRef;
   @ViewChild("shareBtn") shareBtn: ElementRef;

@@ -59,8 +59,15 @@ updated: 2026-10
 related: exp.6
 title.en: Practical AI agents and reusable skills
 title.pt: Agentes de IA e skills na prática
-en: I extended the Live Resume itself and other private applications using AI agents. As documented in my April 2026 post, I also used agents to collect and organize vocabulary for an open-source Dutch A2 flashcard game in hours instead of days. At Swisscom's ETS Hackathon, my team built AI skills for repetitive code changes. These examples span application development, data collection and code automation.
-pt: Extendi o próprio Live Resume e outras aplicações privadas usando agentes de IA. Conforme meu artigo de abril de 2026, também usei agentes para coletar e organizar vocabulário de um jogo open source de flashcards de holandês A2 em horas, em vez de dias. No ETS Hackathon da Swisscom, meu time criou skills de IA para mudanças repetitivas no código. Esses exemplos abrangem desenvolvimento de aplicações, coleta de dados e automação de código.
+en: I extended the Live Resume itself and other private applications using AI agents. As documented in my April 2026 post, I also used agents to collect and organize the vocabulary of my Dutch flashcard game in hours instead of days. At Swisscom's ETS Hackathon, my team built AI skills for repetitive code changes.
+pt: Atualizei o meu próprio Live Resume e outras aplicações privadas usando agentes de IA. Conforme meu artigo de abril de 2026, também usei agentes para coletar e organizar o vocabulário do meu jogo de flashcards de holandês em horas, em vez de dias. No ETS Hackathon da Swisscom, meu time criou skills de IA para mudanças repetitivas no código.
+
+[open-source-flashcard-game]
+updated: 2026-11
+title.en: Open-source Dutch flashcard game
+title.pt: Jogo open source de holandês
+en: I built a free, open-source flashcard game for the Dutch A2 Inburgering exam, first for my own exam preparation. It is plain HTML, CSS and JavaScript. Each card shows a Dutch word, its English translation and an example sentence, with pronunciation through the Web Speech API. The code is on my GitHub and the game is linked from this site's menu.
+pt: Criei um jogo de flashcards gratuito e open source para o exame de holandês A2 do Inburgering, primeiro para me preparar. É feito em HTML, CSS e JavaScript puros. Cada carta traz a palavra, a tradução em inglês e uma frase de exemplo, com pronúncia pela Web Speech API. O código está no meu GitHub e o jogo tem link no menu do site.
 
 [ai-learning-scope]
 updated: 2026-10
@@ -74,8 +81,8 @@ updated: 2026-10
 related: exp.3 exp.6
 title.en: Reusable tooling and developer experience
 title.pt: Ferramentas reutilizáveis e experiência do dev
-en: My work relevant to platform engineering includes reusable DevOps patterns adopted by other Swisscom teams, automated CI/CD and container deployments. Earlier, at Deevo Studio, I introduced reusable modules and internal frameworks to speed up delivery and improve maintainability. The common thread is making good engineering practices easier for other developers to reuse.
-pt: Meu trabalho relevante para engenharia de plataforma inclui padrões DevOps reutilizáveis adotados por outros times da Swisscom, CI/CD automatizado e deploys em containers. Antes, na Deevo Studio, introduzi módulos reutilizáveis e frameworks internos para acelerar entregas e facilitar a manutenção. O ponto em comum é facilitar o reuso de boas práticas por outros desenvolvedores.
+en: My work relevant to platform engineering includes reusable DevOps patterns adopted by other Swisscom teams, automated CI/CD and container deployments. Earlier, at Deevo Studio, I introduced reusable modules and internal frameworks to speed up delivery and improve maintainability.
+pt: Meu trabalho relevante para engenharia de plataforma inclui padrões DevOps reutilizáveis adotados por outros times da Swisscom, CI/CD automatizado e deploys em containers. Antes, na Deevo Studio, introduzi módulos reutilizáveis e frameworks internos para acelerar entregas e facilitar a manutenção.
 
 [production-reliability]
 updated: 2026-10
@@ -130,8 +137,8 @@ updated: 2026-10
 related: exp.6
 title.en: Tech talks and knowledge sharing
 title.pt: Palestras e compartilhamento de conhecimento
-en: I have given several tech talks, including talks at Swisscom. One covered build metrics and trends and reached more than 265 people, in person and online, across Rotterdam, Riga and Switzerland. Giving technical presentations is part of how I share engineering knowledge beyond my immediate team.
-pt: Apresentei várias palestras técnicas, incluindo palestras na Swisscom. Uma delas abordou métricas e tendências de build e alcançou mais de 265 pessoas, presencialmente e online, em Roterdã, Riga e na Suíça. Apresentar conteúdo técnico é uma das formas como compartilho conhecimento de engenharia além do meu próprio time.
+en: I have given several tech talks, including talks at Swisscom. One covered build metrics and trends and reached more than 265 people, in person and online, across Rotterdam, Riga and Switzerland.
+pt: Apresentei várias palestras técnicas, incluindo palestras na Swisscom. Uma delas abordou métricas e tendências de build e alcançou mais de 265 pessoas, presencialmente e online, em Roterdã, Riga e na Suíça.
 
 [product-business-impact]
 updated: 2026-10

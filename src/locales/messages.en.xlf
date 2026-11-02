@@ -587,6 +587,24 @@
         </context-group>
         <note priority="1" from="description">assistant</note>
       </trans-unit>
+      <trans-unit id="sideProject" datatype="html">
+        <source>Learn Dutch</source>
+        <target>Learn Dutch</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">nav</note>
+      </trans-unit>
+      <trans-unit id="sideProject.title" datatype="html">
+        <source>Free Dutch flashcard game</source>
+        <target>Free Dutch flashcard game</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">nav</note>
+      </trans-unit>
       <trans-unit id="assistant" datatype="html">
         <source>AI Assistant</source>
         <target>AI Assistant</target>

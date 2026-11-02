@@ -26,7 +26,7 @@ export type Locale = typeof LOCALES[number];
 /** Translated UI strings (from src/locales/messages.*.xlf) that the suite asserts on. */
 export const TEXT = {
   en: {
-    nav: { about: "About me", experience: "Experiences", posts: "Posts", contact: "Contact" },
+    nav: { about: "About me", experience: "Experiences", posts: "Posts", contact: "Contact", sideProject: "Learn Dutch" },
     previous: "Previous",
     next: "Next",
     readMore: "Read more",
@@ -39,7 +39,7 @@ export const TEXT = {
     requiredMessage: "The message is required."
   },
   pt: {
-    nav: { about: "Sobre mim", experience: "Experiências", posts: "Artigos", contact: "Contato" },
+    nav: { about: "Sobre mim", experience: "Experiências", posts: "Artigos", contact: "Contato", sideProject: "Aprenda Holandês" },
     previous: "Anterior",
     next: "Próximo",
     readMore: "Saiba mais",

@@ -14,7 +14,9 @@ export const environment = {
     brand: "gbastos",
     cvFile: "assets/cv-english-guilherme-bastos-v2.0.pdf",
     siteUrl: "https://guilhermeborgesbastos.com",
-    pitch: "Hello, I'm a Full-stack Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!"
+    pitch: "Hello, I'm a Full-stack Web Developer with 10+ years of experience designing web and mobile projects. Find out more in my live-resume!",
+    // an app of yours linked from the header menu (opens in a new tab); leave it empty to hide the link
+    sideProjectUrl: "https://inburgering.guilhermeborgesbastos.com/"
   },
   // Your Firebase web app's config (Firebase console → Project settings → Your apps). Left empty,
   // the site runs without Firebase: no analytics, the contact form reports that it can't send,

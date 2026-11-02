@@ -38,7 +38,7 @@ header {
 
             li {
                 text-align: center;
-                margin-right: 1em;
+                margin-right: 0.25em;
 
                 a {
                     text-transform: capitalize;
@@ -61,6 +61,17 @@ header {
                     background-color: #222f5c;
                     color: #fff;
                     font-weight: 600;
+                }
+
+                .external-icon {
+                    margin-left: 6px;
+                    font-size: 0.7em;
+                    vertical-align: 0.15em;
+                }
+
+                // Shown instead of the label on narrow desktops (header.component.responsivity.scss).
+                .compact-icon {
+                    display: none;
                 }
 
                 // Its own stacking context, so the badge's pulse (z-index -1) paints behind the badge
