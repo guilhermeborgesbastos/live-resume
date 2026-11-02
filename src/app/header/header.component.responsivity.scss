@@ -235,3 +235,26 @@
         vertical-align: middle;
     }
 }
+
+// Narrow desktops: the side project link shrinks to an icon (the label stays for screen readers
+// and the title tooltip), so the menu and the language switch keep to one row.
+@media screen and (min-width: 1025px) and (max-width: 1420px) {
+    header .child.nav-container ul li .side-project-link {
+        .side-project-label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+
+        .external-icon {
+            display: none;
+        }
+
+        .compact-icon {
+            display: inline-block;
+        }
+    }
+}

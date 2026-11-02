@@ -15,6 +15,9 @@
             <li><a (click)="onSectionLink($event, 'posts')" href="#posts" data-section="posts" itemprop="url"><span itemprop="name" i18n="nav@@posts">Posts</span></a></li>
             <li><a (click)="onSectionLink($event, 'contact')" href="#contact" data-section="contact" itemprop="url"><span itemprop="name" i18n="nav@@contact">Contact</span></a></li>
             <li><a (click)="resetMenu()" routerLink="/assistant" data-section="assistant" class="assistant-link" itemprop="url"><span itemprop="name" i18n="nav@@assistant">AI Assistant</span><span class="new-badge" aria-hidden="true" i18n="nav@@assistant.new">New</span></a></li>
+            @if (sideProjectUrl) {
+                <li><a (click)="resetMenu()" [href]="sideProjectUrl" target="_blank" rel="noopener" class="side-project-link" i18n-title="nav@@sideProject.title" title="Free Dutch flashcard game" itemprop="url"><span itemprop="name" class="side-project-label" i18n="nav@@sideProject">Learn Dutch</span><fa-icon [icon]="faExternalLinkAlt" class="external-icon" aria-hidden="true"></fa-icon><fa-icon [icon]="faLanguage" class="compact-icon" aria-hidden="true"></fa-icon></a></li>
+            }
             <li><a (click)="resetMenu()" [href]="cvFile" i18n-title="nav@@open.as.pdf" title="Open Resume as PDF" target="_blank"><fa-icon [icon]="faCloudDownloadAlt" class="bar-icon"></fa-icon></a></li>
         </ul>
     </div>
